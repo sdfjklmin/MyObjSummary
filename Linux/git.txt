@@ -7,6 +7,8 @@ SSH key 添加 :
 	ssh-keygen -t rsa -C 'git账号' 然后一直下一步
 	生成对应的key,根据生成的对应提示cat,复制key
 	添加到git
+克隆到非空文件:
+	克隆到一个空的文件中然后将   .git文件夹移到对应的文件目录中	
 更新提交代码:
 	git init  // git初始化
 
