@@ -1,0 +1,26 @@
+php7安装:
+		#安装对应的rpm依赖的时候,可能文件包不存在,最好是进入网页查看
+		#找到对应的安装包信息
+		rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+
+		#安装PHP7和相关依赖
+		rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+		yum install php70w
+
+		#安装过后没有pecl
+
+
+		===========================
+		rpm -q abc 查找abc.rpm安装包
+		rpm -e abc 删除abc.rpm安装包
+
+php5.6安装:
+		epel源
+		rpm -Uvh http://ftp.iij.ad.jp/pub/linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+		rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm		
+		remi源
+		yum install epel-release
+		rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+		安装
+		 yum install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mcrypt php-mysqlnd php-phpunit-PHPUnit php-pecl-xdebug php-pecl-xhprof

@@ -1,0 +1,31 @@
+_Tip :安装
+1.	git clone git@github.com:sdfjklmin/laraval.git // 克隆地址
+	git add .   // 添加版本控制
+	git commit -m '我修改的' 修改信息
+SSH key 添加 :
+	ssh -T git@github.com   // 测试
+	ssh-keygen -t rsa -C 'git账号' 然后一直下一步
+	生成对应的key,根据生成的对应提示cat,复制key
+	添加到git
+更新提交代码:
+	git init  // git初始化
+
+	git pull -u origin master:master  // 更新对应的分支
+
+	git status    // 修改了哪些文件
+
+	git diff // 对应变化
+
+	git add file1.py 	//如有新添加文件则
+
+	git rm file2.py    //如有删除文件则
+
+	git add -A    //这个命令表示新增修改的文件到缓存列表
+
+	git commit -m "备注说明"
+
+	git push -u origin master:master 
+	对应问题 :
+		1.冲突
+			git reset --hard  // 放弃本地冲突代码
+			git pull

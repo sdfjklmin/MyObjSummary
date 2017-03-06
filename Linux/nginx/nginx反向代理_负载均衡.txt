@@ -1,0 +1,82 @@
+ 安装后如果不能访问,需要关闭防火墙(这里是CentOS7的关闭方法)
+	 systemctl start firewalld.service	#启动firewall
+	 systemctl stop firewalld.service	#停止firewall
+   service iptables stop
+	systemctl disable firewalld.service #禁止firewall开机启动
+ 默认安装目录: 
+	 /usr/local/nginx
+ 启动服务:
+ 	/usr/local/nginx/sbin/nginx
+ 平滑重启:
+    /usr/local/nginx/sbin/nginx -s reload
+ 查看进程对应的id:
+    cat /usr/local/nginx/logs/nginx.pid
+ 查看nginx服务:
+    ps -ef | grep nginx
+   lsof ?
+
+step:
+A.访问服务器:
+    192.168.5.47
+B.真实服务器:
+	192.168.5.38    
+A.安装ngiux相关依赖
+
+   yum install -y pcre pcre-devel openssl openssl-devel gcc  # -y 自动安装
+
+   a.1手动安装nguix
+
+    cd /usr/loca/src
+    wget http://nginx.org/download/nginx-1.8.0.tar.gz
+    tar -zxvf nginx-1.8.0.tar.gz
+    cd nginx-1.8.0
+	#添加www用户，其中-M参数表示不添加用户家目录，-s参数表示指定shell类型
+	useradd www -M -s /sbin/nologin
+	vim auto/cc/gcc
+	#将这句注释掉 取消Debug编译模式 大概在179行
+	#CFLAGS="$CFLAGS -g"
+	#我们再配置下nginx编译参数，编译时一定要添加--with-http_ssl_module，以便让nginx支持ssl功能！
+	[root@nginx-1.8.0 ~]# ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_stub_status_module --with-http_ssl_module
+	[root@nginx-1.8.0 ~]#make
+	[root@nginx-1.8.0 ~]#make install clean  (清除安装过程多余的安装文件)
+
+   a.2
+   	 编辑nginx.conf #添加 include vhosts/*.conf; #如果没有vhost文件夹,就先mkdir ,引入配置
+     直接修改nginx.conf	
+     在http{} 中添加
+       #upstream 上游
+	     upstream backend
+    	  {
+             #ip_hash;
+             server 192.168.5.38:8090 weight=1; #如果有多个可以添加权重 
+             server 192.168.5.38 weight=3; #多个指向的时候要开启ip_hash
+          }
+
+     在server{} 
+       server_name  www.test.com;
+     location / {} 添加内容 
+      location / {
+          # root  /home/wwwroot/www.test.com;
+            root  html;
+            index  index.html index.htm;
+
+            #设置主机头和客户端真实地址，以便服务器获取客户端真实IP
+            #proxy 代理服务器
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             #禁用缓存
+             proxy_buffering off;
+             #反向代理的地址
+             proxy_pass http://backend;     
+
+        }     
+   b.1 自动安装nginx
+
+  	yum install nginx	
+
+  B.配置nginx
+    1.配置对应的子域名vhost中的配置	
+     www.test.com.conf 
+     server{} 中
+        listen 8090; #根据上面配置的upstream来

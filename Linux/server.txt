@@ -1,0 +1,29 @@
+版本信息为 : CentOS7
+访问网站:
+	www.test.com    192.168.5.47(son_one)
+服务器:
+	root   dnf123456
+	dis        192.168.5.235     nginx + mariadb + php7		mysql:123456
+	lnmp_m	   192.168.5.38      lnmp (nginx+mysql+php)		mysql:123456ss
+	son_one	   192.168.5.47      nginx + mariadb			mysql:123456
+	son_two    192.168.5.4 	     nginx + mariadb 			mysql:123456
+	dis_oracle 192.168.5.236     nginx + mariadb + php7 	mysql:123456
+相关配置:
+
+多入口访问							nginx
+test_one			son_one <---反向代理+负载均衡-----> lnmp_m(weight=1)  /  dis(weight=2)  {ip_hash可添加多个}
+test_two														|
+test_three														| 
+																| mysql
+																|
+									son_one(从)<----mysql主从配置------>{ lnmp_m(主)<---mysql主主配置--->dis(主) }
+
+
+mariadb: 
+                 主从同步
+     dis(主数据库)----son_one(从数据库) 
+nginx:
+   
+				方向代理,负载均衡     ip-hash
+     son_one(访问地址) ---- lnmp_m(真是地址)   weight=1
+     						dis(地址2)

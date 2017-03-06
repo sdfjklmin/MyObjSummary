@@ -1,0 +1,25 @@
+_1.更新数据字段(数据集合)
+	UPDATE m_o_survey_order  t1 INNER JOIN
+
+	(SELECT
+		o.id,
+		GROUP_CONCAT(d.customer_name) AS customer_names
+	FROM
+		m_o_survey_order AS o
+	LEFT JOIN m_o_survey_customer_detail AS d ON o.id = d.order_id
+	WHERE
+		o.customer_names = ''
+	AND d.customer_name != ''
+	GROUP BY
+		o.id) t2 ON t1.id=t2.id SET t1.customer_names=t2.customer_names;
+_2. str存在strlist中 
+    FIND_IN_SET(str,strlist)
+_3. 将查询结果插入到表中
+	insert into tab (a,b,c) 
+	select * from tab2
+_4.查看表名的字段
+	information_schema系统库(mysql相关的信息都能在系统库中找到)
+	SELECT COLUMN_NAME FROM information_schema.COLUMNS where table_name = 'tab_name';	
+_5.复制一张表
+   CREATE TABLE abc AS
+   SELECT * FROM test t 	会把test的结构和数据都会创建到abc中

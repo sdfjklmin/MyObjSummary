@@ -1,0 +1,46 @@
+Ngiux :
+	1.开启目录访问权限 autoindex
+	 在 /usr/local/ngiux/conf/ngiux.conf 添加
+	location / 
+	{   
+        root /data/www/file                     //指定实际目录绝对路径；   
+        autoindex on;                            //开启目录浏览功能；   
+        autoindex_exact_size off;            //关闭详细文件大小统计，让文件大小显示MB，GB单位，默认为b；   
+        autoindex_localtime on;              //开启以服务器本地时区显示文件修改日期！   
+	}	
+	2.域名添加 
+	  在 /usr/local/ngiux/conf/vhost 新增 www.abc.com.conf 文件
+	  要确保ngiux.conf 中有 include vhost/*.conf; 
+	  内容如下:
+		server
+		    {
+		        listen 80;  				// 监听的端口号
+		        #listen [::]:80; 			//其他端口
+		        server_name www.abc.com;	//域名
+		        index index.html index.htm index.php default.html default.htm default.php; //默认进入的index
+		        root  /home/wwwroot/min.com/Merchant;  // 网站目录
+
+		        include other.conf;        //引入其他配置
+		        #error_page   404   /404.html;  // 错误页面
+		        location ~ [^/]\.php(/|$)
+		        {
+		            # comment try_files $uri =404; to enable pathinfo
+		            try_files $uri =404;
+		            fastcgi_pass  unix:/tmp/php-cgi.sock;
+		            fastcgi_index index.php;
+		            include fastcgi.conf;
+		            #include pathinfo.conf;
+		        }
+
+		        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+		        {
+		            expires      30d;
+		        }
+
+		        location ~ .*\.(js|css)?$
+		        {
+		            expires      12h;
+		        }
+
+		        access_log off;
+		    }

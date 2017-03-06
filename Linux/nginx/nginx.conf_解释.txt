@@ -1,0 +1,183 @@
+user  www www;  #指定Nginx Worker进程运行用户以及用户组
+
+worker_processes 2; #指定了Nginx要开启的进程数，多核CPU指定和核数一样多的进程数
+
+pid        logs/nginx.pid; #指定进程id的存储文件位置
+
+worker_rlimit_nofile 65535; #指定单进程打开文件数，需与系统设定一致
+
+ 
+
+events {
+
+use epoll;  #指定nginx工作模式，nginx主要的工作模式有select、poll、kqueue、epoll
+
+            其中select、poll是标准工作模式，kqueue、epoll为高效工作模式，epoll用在Linux系统中，而kqueue用在BSD系统中
+
+    worker_connections  65535;#指定单进程的最大连接数
+
+}
+
+ 
+
+HTTP部分
+
+ 
+
+http {
+
+    include      mime.types; #指定配置文件所包含的文件
+
+    default_type  application/octet-stream; #指定默认类型为二进制流，也就是当文件类型未定义时使用这种方式，例如在没有配置PHP环境时，Nginx是不予解析的，此时，用浏览器访问PHP文件就会出现下载窗口
+
+ 
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '#设定日志格式
+
+                      '$status $body_bytes_sent "$http_referer" '
+
+                      '"$http_user_agent" "$http_x_forwarded_for"';;
+
+   
+
+ 
+
+client_max_body_size  20m;  #设置允许客户端请求的最大的单个文件字节数
+
+    client_header_buffer_size    16k;#指定来自客户端请求头的headerbuffer大小，如果自定义了消息头或有更大的cookie，可以在这里增加缓冲大小
+
+    large_client_header_buffers  4 32k;#指定客户端请求中较大的消息头的缓存最大数量和大小，4为个数，32k为大小，最大缓存为4个32kb
+
+ 
+
+    sendfile        on;#开启高效传输模式
+
+    tcp_nopush    on;  # tcp_nopush，tcp_nodelay设置on,防止网络阻塞
+
+    tcp_nodelay    on;         
+
+   
+
+    keepalive_timeout  65; #指定客户端连接保持活动的超时时间
+
+    client_header_timeout  10;#指定客户端请求头读取超时时间，如果超过这个时间，客户端还没有发送任何数据，Nginx将返回“Request time out（408）”错误
+
+    client_body_timeout  10;#指定客户端请求主体读取超时时间，如果超过这个时间���客户端还没有发送任何数据，Nginx将返回“Request time out（408）”错误
+
+send_timeout        10;#指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接
+
+ 
+
+ 
+
+    gzip  on; #开启gzip压缩，实时压缩输出数据流
+
+    gzip_min_length  1k; #设置允许压缩的页面最小字节数
+
+    gzip_buffers    4  16k; #指定内存空间来存贮压缩结果，这里指定4个单位为16k的内存来存储压缩结果，即总大小为64k
+
+    gzip_http_version  1.1;#指定识别HTTP协议版本，默认是1.1
+
+    gzip_comp_level  2;#指定gzip压缩比，1 压缩比最小，处理速度最快；9 压缩比最大，传输速度快，但处理最慢，也比较消耗CPU资源
+
+    gzip_types  text/plain application/x-javascript text/css application/xml;#指定压缩的类型，无论是否指定，“text/html”类型总是会被压缩
+
+    gzip_vary  on;#该选项开启可以让前端的缓存服务器缓存经过gzip压缩的页面，例如，用Varnish缓存经过Nginx压缩的数据
+
+ 
+
+server_tokens off;#隐藏Nginx版本号
+
+ 
+
+server {
+
+        listen      8000; #指定Nginx监端口
+
+        server_name  localhost;#用来指定IP或者域名
+
+ 
+
+        charset utf-8;#指定Nginx默认的字符集，只有utf-8支持中文字符
+
+        access_log  logs/host.access.log  main;#指定访问日志的名称及位置
+
+ 
+
+        location / {
+
+            index  index.html index.htm;#设定默认首页
+
+            root /tom/webapps/ROOT;#指定网页根目录
+
+        }
+
+ 
+
+location ~ (jsp|\?) {      #指定url中包含jsp或者?的全部转发到192.168.0.10的80端口即tomcat处理
+
+            proxy_pass  http://192.168.0.10:80;
+
+        }
+
+二、Nginx打开目录浏览功能(autoindex)
+
+Nginx默认是不允许列出整个目录的。如需此功能，打开nginx.conf文件或你要启用目录浏览虚拟主机的配置文件，在server或location 段里添加上autoindex on;来启用目录浏览，下面会分情况进行说明。
+
+另外Nginx的目录浏览有两个比较有用的参数，可以根据自己的需求添加：
+
+autoindex_exact_size off;
+
+默认为on，显示出文件的确切大小，单位是bytes。
+
+改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
+
+autoindex_localtime on;
+
+默认为off，显示的文件时间为GMT时间。
+
+改为on后，显示的文件时间为文件的服务器时间
+
+1、整个虚拟主机开启目录浏览
+
+在server段添加
+
+location / {
+
+autoindex on;
+
+autoindex_localtime on; #之类的参数写这里
+
+}
+
+2、单独目录开启目录浏览
+
+2.1：直接二级目录开启目录浏览
+
+location /down/ {
+
+autoindex on;
+
+}
+
+2.2：虚拟目录开启目录浏览
+
+location /down/ {
+
+alias /home/wwwroot/lnmp/test/;
+
+autoindex on;
+
+}
+
+三、nginx timeout 配置 全局timeout 局部timeout web timeout
+
+nginx比较强大,可以针对单个域名请求做出单个连接超时的配置.
+
+比如些动态解释和静态解释可以根据业务的需求配置
+
+proxy_connect_timeout :后端服务器连接的超时时间_发起握手等候响应超时时间
+
+proxy_read_timeout:连接成功后_等候后端服务器响应时间_其实已经进入后端的排队之中等候处理（也可以说是后端服务器处理请求的时间）
+
+proxy_send_timeout :后端服务器数据回传时间_就是在规定时间之内后端服务器必须传完所有的数据
