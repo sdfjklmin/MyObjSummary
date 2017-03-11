@@ -3,11 +3,11 @@
 	www.test.com    192.168.5.47(son_one)
 服务器:
 	root   dnf123456
-	dis        192.168.5.235     nginx + mariadb + php7		mysql:123456
-	lnmp_m	   192.168.5.38      lnmp (nginx+mysql+php)		mysql:123456ss
-	son_one	   192.168.5.47      nginx + mariadb			mysql:123456
-	son_two    192.168.5.4 	     nginx + mariadb 			mysql:123456
-	dis_oracle 192.168.5.236     nginx + mariadb + php7 	mysql:123456
+	dis        192.168.5.235     nginx + mariadb + php7					mysql:123456
+	lnmp_m	   192.168.5.38      lnmp (nginx+mysql+php)					mysql:123456ss
+	son_one	   192.168.5.47      nginx + mariadb + php5.6				mysql:123456
+	son_two    192.168.5.4 	     nginx + mariadb 			   			mysql:123456
+	dis_oracle 192.168.5.236     nginx + mariadb + php7 				mysql:123456
 相关配置:
 
 多入口访问							nginx
