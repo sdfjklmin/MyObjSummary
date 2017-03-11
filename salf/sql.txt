@@ -7,6 +7,7 @@ SQL注入:(默认有漏洞)
 				进入后新建一个 run.cmd => cmd.exe (指定到当前路径)
 				运行如下
 					python sqlmap.py -u "http://www.abc.com?id=1"   step1
+					如果不能够运行python 把安装路径复制到环境变量中
 			linuxs:
 				直接使用	
 					python sqlmap.py -u "http://www.abc.com?id=1"  	step1
