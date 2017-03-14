@@ -1,0 +1,24 @@
+基本信息:
+	这里准备了4台CentOS Linux,装有redis的3.0版本。
+	安装:
+		安装必须包:
+			yum install gcc
+		下载:	
+			wget http://download.redis.io/releases/redis-3.0.0.tar.gz
+			tar zxvf redis-3.0.0.tar.gz
+			cd redis-3.0.0
+		编译:	
+			#如果不加参数,linux下会报错
+			make MALLOC=libc
+		简单命令:
+			#启动redis
+				src/redis-server &
+			#关闭redis
+				src/redis-cli shutdown	
+		测试:
+				$ src/redis-cli
+				127.0.0.1:6379> set foo bar
+				OK
+				127.0.0.1:6379> get foo
+				"bar"		
+主从模式:
