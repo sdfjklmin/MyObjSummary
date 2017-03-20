@@ -3,7 +3,10 @@
 	www.test.com    192.168.5.47(son_one)
 
 Redis操作:
-	
+	dis 	  			redis    			Master   1
+	son_two   			redis    			Slave	 2
+	son_one   			redis    			Slave	 3
+	dis_oracle			redis 				Slave	 4		
 服务器:
 	root   dnf123456
 	dis        192.168.5.235     nginx + mariadb + php7					mysql:123456
