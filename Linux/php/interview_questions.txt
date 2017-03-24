@@ -1,0 +1,18 @@
+ <?php
+	echo "<pre>";
+#第1题：
+    $arr = [1,2,3,4];
+    foreach($arr as &$v) {
+        //nothing todo.
+        // unset($v);
+        var_dump($v);
+    }
+    echo "<hr />";
+    var_dump($arr);
+    echo "<hr />";
+    foreach($arr as $v) {
+        //nothing todo.
+        var_dump($v);
+    }
+    var_export($arr);
+    //output:array(0=>1,1=>2,2=>2)，你的答案对了吗？为什么
