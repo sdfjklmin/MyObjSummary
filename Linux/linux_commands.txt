@@ -4,7 +4,7 @@ CentOS7 :
 		选择系统,看下面的提示,然后按e,
 		编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
 		按Ctrl+X重启，并修改密码
-			echo 123456 |passwd --stdin root
+			echo '123456' |passwd --stdin root
 		由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
             touch /.autorelabel
         重启系统
