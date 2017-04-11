@@ -4,6 +4,13 @@ if (PHP_SAPI != 'cli') {
     echo '只能在CLI命令行模式运行' ;
     exit;
 }
+# 操作系统判定
+$sys = 0 ; # 默认windows
+if(PATH_SEPARATOR==':') {
+    #linux
+    $sys = 1 ;
+}
+
 # 基本参数 入口文件
 $index = $argv[0] ;
 array_shift($argv);
@@ -41,6 +48,28 @@ if(in_array($e,array('m','M','h','H'))) {
 }else{
     style('时间格式不对,请以m或者h结尾');
 }
+# linux系统判断
+if($sys) {
+    echo "温馨提示:
+            Linux系统可能会出现差异,确定要使用 ? "."Y/N"."\n" ;
+        # STDIN cli模式中一个系统常量 可以从输入信息中读取数据
+        $stdin = fopen('php://stdin', 'r'); # 判断系统是否默认开启指向流
+        if($stdin) {
+            $check = trim(fgets(STDIN));  # 获取流中的数据
+            #自定义判断数据
+            if ($check != 'y' && $check != 'Y') {
+                if($check !='n' && $check !='N') {
+                    style('无效参数,终止执行');
+                }else{
+                    style('用户终止');
+                }
+            }
+        }else{
+            # 未开启指向流
+            style('系统错误');
+        }
+}
+
 
 # 成功提示
 echo "成功开启休息功能:
