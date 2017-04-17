@@ -1,0 +1,45 @@
+1.Mysql读写性能是多少,有哪些性能相关的配置 ?
+	读写性能可以根据压力测试来进行获取.
+	相关配置:
+		max_connecttions :	最大连接数
+		table_cache		 :	缓存打开表的数量
+		key_buffer_size	 :	索引缓存大小
+		query_buffer_size:	查询缓存大小
+		sort_buffer_size :	排序缓存大小
+		read_buffer_size :	顺序读缓存大小
+		具体查询配置:
+			show variables like '%max_connecttions%'
+2.SQL层面已经难以优化,请求量还在增加的对应策略 ?
+	分库分表
+	使用集群(master-slave),读写分离
+	增加业务层的cache层
+	使用连接层
+3.如何防止DB误操作和做好防灾 ?	
+	重要DB数据的手工修改操作，操作前需做到2点：
+		1.先在测试环境操作 
+		2.备份数据:根据业务重要性做定时备份，考虑系统可承受的恢复时间
+		进行容灾演练，感觉很必要
+	MySql备份和恢复	
+4.如何选择MySql的存储引擎,Innodb有什么特效 ?
+	插入式存储引擎是MySql的重要特性,MySql支持多种存储引擎.
+	MySql支持的存储引擎有:
+			MylSAM,InnoDB,Memory,Merge 等 .
+	 InnoDB特性:
+	 	MySQL5.5之后及CDB的默认引擎。
+	 	支持行锁:并发性能比较好 .
+	 	支持事物:InnoDB又称为事物存储引擎,支持ACID,提供了 提交,回滚和
+	 			 崩溃恢复能力的事物安全 .
+	 	支持外键:当前唯一支持外键的引擎 .
+	 MylSAM:
+	 	MySQL5.5之前的默认引擎
+	 	支持表锁:插入+查询速度快 ,更新+删除的速度慢
+	 	不支持事物
+5.MySql内部结构有哪些层次 ?
+		Connectors：连接器。接收不同语言的Client交互
+		Management Serveices & Utilities：系统管理和控制工具
+		Connection Pool: 连接池。管理用户连接
+		SQL Interface: SQL接口。接受用户的SQL命令，并且返回用户需要查询的结果
+		Parser: 解析器。验证和解析SQL语句成内部数据结构
+		Optimizer: 查询优化器。为查询语句选择合适的执行路径
+		Cache和Buffer：查询缓存。缓存查询的结果，有命中即可直接返回
+		Engine：存储引擎。MySQL数据最后组织并存储成具体文件	 		
