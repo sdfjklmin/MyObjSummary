@@ -12,3 +12,21 @@
 	二八定律:
 			80%的结果取决于20%的原因
 2.系统设计遵循的原则:			
+
+
+
+
+
+
+
+非功能性需求-abilities
+		Easy to separate		->			Autonomy	(分割)
+		Easy to understand		->			Understandability (理解)
+		Easy to extend			->			Extensibility	(继承)
+		Easy to change			->			Changeability	(改变)
+		Easy to replace			->			Replaceability	(替换)
+		Easy to deploy			->			Deployability	(施展)
+		Easy to scale			->			Scalaility		(规模)
+		Easy to recover			->			Resilience		(回收)
+		Easy to connect			->			Uniform interface (接口)
+		Easy to afford			->			Cost-efficiency (效率)
