@@ -23,3 +23,8 @@ _4.查看表名的字段
 _5.复制一张表
    CREATE TABLE abc AS
    SELECT * FROM test t 	会把test的结构和数据都会创建到abc中
+_6.创建一张临时表
+   CREATE TEMPORARY TABLE abc
+   SELECT * FROM m_b_address
+
+   SHOW CREATE TABLE abc;   #  查看创建表的sql
