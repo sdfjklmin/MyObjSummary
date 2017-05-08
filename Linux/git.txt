@@ -1,3 +1,6 @@
+Command:
+	http://www.ctolib.com/cheatsheets-Git-common-command-list.html
+
 _Tip :安装
 1.	git clone git@github.com:sdfjklmin/laraval.git // 克隆地址
 	git add .   // 添加版本控制

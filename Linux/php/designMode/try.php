@@ -1,4 +1,5 @@
 <?php
+# web http://www.ctolib.com/docs-php-design-patterns-c-7860.html
 # 输出格式
 echo "<pre>"; 
 
