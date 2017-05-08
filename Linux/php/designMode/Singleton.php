@@ -32,12 +32,12 @@ class Singleton
 
 # 测试
 
-// $t1 = new Singleton();
-// $t2 = new Singleton();
-// var_dump($t1 === $t2) ;
+$t1 = new Singleton();
+$t2 = new Singleton();
+var_dump($t1 === $t2) ;
 
-// $t3 = Singleton::getInstance();
-// $t4 = Singleton::getInstance();
-// var_dump($t3 === $t4) ;
+$t3 = Singleton::getInstance();
+$t4 = Singleton::getInstance();
+var_dump($t3 === $t4) ;
 
 
