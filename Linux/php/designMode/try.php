@@ -1,4 +1,5 @@
 <?php
+# 设计模式
 # 参考地址
 # http://www.ctolib.com/docs-php-design-patterns-c-7860.html
 
