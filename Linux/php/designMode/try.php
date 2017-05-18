@@ -1,16 +1,20 @@
 <?php
-# web http://www.ctolib.com/docs-php-design-patterns-c-7860.html
+# 参考地址
+# http://www.ctolib.com/docs-php-design-patterns-c-7860.html
+
 # 输出格式
 echo "<pre>"; 
 
 # 模式简码
+# 对应文件前三个字母
 $arg = 'gcz' ; 	
 
 # 模式简码对应的文件
 $mode = [
-'dl'=>'Singleton',  		# 单例模式
-'gc'=>'Factory',     		# 工厂模式
-'gcz'=>'Observerable',      # 观察者模式
+	'sin'=>'Singleton',  		# 单例模式
+	'fac'=>'Factory',     		# 工厂模式
+	'obs'=>'Observerable',      # 观察者模式
+	'pro'=>'Proxy',				# 代理模式
 ] ;
 
 # 判断模式简码是否存在
