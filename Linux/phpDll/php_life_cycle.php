@@ -1,5 +1,6 @@
 <?php
 /**
+ * PHP生命周期
  * PHP程序的启动
  *              前置初始化(Apache相关操作)
  *              模块初始化       对应扩展 php.dll
@@ -15,10 +16,10 @@
  * PHP扩展周期:
  *      http://www.cunmou.com/phpbook/1.md
  *      Module init、Request init、Request Shutdown、Module shutdown 四个过程
- *
+ *      具体的执行顺序如下
  */
 
-
+// 这四个宏都是在walu.c里完成最终实现的，而他们的则是在/main/php.h里被定义的(其实也是调用的别的宏)
 // 这些代码都在walu.c里面，不再.h里 php内核代码
 int time_of_minit;//在MINIT中初始化，在每次页面请求中输出，看看是否变化
 PHP_MINIT_FUNCTION(walu)
@@ -56,3 +57,10 @@ PHP_FUNCTION(walu_test)
     php_printf("%d&lt;br /&gt;",time_of_rinit);
     return;
 }
+
+
+
+# 线程安全与非线程安全
+# web: http://www.cunmou.com/phpbook/1.4.md
+
+# TRSM (thread safe resource management) php抽象层,php多线程管理
