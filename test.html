@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script src="./vue.js"></script>
+<body>
+	<div id="app">
+	  <p>{{message}}</p>
+	</div>
+	<div id="test">
+		{{message}}
+	</div>
+</body>
+<script type="text/javascript">
+console.log('This is vue.js');
+console.log('www.baidu.com');
+	new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello Vue.js!'
+		  }
+		})
+	new Vue({
+		  el: '#test',
+		  data: {
+		    message: 'Hello Vue.js!'
+		  }
+		})
+	
+</script>
+</html>
+

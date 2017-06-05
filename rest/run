@@ -69,25 +69,30 @@ if($sys) {
             style('系统错误');
         }
 }
-
-
-# 成功提示
-echo "成功开启休息功能:
-            您设置的休息间隔为 $v $tip " ;
 # 自定义配置
 require_once __DIR__.'/config.php';
 # 时钟路径
 $strConf = implode($conf['jump'],'') ;
 # 休息次数
 $t = 0;
+
+# 成功提示
+echo "成功开启休息功能:
+            您设置的休息间隔为 $v $tip " ;
+
 while(true) {
+    # 休息提示语
     $show = $msg[rand(0,(count($msg)-1))];
+    # 系统休息时间
     $r = $conf['time']['r']*$conf['time']['t'] ;
+    # 睡眠用户休息时间间隔
     sleep($s);
+    # window 自带提示命令
     exec("msg ".$_SERVER['USERNAME']." /TIME:2 $show");
     $file  = 'log.txt';
     file_put_contents($file, "") ;
     file_put_contents($file, $r,FILE_APPEND) ;
+    # 休息时间倒计时界面
     exec("explorer $strConf");
     sleep($r) ;
     if($t == 0) {

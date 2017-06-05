@@ -31,7 +31,7 @@ $a = file_get_contents('log.txt');
 	
 </div>
 <script type="text/javascript">
-	var a = "<?php echo intval($a);?>" ;
+	var a = "<?php echo $a;?>" ;
 	countDown(a);
 	var outTime = a*1000 +5 ;
 	setTimeout(function(){

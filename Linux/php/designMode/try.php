@@ -6,10 +6,6 @@
 # 输出格式
 echo "<pre>"; 
 
-# 模式简码
-# 对应文件前三个字母
-$arg = 'gcz' ; 	
-
 # 模式简码对应的文件
 $mode = [
 	'sin'=>'Singleton',  		# 单例模式
@@ -18,6 +14,8 @@ $mode = [
 	'pro'=>'Proxy',				# 代理模式
 ] ;
 
+# 对应文件前三个字母
+$arg = 'sin' ; 	
 # 判断模式简码是否存在
 if (empty($mode[$arg]) && !isset($mode[$arg])) {
 	 exit('not find design mode');
@@ -27,8 +25,13 @@ if (empty($mode[$arg]) && !isset($mode[$arg])) {
 if (!file_exists($mode[$arg].'.php')) {
 	exit('no file match');	
 }
+
+
 # 引入文件
 require_once './'.$mode[$arg] .'.php';
 
-# 测试
-
+# 自动加载 php 自带加载类(设计模式中有些是接口实现)
+/* function __autoload($class_name) {
+     require_once $class_name . '.php';
+ }
+*/

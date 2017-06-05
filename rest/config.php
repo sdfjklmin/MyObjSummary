@@ -5,7 +5,7 @@ $conf = array(
     'jump'=>[
         'request'=>'http://',
         'host'   =>'127.0.0.1',
-        'dir'    =>'/MyObjSummary/rest/index.html'
+        'dir'    =>'/MyObjSummary/rest/index.php'
     ],
     # rest time
     'time'=>[
