@@ -33,5 +33,5 @@ require_once './'.$mode[$arg] .'.php';
 # 自动加载 php 自带加载类(设计模式中有些是接口实现)
 /* function __autoload($class_name) {
      require_once $class_name . '.php';
- }
-*/
+ }*/
+
