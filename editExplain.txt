@@ -29,4 +29,9 @@ B.SublimeSimpleSync
   }
   ]
 }
-《漠:溟帥》
+C.php代码错误提示
+  ctrl+shift+p 输入 install 点击 install packge
+     等待安装框出来后,输入sublimelinter选择选装,
+     然后再pic唤醒输入：sublimelinter-php 
+     
+     安装自动代码提醒+当前文件内函数定义等跳转插件：SublimeCodeIntel

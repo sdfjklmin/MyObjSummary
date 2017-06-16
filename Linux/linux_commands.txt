@@ -180,3 +180,6 @@ Vi Command	:
 3.禁止root登陆
 	vi /etc/ssh/sshd_config	
 	PermitRootLogin no
+
+4.登录提示信息
+	编辑 vi /etc/motd 即可
