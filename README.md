@@ -13,6 +13,10 @@
     - [phpDll](#phpDll) 		php底层介绍,so扩展编写
     - [redis](#redis) 			key-value介绍
     - [swoole](#swoole)			框架应用介绍
+   - [rest](#rest)				休息提醒CLI
+   - [salf](#salf)				安全介绍
+   - [task](#task)				项目脚本
+   [editExplain](#editExplain)	编辑器介绍,扩展安装
   
 
 
