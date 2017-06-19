@@ -1,6 +1,3 @@
-		知识总结
-------------------------
-
 ## 目录
 - [MyObjSummary]
   - [frame](#frame) 				框架设计
@@ -21,3 +18,8 @@
    - [test.html](#test.html)		html知识测试(验证所收集到的知识)
    - [test.php](#test.php)			php知识测试(验证所收集到的知识)
    - [vue.js](#vue.js)				view/vue.js 源码 (配合html测试)
+
+
+   ### mysql
+
+   mysql主主配置、mysql主从配置、mysql问答优化、mysql面试、mysql命令、sql总结
