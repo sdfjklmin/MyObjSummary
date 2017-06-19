@@ -4,7 +4,7 @@
 ## 目录
 - [MyObjSummary]
   - [frame](#frame) 框架设计
-  - [Linux](#Linux) Linux系统操作
+  - [/tree/master/Linux](#Linux) Linux系统操作
 	  - [ftp](#ftp) FTP相关介绍
 	  - [html](#html) html知识总结和应用
 	  - [mysql](#mysql) mysql配置,优化,面试
