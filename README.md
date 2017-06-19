@@ -19,7 +19,18 @@
    - [test.php](#test.php)			php知识测试(验证所收集到的知识)
    - [vue.js](#vue.js)				view/vue.js 源码 (配合html测试)
 
+   ### html
+
+   html知识总结
 
    ### mysql
 
    mysql主主配置、mysql主从配置、mysql问答优化、mysql面试、mysql命令、sql总结
+
+   ### nginx
+
+   nginx反向代理、nginx负载均衡、nginx(conf)命令详解、nginx操作详解
+
+   ### php
+
+   依赖注入容器、设计模式、laravel、php异步编程、QRcode(二维码)、php知识归纳
