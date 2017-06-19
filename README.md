@@ -19,10 +19,6 @@
    - [test.php](#test.php)			php知识测试(验证所收集到的知识)
    - [vue.js](#vue.js)				view/vue.js 源码 (配合html测试)
 
-   ### html
-
-   html知识总结
-
    ### mysql
 
    mysql主主配置、mysql主从配置、mysql问答优化、mysql面试、mysql命令、sql总结
