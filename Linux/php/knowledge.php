@@ -71,3 +71,22 @@
     chr(90) ; # Z
     chr(97) ; # a
     chr(122) ; # z
+
+#8: sprintf 字符串替换     
+    # -s 字符类型
+    # -u 数字类型
+    $n = 2;
+    $str = "Shanghai";
+    $txt = sprintf("test %u %s %s",$number,$str,$str);
+
+#9: extract  从数组中将变量导入到当前的符号表(用于前端解析)
+    $t = 'test' ;
+    $arr = [
+        'abc'=>'testAbc',
+        'def'=>'testDef',
+        'ghi'=>'testGhi',
+    ] ;
+    extract($arr,EXTR_PREFIX_SAME,$t) ;
+    echo "$abc,$def,$ghi,$t";
+    // testAbc,testDef,testGhi,test
+
