@@ -1,0 +1,62 @@
+
+1.环境搭建（主要针对非Windows）
+	a.源码下载
+		源码下载： http://php.net/downloads.php
+		git下载 ：
+				# git 官方地址
+				git clone https://git.php.net/repository/php-src.git
+				# 也可以访问github官方镜像
+				git clone git://github.com/php/php-src.git
+				cd php-src && git checkout PHP-5.3 # 签出5.3分支
+		（这里使用Git，方便以后源码学习时，bug修改和查看日志）	
+	b.编译	
+		下载过后进入到对应的目录 php-src
+		cd php-src
+		./buildconf   # 生成 configure	
+			（有些系统可能autoconf会有问题，注意看报错信息，然后安装 yum install autoconf）
+
+		./configure --hlep (查看可用的参数)	
+
+		./configure --disable-all (编译最简单版本的php)
+				(编译的时候可能会出错,那是因为不同的系统和版本相关的依赖不同,具体看错误信息进行依赖安装)
+				prefix 指定安装目录
+		make	(安装,不同的系统操作不一样 有点是 make install 或者 make && make install 具体百度)		
+
+		安装过后 在 sapi/cli下会有php可执行文件
+		./sapi/cli/php -v  查看版本信息
+		./sapi/cli/php -m  查看php安装模块
+2.源码结构
+	*根目录: 
+		/ 这个目录包含的东西比较多，主要包含一些说明文件以及设计方案。 
+		其实项目中的这些README文件是非常值得阅读的例如：
+		/README.PHP4-TO-PHP5-THIN-CHANGES 这个文件就详细列举了PHP4和PHP5的一些差异。
+		还有有一个比较重要的文件/CODING_STANDARDS，如果要想写PHP扩展的话，这个文件一定要阅读一下， 不管你个人的代码风格是什么样，怎么样使用缩进和花括号，既然来到了这样一个团体里就应该去适应这样的规范，这样在阅读代码或者别人阅读你的 代码是都会更轻松。
+	*build 
+		顾名思义，这里主要放置一些和源码编译相关的一些文件，比如开始构建之前的buildconf脚本等文件，还有一些检查环境的脚本等。
+	*ext
+		官方扩展目录，包括了绝大多数PHP的函数的定义和实现，如array系列，pdo系列，spl系列等函数的实现，都在这个目录中。个人写的扩展在测试时也可以放到这个目录，方便测试和调试。
+	*main 
+		这里存放的就是PHP最为核心的文件了，主要实现PHP的基本设施，这里和Zend引擎不一样，Zend引擎主要实现语言最核心的语言运行环境。
+	*Zend
+		Zend引擎的实现目录，比如脚本的词法语法解析，opcode的执行以及扩展机制的实现等等。
+	*pear
+		“PHP 扩展与应用仓库”，包含PEAR的核心文件。
+	*sapi
+		包含了各种服务器抽象层的代码，例如apache的mod_php，cgi，fastcgi以及fpm等等接口。
+	*TSRM
+		PHP的线程安全是构建在TSRM库之上的，PHP实现中常见的*G宏通常是对TSRM的封装，TSRM(Thread Safe Resource Manager)线程安全资源管理器。
+	*tests
+		PHP的测试脚本集合，包含PHP各项功能的测试文件
+	*win32
+		这个目录主要包括Windows平台相关的一些实现，比如sokcet的实现在Windows下和*Nix平台就不太一样，同时也包括了Windows下编译PHP相关的脚本。
+
+	PHP的测试比较有意思，它使用PHP来测试PHP，测试php脚本在/run-tests.php，这个脚本读取tests目录中phpt文件。 读者可以打开这些看看，php定义了一套简单的规则来测试，例如以下的这个测试脚本/tests/basic/001.phpt：
+
+		--TEST--
+		Trivial "Hello World" test
+		--FILE--
+		<?php echo "Hello World"?>
+		--EXPECT--
+		Hello World
+	这段测试脚本很容易看懂，执行--FILE--下面的PHP文件，如果最终的输出是--EXPECT--所期望的结果则表示这个测试通过， 可能会有读者会想，如果测试的脚本不小心触发Fatal Error，或者抛出未被捕获的异常了，因为如果在同一个进程中执行， 测试就会停止，后面的测试也将无法执行，php中有很多将脚本隔离的方法比如： system()，exec()等函数，这样可以使用主测试进程服务调度被测脚本和检测测试结果，通过这些外部调用执行测试。 php测试使用了proc_open()函数， 这样就可以保证测试脚本和被测试脚本之间能隔离开。phpt文件的编写详细信息可参考 附录E phpt文件的编写。 如果你真的那么感兴趣，那么研究下$PHP_SRC/run-tests.php脚本的实现也是不错的选择。这个测试框架刚开始 由PHP的发明者Rasmus Lerdorf编写，后来进行了很多的改进。后面可能会引入并行测试的支持。	
+3.常用代码		
