@@ -24,3 +24,20 @@ php5.6安装:
 		rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 		安装
 		 yum install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mcrypt php-mysqlnd php-phpunit-PHPUnit php-pecl-xdebug php-pecl-xhprof
+
+把php[其他安装也一样nginx,mysql等]命令加入到系统中:
+
+		1.  当前用户生效
+			cd ~
+			vi .bash_profile 修改文件中PATH一行，将路径加入到PATH=$PATH:$HOME/bin一行之后
+
+		
+		2.永久生效
+			vi /etc/profile
+			添加
+				PATH=$PATH:/(对应php的安装运行目录)
+				export PATH
+			source /etc/profile  配置生效	
+			echo $PATH 查看
+		3.临时生效
+			export PATH=$PATH:/(对应php的安装运行目录)
