@@ -21,9 +21,9 @@ SSH key 添加 :
 
 	git diff 				// 对应变化
 
-	git add file1.py 		//如有新添加文件则
+	git add file1.py 		//新添加文件
 
-	git rm file2.py    		//如有删除文件则
+	git rm file2.py    		//删除文件
 
 	git checkout abc.php	// 把abc.php文件更新到本地
 
@@ -47,3 +47,4 @@ SSH key 添加 :
 	git branch -r -d origin /test
 	git push origin :test	// 删除远程的test分支
 	git push --set-upstream origin test  // 提交test分支的代码
+	git checkout -b test	// 创建test分支并且切换到test上
