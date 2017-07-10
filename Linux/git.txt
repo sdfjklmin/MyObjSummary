@@ -17,15 +17,17 @@ SSH key 添加 :
 
 	git pull -u origin master:master  // 更新对应的分支
 
-	git status    // 修改了哪些文件
+	git status    			// 修改了哪些文件
 
-	git diff // 对应变化
+	git diff 				// 对应变化
 
-	git add file1.py 	//如有新添加文件则
+	git add file1.py 		//如有新添加文件则
 
-	git rm file2.py    //如有删除文件则
+	git rm file2.py    		//如有删除文件则
 
-	git add -A    //这个命令表示新增修改的文件到缓存列表
+	git checkout abc.php	// 把abc.php文件更新到本地
+
+	git add -A    			//这个命令表示新增修改的文件到缓存列表
 
 	git commit -m "备注说明"
 
