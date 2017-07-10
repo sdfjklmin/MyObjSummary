@@ -46,3 +46,4 @@ SSH key 添加 :
 	git remote -v			// 查看执行结果
 	git branch -r -d origin /test
 	git push origin :test	// 删除远程的test分支
+	git push --set-upstream origin test  // 提交test分支的代码
