@@ -42,5 +42,5 @@ SSH key 添加 :
 	git checkout test		// 分支切换到test上
 	git branch -d test		// 本地删除test分支
 	git remote -v			// 查看执行结果
-	git branch -r -d origin/test
-	git push origin:test	// 删除远程的test分支
+	git branch -r -d origin /test
+	git push origin :test	// 删除远程的test分支
