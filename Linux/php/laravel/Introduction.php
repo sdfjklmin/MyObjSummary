@@ -120,5 +120,61 @@ C.错误测试
 三.简单的系统 
 
 
+四.使用homestead安装
+   工具:
+   		vagrant Virtualbox homestead 
+   1.安装vagrant
+   2.安装Virtualbox
+   3.导入box
+   		vagrant box add laravel/homestead		// 远程服务器的homestead(下载起来比较慢)
 
-	
+   		下载homestead,新建文件夹homestead,然后把下好的box命名为homestead.box,
+   		在homestead文件夹内运行
+   			vagrant box add laravel/homestead homestead.box[如果没有在当前路径下,需要加上路径地址]	
+   			vagrant box list 	// 查看box是否导入成功 如果有多个box 需要删除 vagrant box remove abc.box
+
+   4.下载homestead官方配置
+   		git clone https://github.com/laravel/homestead.git Homestead
+
+   		运行
+   			bash  init.sh   // 需要安装 git bash
+
+   		配置homestead.yaml具体如下					
+   			---
+			ip: "192.168.10.10"      # 进入服务器查看是否存在此ip,登录信息 统一是 vagrant
+			memory: 2048
+			cpus: 1
+			provider: virtualbox
+
+			authorize: ~/.ssh/id_rsa.pub
+
+			keys:
+			   - ~/.ssh/id_rsa
+
+			folders:
+			    - map: E:\Aobj  # 本地项目目录
+			      to: /home/vagrant/Code # 服务器项目目录
+
+			sites:
+			    - map: homestead.app  # 站点
+			      to: /home/vagrant/Code/laravel/public # 对应的服务器目录
+			    - map: min.app
+			      to: /home/vagrant/Code/lotteryApi/public
+
+			databases:
+			    - homestead
+	5.启动 vagrant up
+		ssh-keygen   // 生成对应的文件 ssh登录时候的验证	
+		homestead/scripts/homestead.rb  // 修改版本信息
+	6.安装laravel
+		composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+		composer create-project laravel/laravel=5.2.* --prefer-dist
+
+		composer update--no-scripts
+	tip:
+		vagrant命令
+			vagrant up 启动
+			vagrant halt 关机
+			vagrant ssh 远程登录 
+			具有清参照 vagrant --help			    
