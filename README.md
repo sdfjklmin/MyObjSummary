@@ -31,6 +31,3 @@
 
    依赖注入容器、设计模式、laravel、php异步编程、QRcode(二维码)、php知识归纳
 
-
-   prepare execute fetchAll fetch 
-   sprintf

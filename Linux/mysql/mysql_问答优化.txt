@@ -44,3 +44,8 @@
 		Cache和Buffer：查询缓存。缓存查询的结果，有命中即可直接返回
 		Engine：存储引擎。MySQL数据最后组织并存储成具体文件	 	
 6.利用 EXPLAIN 对 sql 进行分析,针对索引,主键,当个字段,表优化等 .
+
+7.针对InnoDB的机制，我们可以尝试几种优化方法:
+	a.在session级别，提供可设置预读的触发条件，并使用多个后台线程来完成异步IO请求。因为没有减少小IO请求，作者尝试了这种方法，收益甚小；
+	b.独立一个buffer pool，专门进行多块读，针对next extent，一次读取到buffer pool中，这种方式就和Oracle的multiblock-read比较类似了；
+	c.终极优化方法，就是使用并行查询，Oracle在全表扫描的时候，使用/* parallel */ hint方法启动多个进程完成查询，InnoDB的聚簇索引结构，需要逻辑分片，针对每一个分片启动一个线程完成查询。

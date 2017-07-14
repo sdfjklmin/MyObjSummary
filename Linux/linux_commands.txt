@@ -9,6 +9,10 @@ CentOS7 :
             touch /.autorelabel
         重启系统
 			exec /sbin/init
+	网络连接:
+	
+			进入  /etc/sysconfig/network-scripts 编辑第一个网卡	将 ONBOOT改为yes(激活网卡)
+			servic network restart (重启网卡)	
 Tip: 
 	min	:min
 	test:123456
