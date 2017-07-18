@@ -15,3 +15,8 @@ Redis基本数据类型介绍:
 Redis发展过程中的三种模式：
 		主从、哨兵、集群
 		Redis的发展可以从版本的变化看出来,从1.X的主从模式,到2.X的哨兵模式,再到今天3.X的集群模式,可以说这些都是Redis保证数据可靠性、高可用的思路.
+Redis持久化:把Redis内存中的数据同步到磁盘中来保证持久化
+		Snapshotting（快照）也是默认方式
+		Append-only file（缩写aof）的方式
+		虚拟内存
+		diskstore
