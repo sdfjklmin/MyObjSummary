@@ -1,0 +1,59 @@
+
+分析SQL执行带来的开销优化sql语句.
+
+A.profile
+	1.使用之前先查看当前数据库的版本信息,低版本无法使用.
+		show version();  或者 show variables like '%version%'
+	2.查看profiling
+		show variables like '%profil%'	;
+
+		result:
+			+------------------------+-------+  
+			| Variable_name          | Value |  
+			+------------------------+-------+  
+			| have_profiling         | YES   |   --只读变量，用于控制是否由系统变量开启或禁用profiling  
+			| profiling              | OFF   |   --开启SQL语句剖析功能  
+			| profiling_history_size | 15    |   --设置保留profiling的数目，缺省为15，范围为0至100，为0时将禁用p
+
+		show profiles; 查看是否开启,效果同上.
+	3.查看使用说明 
+		help profile;
+	4.开启profile
+		set profiling=1; 赋值时候不要有多余的空格.
+	5.运行sql,查看对应的profile
+		select * from test ;
+		show profiles;			
+
+		result:
+		+----------+------------+--------------------------------------------------------------------------------------------------------------------------+
+		| Query_ID | Duration   | Query                                                                                                                    |
+		+----------+------------+--------------------------------------------------------------------------------------------------------------------------+
+		|       28 | 0.00033575 | select * from test                                                                                        |
+		+----------+------------+--------------------------------------------------------------------------------------------------------------------------+
+
+		分析sql性能,分析的时候可以加上对应的开销字段
+		show profile [cpu,io][all] for query 28 ;
+
+		show profile for query 28 ;
+
+		+----------------------+----------+
+		| Status               | Duration |
+		+----------------------+----------+
+		| starting             | 5.7E-5   |
+		| checking permissions | 7E-6     |
+		| Opening tables       | 1.7E-5   |
+		| init                 | 2.3E-5   |
+		| System lock          | 8E-6     |
+		| optimizing           | 5E-6     |
+		| statistics           | 1.1E-5   |
+		| preparing            | 9E-6     |
+		| executing            | 3E-6     |
+		| Sending data         | 8.8E-5   |
+		| end                  | 5E-6     |
+		| query end            | 6E-6     |
+		| closing tables       | 5E-6     |
+		| freeing items        | 7.8E-5   |
+		| cleaning up          | 1.5E-5   |
+		+----------------------+----------+
+	6.关闭
+		set profiling=off;	
