@@ -8,3 +8,4 @@ $arr = [
 ] ;
 extract($arr) ;
 echo "$abc,$def,$ghi";
+echo "测试git";
