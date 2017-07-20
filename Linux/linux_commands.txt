@@ -187,3 +187,12 @@ Vi Command	:
 
 4.登录提示信息
 	编辑 vi /etc/motd 即可
+
+5.自定义命令
+  a.直接修改系统命令
+  	vi /etc/bashrc
+  	在最后一行添加
+  	alias test="cd /minCmd"	
+  	source /etc/bashrc  # 使更改配置生效
+  b.建立shell脚本
+  	...... 不熟悉
