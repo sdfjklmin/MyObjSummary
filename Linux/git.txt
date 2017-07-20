@@ -49,7 +49,7 @@ SSH key 添加 :
 	git push --set-upstream origin test  // 提交test分支的代码
 	git checkout -b test	// 创建test分支并且切换到test上
 	git push origin ts_3:ts_3 // 同步远程ts_3
-
+	 git fetch -p // 更新远程分支
 
 	//切换分支之前要提交代码
 	git merge test			// 在master分支下合并test分支
