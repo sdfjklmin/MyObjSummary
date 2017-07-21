@@ -41,3 +41,91 @@ php5.6安装:
 			echo $PATH 查看
 		3.临时生效
 			export PATH=$PATH:/(对应php的安装运行目录)
+
+手动编译安装:
+	官方下载php.tar.gz
+	解压进入
+
+	./configure 
+	--prefix=/usr/local/php 		  #安装地址
+	--with-config-file-path=/etc      #配置文件
+	--enable-inline-optimization 	  #开启功能	
+	--disable-debug					  #关闭debug	
+	--disable-rpath 
+	--enable-shared
+	--enable-opcache 
+	--enable-fpm                      #运行php-fpm
+	--with-fpm-user=www               #运行用户
+	--with-fpm-group=www 
+	--with-mysql=mysqlnd 
+	--with-mysqli=mysqlnd 
+	--with-pdo-mysql=mysqlnd 
+	--with-gettext 
+	--enable-mbstring 
+	--with-iconv 
+	--with-mcrypt 
+	--with-mhash 
+	--with-openssl 
+	--enable-bcmath 
+	--enable-soap -
+	-with-libxml-dir 
+	--enable-pcntl 
+	--enable-shmop 
+	--enable-sysvmsg -
+	-enable-sysvsem 
+	--enable-sysvshm 
+	--enable-sockets 
+	--with-curl 
+	--with-zlib 
+	--enable-zip 
+	--with-bz2 
+	--with-readline 
+	--without-sqlite3 
+	--without-pdo-sqlite 
+	--with-pear			
+
+
+	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
+
+	由于系统的版本不同,有些内置的模块没有,需要根据错误提示进行安装扩展
+	yum install libxml2-devel
+	yum install openssl openssl-devel
+	yum install bzip2 bzip2-devel
+	yum -y install curl-devel
+	yum install libmcrypt libmcrypt-devel mcrypt mhash
+	yum install readline-devel
+
+	如果没有找到对应的源码需要扩展yum源
+	yum install epel-release
+	#yum  install epel-release
+	yum update
+
+	make && make install
+	安装完后 会提示对应的安装地址
+	对应的php安装地址
+	/usr/loacl/php/bin 配置系统变量
+
+	配置php-fpm
+	cd /usr/local/php/etc
+	cp php-fpm.conf.default php-fpm.conf #生成配置文件
+
+	启动
+	/usr/local/php/sbin/php-fpm #可能会报php-fpm.d的错误
+	cd /usr/local/php/etc/php-fpm.d
+	cp www.conf.default www.conf   #文件中的用户和组都是www最好新建一个www用户
+
+	安装nginx
+	添加或修改Nginx.conf
+		location ~ \.php$ {
+
+			root /www/test; #网站指定的目录
+
+			fastcgi_pass 127.0.0.1:9000;
+
+			fastcgi_index index.php;
+
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+			include fastcgi_params;
+
+			}
