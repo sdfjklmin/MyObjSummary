@@ -129,5 +129,31 @@ php5.6安装:
 			include fastcgi_params;
 
 			}
+		添加新站点可以通过引入文件的方法引入,这里直接修改
+
+		在对应的server相同等级下添加
+			server {
+				listen       80;
+				#listen       somename:8080;
+				server_name  min.1;
+
+				location / {
+				root   /minAobj/min.1;
+				index  index.html index.htm index.php;
+				}
+
+				location ~ \.php$ {
+				root           /minAobj/min.1;
+				fastcgi_pass   127.0.0.1:9000;
+				fastcgi_index  index.php;
+				fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+				include        fastcgi_params;
+				}
+
+			}
+		windows hosts配置
+		192.168.124.129  mint.test  #如果nginx没有min.test站点那么对应的是默认站点
+		192.168.124.129  mint.1     #对应nginx的站点min.1
+
 	搭建完成之后有些操作可能无法执行(权限问题)
 	chown -R www www/	 # 把www文件夹下的所以文件归属于www用户/组  用户 文件夹
