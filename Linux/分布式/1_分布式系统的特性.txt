@@ -1,0 +1,5 @@
+﻿1.CAP介绍:
+	C:Consistency(一致性) .
+	A:Availability(可用性).
+	P:Partition(分区容错性). 
+	在分布式系统中，同时满足CAP定律中的一致性 Consistency、可用性 Availability和分区容错性 Partition Tolerance三者是不可能的。在绝大多数的场景，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证最终一致性。

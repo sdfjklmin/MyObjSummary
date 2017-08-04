@@ -157,3 +157,5 @@ php5.6安装:
 
 	搭建完成之后有些操作可能无法执行(权限问题)
 	chown -R www www/	 # 把www文件夹下的所以文件归属于www用户/组  用户 文件夹
+Please check your autoconf installation and the
+$PHP_AUTOCONF environment variable. Then, rerun this script.
