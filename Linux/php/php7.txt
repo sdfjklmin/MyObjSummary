@@ -114,6 +114,19 @@ php5.6安装:
 	cd /usr/local/php/etc/php-fpm.d
 	cp www.conf.default www.conf   #文件中的用户和组都是www最好新建一个www用户
 
+	PHP扩展安装:
+	建议在php对应的安装目录运行安装
+	/usr/local/php/bin
+	eg: pecl instal msgpack
+	 PHP Startup: Unable to load dynamic library '/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so' - /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so: cannot open shared object file: No such file or directory in Unknown on line 0
+     对应安装的扩展没有在php.ini的扩展目录中
+     find / -name swoole.so  //查找已有的扩展目录(对应的有两个地址)
+     find / -name msgpack.so //新安装的扩展(复制到对应php扩展目录) 
+
+     /usr/local/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so  //系统pecl安装的默认扩展目录
+	/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so //php.ini系统扩展目录
+
+
 	安装nginx
 	添加或修改Nginx.conf
 		location ~ \.php$ {
@@ -157,5 +170,22 @@ php5.6安装:
 
 	搭建完成之后有些操作可能无法执行(权限问题)
 	chown -R www www/	 # 把www文件夹下的所以文件归属于www用户/组  用户 文件夹
-Please check your autoconf installation and the
-$PHP_AUTOCONF environment variable. Then, rerun this script.
+
+	Please check your autoconf installation and the
+	$PHP_AUTOCONF environment variable. Then, rerun this script.
+	错误提示:没有autoconf.autoconf依赖于m4
+	yum install m4
+	yum install autoconf
+	pecl install swoole
+
+	当安装对应扩展始终无法动态加载扩展库时,删除安装的php从新安装.
+	(可能安装之前已经有php的环境变量,导致系统变量污染)
+
+	安装telnet: 
+	yum -y install xinetd telnet telnet-server
+	service xinetd restart // 重启服务
+	# systemctl status telnet.socket
+	如果显示inactive则表示没有打开请执行
+	# systemctl enable telnet.socket 加入开机启动
+	# systemctl start telnet.socket 启动Telnet服务
+	# systemctl status telnet.cocket 再次查看服务状态
