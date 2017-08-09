@@ -89,4 +89,5 @@
     extract($arr,EXTR_PREFIX_SAME,$t) ;
     echo "$abc,$def,$ghi,$t";
     // testAbc,testDef,testGhi,test
+#10:DIRECTORY_SEPARATOR php系统常量即文件分隔符    
 

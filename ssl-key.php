@@ -82,9 +82,9 @@ class Rsa
      */
     public function setupPubKey()
     {
-        if (is_resource($this->_pubKey)) {
+        /*if (is_resource($this->_pubKey)) {
             return true;
-        }
+        }*/
         $file = $this->_keyPath . DIRECTORY_SEPARATOR . 'pub.key';
         $pubKey = file_get_contents($file);
         $this->_pubKey = openssl_pkey_get_public($pubKey);
