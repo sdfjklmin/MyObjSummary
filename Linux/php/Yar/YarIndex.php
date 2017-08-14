@@ -21,6 +21,17 @@ class YarIndex
        /* if(!file_exists('./'.$actions[0].'.php')) {
             throw new Exception("not find ".'./'.$actions[0].'.php')." file");
         }*/ 
+        //密码验证
+        $pawdConf = [
+            'intoPwd' => 'YarInto' ,
+            'addSalt' => 'YarSalt' ,
+            'other'   => 'addYar' , 
+        ] ;
+        $check = password_verify(json_encode($pawdConf),$hash) ;
+        if ($check === false) {
+            # code...
+            throw new Exception("Forbidden into !");
+        }
         require_once('./'.$actions[0].'.php');
         if(!class_exists($actions[0])) {
             throw new Exception($actions[0]." not find ");

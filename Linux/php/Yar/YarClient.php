@@ -26,8 +26,15 @@ class YarClient
 		$client->SetOpt(YAR_OPT_CONNECT_TIMEOUT,1000);
 		//数据格式
 		$client->SetOpt(YAR_OPT_PACKAGER,'json');
+		//密码验证
+		$pawdConf = [
+			'intoPwd' => 'YarInto' ,
+			'addSalt' => 'YarSalt' ,
+			'other'	  => 'addYar' ,	
+		] ;
+		$hash = password_hash(json_encode($pawdConf),PASSWORD_DEFAULT);
 		//service同一入口
-		return $client->index($action,$argument);
+		return $client->index($action,$argument,$hash);
 		
 	}
 
