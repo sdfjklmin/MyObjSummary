@@ -41,7 +41,10 @@ php5.6安装:
 			echo $PATH 查看
 		3.临时生效
 			export PATH=$PATH:/(对应php的安装运行目录)
-
+phpize
+./configure --with-php-config=/usr/local/php   --enable-coroutine
+make
+make install
 手动编译安装:
 	官方下载php.tar.gz
 	解压进入
@@ -82,10 +85,11 @@ php5.6安装:
 	--with-readline 
 	--without-sqlite3 
 	--without-pdo-sqlite 
-	--with-pear			
+	--with-pear	
+	--enable-maintainer-zts	# pthreads的前置包	
 
 
-	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
+	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-maintainer-zts --enable-coroutine --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
 
 	由于系统的版本不同,有些内置的模块没有,需要根据错误提示进行安装扩展
 	yum install libxml2-devel
@@ -133,6 +137,16 @@ php5.6安装:
 
      /usr/local/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so  //系统pecl安装的默认扩展目录
 	/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so //php.ini系统扩展目录
+
+	手动编译扩展
+	wget http://youExtension.tgz
+	tar -zxvf
+	cd youExtension-3.1.6
+	/usr/local/php7/bin/phpize #生成./configue文件
+	./configure --with-php-config=/usr/local/php7/bin/php-config
+	make && make install
+
+	echo "extension=pthreads.so" >> /etc/php.ini #添加配置
 
 	php --ri yar // 查看yar的版本信息
 	安装nginx
@@ -197,3 +211,8 @@ php5.6安装:
 	# systemctl enable telnet.socket 加入开机启动
 	# systemctl start telnet.socket 启动Telnet服务
 	# systemctl status telnet.cocket 再次查看服务状态
+
+	php重启:
+	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
+	ps aux | grep php-fpm 
+	kill 15891 # 对应的master进程ID
