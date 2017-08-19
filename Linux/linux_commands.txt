@@ -12,6 +12,10 @@ CentOS7 :
 	网络连接:
 	
 			进入  /etc/sysconfig/network-scripts 编辑第一个网卡	将 ONBOOT改为yes(激活网卡)
+				  vi ifcfg-eno..
+				  BOOTPROTO=static[静态ip]|dhcp[动态ip]
+				  IPADDR=192.168.124.129
+				  NETMASK=255.255.255.0
 			servic network restart (重启网卡)	
 Tip: 
 	min	:min
@@ -196,3 +200,10 @@ Vi Command	:
   	source /etc/bashrc  # 使更改配置生效
   b.建立shell脚本
   	...... 不熟悉
+6.修改主机信息
+  a.使用hostname
+  	hostname 主机名称
+  	su #使修改生效
+  b. vi /etc/hosts	  	
+    新增:
+    192.169.124.130 hostname

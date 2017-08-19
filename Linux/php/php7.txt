@@ -88,8 +88,7 @@ make install
 	--with-pear	
 	--enable-maintainer-zts	# pthreads的前置包	
 
-
-	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-maintainer-zts --enable-coroutine --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
+	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-maintainer-zts --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
 
 	由于系统的版本不同,有些内置的模块没有,需要根据错误提示进行安装扩展
 	yum install libxml2-devel
@@ -216,3 +215,4 @@ make install
 	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
 	ps aux | grep php-fpm 
 	kill 15891 # 对应的master进程ID
+	
