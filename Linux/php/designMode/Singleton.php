@@ -9,10 +9,15 @@ class Singleton
 
 	static private $_instance = null; 
 
-	public function __construct() 
-	{ 
+    private  function __construct()
+    {
+    	#不允许实例化
+    }
 
-	} 
+    private function __clone()
+    {	
+    	#不允许外部克隆
+    }
 
 	static public function getInstance() 
 	{ 
