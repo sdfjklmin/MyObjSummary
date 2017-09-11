@@ -92,14 +92,14 @@ Ngiux :
 			   
 		}
 		#http和https共存 方法2(推荐) 
-		(https配置)
+		#(https配置)
 		server {
 	        listen      443 ssl;
 	        server_name  localhost;
 	        ssl_certificate /usr/local/nginx/conf/33iq.crt;
 	        ssl_certificate_key /usr/local/nginx/conf/33iq_nopass.key;
         }
-        (http重定向)
+        #(http重定向)
         server {
 	        listen       80;
 	        server_name localhost;

@@ -39,7 +39,46 @@ A.安装ngiux相关依赖
 	[root@nginx-1.8.0 ~]# ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_stub_status_module --with-http_ssl_module
 	[root@nginx-1.8.0 ~]#make
 	[root@nginx-1.8.0 ~]#make install clean  (清除安装过程多余的安装文件)
+  #安装openssl
+        wget https://www.openssl.org/source/openssl-1.1.0f.tar.gz
+        tar xzf openssl.tar.gz
+        cd openssl-1.1.0f
+        ./config --prefix=/usr/local/openssl
+        make && make install
+        2.替换旧版本库(如果已经安装)
+        mv /usr/bin/openssl  /usr/bin/openssl.old
+        mv /usr/include/openssl /usr/include/openssl.old
+        ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
+        ln -s /usr/local/openssl/include/openssl /usr/include/openssl
+        #链接新库文件
+        ln -s /usr/local/openssl/lib/libssl.so /usr/local/lib64/libssl.so
+        ln -s /usr/local/openssl/lib/libcrypto.so /usr/local/lib64/libcrypto.so
+        #检查更新后的openssl依赖库是否是1.1.0f
+        strings /usr/local/lib64/libssl.so | grep OpenSSL
+        #显示结果表明已升级到最新版本链接库
+        OpenSSL 1.1.0f  25 May 2017
+        #配置openssl库文件的搜索路径
+        echo '/usr/local/openssl/lib' >> /etc/ld.so.conf
+        #使修改后的搜索路径生效
+        ldconfig -v
+        #查看openssl版本，结果显示升级成功
+        openssl version
+        OpenSSL 1.1.0f  25 May 2017
+  #参数配置
+        ngx_http_v2_module #http2前置模块 (http2需要高版本的nginx和openssl建议去官网下载最新版)
 
+        ./configure --user=www --group=www --prefix=/usr/local/nginx/ --with-pcre --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module --with-http_v2_module  --with-openssl=/usr/local/openssl/
+
+        如果是手动安装openssl需要指定openssl的路径--with-openssl=/usr/local/openssl/
+        如果报错.openssl没有找到,修改nginx的源码安装包/nginx-1.13.4/auto/lib/openssl中的conf
+
+        找到这么一段代码：
+        CORE_INCS="$CORE_INCS $OPENSSL/.openssl/include"
+        CORE_DEPS="$CORE_DEPS $OPENSSL/.openssl/include/openssl/ssl.h"
+        CORE_LIBS="$CORE_LIBS $OPENSSL/.openssl/lib/libssl.a"
+        CORE_LIBS="$CORE_LIBS $OPENSSL/.openssl/lib/libcrypto.a"
+        CORE_LIBS="$CORE_LIBS $NGX_LIBDL"
+        去掉.openssl(根据错误信息/usr/local/openssl/.openssl/include/openssl/ssl.h),查找到对应的ss.h目录,并没有.openssl这一层
    a.2
    	 编辑nginx.conf #添加 include vhosts/*.conf; #如果没有vhost文件夹,就先mkdir ,引入配置
      直接修改nginx.conf	
