@@ -44,6 +44,28 @@ Ngiux :
 
 		        access_log off;
 		    }
+
+		    eg.php服务
+		    server {
+				listen       80;
+				#listen       somename:8080;
+				server_name  min.1;
+
+				location / {
+				root   /minAobj/min.1;
+				index  index.html index.htm index.php;
+				}
+
+				location ~ \.php$ {
+				root           /minAobj/min.1;
+				fastcgi_pass   127.0.0.1:9000;
+				fastcgi_index  index.php;
+				fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+				include        fastcgi_params;
+				}
+
+			}
+
 	3.让http自动跳https(重写)	    
 		server {  
 			listen  192.168.1.111:80;  

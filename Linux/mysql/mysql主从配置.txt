@@ -16,9 +16,9 @@ step:
    systemctl enable mariadb  #设置开机启动 
    
    #给对应的ip赋予权限
-   grant all privileges on *.* to 'root'@'192.168.5.178' identified by 'root' with grant option;
-   #GRANT ALL PRIVILEGES ON *.* TO'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
-   grant all privileges on *.* to 'root'@'192.168.5.34' identified by 'passwd'
+   grant all privileges on *.* to 'root'@'192.168.5.178' identified by 'passwd' with grant option;
+   #GRANT ALL PRIVILEGES ON *.* TO'root'@'%' IDENTIFIED BY 'passwd' WITH GRANT OPTION;
+   grant all privileges on *.* to 'root'@'192.168.5.34' identified by 'passwd';(测试可用)
           all privileges：表示将所有权限授予给用户。也可指定具体的权限，如：SELECT、CREATE、DROP等。
           on：表示这些权限对哪些数据库和表生效，格式：数据库名.表名，这里写“*”表示所有数据库，所有表。如果要指定将权限应用到test库的user表中，可以这么写：test.user
           to：将权限授予哪个用户。格式：”用户名”@”登录IP或域名”。%表示没有限制，在任何主机都可以登录。比如：”yangxin”@”192.168.0.%”，表示yangxin这个用户只能在192.168.0IP段登录
@@ -27,7 +27,7 @@ step:
           可以使用GRANT给用户添加权限， 权限会自动叠加，不会覆盖之前授予的权限，比如你先给用户添加一个SELECT权限，后来又给用户添加了一个INSERT权限，那么该用户就同时拥有了SELECT和INSERT权限。
    #修改root密码
     USE mysql ;  // 使用数据库
-    UPDATE user SET Password = password ( 'new-password' ) WHERE User = 'root' ;  //更改root的密码
+    UPDATE user SET Password = password ( '123456' ) WHERE User = 'root' ;  //更改root的密码
 
    操作思路:
       配置log-bin和server-id；

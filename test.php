@@ -1,13 +1,15 @@
 <?php
-$t = '0' ;
-var_dump(empty($t)) ;exit();
-$a= [1=>'a',2=>'b',3=>'c']  ;
-foreach ($a as $key => $value) {
-	# code...
-	unset($a[1]) ;
-}
-var_dump($a) ;exit();
-$a = '投注了';
-var_dump(json_decode($a,true)) ;
-exit(var_dump(200844%10));
-header('Location: http://www.baidu.com') ;
+$test = [
+	'app_id'=>'322323232sdsd',
+	'app_key'=>'ssdssdsd23sdkjhkjhsdkj',
+	'corp_id'=>'sssd324sd',
+] ;
+
+$str = json_encode($test) ;
+$strMd = base64_encode($str) ;
+$str2 = base64_decode($strMd) ;
+$data = json_decode($str2,true) ;
+$token = '23232' ;
+var_dump($strMd,$str2,$data,compact('token'),uniqid());
+
+

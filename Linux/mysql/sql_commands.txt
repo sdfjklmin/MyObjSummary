@@ -28,3 +28,7 @@ _6.创建一张临时表
    SELECT * FROM m_b_address
 
    SHOW CREATE TABLE abc;   #  查看创建表的sql
+_7.查看表的列
+   DESC cp_bets ; 	
+   SHOW columns FROM  cp_bets ;
+_8.explain sql语句 (查看sql语句,看索引是否生效)   
