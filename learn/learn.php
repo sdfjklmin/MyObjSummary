@@ -27,3 +27,4 @@ KDC有两个服务组成：身份验证服务（Authentication Server，简称AS
 线路跳转方式(短连接优化) 
 前端h5打包App(HBuilder)
 二维码(芝麻,草料,新浪)
+CDN
