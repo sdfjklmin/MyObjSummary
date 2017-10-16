@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script type="text/javascript" src="./vue.js"></script>
+<body>
+<!--  test1 -->
+<div id="test">
+	{{msg}}
+</div>
+<script type="text/javascript">
+	// test1
+	let vm = new Vue({
+		el:'#test',
+		data:{
+			msg:'this is test msg'
+		}
+	});
+	setTimeout("vm.msg='look'",5000) ;
+</script>
+
+<!-- test2 -->
+<div id="app-2">
+  <span v-bind:title="msg">
+   mouse move
+  </span>
+</div>
+<script type="text/javascript">
+	//test2
+	let app2 = new Vue({
+			  el: '#app-2',
+			  data: {
+			    msg: 'mouse ' + new Date().toLocaleString()
+			  }
+			}) ;
+
+</script>
+
+
+<!--test3-->
+<div id="app-3">
+    <p v-if="seen">look</p>
+</div>
+<script type="text/javascript">
+	 //test3
+    let app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    }) ;
+    app3.seen = false ;
+</script>
+
+
+<!-- test5 -->
+<div id="test-5">
+	<p>{{msg}}</p>
+    <button v-on:click='msgClick'>msg Click</button>
+</div>
+<script type="text/javascript">
+	//test-5
+    let test5 = new Vue({
+    	el:'#test-5',
+    	data:{
+    		msg:'this is msg click'
+    	},
+    	methods:{
+    		msgClick:function(){
+    			alert('msgClick 夜曳') ;
+    			console.log('this is msgClick function');
+    		}
+    	},
+    });
+</script>
+
+<!-- test6 -->
+<div id="test-6">
+	<p>{{test6Msg}}</p>
+	<input v-model='test6MsgValue'>
+</div>
+<script type="text/javascript">
+	let test6 = new Vue({
+		el:"#test-6",
+		data:{
+			test6Msg:'test6Msg',
+			test6MsgValue:'this is test6 msg value',
+		}
+	});
+</script>
+
+
+<!-- test7 -->
+<div id="app-7">
+	<todo-item
+		v-for='item in getDatas'
+		v-bind:todo='item'
+		v-bind:key='item.id'
+		>	
+	</todo-item>
+</div>
+<script type="text/javascript">
+	Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    getDatas: [
+      { id: 0, text: 'dog' },
+      { id: 1, text: 'ping' },
+      { id: 2, text: 'cat' }
+    ]
+  }
+})
+</script>
+</body>
+
+
+</html>
