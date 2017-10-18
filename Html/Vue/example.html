@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script type="text/javascript" src="./fun.js"></script>
+<script type="text/javascript" src="./vue.js"></script>
+<body>
+<div id="example">
+	<a v-on:click="doSomething">dssssssss</a>
+</div>
+<div id="ask">
+	<p>
+		<input v-model='question'>
+	</p>
+	<p>
+		{{answer}}
+	</p>
+</div>
+<script type="text/javascript">
+	var ask = new Vue({
+		el:'#ask',
+		data:{
+			question:'into you asking',
+			answer:'no answer'
+		},
+		watch:{
+			question:function(newQuestion){
+				this.answer='Wating for the answer';
+				this.getAnswer();
+			}
+		},
+		methods:{
+			getAnswer:function(){
+				if(this.question == 'hi') {
+					this.answer = 'hi you master' ;
+				}
+			}
+		}
+
+	});
+</script>
+</body>
+<!-- <script type="text/javascript">
+var data = {a:1} ;
+var vm = new Vue({
+	el:'#example',
+	data:data,
+	methods:{
+		doSomething:function(){
+		alert(333333);
+	}
+	}
+});
+
+new Vue({
+  data: {
+    a: 3
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+    console.log('a is: ' + this.a)
+  }
+})
+</script> -->
+</html>
