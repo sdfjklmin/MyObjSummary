@@ -1,0 +1,37 @@
+A.SFTP
+	a.1   ctrl+shift+p 输入 install 点击 install packge
+	   等待安装框出来后,输入SFTP
+
+	a.2通过SFTP操作文件   
+		File->SFTP/FTP 配置相关的登陆信息 保存在User\sftp_servers中
+	  查看:
+	  	Preferences->	Browes Packages
+	a.3通过SFTP操作项目
+		  从服务器获取代码后,打开项目
+		  任意打开一个文件,点击右键
+		  选择 	SFTP/FTP -> Map to Remote
+		  配置远程登陆信息和服务器代码地址
+B.SublimeSimpleSync	  
+  设置 Preferences-->Package Settings-->Sublime Simple Sync-->Setting-User
+  复制 对应路径下的 Setting-Default 编辑 Setting-User保存
+  eg:
+  {
+  "config": {
+    "autoSync": true,// 保存的时候自动将local路径的内容同步到remote路径中去。
+    "debug": false,
+    "timeout": 10 //support mac/Linux
+  },
+  "rules": [
+  {
+    "type" : "local",
+    "local" : "D:\\xxx路径\\WebContent",           //你的本地文件夹
+    "remote" : "D:\\xxxx路径\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\xxx文件夹"   //你的本地服务器的位置
+  }
+  ]
+}
+C.php代码错误提示
+  ctrl+shift+p 输入 install 点击 install packge
+     等待安装框出来后,输入sublimelinter选择选装,
+     然后再pic唤醒输入：sublimelinter-php 
+     
+     安装自动代码提醒+当前文件内函数定义等跳转插件：SublimeCodeIntel

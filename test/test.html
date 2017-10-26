@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="msg"></div>
+<input type="text" id="text">
+<input type="submit" value="发送数据" onclick="song()">
+</body>
+<script>
+    var msg = document.getElementById("msg");
+    var wsServer = 'ws://192.168.124.129:9502';
+    //调用websocket对象建立连接：
+    //参数：ws/wss(加密)：//ip:port （字符串）
+    var websocket = new WebSocket(wsServer);
+    //打印出websocket可以查看对应的方法和属性
+    if(websocket.readyState != 1) {
+    	msg.innerHTML = 'websocket连接失败!' ;
+    }
+    // return false ;
+    //onopen监听连接打开
+    websocket.onopen = function (evt) {
+        var status = websocket.readyState ;
+        var tip = '' ;
+        switch(status) {
+        	case 0 :
+        		tip = '连接中请稍后: ' ;
+        		break ;
+        	case 1 :
+        		tip = '连接成功: ' ;
+        		break ;
+        	case 2 :
+        		tip = '关闭中请稍后: ' ;
+        		break ;
+        	case 3 :
+        		tip = '失去连接: ' ;
+        		break ;			
+        }
+        msg.innerHTML = tip;
+    };
+
+    function song(){
+        var text = document.getElementById('text').value;
+        document.getElementById('text').value = '';
+        //向服务器发送数据
+        websocket.send(text);
+    }
+
+    //onmessage 监听服务器数据推送
+    websocket.onmessage = function (evt) {
+    	console.log(evt);
+        msg.innerHTML += evt.data +'<br>';
+    };
+
+</script>
+</html>
