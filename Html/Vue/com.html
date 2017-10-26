@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script type="text/javascript" src="./vue.js"></script>
+<body>
+<div id="example">
+  <my-com></my-com>
+</div>
+<div id="example2">
+	<my-test></my-test>
+</div>
+</body>
+<script type="text/javascript">
+	// 注册
+	Vue.component('my-com', {
+	  template: '<div>A custom component!</div>'
+	})
+	Vue.component('my-test',{
+		template:'<h1>my-test</h1>'
+	}) ;
+	// 创建根实例
+	new Vue({
+	  el: '#example'
+	})
+	new Vue({
+	  el: '#example2'
+	})
+</script>
+</html>

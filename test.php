@@ -1,4 +1,5 @@
 <?php
+var_dump( intval(20171024001) );
 $test = [
 	'app_id'=>'322323232sdsd',
 	'app_key'=>'ssdssdsd23sdkjhkjhsdkj',
