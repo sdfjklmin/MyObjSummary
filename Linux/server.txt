@@ -21,7 +21,7 @@ Redis操作:
 
 相关配置:
 
-														nginx
+														nginx/http2.0 ssl
 						son_one <---反向代理+负载均衡-----> lnmp_m(weight=1)  /  dis(weight=2)  {ip_hash可添加多个}
 																|
 																| 
