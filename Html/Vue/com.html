@@ -5,27 +5,70 @@
 </head>
 <script type="text/javascript" src="./vue.js"></script>
 <body>
-<div id="example">
-  <my-com></my-com>
-</div>
+<!-- 简单组件 -->
 <div id="example2">
-	<my-test></my-test>
+	<my-test v-on:click.native='doTheThing'></my-test>
+  {{ex2data}}
+  <input v-bind:value='doSome'>
 </div>
 </body>
 <script type="text/javascript">
 	// 注册
-	Vue.component('my-com', {
-	  template: '<div>A custom component!</div>'
-	})
 	Vue.component('my-test',{
 		template:'<h1>my-test</h1>'
 	}) ;
 	// 创建根实例
 	new Vue({
-	  el: '#example'
-	})
-	new Vue({
-	  el: '#example2'
+	  el: '#example2',
+    data:{
+      ex2data:'test'
+    },
+    methods:{
+      doTheThing:function()
+      {
+        console.log('doTheThing');
+      },
+      doSome:function()
+      {
+       this.$emit('input', 'look')
+      }
+    }
 	})
 </script>
+
+<!-- 组件事件 -->
+<div id="counter-event-example">
+  <p>{{ total }}</p>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<script type="text/javascript">
+	Vue.component('button-counter', {
+  template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    incrementCounter: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
+</script>
+
+
 </html>

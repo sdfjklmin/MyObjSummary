@@ -1,0 +1,5 @@
+1.v-on 事件绑定
+	v-on:click
+	v-on:click.native='doSomething' //绑定原生事件
+2.v-model 表单绑定
+	<input v-model='doSomething'>		
