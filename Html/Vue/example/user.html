@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<body>
+	<div id="user">
+		<p>
+			 <!-- 给user组件设置默认值 -->
+			  <router-link to="/user/foo/yes">Go to User</router-link>
+			  <router-link to='/test'>Go to test</router-link>
+			  <router-view></router-view>
+		</p>
+	</div>
+</body>
+<script>
+	const User= { 
+			template:'<div class="user"><h1>User {{ $route.params.id}} {{ $route.params.name}}</h1> <router-view></router-view></div>',
+			  beforeRouteUpdate (to, from, next) {
+			  	console.log(to);
+			  	console.log(from);
+			  	console.log(next);
+			  }
+			}
+	const UserMin ={ template:'<div>user min</div>'}	
+	const UserTest = {template:"<div>user test</div>"}
+	const Test ={
+			template:'<div>Test</div>',
+			  beforeRouteUpdate (to, from, next) {
+			  	alert(2);
+			  }
+			}
+	//this.$route.params
+	const router = new VueRouter({
+	   routes:[
+	   	{path:'/user/:id/:name',component:User,
+	   		children:[
+	   			{path:'',component:UserMin} ,
+	   			{path:'test',component:UserTest}
+	   		]
+	    } ,
+	   	{path:'/test',component:Test}
+	   ]
+	})
+
+	const app = new Vue({
+	  router
+	}).$mount('#user')
+</script>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<body>
+	<div id="app">
+	  <h1>Hello App!</h1>
+	  <p>
+	    <!-- 使用 router-link 组件来导航. -->
+	    <!-- 通过传入 `to` 属性指定链接. -->
+	    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+	    <router-link to="/foo">Go to Foo</router-link>
+	    <router-link to="/bar">Go to Bar</router-link>
+	    <router-link to="/self">Go to Self</router-link>
+	    <router-link to="/user/7">Go to User</router-link> <!-- 参数默认值 -->
+	    <router-link to='/route'>Go to route</router-link>
+	  </p>
+	  <!-- 路由出口 -->
+	  <!-- 路由匹配到的组件将渲染在这里 -->
+	  <router-view></router-view>
+</div>
+</body>
+<!-- 使用router-link导航 -> router-view来渲染  -->
+<!-- 定义路由组件 -> 定义路由 ->  创建路由实例  ->  创建和挂载实例   -->
+<script >
+	// 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
+
+	// 1. 定义（路由）组件。
+	// 可以从其他文件 import 进来
+	const Foo = { template: '<div>foo</div>' }
+	const Bar = { template: '<div>bar</div>' }
+	const Self= {template:'<h1>Self</h1>'}
+	const User = {template:"<div>User {{$route.params.id}}</div>"}  //参数绑定
+	//路由嵌套(route-view)
+	const RouteView = {template:"<div><h1>RouteView</h1><router-view></router-view></div>"}
+	const RouteTest = {template:'<div>RouteTest</div>'};
+	const RouteDef = {template:'<div>RouteDef</div>'};
+
+	// 2. 定义路由
+	// 每个路由应该映射一个组件。 其中"component" 可以是
+	// 通过 Vue.extend() 创建的组件构造器，
+	// 或者，只是一个组件配置对象。
+	// 我们晚点再讨论嵌套路由。
+	const routes = [
+	  { path: '/foo', component: Foo },
+	  { path: '/bar', component: Bar },
+	  { path: '/self',component: Self},
+	  { path:'/user/:id',component: User} , //参数绑定
+	  { path:'/route',component:RouteView,
+	  	 children:[
+	  	 	{path:'',component:RouteDef}, // 默认路径
+	  	 	{path:'test',component:RouteTest} // route/test路径
+	  	 ]
+	  }
+	]
+
+	// 3. 创建 router 实例，然后传 `routes` 配置
+	// 你还可以传别的配置参数, 不过先这么简单着吧。
+	const router = new VueRouter({
+	  routes // （缩写）相当于 routes: routes
+	})
+
+	// 4. 创建和挂载根实例。
+	// 记得要通过 router 配置参数注入路由，
+	// 从而让整个应用都有路由功能
+	const app = new Vue({
+	  router
+	}).$mount('#app')
+
+	//默认导航  <router-link to="/foo">(声明式) = router.push('foo')(编程式)
+	//想要导航到不同的 URL，则使用 router.push 方法。这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
+	//router.replace(location, onComplete?, onAbort?)
+	//跟 router.push 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
+	//router.go(n) 这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 window.history.go(n)。
+	router.push('/route/test'); // 字符串
+	// router.push({path:'/foo'}) 对象
+	// 命名的路由
+	//router.push({ name: 'user', params: { userId: 123 }})
+
+	setTimeout("router.push({path:'/foo'})",3000); //这里是根路径
+	// 现在，应用已经启动了！
+
+
+
+</script>
+</html>
