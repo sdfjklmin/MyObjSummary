@@ -19,7 +19,8 @@
 	    <router-link to="/bar">Go to Bar</router-link>
 	    <router-link to="{ name: 'self'}">Go to Self</router-link> <!-- 命名路由 -->
 	    <router-link to="/user/7">Go to User</router-link> <!-- 参数默认值 -->
-	    <router-link to='/route'>Go to route</router-link>
+	    <router-link to='/route'>Go to route</router-link> <!-- 路由嵌套 -->
+	    <router-link to='/userTwo'>Go to UserTwo</router-link> <!-- 路由参数解耦 -->
 	  </p>
 	  <li>
 	  	<router-link to='/nameView'>name view</router-link>
@@ -48,19 +49,24 @@
 	const RouteDef = {template:'<div>RouteDef</div>'}
 	//命名视图
 	const NameView = {template:'<div>name view</div>'} 
+    //路由参数解耦
+    const UserTwo = {
+    	props:['id','name'],
+    	template:'<div>UserTwo {{ id }}  {{ name }}</div>'
+    } ;
+
 
 	// 2. 定义路由
 	// 每个路由应该映射一个组件。 其中"component" 可以是
 	// 通过 Vue.extend() 创建的组件构造器，
 	// 或者，只是一个组件配置对象。
-	// 同级: path(路径) name(命名路由) redirect(重定向) component(单个组件)
-	// 我们晚点再讨论嵌套路由。
+	// 同级: path(路径) name(命名路由) redirect(重定向) component(单个组件) components(多个组件) alias(别名)
 	const routes = [
-	  { path: '/foo', component: Foo },
+	  { path: '/foo',redirect:'/bar',component: Foo },
 	  { path: '/bar', component: Bar },
 	  { path: '/self',name:'self',component: Self}, // name命名路由
 	  { path:'/user/:id',component: User} , //参数绑定
-	  { path:'/route',component:RouteView,
+	  { path:'/route',component:RouteView, //路由嵌套
 	  	 children:[
 	  	 	{path:'',component:RouteDef}, // 默认路径
 	  	 	{path:'test',component:RouteTest} // route/test路径
@@ -70,7 +76,11 @@
 	  {path:'/nameView',components:{
 	  		default:Self, //默认组件 对应默认的router-view
 	  		nameView: NameView // 自定义组件 对应 nameView 的router-view
-	  }}
+	  }},
+	  //路由参数解耦
+	  {
+	  	path:'/userTwo/:id/:name',component:UserTwo,props:true
+	  }
 	]
 
 	// 3. 创建 router 实例，然后传 `routes` 配置
@@ -98,7 +108,6 @@
 
 	setTimeout("router.push({path:'/foo'})",3000); //这里是根路径
 	// 现在，应用已经启动了！
-
 
 
 </script>
