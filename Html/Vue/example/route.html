@@ -17,13 +17,18 @@
 	    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
 	    <router-link to="/foo">Go to Foo</router-link>
 	    <router-link to="/bar">Go to Bar</router-link>
-	    <router-link to="/self">Go to Self</router-link>
+	    <router-link to="{ name: 'self'}">Go to Self</router-link> <!-- 命名路由 -->
 	    <router-link to="/user/7">Go to User</router-link> <!-- 参数默认值 -->
 	    <router-link to='/route'>Go to route</router-link>
 	  </p>
+	  <li>
+	  	<router-link to='/nameView'>name view</router-link>
+	  </li>
+
 	  <!-- 路由出口 -->
 	  <!-- 路由匹配到的组件将渲染在这里 -->
-	  <router-view></router-view>
+	  <router-view></router-view> <!-- 默认 -->
+	  <router-view name='nameView'></router-view> <!-- 命名视图 -->
 </div>
 </body>
 <!-- 使用router-link导航 -> router-view来渲染  -->
@@ -39,25 +44,33 @@
 	const User = {template:"<div>User {{$route.params.id}}</div>"}  //参数绑定
 	//路由嵌套(route-view)
 	const RouteView = {template:"<div><h1>RouteView</h1><router-view></router-view></div>"}
-	const RouteTest = {template:'<div>RouteTest</div>'};
-	const RouteDef = {template:'<div>RouteDef</div>'};
+	const RouteTest = {template:'<div>RouteTest</div>'}
+	const RouteDef = {template:'<div>RouteDef</div>'}
+	//命名视图
+	const NameView = {template:'<div>name view</div>'} 
 
 	// 2. 定义路由
 	// 每个路由应该映射一个组件。 其中"component" 可以是
 	// 通过 Vue.extend() 创建的组件构造器，
 	// 或者，只是一个组件配置对象。
+	// 同级: path(路径) name(命名路由) redirect(重定向) component(单个组件)
 	// 我们晚点再讨论嵌套路由。
 	const routes = [
 	  { path: '/foo', component: Foo },
 	  { path: '/bar', component: Bar },
-	  { path: '/self',component: Self},
+	  { path: '/self',name:'self',component: Self}, // name命名路由
 	  { path:'/user/:id',component: User} , //参数绑定
 	  { path:'/route',component:RouteView,
 	  	 children:[
 	  	 	{path:'',component:RouteDef}, // 默认路径
 	  	 	{path:'test',component:RouteTest} // route/test路径
 	  	 ]
-	  }
+	  },
+	  //命名视图 components这里多个组件要加s
+	  {path:'/nameView',components:{
+	  		default:Self, //默认组件 对应默认的router-view
+	  		nameView: NameView // 自定义组件 对应 nameView 的router-view
+	  }}
 	]
 
 	// 3. 创建 router 实例，然后传 `routes` 配置
