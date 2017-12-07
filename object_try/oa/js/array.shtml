@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="jquery.js" /></script>
+<title>数组打印</title>
+<script language="javascript">
+var str = '';
+var data = opener.jsopenararass;
+function show(){
+	str = strarr(data, 1,'a');
+	$('#view').html(str);
+}
+function strarr(caa, lev,ls){
+	var s = '',s1,i=0,type,src,slx,val;
+	
+	for(var a in caa){
+		val = caa[a];
+		type= typeof(val);
+		i++;
+		s+='<div>';// ondblclick="$(this).remove()"
+		s+='<div class="div01">';
+		if(type!='object' || val==null){
+			s+='<img src="../images/main/white.gif" height="16" width="16" align="absmiddle">';
+		}else{
+			slx = ''+ls+'abcdeae'+a+'';
+			s+='<img src="../mode/icons/bullet_toggle_plus.png" onclick="clickdown(\''+slx+'\', this)" height="16" width="16" align="absmiddle">';
+		}
+		if(val!=null){
+			val = val.toString().replace(/\n/gi, '<br/>');
+			val = val.replace(/\s/gi, '&nbsp;');
+			val = val.replace('function', '<font color=blue>function</font>');
+			val = val.replace(/return/gi, '<font color=blue>return</font>');
+			val = val.replace(/var/gi, '<font color=blue>var</font>');
+			val = val.replace(/this/gi, '<font color=blue>this</font>');
+			val = val.replace(/for/gi, '<font color=blue>for</font>');
+			val = val.replace(/Ext./gi, '<font color=#800000>Ext.</font>');
+		}
+		s+=' '+i+'、<b>'+a+'</b>：'+val+'</div>';
+		if(type=='object' && val!=null){
+			s+='<div id="'+slx+'_down" style="padding:10px;padding-left:30px;display:none"></div>';	
+		}
+		
+		s+='</div>';
+	}
+	
+	return s;
+}
+function clickdown(slx, o1){
+	var a1 = slx.split('abcdeae');
+	
+	var oaa = document.getElementById(''+slx+'_down');
+	if(!oaa){
+		return;
+	}
+	var d	= data[a1[1]];
+	for(var i=2; i<a1.length;i++)d = d[a1[i]];
+	var s	= strarr(d, 1,slx);
+	var o	= $('#'+slx+'_down');
+	if(s==''){
+		o.remove();
+		o1.src='../images/main/white.gif';
+		return;
+	}
+	o.html(s);
+	o.toggle();
+}
+</script>
+<style type="text/css">
+*{ font-size:14px; margin:0; padding:0; font-family:Verdana, Geneva, sans-serif;}
+img{ cursor:pointer}
+.div01{padding:5px;border-bottom:1px #cccccc solid;}
+.div01:hover{background:#f1f1f1}
+</style>
+</head>
+<body onLoad="show()"  style="padding:10px">
+
+<div id="view"></div>
+
+</body>
+</html>

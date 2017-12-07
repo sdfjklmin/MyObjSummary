@@ -1,0 +1,190 @@
+*{font-family:微软雅黑,Verdana, Geneva, sans-serif;padding:0px;margin:0px;}
+body{color:#222222;margin:0px;border:0;font-size:14px;}
+td,button{ font-size:14px}
+a,c,.cursor{cursor:pointer;}
+p{text-indent:24pt;margin:10px 0px}
+ul,li,a{ list-style-type:none;}
+ul,li{padding:0px;margin:0px}
+.relative{position:relative}
+.zhu{ color:#ffffff}
+img{border:0}
+
+select,input,textarea,button,a{ font-size:14px;resize: none;outline:none}
+
+a.hui:link,a.hui:visited{color:#555555;TEXT-DECORATION:none;}
+a.hui:hover{TEXT-DECORATION:underline;color:red;}
+
+a.blue:link,a.blue:visited{color:blue;TEXT-DECORATION:none;}
+a.blue:hover{TEXT-DECORATION:underline;color:red;}
+
+a.red:link,a.red:visited{color:red;TEXT-DECORATION:underline;}
+a.red:hover{TEXT-DECORATION:underline;color:red;}
+
+.tishi{color:#888888;padding:10px 0px}
+
+.basetable td{padding:3px 5px; text-align:center}
+
+.font12{font-size:12px}
+.font14{font-size:14px}
+.font16{font-size:16px}
+
+.white{color:white;}
+a.white:link,a.white:visited{color:white;TEXT-DECORATION:none;}
+a.white:hover{TEXT-DECORATION:underline;color:white;}
+
+.blank1{ height:1px; overflow:hidden; border-bottom:1px #dddddd solid}
+.blank10{ height:10px; overflow:hidden}
+.blank5{ height:5px; overflow:hidden}
+.blank20{ height:20px; line-height:20px;overflow:hidden}
+.blank25{ height:25px; line-height:25px;overflow:hidden}
+.blank30{ height:30px; line-height:30px; overflow:hidden}
+.blank40{ height:40px; line-height:40px; overflow:hidden}
+.black{ width:960px}
+.body{padding:10px}
+
+.h1{ font-size:24px;font-weight:bold;}
+.h2{ font-size:20px;font-weight:bold;}
+
+.alert{ padding:10px 20px;border-radius:0px; text-align:center;box-shadow:0px 0px 10px rgba(0,0,0,0.2);}
+.alert_msg{ background-color:#fbe3cf;border:0px #f6a15d solid; color:#f86f00}
+.alert_success{ background-color:#e3f6d1;border:0px #78b146 solid;color:green}
+.alert_wait{ background-color:#f8f8f8;border:0px #cccccc solid;color:#555555}
+
+
+.inputs{height:30px;line-height:25px;background-color:white;padding:2px;width:95%; border:1px #dddddd solid}
+input.checkbox,input.radio{ border:none;padding:0;margin-right:5px; width:14px; height:14px}
+.icons{ height:14px; width:14px;}
+
+.icon{ height:14px; width:14px}
+
+.title{background:#157FCC; color:#ffffff; height:40px; line-height:40px; overflow:hidden; text-align:left;font-size:14px;}
+.title li{height:40px;overflow:hidden;float:left;width:50%}
+.htitle{background:#bcbcbc; color:#ffffff; height:40px; line-height:40px; overflow:hidden; text-align:left;font-size:14px;}
+
+.input,.select,.textarea{height:30px; line-height:30px; border:1px #cccccc solid; padding:2px 5px;font-size:14px;}
+.textarea{ line-height:26px;}
+.input:focus,input:focus{box-shadow:0px 0px 5px rgba(0,0,0,0.3); border:1px #0887CC solid; color:#000000}
+
+.box{box-shadow:0px 0px 5px rgba(0,0,0,0.3); border:1px #157FCC solid;}
+
+
+
+.danger{background-color:#C9302C}
+.success{background-color:#449D44}
+.info{background-color:#31B0D5}
+.red{background-color:#ff0000}
+.warning{background-color:#e7971f}
+.green{background-color:#32BC12}
+.huang{background-color:#ff6600}
+
+
+
+
+
+.topmenubg{height:50px;color:white;overflow:hidden;}
+.topcenter{height:50px;color:white;overflow:hidden; position:absolute;right:0px;top:0px}
+.topcenter span,.topmenubg span{ color:white; display:block; height:50px; line-height:49px; float:right; padding:0px 15px; text-decoration:none;border-right:1px #15AF90 solid; cursor:pointer} 		/*换皮肤的 头部快间隔*/
+.topcenter span:hover,.topmenubg span:hover,.spanactive{background:#15AF90} 	/*换皮肤的  选中的模块*/
+.topmenubg span{float:left;border-right-width:0px;}
+
+.topheader{color:white;font-size:24px;background:#1ABC9C;height:50px;overflow:hidden;} /*头部颜色*/
+
+.topmenu{font-size:14px;padding:0px 20px;}
+.topactive{background-color:#0784C6}
+.topuser{color:white;position:absolute;right:5px;top:12px;font-size:14px;}
+
+.menubg{background:#F8F9FB; float:left; width:190px;}
+.menutoptext{height:44px;overflow:hidden;background:#505050;line-height:44px;color:white;} /*导航头部背景*/
+.menutoptext li{height:44px;overflow:hidden;line-height:44px;color:white;float:left;}
+.menutoptext .li01{width:70%}
+.menutoptext .li02{width:30%}
+.indexsplit{background:#e1e1e1}
+.menulistbg{background:#505050;width:30px;overflow:hidden;text-align:center;line-height:22px;color:white} /*导航头部背景*/
+
+.menuone{padding:10px 10px;border-bottom:1px #eeeeee solid;cursor:pointer;background:#ffffff; position:relative;font-size:14px}
+.menutwo{padding:8px 0px 8px 30px;border-bottom:1px #EAF1FC solid;cursor:pointer;background:#F8F9FB;font-size:13px;color:#555555}
+.menuone:hover,.menutwo:hover{background:#f5f5f5;color:#000000}
+.menuone span{ position:absolute; right:10px}
+.menuone font{display:block;width:20px;float:left}
+.menuactive{ background-color:#ffffff; color:#555555}
+.menuactive:hover{background-color:#ffffff; color:#888888}
+
+.tabsindex{height:44px;overflow:hidden;background:#f1f1f1;}
+.tabsindex td{height:44px;overflow:hidden;line-height:44px;padding:0px 20px;color:#888888;cursor:pointer;position:relative;}
+.tabsindex .accive{background-color:#ffffff;color:#000000}
+.tabsindex div:hover,.tabsindex td:hover{color:#000000}
+.tabsindex span{font-size:12px;color:#888888;position:absolute;top:3px;right:5px}
+.jtcls{height:44px;line-height:44px;overflow:hidden;width:14px;text-align:center;position:absolute;z-index:8;top:50px; background-color:#e1e1e1;right:0px;font-size:12px;cursor:pointer;color:#888888;display:none;top:0px}
+.jtcls:hover{background-color:#e5e5e5;color:#000000}
+
+.homeiconss{margin:10px 10px;padding:10px;color:white;width:150px;height:110px;overflow:hidden;cursor:pointer;font-size:14px;position:relative;}
+.homeiconss i{font-size:40px}
+.homeiconss:hover{opacity:0.8}
+.homeiconss2{width:120px;height:90px;overflow:hidden;border-radius:0px}
+.homeiconss .div01{margin-top:15px}
+.homeiconss .div00{position:absolute;right:10px;top:2px}
+
+
+.arrow-down{
+width: 0;
+height: 0;
+border-left: 10px solid transparent; /* 左边框的宽 */
+border-right: 10px solid transparent; /* 右边框的宽 */
+border-top: 10px solid #cccccc; /* 下边框的长度|高,以及背景色 */
+font-size: 0;
+line-height: 0;
+} 
+
+.bootstree ul{height:36px;overflow:hidden;border-top:1px #dedede solid}
+.bootstree ul li{height:35px;overflow:hidden;line-height:35px;float:left;border-right:1px #dedede solid}
+.bootstree ul li:last-child{border-right-width:0px}
+
+.bootstree ul:nth-of-type(even) {
+  background-color: #f9f9f9;
+}
+.bootstree ul:hover{background-color: #f5f5f5;}
+
+.footmsg{text-align:left;color:#ff6600; padding:15px 0px;line-height:24px;font-size:12px}
+.form-control{padding:0px 5px;}
+
+
+.table > tbody > tr > td{padding:6px}
+.tdinput{padding:5px 0px;text-align:left;padding-right:15px}
+.inputtitle{text-align:center; background-color:#EDF7FC;line-height:30px;}
+.trb td,.trb th{border-right:1px #eeeeee solid}
+.trb td:last-child{border-right-width:0px}
+.trb th:last-child{border-right-width:0px}
+
+.form-select{
+	background:#dddddd;
+	background:-ms-linear-gradient(top, #f1f1f1, #dedede,#f1f1f1);
+	background:-moz-linear-gradient(top, #f1f1f1, #dedede,#f1f1f1);
+	background:-webkit-linear-gradient(top, #f1f1f1, #dedede,#f1f1f1);
+}
+.select-list .div01{padding:8px 10px;border-top:1px #eeeeee solid}
+.select-list .div01:hover{background-color:#E0F2FC}
+.select-list .div02{padding:8px 10px;border-top:1px #eeeeee solid;background-color:#E0F2FC}
+
+.jquery-calendar .tdtext{border:1px #eeeeee solid;padding:3px}
+.jquery-calendar .tdtext:hover{background-color:#f5f5f5}
+.jquery-calendar .thtext{border:1px #eeeeee solid; color:#26AA05; background-color:#EBF7D9;height:34px}
+
+#tishidivshow{width:280px;background-color:white;border-radius:5px;position:fixed;z-index:8;right:3px;bottom:3px}
+
+.overdiv{padding:5px 10px;cursor:pointer}
+.overdiv:hover{background-color:#E0F2FC}
+
+.floats{display:inline-block;width:100%}
+.floats li{float:left}
+.floats30{float:left;width:30%}
+.floats20{float:left;width:20%}
+.floats80{float:left;width:80%}
+.floats60{float:left;width:60%}
+.floats40{float:left;width:40%}
+.floats50{float:left;width:50%}
+.floats70{float:left;width:70%}
+.floatr20{float:right;width:20%}
+
+.datesss{background:url(../../mode/icons/date.png) no-repeat right;cursor:pointer}
+.divinput{padding:5px}
+.lurim{ text-align:right}

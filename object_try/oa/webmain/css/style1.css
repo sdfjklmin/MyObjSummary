@@ -1,0 +1,4 @@
+.topheader{background:#1389D3}
+.topcenter span,.topmenubg span{border-right:1px #1082C9 solid;} 
+.topcenter span:hover,.topmenubg span:hover,.spanactive{background:#1082C9} 
+.topmenubg span{border-right-width:0px;}

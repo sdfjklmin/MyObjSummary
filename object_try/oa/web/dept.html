@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+<title>信呼</title>
+<link rel="stylesheet" type="text/css" href="res/css/webimcss.css"/>
+<script type="text/javascript" src="res/js/jquery.js"></script>
+<script type="text/javascript" src="res/js/js.js"></script>
+<script>
+var deptarrs=[],userarr=[],changetype='';
+function initbody(){
+	changetype = js.request('changetype');
+	mainobj=$('#maindiv');
+	if(changetype==''){
+		$('.xuandiv').hide();
+	}else{
+		$('#bottombtn').show();
+		$('#bottombtns').show();
+	}
+	var s = js.getoption('deptjson');
+	if(s!=''){
+		getlistla(s);
+	}else{
+		loaddata();
+	}
+}
+function getlistla(s){
+	mainobj.html('');
+	deptarrs = js.decode(s);
+	s= js.getoption('userjson');
+	if(s!='')userarr=js.decode(s);
+	showlistss(0,0,'maindiv');
+}
+function loaddata(){
+	js.ajax('dept','data',{},function(ret){
+		js.setoption('deptjson', ret.deptjson);
+		js.setoption('userjson', ret.userjson);
+		getlistla(ret.deptjson);
+	});
+}
+function showlistss(pid, oi, shid){
+	var a=deptarrs;
+	var s='',i,len=a.length,type='checkbox';
+	var hw=24;
+	if(changetype.indexOf('check')==-1)type='radio';
+	for(i=0;i<len;i++){
+		if(a[i].pid==pid){
+			s+='<div class="index_list listsss" style="padding-left:'+(hw*oi+10)+'px">';
+			s+='	<div onclick="clickshowna('+i+', '+oi+')"  class="index_title"><img width='+hw+' height='+hw+' src="images/files.png" align="absmiddle">&nbsp;'+a[i].name+'</div>';
+			if(changetype.indexOf('dept')>-1)s+='<span class="right"><input id="box_d_'+a[i].id+'" onclick="xuandeptuser(\''+a[i].id+'\',\''+a[i].name+'\',\'d\', this)" type="'+type+'" name="allinptsss" class="checkbox"></span>';
+			s+='</div>';
+			s+='<span show="false" id="dept'+a[i].id+'"></span>';
+		}
+	}
+	if(changetype.indexOf('user')>-1){
+		a=userarr;len=a.length;
+		for(i=0;i<len;i++){
+			if(a[i].deptid==pid){
+				s+='<div class="index_list listsss" style="padding-left:'+(hw*oi+10)+'px">';
+				s+='	<div class="index_title" onclick="xuanuser('+i+')"><img width='+hw+' height='+hw+' src="'+a[i].face+'" align="absmiddle">&nbsp;'+a[i].name+'<font>('+a[i].ranking+')</font></div>';
+				if(changetype.indexOf('user')>-1)s+='<span class="right"><input id="box_u_'+a[i].id+'" onclick="xuandeptuser(\''+a[i].id+'\',\''+a[i].name+'\',\'u\', this)" name="allinptsss" type="'+type+'" class="checkbox"></span>';
+				s+='</div>';
+			}
+		}
+	}
+	$('#'+shid+'').html(s);
+}
+function clickshowna(xu,oi){
+	var a = deptarrs[xu];
+	var o1= $('#dept'+a.id+'');
+	var lx= o1.attr('show');
+	if(lx=='false'){
+		showlistss(a.id,oi+1,'dept'+a.id+'');
+		o1.attr('show','true');
+	}else{
+		o1.toggle();
+	}
+}
+function xuandeptuser(id,na,lx,o2){
+	var o1 = $('.xuandiv');
+	if(changetype.indexOf('check')<0)o1.html('');
+	var ssid = 'show_'+lx+'_'+id+'';
+	if(!o2.checked){
+		$('#'+ssid+'').remove();
+		return;
+	}
+	if(lx=='d' && changetype.indexOf('dept')<0)return;
+	if(lx=='u' && changetype.indexOf('user')<0)return;
+	
+	var s = '<span id="'+ssid+'"><i>'+id+'</i><u>'+lx+'</u><a>'+na+'</a>'+na+'&nbsp;<font onclick="removeuid(\''+id+'\',\''+lx+'\')">×</font></span>';
+	o1.append(s);
+}
+function xuanuser(oi){
+	return;
+	if(changetype!='')return;
+	var d = userarr[oi];
+	js.location('userinfor.html?uid='+d.id+'&'+jm.encrypt(d.name)+'');
+}
+function removeuid(id,lx){
+	var ssid = 'show_'+lx+'_'+id+'';
+	$('#'+ssid+'').remove();
+	get('box_'+lx+'_'+id+'').checked=false;
+}
+function cancel(){
+	try{parent.js.changecancel();}catch(e){}
+}
+function okla(){
+	var s = '',sid='',sna='';
+	var o=$('.xuandiv').find('i');
+	var o1=$('.xuandiv').find('a');
+	var o2=$('.xuandiv').find('u');
+	var s1='',s2='',lx='';
+	var xubo = false;
+	if(changetype.indexOf('dept')>-1 && changetype.indexOf('user')>-1)xubo=true;
+	for(var i=0;i<o.length;i++){
+		s1 = $(o[i]).text();
+		s2 = $(o1[i]).text();
+		lx = $(o2[i]).text();
+		if(xubo)s1=''+lx+''+s1+'';
+		sid+=','+s1;
+		sna+=','+s2;
+	}
+	if(sid!=''){
+		sid=sid.substr(1);
+		sna=sna.substr(1);
+	}
+	var btype = js.request('btype');
+	try{parent.js.changeok(sna,sid, btype, js.request('params'));}catch(e){}
+	try{if(btype!='')parent[btype](sna,sid, btype, js.request('params'));}catch(e){}
+	cancel();
+}
+function shuaxinda(){
+	js.setoption('deptjson','');
+	location.reload();
+}
+</script>
+<style>
+*{font-size:14px;padding:0px;margin:0px}
+.index_list{
+	padding:10px 5px;border-bottom:1px #eeeeee solid;
+	background:white;
+}
+.index_list font{font-size:12px;color:#888888}
+.index_list img{height:20px;width:20px}
+.index_list:not(.no_access):active{ background:#C1E8F2}
+.xuandiv{padding:10px;background:white;border-bottom:1px #eeeeee solid;line-height:30px;}
+.xuandiv span{padding:2px 5px;background-color:#3FBFC2;color:white;margin:5px}
+.xuandiv font{cursor:pointer}
+.xuandiv i,.xuandiv a,.xuandiv u{display:none}
+.listsss{position:relative}
+.listsss .right{top:15px; position:absolute; right:10px}
+#bottombtn{position:fixed;bottom:0px; background-color:#f1f1f1;width:100%;overflow:hidden;text-align:right;height:40px;overflow:hidden;border-top:1px #cccccc solid}
+#bottombtns{height:40px;overflow:hidden;display:none}
+.btns{padding:0px 10px;height:26px;line-height:26px; background-color:#1abc9c;border:none;color:white;font-size:14px;margin-top:7px}
+.btns:active{ background-color:#099B7E}
+</style>
+</head>
+<body>
+	<div class="xuandiv"></div>
+	<div id="maindiv"></div>
+	
+	<div id="bottombtns"></div>
+	<div id="bottombtn">
+		<button onclick="shuaxinda();" style="background-color:#888888" class="btns" type="button">刷新数据</button>&nbsp; &nbsp; 
+		<button onclick="cancel()" class="btns" type="button">取消</button>&nbsp; &nbsp; 
+		<button onclick="okla()" class="btns" type="button">确定</button>&nbsp; &nbsp; 
+	</div>
+</body>
+</html>

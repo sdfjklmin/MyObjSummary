@@ -1,0 +1,83 @@
+<script type="text/javascript" src="res/mode/calendar/jquery-rockcalendar.js"></script>
+<script type="text/javascript" src="res/mode/calendar/jquery-rocklunar.js"></script>
+<script type="text/javascript">
+agentobj.schedule.initagent = function(){
+	var me=this;
+	this.clickevent=function(d){
+		var lx = d.url;
+		if(js.ajaxbool)return;
+		if(lx=='guan'){
+			this.disabledscroll('auto');
+			this.getdata('guan', 1);
+		}else{
+			c.showcale();
+		}
+		if(lx=='nowmonth')c.calendarobj.nowmonth();
+		if(lx=='prevmonth')c.calendarobj.fanmonth(-1);
+		if(lx=='nextmonth')c.calendarobj.fanmonth(1);
+	};
+	
+	var c={
+		init:function(){
+			this.showcale();
+		},
+		showcale:function(){
+			var s= '<div id="schedulev_{rand}" style="height:290px;overflow:hidden;background-color:white"></div><div resizeh="291" id="schedulelist_{rand}" style="background-color:white;border-top:1px #cccccc solid;overflow:auto;height:100px"><div id="dt_{rand}" style="padding:5px;border-bottom:1px #cccccc dotted">2016-08-11</div><div id="jishilist_{rand}"></div></div>';
+			me.disabledscroll();
+			if(!get('schedulev_{rand}')){
+				me.showobj.html(s);
+				this.calendarobj = $('#schedulev_{rand}').rockcalendar({
+					height:250,
+					selbgcolor:'#C0EDD6',
+					changemonth:function(y, m, o){
+						var dt = ''+y+'年'+xy10(m)+'月';
+						c.getdatass(o);
+					},
+					align:'center',valign:'center',
+					renderer:function(day, s, s1,s2,col1,col2,oi,o){
+						var s = '<font color='+col1+'>'+s1+'</font>';
+						return s;
+					},
+					onclick:function(y,m,d,day, lun, jie){
+						var dt = ''+y+'-'+xy10(m)+'-'+xy10(d)+'';
+						c.nowdt = dt;
+						c.showlisa(dt);
+						$('#dt_{rand}').html('日期：'+day+' &nbsp; '+lun[0]+''+lun[1]+''+lun[2]+'&nbsp;<font color=red>'+jie+'</font>');
+					}
+				});
+			}
+			$('#schedulelist_{rand}').css('height',''+(me.showheight-291)+'px');
+		},
+		backdata:{},
+		getdatass:function(o){
+			var startdt = o.getFistdt(),enddt = o.getLastdt();
+			var d = {startdt:startdt,enddt:enddt};
+			$('#jishilist_{rand}').html('<div style="padding:10px">'+js.getmsg('加载中...')+'</div>');
+			js.ajax('schedule','getlist',{startdt:startdt,enddt:enddt},function(a){
+				c.getdatassss(a);
+			},'none');
+		},
+		getdatassss:function(arr){
+			var d,oi=0,a;
+			$('#jishilist_{rand}').html('');
+			c.backdata=arr;
+			for(d in arr){
+				oi++;a=arr[d];
+				if(a.length>0)c.calendarobj.setbgcolor(oi,'#D7F7E6');
+			}
+			this.showlisa(this.nowdt);
+		},
+		showlisa:function(dt){
+			var a= this.backdata[dt],s='',i,a1;
+			if(!a)return;
+			for(i=0;i<a.length;i++){
+				a1=a[i].time.split(' ');
+				s+='<div style="padding:5px">'+(i+1)+'、['+a1[1]+']'+a[i].title+'</div>';
+			}
+			if(s=='')s='<div style="padding:10px;color:#888888">暂无记事</div>';
+			$('#jishilist_{rand}').html(s);
+		}
+	};
+	c.init();
+}
+</script>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+<title>信呼</title>
+<link rel="stylesheet" type="text/css" href="res/css/webimcss.css"/>
+<link rel="stylesheet" type="text/css" href="res/perfectscrollbar/perfect-scrollbar.css"/>
+<link rel="stylesheet" type="text/css" href="res/fontawesome/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="res/mode/menu/jquery-rockmenu.css"/>
+<link rel="stylesheet" type="text/css" href="res/css/chat.css"/>
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript" src="res/js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="res/js/js.js"></script>
+<script type="text/javascript" src="res/js/main.js"></script>
+<script type="text/javascript" src="res/js/base64-min.js"></script>
+<script type="text/javascript" src="res/js/strformat.js"></script>
+<script type="text/javascript" src="res/perfectscrollbar/perfect-scrollbar.js"></script>
+<script type="text/javascript" src="res/js/websocket.js"></script>
+<script type="text/javascript" src="res/js/notify.js"></script>
+<script type="text/javascript" src="res/js/nwjs.js"></script>
+<script type="text/javascript" src="res/js/jquery-imgview.js"></script>
+<script type="text/javascript" src="res/mode/menu/jquery-rockmenu.js"></script>
+</head>
+
+<body style="background:#66A8E5 url(images/loginbg.jpg) top center no-repeat;overflow:hidden" oncontextmenu="return false" scroll="no" >
+
+<div align="center">
+	<div class="main">
+		<span id="stotal_ss0" class="badge chaweidum"></span>
+		<span id="stotal_ss1" class="badge chaweidum" style="left:95px"></span>
+		
+		<div class="header gradient">
+		<table cellspacing="0" cellpadding="0" width="100%"><tr>
+		<td height="50"><div style="width:10px;overflow:hidden"></div></td>
+		<td ><img src="images/logos.png" id="mainlogo" height="40"></td>
+		<td width="100%"></td>
+		<td align="right"><input placeholder="搜索联系人/会话/应用" class="msousou"></td>
+		<td class="topbtn" title="添加打卡" onclick="im.adddaka()" align="center" style="font-size:20px"><i class="icon-map-marker"></i></td>
+		</tr></table>
+		</div>
+		<table cellspacing="0" cellpadding="0" width="100%">
+		<tr valign="top">
+		<td bgcolor=#f5f5f5>
+		<div class="mainleft">
+			<div style="height:70px;overflow:hidden;" class="gradienth">
+			<table cellspacing="0" cellpadding="0" width="100%"><tr>
+			<td height="70" style="padding:0px 10px">
+				<div style="height:44px;overflow:hidden"><img onclick="im.openuserzl(adminid)" id="myface" style="border-radius:22px;cursor:pointer" src="images/noface.png" width="44" height="44"></div>
+			</td>
+			<td width="100%"><div id="myname"></div><div id="myinfor" style="font-size:12px;color:#999999" class="blank20"></div></tr></table>
+			</div>
+			<div class="headertab">
+				
+				<div class="active" title="会话" onclick="im.tabchagne(0, this)"><i class="icon-comment-alt"></i></div>
+				<div style="width:34%" title="应用中心" onclick="im.tabchagne(1,this)"><i class="icon-th-large"></i></div>
+				<div title="所有人员" onclick="im.tabchagne(2,this)"><i class="icon-user"></i></div>
+			</div>
+			<div id="headercenter" resizeh="140" style="overflow:hidden;height:440px;position:relative">
+				<div tabdiv="0">
+					<div id="historylist_tems" style="padding-top:50px;text-align:center;color:#cccccc"><span style="font-size:40px"><i class="icon-comment-alt"></i></span><br>暂无消息</div>
+					<div class="listviewt" oncontextmenu="return im.bodyright(event,1)" id="historylist"></div>	
+				</div>
+				<div id="agentlist" tabdiv="1"  style="display:none"></div>
+				<div tabdiv="2" style="display:none; background-color:white">
+					
+					<div class="gsholiv" onclick="im.hidealislist(1,this)"><img src="images/im/xiangyou.png" align="absmiddle">会话<span style="font-size:12px" id="grouptotal1">(0)</span></div>
+					<span id="grouplist_1" style="display:none;" class="usersslist"></span>
+					
+					<div class="gsholiv" onclick="im.hidealislist(0,this)"><img src="images/im/xiangyou.png" align="absmiddle">组织结构</div>
+					<span id="grouplist_0" style="display:none;" class="usersslist">
+						<span id="showdept_0"></span>
+					</span>
+				
+				</div>
+			</div>
+			<div style="height:30px;overflow:hidden; background-color:#eeeeee">
+				<div class="toolsliao">
+					<span id="setbtns" title="设置"><i class="icon-cog"></i></span>
+					<span id="addbtns" title="流程申请"><i class="icon-plus"></i></span>
+				</div>
+			</div>
+		</div>
+		</td>
+		<td bgcolor="#f8f8f8" style="border-left:1px #f1f1f1 solid">
+			<div resizeh="0" class="listview" id="tabslist"></div>
+		</td>
+		<td width="100%" style="border-left:1px #dddddd solid">
+			<div id="view_content" resizeh="0" style="overflow:hidden;height:480px;position:relative"></div>
+		</td>
+		</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>

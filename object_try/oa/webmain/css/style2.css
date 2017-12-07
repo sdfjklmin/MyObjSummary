@@ -1,0 +1,6 @@
+.topheader{background:#E95420}
+.topcenter span,.topmenubg span{border-right:1px #E04C1A solid;} 
+.topcenter span:hover,.topmenubg span:hover,.spanactive{background:#E04C1A}
+.topmenubg span{border-right-width:0px;}
+.menutoptext{background:#BCB5AB}
+.menulistbg{background:#BCB5AB}

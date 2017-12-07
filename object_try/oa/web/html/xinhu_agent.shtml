@@ -1,0 +1,15 @@
+<script>
+$(document).ready(function(){
+	{params}
+	var id = params.id;
+	var ct  = new agentclass({
+		'id' : id,
+		'rand' :'{rand}'
+	});
+});
+</script>
+
+<div>
+	<div id="agentheader_{rand}" class="opentitle"></div>
+	<div  resizeh="41" style="height:300px;overflow:auto;background-color:#f8f8f8" id="agentshow_{rand}"></div>
+</div>

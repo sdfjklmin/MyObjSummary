@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?=$da['title']?></title>
+<link rel="stylesheet" type="text/css" href="mode/bootstrap3.3/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="mode/bootstrap3.3/css/font-awesome.min.css">
+<!--[if IE 7 ]><link rel="stylesheet" type="text/css" href="mode/bootstrap3.3/css/font-awesome-ie7.min.css"><![endif]-->
+<link rel="stylesheet" type="text/css" href="<?=$da['p']?>/css/webmain.css"/>
+<link rel="stylesheet" type="text/css" href="<?=$da['p']?>/css/style<?=$da['style']?>.css" id="mainstylecss"/>
+<link rel="stylesheet" type="text/css" href="web/res/mode/menu/jquery-rockmenu.css"/>
+<link rel="stylesheet" type="text/css" href="mode/plugin/css/jquery-rockdatepicker.css"/>
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript" src="js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<script type="text/javascript" src="js/base64-min.js"></script>
+<script type="text/javascript" src="<?=$da['p']?>/<?=$da['p']?>Script.js"></script>
+<script type="text/javascript" src="<?=$da['p']?>/<?=$da['d']?><?=$da['m']?>/<?=$da['m']?>script.js"></script>
+<script type="text/javascript" src="<?=$da['p']?>/<?=$da['d']?><?=$da['m']?>/<?=$da['m']?>public.js"></script>
+<script type="text/javascript" src="web/res/mode/menu/jquery-rockmenu.js"></script>
+<script type="text/javascript">
+js.servernow	= '<?=$da['now']?>';
+PROJECT			= '<?=$da['p']?>';
+VERSION='<?=VERSION?>';
+function globalbody(){
+	adminid		= '<?=$da['adminid']?>';
+	adminname	= '<?=$da['adminname']?>';
+	adminuser	= '<?=$da['adminuser']?>';
+	adminstyle	= '<?=$da['style']?>';
+}
+</script>
+</head>
+<body style="padding:0px;margin:0px; overflow:hidden;" scroll="no">
+
+<div class="topheader" >
+	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>	
+		<td height="50" nowrap>
+			<table  border="0" cellspacing="0" cellpadding="0"><tr>	
+				<td style="padding:0px 10px;" nowrap><img src="images/xh829.png" height="34" width="34"></td>
+				<td style="font-size:18px;padding-right:20px" nowrap><b><?=TITLE?></b></td>
+			</tr>
+			</table>
+		</td>
+		<td width="80%" >
+			<div class="topmenubg">
+				<?php foreach($da['topmenu'] as $k=>$rs){?>
+				<span pmenuid="<?=$rs['id']?>"><?php if($rs['icons']){?><i class="icon-<?=$rs['icons']?>"></i> <?php }?><?=$rs['name']?></span>
+				<?php }?>
+			</div>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<div class="topcenter"  align="right">
+	<span id="indexuserl" ><img src="<?=$da['face']?>" style="border:1px #cccccc solid;background:#ffffff;border-radius:15px;cursor:pointer;margin-right:10px" align="absmiddle" id="myface" height="30" width="30">你好，<?=$da['adminname']?>&nbsp; <i class="icon-caret-down"></i></span>
+	<?php 
+	if($da['afrom']=='')echo '<span onclick="openwangyban()"><i class="icon-globe"></i> 网页版</span>';
+	?>
+	<span onclick="openmobile()"><i class="icon-tablet"></i> 手机版</span>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr valign="top">
+	<td >
+		<div id="indexmenu" class="menubg">
+			<div class="menutoptext">
+				<ul>
+					<li class="li01"><div id="menulisttop" style="font-size:16px;padding-left:10px"><i class="icon-reorder"></i> 栏目导航</div></li>
+					<li class="li02"><div style="text-align:right;padding-right:10px">&nbsp;<i id="reordershla" class="icon-reorder cursor"></i></a></div></li>
+				</ul>
+			</div>
+			<div id="menulist" style="overflow:auto"></div>
+		</div>
+		<div  id="indexmenuss" style="display:none" class="menulistbg cursor"><i class="icon-reorder"></i><br>打<br>开<br>导<br>航</div>
+	</td>
+	<td>
+		<div id="indexsplit" class="indexsplit" style="overflow:hidden;width:5px"></div>
+	</td>
+	<td width="100%">
+		<div style="overflow:hidden;position:relative;">
+			<div class="jtcls" id="jtcls_left" onclick="_changesrcool(1)">&gt;</div>
+			<div class="jtcls" id="jtcls_right" onclick="_changesrcool(-1)" style="left:0px">&lt;</div>
+			<div id="tabsindexm" class="tabsindex"><table border="0" cellspacing="0" cellpadding="0"><tr id="tabs_title"></tr></table></div>
+			<div id="indexcontent" style="overflow:auto;position:relative;">
+				<div id="content_allmainview" style="margin:10px;"></div>
+			</div>
+		</div>
+	</td>
+</tr>
+</table>
+
+<script type="text/javascript" src="mode/bootstrapplugin/jquery-bootstable.js"></script>
+<script type="text/javascript" src="mode/bootstrapplugin/jquery-bootsform.js"></script>
+<script type="text/javascript" src="mode/bootstrapplugin/jquery-bootstree.js"></script>
+<script type="text/javascript" src="mode/plugin/jquery-rockdatepicker.js"></script>
+<script type="text/javascript" src="web/res/mode/calendar/jquery-rockcalendar.js"></script>
+<script type="text/javascript" src="web/res/mode/calendar/jquery-rocklunar.js"></script>
+</body>
+</html>

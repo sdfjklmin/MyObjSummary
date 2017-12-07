@@ -1,0 +1,39 @@
+<script>
+$(document).ready(function(){
+	{params}
+	var gid = params.uid,type=params.type;
+	var ct  = new chatclass({
+		'gid' : gid,
+		'type' : type,
+		'rand' :'{rand}'
+	});
+	js.initbtn(ct);
+});
+</script>
+
+<div>
+	<div id="chatheader_{rand}" class="opentitle"></div>
+	<div resizeh="189" style="height:300px;overflow:hidden;position:relative;" id="showview_{rand}"></div>
+	<div style="height:30px; background-color:#eeeeee;overflow:hidden">
+		<div class="toolsliao">
+			<a click="toolsclick" tools="emts" title="添加表情"><img src="images/im/emts.png"></a>
+			
+			<a click="toolsclick" tools="file" title="发送图片/文件"><img src="images/im/files.png"></a>
+			<a click="toolsclick" tools="crop" title="截屏"><img src="images/im/crop.png"></a>
+			<a click="toolsclick" tools="cropput" title="粘贴截屏图片"><img src="images/im/crop1.png"></a>
+			<a click="toolsclick" tools="clear" title="清屏"><img src="images/im/clear.png"></a>
+			<a click="toolsclick" tools="jilu" style="float:right;display:none"><img src="images/im/notpia.png" align="absmiddle">信息记录</a>
+		</div>
+	</div>
+	<div style="height:80px;overflow:hidden;margin-left:3px">
+		<textarea class="content" onpaste="im.readclip(event)" id="input_content_{rand}"></textarea>
+	</div>
+	
+	<div style="height:40px; background-color:#eeeeee">
+		<div align="right" style="padding:9px">
+			<a class="webbtn" title="快捷键：Alt+C/Esc" onclick="closenowtabs()" >关闭(C)</a>&nbsp; &nbsp; 
+			<a class="webbtn" title="快捷键：Alt+S" click="toolsclick" tools="send">发送(S)</a><a class="webbtn" style="padding-left:4px;padding-right:4px;border-left:1px #0AA888 solid" click="toolsclick" tools="change">↓</a>
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title><?=$da['title']?></title>
+<link rel="stylesheet" href="<?=$da['p']?>/css/css.css" />
+<link rel="stylesheet" href="mode/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" type="text/css" href="mode/plugin/css/jquery-rockdatepicker.css"/>
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<script type="text/javascript" src="js/base64-min.js"></script>
+<script type="text/javascript" src="mode/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="mode/plugin/jquery-rockdatepicker.js"></script>
+<script type="text/javascript" src="<?=$da['p']?>/flow/input/inputjs/input.js"></script>
+<script type="text/javascript">
+var editor,arr=<?=$da['fieldsjson']?>,moders=<?=json_encode($da['moders'])?>,isedit=0,mid='<?=$da['mid']?>',data={};
+</script>
+<style>
+.tdcont{padding:0px 0px;font-size:14px;}
+.tdcont *{font-size:14px;}
+.tdcont a{color:blue;font-size:12px}
+.ys0{border:1px #888888 solid}
+.ys1{padding:5px 5px; border:1px #888888 solid;color:#555555;}
+.ys2{padding:5px 5px; border:1px #888888 solid;}
+
+.inputs{width:95%;font-size:14px;}
+.cionsss{padding:4px; background-color:#dddddd}
+.datesss{background:url(mode/icons/date.png) no-repeat right;cursor:pointer}
+.status{position: absolute;right:5px;top:-10px;display:none}
+
+.tablesub td{height:25px;text-align:center;border-bottom:1px #888888 solid;border-right:1px #888888 solid;}
+.tablesub .inputs{border:none}
+
+.course{padding:8px 10px; background-color:#CDF4EC;border:1px #AADDD3 solid;margin-right:10px}
+.coursejt{height:8px;overflow:hidden;width:30px;background-color:#CDF4EC}
+.coursejts{width:0px;  height:0px; overflow:hidden;border-width:8px;border-style:solid;border-color:transparent transparent transparent #CDF4EC;}
+</style>
+</head>
+<body style="background:white">
+<div align="center">
+	<div class="blank10"></div>
+	<div style="width:650px; position:relative">
+		<div class="status"><img id="statusimg" src="images/status1.png"></div>
+		<div style="padding-bottom:15px;font-size:24px"><?=$da['title']?></div>
+		<div class="tdcont" align="left">
+			<form name="myform">
+			<input name="id" type="hidden" value="<?=$da['mid']?>">
+			<input value="0" type="hidden" name="sub_totals0">
+			<input value="0" type="hidden" name="sub_totals1">
+			<?=$da['content']?>
+			</form>
+		</div>
+		<?php 
+		if($da['course']){
+			$s = '<div align="center" style="padding:20px 0px">';
+			$s .='<table><tr>';
+			foreach($da['course'] as $k=>$rs){
+				
+				$s .='<td><div class="course">'.$rs['name'].'</div></td>';
+				if($rs['id']>-1){
+					$s .='<td><div class="coursejt"></div></td>';
+					$s .='<td><div class="coursejts"></div></td>';
+				}
+			}
+			$s .= '</tr></table>';
+			$s .= '</div>';
+			echo $s;
+		}
+		?>
+		<div style="height:60px; overflow:hidden"></div>
+	</div>
+	<div align="right" style="background:#eeeeee;border-top:1px #aaaaaa solid;padding:10px 0px; position:fixed;width:100%;bottom:0px;left:0px">
+		<span id="msgview"></span>&nbsp; 
+		<input id="AltS" style="display:none" type="button" onclick="return c.save()" value="保存(S)" class="webbtn">&nbsp; &nbsp; 
+	</div>
+</div>
+<script type="text/javascript" src="<?=$da['p']?>/flow/input/inputjs/mode_<?=$da['moders']['num']?>.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?php include_once(P.'/public/header.html');?>
+
+<script>
+function submitsave(){
+	var d=js.getformdata();
+	js.ajax('reim','createtaolun',d,function(ret){
+		js.msg('success','创建成功');
+		get('submitbtn').disabled=true;
+		js.sendevent('createtlz', 'main_index', ret);
+		js.backla();
+	},'',function(a){
+		if(a.title=='')return '名称不能为空';
+		if(a.receid=='')return '请选择讨论组人员';
+	});
+}
+</script>
+</head>
+<body  class="mbody">
+<div>
+	<form name="myform">
+		<div class="divinput"><input class="input" placeholder="*名称" name="title"></div>
+		<div class="divinput"><textarea class="input" name="content" style="height:100px" placeholder="说明"></textarea></div>
+		<div style="background:white">
+			<table width="100%"><tr><td width="100%">
+				<div class="padding10"><input type="hidden" id="recename_id" name="receid"><input class="input" placeholder="*会话人员" readonly id="recename" name="recename"></div>
+			</td>
+			<td class="imgbtn"><img src="images/del.png" onclick="clearuser('recename')" height="24"></td>
+			<td class="imgbtn"><img src="images/sousuo.png" onclick="changeuser('recename','usercheck')" height="24"></td>
+			<tr>
+			</table>
+		</div>
+	</form>
+	<div class="blank10"></div>
+	<div class="padding10"><input type="button" id="submitbtn" onclick="submitsave()" class="btn" value="创建"></div>
+</div>
+
+</body>
+</html>

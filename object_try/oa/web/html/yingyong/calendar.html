@@ -1,0 +1,28 @@
+<script type="text/javascript" src="res/mode/calendar/jquery-rockcalendar.js"></script>
+<script type="text/javascript" src="res/mode/calendar/jquery-rocklunar.js"></script>
+<script type="text/javascript">
+agentobj.calendar.initagent = function(){
+	var me=this;
+	this.calendarobj = this.showobj.rockcalendar({
+		height:this.showheight-43,
+		selbgcolor:'#DEF7F2',
+		changemonth:function(y, m){
+			var dt = ''+y+'年'+xy10(m)+'月';
+			me.setTitle(dt);
+		},
+		align:'center',
+		valign:'center',
+		renderer:function(day, s, s1,s2,col1,col2){
+			var s = '<div><font color='+col1+'>'+s1+'</font><br><font style="font-size:11px" color='+col2+'>'+s2+'</font></div>';
+			return s;
+		}
+	});
+	this.clickevent=function(d){
+		if(d.url=='nowmonth')this.calendarobj.nowmonth();
+		if(d.url=='prevmonth')this.calendarobj.fanmonth(-1);
+		if(d.url=='nextmonth')this.calendarobj.fanmonth(1);
+	};
+	me.disabledscroll();
+	me.setBgcolor();
+}
+</script>
