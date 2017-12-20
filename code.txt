@@ -1,4 +1,4 @@
- //六合彩色波号码
+  //六合彩色波号码
     'color_waves' => [
         /******色波*******/
         //红波
@@ -16,7 +16,6 @@
         'red_big'=>['29','30','34','35','40','45','46'],
         //红波小
         'red_small'=>['01','02','07','08','12','13','18','19','23','24'],
-
         //蓝波单
         'blue_single'=>['03','09','15','25','31','37','41','47'],
         //蓝波双
@@ -25,7 +24,6 @@
         'blue_big'=>['25','26','31','36','37','41','42','47','48'],
         //蓝波小
         'blue_small'=>['03','04','09','10','14','15','20'],
-
         //绿波单
         'green_single'=>['05','11','17','21','27','33','39','43'],
         //绿波双
@@ -34,19 +32,101 @@
         'green_big'=>['27','28','32','33','38','39','43','44'],
         //绿波小
         'green_small'=>['05','06','11','16','17','21','22'],
+        /*******色波(半半波)*********/
+        //红大单
+        'red_big_single'=>['29','35','45'],
+        //红大双
+        'red_big_double'=>['30','34','40','46'],
+        //红小单
+        'red_small_single'=>['01','07','13','19','23'],
+        //红小双
+        'red_small_double'=>['02','08','12','18','24'],
+        //蓝大单
+        'blue_big_single'=>['25','31','37','41','47'],
+        //蓝大双
+        'blue_big_double'=>['26','36','42','48'],
+        //蓝小单
+        'blue_small_single'=>['03','09','15'],
+        //蓝小双
+        'blue_small_double'=>['04','10','14','20'],
+        //绿大单
+        'green_big_single'=>['27','33','39','43'],
+        //绿大双
+        'green_big_double'=>['28','32','38','44'],
+        //绿小单
+        'green_small_single'=>['05','11','17','21'],
+        //绿小双
+        'green_small_double'=>['06','16','22'],
 
+    ],
+    //六合彩五行
+    'five_elements'=>[
+        'gold'=>['03','04','17','18','25','26','33','34','47','48'],
+        'wood'=>['07','08','15','16','29','30','37','38','45','46'],
+        'water'=>['05','06','13','14','21','22','35','36','43','44'],
+        'fire'=>['01','02','09','10','23','24','31','32','39','40'],
+        'earth'=>['11','12','19','20','27','28','41','42','49'] ,
     ],
 
 
-
-    
-
-        //屏蔽重庆时时彩中的一字定位
-        $lotteryIds = [1, 7, 8];
-        $groupId = 105 ; //分组id
-        $groupIds = [] ; //分组id集合
-        foreach ($lotteryIds as $id) {
-            $groupIds[] = $id.$groupId ;
+        $json = '{
+  "bets": [
+    {
+      "lottery_type_id": "4",
+      "play_id": 400503,
+      "bets_quantity": 1,
+      "bets_info": [
+        {
+          "amount": 2,
+          "number": "02|05|09|03",
+          "quantity": 1
         }
-        LotteryPlay::whereIn('play_group_id',$groupIds)->update(['enable'=>2]) ;
-        CorpLotteryPlay::whereIn('play_group_id',$groupIds)->update(['status'=>2]) ;
+      ],
+      "series": 654682
+    }
+  ]
+}
+' ;
+        $data = json_decode($json,true) ;
+        $bet =$data['bets'][0] ;
+        //验证柱数（总柱数&每个info中柱数）
+        Check::betsQuantity($bet['bets_quantity'], $bet['bets_info'], $bet['play_id']);
+        dd(23);
+
+
+
+          610101 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::zheng_ma_sm', 'param_attach' => []],
+    610201 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::te_ma', 'param_attach' => []],
+    610301 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::zheng_ma', 'param_attach' => []],//微信-正码
+    610302 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::zheng_ma_2', 'param_attach' => []],//web-正码
+    //生肖
+    610401 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::sheng_xiao', 'param_attach' => []],
+    610403 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::total_animal', 'param_attach' => []], //总肖
+    610404 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::positive_animal', 'param_attach' => []], //正肖
+    610405 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::one_animal', 'param_attach' => []], //一肖
+    //610402 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::color_waves', 'param_attach' => []],
+    //色波
+    610501 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::color_waves', 'param_attach' => []],
+    610502 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::color_half', 'param_attach' => []],
+    610503 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::color_half', 'param_attach' => []],
+    610504 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::color_seven', 'param_attach' => []],
+    //五行
+    610601 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::five_elements', 'param_attach' => []],
+    //七码
+    610701 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::seven_code', 'param_attach' => []],
+    //特头特尾
+    610801 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::special_tail', 'param_attach' => []],
+    //中一
+    610901 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [5]],
+    610902 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [6]],
+    610903 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [7]],
+    610904 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [8]],
+    610905 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [9]],
+    610906 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::winning', 'param_attach' => [10]],
+    //正码特
+    611001 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [0]],
+    611002 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [1]],
+    611003 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [2]],
+    611004 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [3]],
+    611005 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [4]],
+    611006 => ['func' => 'App\Library\Lottery\CheckIsWin\LHCTradition::code_special', 'param_attach' => [5]],

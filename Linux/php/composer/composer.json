@@ -1,0 +1,12 @@
+{
+    "name": "administrator/composer",
+    "authors": [
+        {
+            "name": "sokminyo",
+            "email": "735305610@qq.com"
+        }
+    ],
+    "require": {
+    	 "monolog/monolog": "1.0.*" 
+    }
+}

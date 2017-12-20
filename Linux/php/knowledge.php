@@ -91,3 +91,7 @@
     // testAbc,testDef,testGhi,test
 #10:DIRECTORY_SEPARATOR php系统常量即文件分隔符    
 
+#11:ClI模式启动php
+    //进入到项目目录=> php -S localhost:8000     
+    //启动时指定根目录=> php -S localhost:8000 -t foo/
+

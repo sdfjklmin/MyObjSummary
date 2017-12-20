@@ -177,7 +177,8 @@ C.错误测试
 			vagrant up 启动
 			vagrant halt 关机
 			vagrant ssh 远程登录 
-			具有清参照 vagrant --help			    
+			具有清参照 vagrant --help		
+			 vagrant.exe provision //域名配置生效	    
 	任务调度
 		php artisan schedule:run 运行文件 Kernel		
 		
