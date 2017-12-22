@@ -6,3 +6,10 @@
 	自动化测试和持续集成、发布；
 	在服务型环境中部署和调整数据库或其他的后台应用；
 	从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。	
+2.安装
+	yum install -y epel-relase //安装依赖
+	yum install docker-io	//安装docker
+	service docker start //启动docker,根据安装方式不同启动命令也有不同
+	docker version //查看当前版本
+	docker search php-7.0 //搜索包名
+	docker pull php-7.0 //拉取包
