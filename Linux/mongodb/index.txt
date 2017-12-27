@@ -1,0 +1,15 @@
+1.安装
+	curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz //下载文件
+	tar -zxvf mongodb-linux-x86_64-3.0.6.tgz //解压
+2.数据库目录
+	有些安装会默认创建 /data/db #如果没有自行创建
+3.启动
+	在MongoDB的bin中
+		./mongod #如果报连接错误
+		=> ./mongod --dbpath=/data/bin #指定启动的数据库目录,指定一次后之后会默认		
+		(如果不行可以删除 /data/db/mongod.lock)
+4.进入后台管理
+	./mongo		(启动和进入需要两个窗口)
+5.使用	
+
+
