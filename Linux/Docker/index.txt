@@ -10,6 +10,31 @@
 	yum install -y epel-relase //安装依赖
 	yum install docker-io	//安装docker
 	service docker start //启动docker,根据安装方式不同启动命令也有不同
+	
 	docker version //查看当前版本
 	docker search php-7.0 //搜索包名
 	docker pull php-7.0 //拉取包
+	
+	docekr rmi php-7 //删除包
+	docker ps //查看运行的容器
+	docker ps -a //所有
+	docker logs abcdkjlksd(容器ID)
+	
+	docker rm myPHP //删除myPHP容器
+	
+	docker stop <容器名orID>
+	docker start <容器名orID>
+	docker kill <容器名orID>
+
+    运行容器
+	docker run -p 80:80 --name myNg -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
+    -p 80:80 把容器80端口映射到服务80 =  -P
+    --name 设置名字
+    -d 运行镜像
+
+	容器IP的查方法
+	docker inspect 容器ID或容器名 |grep '"IPAddress"'
+
+
+	docker run -p 80:80 --name myNg3 -v /docker/nginx/conf.d --privileged=true -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
+	须迹斯耶

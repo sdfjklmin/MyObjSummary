@@ -29,3 +29,4 @@ KDC有两个服务组成：身份验证服务（Authentication Server，简称AS
 二维码(芝麻,草料,新浪)
 CDN
 OSS
+docker
