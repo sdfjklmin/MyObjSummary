@@ -7,6 +7,8 @@
 	 /usr/local/nginx
  启动服务:
  	/usr/local/nginx/sbin/nginx
+ 关闭服务:
+    /usr/local/nginx/sbin/nginx -s stop   
  平滑重启:
     /usr/local/nginx/sbin/nginx -s reload
  查看进程对应的id:

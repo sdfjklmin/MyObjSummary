@@ -220,8 +220,12 @@ make install
 	下载mongodb的压缩包
 	pecl install mongodb-1.13.14.tgz
 
-	php重启:
+	php重启1:
 	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
 	ps aux | grep php-fpm 
-	kill 15891 # 对应的master进程ID
+	kill 15891 # 对应的master进程ID 
 	
+	php重启2:
+	ps aux | grep php-fpm  #查看对应的php-fpm.conf文件地址
+	取消pid=run/php-fpm.pid的注释
+	kill `cat php-fpm.pid的地址`  #这里是反引号
