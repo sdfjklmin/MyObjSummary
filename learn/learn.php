@@ -30,3 +30,6 @@ KDC有两个服务组成：身份验证服务（Authentication Server，简称AS
 CDN
 OSS
 docker
+
+米兰网:
+	windos通过映射网络驱动去修改linux的文件信息

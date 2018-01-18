@@ -207,3 +207,11 @@ Vi Command	:
   b. vi /etc/hosts	  	
     新增:
     192.169.124.130 hostname
+7.将安装命令加入到系统环境中
+	vi /etc/profile
+	添加
+		PATH=$PATH:/(对应php的安装运行目录[bin])
+		PATH=$PATH:/(对应mongo的安装运行目录[bin])
+		export PATH
+	source /etc/profile  配置生效	
+	echo $PATH 查看    

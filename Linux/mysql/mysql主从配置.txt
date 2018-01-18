@@ -28,7 +28,7 @@ step:
    #修改root密码
     USE mysql ;  // 使用数据库
     UPDATE user SET Password = password ( '123456' ) WHERE User = 'root' ;  //更改root的密码
-
+   #上述操作需要重启数据库才能生效
    操作思路:
       配置log-bin和server-id；
       建立同步帐号（master），并授权；
