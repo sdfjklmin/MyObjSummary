@@ -215,6 +215,11 @@ make install
 	# systemctl start telnet.socket 启动Telnet服务
 	# systemctl status telnet.cocket 再次查看服务状态
 
+	安装mongo:
+	pecl install mongodb ;(如果无法连接或者报版本限制,解决如下)
+	下载mongodb的压缩包
+	pecl install mongodb-1.13.14.tgz
+
 	php重启:
 	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
 	ps aux | grep php-fpm 
