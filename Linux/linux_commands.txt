@@ -218,3 +218,7 @@ Vi Command	:
 	source /etc/profile  配置生效	
 	echo $PATH 查看    
 8.ctrl + 回撤键	 #命令行模式输入删除
+9.往文件中追加信息
+	echo '追加信息' >> addinfo.php
+10.覆盖文件中的信息
+	echo '' > addinfo.php	

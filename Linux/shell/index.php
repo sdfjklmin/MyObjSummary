@@ -222,3 +222,9 @@ chmod +x ./test.sh  #使脚本具有执行权限
 	do
 		echo $t
 	done	
+
+	eg:
+	for ((i=0;i<=3;i++))
+	do
+		echo $i
+	done	
