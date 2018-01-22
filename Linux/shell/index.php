@@ -2,6 +2,7 @@
 shell种类很多,这里主要是Bash,也就是 Bourne Again Shell.
 
 打开文本编辑器(可以使用 vi/vim 命令来创建文件),新建一个文件 test.sh,扩展名为 sh（sh代表shell）,扩展名并不影响脚本执行,见名知意就好,如果你用 php 写 shell 脚本,扩展名就用 php 好了.
+#bash shell可以记录所有操作过的历史命令 cat ~user.bash_history > cat ~root.bash_history
 
 #简单例子
 
