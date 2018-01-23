@@ -35,3 +35,7 @@
 	MetInfo  / wordpress 网站模板
 	啊D   注入工具
 	Bash Shell
+	swagger 文档生成工具
+	mixphp 基于swoole运行的开发的Api框架
+	Validator 验证集成插件
+	laravle Carbon 后台获取时间插件

@@ -46,7 +46,9 @@ selfPhp(){
       php) /usr/local/php/sbin/php-fpm
       echo 'php 启动成功'
       ;;
-      php-r) kill `cat /usr/local/php/var/run/php-fpm.pid`
+      php-r) 
+      #kill `cat /usr/local/php/var/run/php-fpm.pid`
+      pkill php-fpm
       /usr/local/php/sbin/php-fpm
       echo 'php 重启成功'
       ;;

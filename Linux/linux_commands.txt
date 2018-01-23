@@ -231,3 +231,14 @@ Vi Command	:
 13.用set可以查看所有的变量
 14.alias查看所有的别名 
 15.type cd #查看cd命令的说明
+16.杀死进程
+	a.查看进程
+		ps -aux 或者 ps -ef
+	b.查看某个进程 [管道]
+		ps -aux | grep php-fpm	 或者 pgrep php-fpm
+	c.查看就是xx的PID	
+		pidof php-fpm   
+	
+	1.pidof php-fpm | xargs kill #杀死php-fpm
+	2.pgrep和kill！pkill＝pgrep+kill。
+	  pkill php-fpm
