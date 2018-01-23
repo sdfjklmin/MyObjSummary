@@ -237,3 +237,6 @@ make install
 	取消pid=run/php-fpm.pid的注释
 	kill `cat php-fpm.pid的地址`  #这里是反引号
 
+    通过ps显示进程id,然后杀死
+    ps aux | grep php-fpm | xargs kill
+
