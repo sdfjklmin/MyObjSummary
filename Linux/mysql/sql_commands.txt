@@ -39,3 +39,5 @@ _9.触发器
    所以不要编写过于复杂的触发器，
    也不要增加过得的触发器，这样会对数据的插入、修改或者删除带来比较严重的影响，
    同时也会带来可移植性差的后果，所以在设计触发器的时候一定要有所考虑。
+_10.this is incompatible with sql_mode=only_full_group_by
+	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上any_value

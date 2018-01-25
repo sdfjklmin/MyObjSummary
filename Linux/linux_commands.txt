@@ -242,3 +242,5 @@ Vi Command	:
 	1.pidof php-fpm | xargs kill #杀死php-fpm
 	2.pgrep和kill！pkill＝pgrep+kill。
 	  pkill php-fpm
+17.查看用户的历史命令记录
+	cat ~user.bash_history > cat ~root.bash_history	  
