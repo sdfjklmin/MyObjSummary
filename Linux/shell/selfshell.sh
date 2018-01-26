@@ -1,7 +1,9 @@
 #!/bin/bash
+#命令帮助
 if [ $1 ]
 then
   #根据字母分类进行提示
+  echo '基础命令如下:'
   case $1 in
 	-h) echo '
 	      ng     启动nginx 
@@ -12,6 +14,10 @@ then
 	      php-r  重启php
 	      php-s  停止php  
 
+        smb    启动samba
+        smb-r  重启samba
+        smb-s  停止samba  
+
              '	
          ;;
 	 *)
@@ -20,18 +26,17 @@ then
   esac
   #exit 终止脚本
 fi
-echo '请输入你的命令为:'
-#检测输入的命令
-read aNum
-checkPhp=`expr index "${aNum}" php`
-checkNg=`expr index "${aNum}" ng`
+#函数声明
 #nginx运行函数
-selfNginx(){
+selfng*(){
   case $1 in
     ng)  /usr/local/nginx/sbin/nginx
     echo 'nginx 启动成功'
     ;;
-    ng-r) /usr/local/nginx/sbin/nginx -s reload
+    ng-r)
+    #当nginx进程没有启动的时候如果直接使用reload会有错误提示
+    pkill nginx
+    /usr/local/nginx/sbin/nginx
     echo 'nginx 重启成功'
     ;;
     ng-s) /usr/local/nginx/sbin/nginx -s stop 
@@ -41,7 +46,7 @@ selfNginx(){
   exit
 }
 #php运行函数
-selfPhp(){
+selfphp*(){
   case $1 in
       php) /usr/local/php/sbin/php-fpm
       echo 'php 启动成功'
@@ -58,13 +63,20 @@ selfPhp(){
   esac
   exit 
 }
-#运行函数
-if [ $checkPhp -gt  0 ]; then
-  selfPhp $aNum 
-fi
-if [ $checkNg -gt 0 ]; then
-  selfNginx $aNum
-fi
+echo '请输入你的命令为:'
+#检测输入的命令 单命令输入[修改为多命令]
+read aNum 
+#基础命令配置 提取到配置文件中
+#baseCheck=(php* ng* smb*)
+for t in `cat ./.selfconf`
+do
+  commonCheck=`expr index "${aNum}" "${t}"`
+  if [ $commonCheck -gt  0 ]; then
+    #函数调用
+    self${t} $aNum
+  fi
+done  
 #错误提示
 echo '无效命令'
 exit
+
