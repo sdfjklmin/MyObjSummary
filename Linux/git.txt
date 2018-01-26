@@ -59,3 +59,7 @@ SSH key 添加 :
 	git branch --set-upstream-to=<remote>/<branch> mantis_80_withdraw
 
   git push --set-upstream origin mantis_80_withdraw
+
+ 忽略管理:
+ 	.gitignore 文件
+ 	.git/info/exclude 增加忽略的内容 

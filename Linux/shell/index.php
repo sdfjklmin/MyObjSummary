@@ -229,3 +229,13 @@ chmod +x ./test.sh  #使脚本具有执行权限
 	do
 		echo $i
 	done	
+
+其他:
+	把命令运行结果赋给变量
+	a=`/usr/local/php/sbin/php-fpm`	#使用反引号
+	
+	让命令停止几秒
+	sleep 1
+
+	查看一条命令的执行结果[这里指最近的一条执行命令]
+	echo $? #0为成功,其他为失败

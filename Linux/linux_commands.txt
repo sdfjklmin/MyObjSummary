@@ -16,6 +16,14 @@ CentOS7 :
 				  BOOTPROTO=static[静态ip]|dhcp[动态ip]
 				  IPADDR=192.168.124.129
 				  NETMASK=255.255.255.0
+
+				  eg:固定ip
+				  DEVICE="eth2"	#网卡名称
+				  NETMASK="255.255.255.0"   #网关
+				  IPADDR="192.168.1.48"		#IP地址
+				  GATEWAY="192.168.1.1"		#默认网关
+				  DNS='192.168.1.1'			#dns地址 ipconfig /all windows上的对应
+				  DNS1=61.139.2.69			#dns地址
 			servic network restart (重启网卡)	
 Tip: 
 	min	:min
@@ -109,6 +117,7 @@ Commands :
 		chmod ugo=rwx filename   ### 设置 user ，group ，others 具有 读取、写入、执行权限
 		chmod ug=rw filename     ### 设置 user ，group 添加 读取、写入权限
 		chmod ugo=--- filename   ### 取消所有权限
+		chmod -R 777 /minPro	 ### 把minPro下的所有问题赋予权限
 
  查找:
  	find:
@@ -244,3 +253,7 @@ Vi Command	:
 	  pkill php-fpm
 17.查看用户的历史命令记录
 	cat ~user.bash_history > cat ~root.bash_history	  
+18.telnet
+	yum install telnet
+	yum install telnet-server	
+	/usr/bin/telnet ip prot
