@@ -240,3 +240,9 @@ make install
     通过ps显示进程id,然后杀死
     ps aux | grep php-fpm | xargs kill
 
+    php版本信息不一致[浏览器版本信息和CLI模式的版本信息]
+    $PATH 查看php命令是否在环境变量中
+    php -v  #查看环境变量中的版本信息
+    /usr/local/php/bin/php -v #查看php安装目录的版本信息
+    type php #查看php的类型目录
+    把最新版本的php复制到 type php的目录中

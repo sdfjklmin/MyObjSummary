@@ -56,10 +56,13 @@ SSH key 添加 :
 	git push				// 分支合并到主干后要提交
 
 
-	git branch --set-upstream-to=<remote>/<branch> mantis_80_withdraw
+
 
   git push --set-upstream origin mantis_80_withdraw
 
  忽略管理:
  	.gitignore 文件
  	.git/info/exclude 增加忽略的内容 
+
+ //将远程分支和本来分支建立联系
+ git branch --set-upstream-to=origin/远程分支的名字 本地分支的名字 

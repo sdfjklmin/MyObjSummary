@@ -39,3 +39,6 @@
 	mixphp 基于swoole运行的开发的Api框架
 	Validator 验证集成插件
 	laravle Carbon 后台获取时间插件
+
+	后台API启动 beauty_api  ./start-guz.sh
+	C端前端启动 frontend-customer npm run dev

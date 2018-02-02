@@ -37,4 +37,4 @@
 
 
 	docker run -p 80:80 --name myNg3 -v /docker/nginx/conf.d --privileged=true -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
-	须迹斯耶
+	须迹笙伐

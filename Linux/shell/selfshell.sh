@@ -68,7 +68,10 @@ echo '请输入你的命令为:'
 read aNum 
 #基础命令配置 提取到配置文件中
 #baseCheck=(php* ng* smb*)
-for t in `cat ./.selfconf`
+#配置文件如果相对于运行文件 则需要在运行文件目录下运行
+#for t in `cat ./.selfconf`
+#建议用绝对路径
+for t in `cat /.selfconf`
 do
   commonCheck=`expr index "${aNum}" "${t}"`
   if [ $commonCheck -gt  0 ]; then

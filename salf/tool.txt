@@ -1,2 +1,21 @@
 1.Arachni web渗透测试
 2.PowerShell 是一种命令行外壳程序和脚本环境
+3.nmap 检查工具
+4.sqlmap sql注入工具
+5.jmeter 性能测试
+6.One-Lin3r 渗透测试单行化工具
+7.Scrapy python爬虫
+	下载文件
+		wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate
+	执行安装
+		python get-pip.py #安装pip
+		pip install Scrapy  #安装Scrapy
+		
+		error:"command 'gcc' failed with exit status 1"
+			  =>yum install gcc libffi-devel python-devel openssl-devel -y
+
+		[文件树查看:yum install tree] 
+		
+
+
+		jenkins	  

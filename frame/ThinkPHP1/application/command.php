@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -10,8 +9,4 @@
 // | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
 
-// 定义项目路径
-define('APP_PATH', __DIR__ . '/application/');
-
-// 加载框架引导文件
-require __DIR__.'/thinkphp/console.php';
+return [];
