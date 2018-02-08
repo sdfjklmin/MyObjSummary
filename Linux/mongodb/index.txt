@@ -12,6 +12,9 @@
 		默认web访问端口:27018
 4.进入后台管理
 	./mongo		(启动和进入需要两个窗口)
+	#php连接,这里参照官网给出的信息有两种
+		1.mongo(旧版) $mongo = new MongoClient();
+		2.mongoDb(新版) $mongo = new MongoDb\Dirver\Manager('mongodb://127.0.0.1:27017');
 5.使用	
 	show dbs			#显示所有数据列表
 	db 					#显示当前连接数据库
@@ -107,3 +110,5 @@
 		./mongodump -h 127.0.0.1 -d test -o /data/mongodata
 16.监控
 	MongoDB中提供了mongostat 和 mongotop 两个命令来监控MongoDB的运行情况。(bin中)		
+
+17.	

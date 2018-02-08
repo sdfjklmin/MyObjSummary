@@ -24,6 +24,28 @@ CentOS7 :
 				  GATEWAY="192.168.1.1"		#默认网关
 				  DNS='192.168.1.1'			#dns地址 ipconfig /all windows上的对应
 				  DNS1=61.139.2.69			#dns地址
+
+
+				  eg:
+					DIVICE=eth7
+					TYPE=Ethernet
+					BOOTPROTO=static
+					DEFROUTE=yes
+					PEERDNS=yes
+					PEERROUTES=yes
+					IPV4_FAILURE_FATAL=no
+					IPV6INIT=yes
+					IPV6_AUTOCONF=yes
+					IPV6_DEFROUTE=yes
+					IPV6_PEERDNS=yes
+					IPV6_PEERROUTES=yes
+					IPV6_FAILURE_FATAL=no
+					UUID=ab975ea9-2c4f-4df1-9601-b8a68385b1fe
+					ONBOOT=yes
+					NETMASK="255.255.255.0"
+					IPADDR="192.168.1.108"
+					GATEWAY="192.168.1.1"
+					DNS1=192.168.1.1
 			servic network restart (重启网卡)	
 Tip: 
 	min	:min
