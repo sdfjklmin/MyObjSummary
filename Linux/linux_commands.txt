@@ -279,3 +279,9 @@ Vi Command	:
 	yum install telnet
 	yum install telnet-server	
 	/usr/bin/telnet ip prot
+19.开机自启
+	/etc/rc.local 加入你需要启动的命令
+	/etc/rc.d/init.d/	加入你需要启动的脚本服务
+20.开启端口(centos7)
+	firewall-cmd --zone=public --add-port=80/tcp --permanent
+	重启 systemctl restart firewalld.service
