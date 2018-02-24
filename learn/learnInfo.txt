@@ -1,0 +1,37 @@
+编程:
+	PHP
+	Shell
+	Python
+服务器:
+	nginx
+数据库:
+	mysql
+	mongodb
+	redis
+操作系统:
+	linux	
+后端框架:
+	ThinkPhp5
+	Laravle
+	Swoole
+	Workman
+	MixPhp
+	海豚PHP
+	爬虫项目
+前端框架:
+	Vue
+	Node.js		
+测试工具:
+	jmeter
+发包工具:
+	jenkins				
+杂项:
+	分布式
+	Docker 
+	Composer
+	Ftp
+	Git
+	WebSocket	
+	网安
+	加密认证
+	其他
