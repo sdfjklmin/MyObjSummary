@@ -1,6 +1,11 @@
 ## 目录
 - [MyObjSummary]
   - [frame](#frame) 				框架设计
+  - [book](#book)           书籍
+  - [Html](#Html)           前端
+    - [Editer](#editer)      编辑器
+    - [Vue](#vue)      Vue
+  - [learn](#learn)         知识学习  
   - [Linux](http://man.linuxde.net) 				Linux系统操作
     - [ftp](#ftp) 					FTP相关介绍
     - [html](#html) 				html知识总结和应用
@@ -10,6 +15,13 @@
     - [phpDll](#phpDll) 			php底层介绍,so扩展编写
     - [redis](#redis) 				key-value介绍
     - [swoole](#swoole)				框架应用介绍
+  - [PHP](http://php.net)
+    - [依赖注入](#依赖注入)  
+    - [设计模式](#设计模式)  
+    - [Laravel](#Laravel)  
+    - [知识问答](#知识问答)  
+    - [phpDll](#phpDll)  
+    - [Yar](#Yar)  
    - [rest](#rest)					休息提醒CLI
    - [salf](#salf)					安全介绍
    - [task](#task)					项目脚本
