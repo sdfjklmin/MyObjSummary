@@ -16,6 +16,6 @@
 
 		[文件树查看:yum install tree] 
 		
+8.Jenkins
 
-
-		jenkins	  
+			  
