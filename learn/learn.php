@@ -44,3 +44,56 @@
 
 	后台API启动 beauty_api  ./start-guz.sh
 	C端前端启动 frontend-customer npm run dev
+泰瑞亚:
+	(单点登录)passport.qaq.com : php-cgi -b 127.0.0.1:9001 php.ini  (QQ登录)
+	(前台登录)trade.qaq.com		(QQ登录)
+	(后台登录)steam.admin.com
+
+	#批量删除文件夹中名字为.gitignore
+	find  .  -name  '.gitignore'  -type  f  -print  -exec  rm  -rf  {} \;
+
+	前台登录[认证信息] -> 单点登录[信息处理] -> 共享cookie或session -> 返回登录成功标识
+
+	#可以插件
+	Ucenter 	简单的单点登录
+	Kerboers	单点登录服务器
+	#简单操作
+	session操作(db,nosql)
+	cookie操作
+
+	#使用
+	MyCat
+
+	mklink /J D:\Obj\Link\test4 D:\Obj\Link\test5
+	为 D:\Obj\Link\test4 <<===>> D:\Obj\Link\test5 创建的联接
+
+	test4自动创建 指向 test5
+	rmdir D:\Obj\Link\test4 rmdir D:\Obj\Link\test5  #删除
+
+	mklink /J D:\Obj\steam_trade\common\core D:\Obj\core
+
+	mklink /J D:\Obj\passport\common\core D:\Obj\core
+
+	mklink /J D:\Obj\passport\common\core[项目core,common中不用创建core文件夹] D:\Obj\core[真实的core]
+	禅道:shaojiamin qaq@1234
+
+
+	git reset --hard origin/master  
+
+
+	#扩展只有文件文件内容无法提交
+	所以使用下面命令： 
+	git rm -rf --cached vendor/crazyfd/yii2-qiniu 
+	git add vendor/crazyfd/yii2-qiniu/*
+	再次使用git status查看发现文件已经成功添加： 
+	Changes to be committed: 
+	(use "git reset HEAD <file>..." to unstage) 
+	deleted: vendor/crazyfd/yii2-qiniu 
+	new file: vendor/crazyfd/yii2-qiniu/LICENSE 
+	new file: vendor/crazyfd/yii2-qiniu/Qiniu.php 
+	new file: vendor/crazyfd/yii2-qiniu/README.md 
+	new file: vendor/crazyfd/yii2-qiniu/composer.json
+	DONE
+
+
+	show variables like '%increment%';  #查看ID自增设置	
