@@ -66,3 +66,10 @@ SSH key 添加 :
 
  //将远程分支和本来分支建立联系
  git branch --set-upstream-to=origin/远程分支的名字 本地分支的名字 
+
+
+//代码冲突解决
+git stash #将本地文件存入缓存
+git pull  #更新代码
+git stash pop
+git diff -w test.php #确认代码自动合并的情况
