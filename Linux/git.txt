@@ -73,3 +73,17 @@ git stash #将本地文件存入缓存
 git pull  #更新代码
 git stash pop
 git diff -w test.php #确认代码自动合并的情况
+
+
+//扩展只有文件文件内容无法提交
+sgit rm -rf --cached vendor/crazyfd/yii2-qiniu 
+git add vendor/crazyfd/yii2-qiniu/*
+再次使用git status查看发现文件已经成功添加： 
+Changes to be committed: 
+(use "git reset HEAD <file>..." to unstage) 
+deleted: vendor/crazyfd/yii2-qiniu 
+new file: vendor/crazyfd/yii2-qiniu/LICENSE 
+new file: vendor/crazyfd/yii2-qiniu/Qiniu.php 
+new file: vendor/crazyfd/yii2-qiniu/README.md 
+new file: vendor/crazyfd/yii2-qiniu/composer.json
+DONE
