@@ -246,3 +246,7 @@ make install
     /usr/local/php/bin/php -v #查看php安装目录的版本信息
     type php #查看php的类型目录
     把最新版本的php复制到 type php的目录中
+
+
+    素兮娆艳眉 素兮娆狸神 素衣风尘浅
+    素兮沫小斯 素兮娆狸皇 素兮娆狸帝
