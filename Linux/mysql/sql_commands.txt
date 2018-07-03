@@ -42,7 +42,7 @@ _9.触发器
 _10.this is incompatible with sql_mode=only_full_group_by
 	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上any_value
 _11.mysql循环插入数据
-	#创建任务
+	#创建存储过程
 	CREATE PROCEDURE test_insert () 
 		#开始
 		BEGIN
@@ -64,6 +64,10 @@ _11.mysql循环插入数据
 		END;
 	#执行
 	CALL test_insert();	
+	#删除存储过程
+	drop procedure test_insert ;
+	#查看存储过程
+	SHOW PROCEDURE STATUS ;
 _12.原生导出
 	select * from `user` into outfile 't1.xls';	
 	#如果无法运行在命令行查看
