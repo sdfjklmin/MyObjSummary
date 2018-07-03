@@ -41,3 +41,34 @@ _9.触发器
    同时也会带来可移植性差的后果，所以在设计触发器的时候一定要有所考虑。
 _10.this is incompatible with sql_mode=only_full_group_by
 	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上any_value
+_11.mysql循环插入数据
+	#创建任务
+	CREATE PROCEDURE test_insert () 
+		#开始
+		BEGIN
+			#定义变量 
+			DECLARE i INT DEFAULT 1;
+				#条件判断
+				WHILE i<1000000 
+				#执行
+				DO 
+					#SQL
+					INSERT SQL ;
+					#变量增加
+					SET i=i+1;
+				#结束循环 
+				END WHILE ;
+			#提交 
+			commit; 
+		#结束
+		END;
+	#执行
+	CALL test_insert();	
+_12.原生导出
+	select * from `user` into outfile 't1.xls';	
+	#如果无法运行在命令行查看
+	#show variables like '%secure%';
+	#如果secure_file_priv为null修改my.ini添加或者修改
+	#secure-file-priv=  或者 secure-file-priv='保存导出的地址'
+	#上面不填写的地址默认为mysql data的地址
+	#保存 重启 执行
