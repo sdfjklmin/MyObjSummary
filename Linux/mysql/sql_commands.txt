@@ -68,8 +68,11 @@ _11.mysql循环插入数据
 	drop procedure test_insert ;
 	#查看存储过程
 	SHOW PROCEDURE STATUS ;
+	#查看创建存储过程的语句
+	SHOW CREATE PROCEDURE test_insert8 ;
 _12.原生导出
 	select * from `user` into outfile 't1.xls';	
+	CHARACTER SET gbk ; #设置编码excl默认为gbk
 	#如果无法运行在命令行查看
 	#show variables like '%secure%';
 	#如果secure_file_priv为null修改my.ini添加或者修改
