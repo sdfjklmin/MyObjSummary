@@ -1,0 +1,3 @@
+redis发布订阅
+redis发布订阅通知基于socket,连接超时受配置影响,可以修改php.ini,或者动态添加
+ini_set('default_socket_timeout', -1);
