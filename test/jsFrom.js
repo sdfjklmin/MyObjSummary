@@ -1,3 +1,4 @@
+    /*表单构建*/
     var f = document.createElement("form");
     document.body.appendChild(f);
     var hidField = {
