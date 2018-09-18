@@ -1,14 +1,14 @@
 <?php
 /**
+* openssl 可以加密解密
 * id en out
 */
 class IdEnOut
 {
 	
     const enOutT    =  12  ; #相加数
-    const enOutLink = ':'; #连接符
     const enOutW    =  6  ; #位移个数
-    const enOutSal  = ['X','e','V','K','T','q','m','u','w','B','c','+','n','-','l','.']  ;
+    const enOutSal  = ['X','e','V','K','T','q','m','u','w','B','A','c','n','C','l','O']  ;
     
     public static function enId($id)
     {
@@ -20,14 +20,13 @@ class IdEnOut
             $s = substr($str,$i,1) ;
             $backStr .= self::enOutSal[$s+self::enOutW] ;
         }
-        return urlencode(self::enOutLink.$backStr) ;
+        return urlencode($backStr) ;
     }
 
 
     public static function outId($str)
     {
         $str = urldecode($str) ;
-        $str = explode(self::enOutLink,$str)[1] ;
         $strLen = strlen($str) ;
         $backNum = '' ;
         for ( $i=0; $i<$strLen ; $i++ ) {
@@ -41,3 +40,8 @@ class IdEnOut
     }
 
 }
+
+$t = '23' ;
+$it = IdEnOut::enId($t) ;
+$ot = IdEnOut::outId($it);
+var_dump($t,$it,$ot);
