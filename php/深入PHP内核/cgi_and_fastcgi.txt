@@ -1,0 +1,31 @@
+CGI :
+ common gateway interface (公共网关接口)
+
+请求模式:
+	Web Brower(浏览器) ----(通过http协议传输)----> Http Server(服务器nginx/apache) -----> CGI Program -----> Db
+
+	Server 与 CGI 通过 STDIN/STDOUT(标准的输入/输出)进行数据传递
+	nginx(动态加载模块) apache(指定加载模块)
+
+CGI工作原理：
+	每当客户请求CGI的时候，WEB服务器就请求操作系统生成一个新的CGI解释器进程(如php-cgi.exe)，
+	CGI 的一个进程则处理完一个请求后退出，下一个请求来时再创建新进程。
+	当然，这样在访问量很少没有并发的情况也行。可是当访问量增大，并发存在，这种方式就不 适合了。于是就有了fastcgi。
+
+FastCGI:
+	像是一个常驻(long-live)型的CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去fork一次（这是CGI最为人诟病的fork-and-execute 模式）。
+
+　　一般情况下，FastCGI的整个工作流程是这样的：
+
+　　1.Web Server启动时载入FastCGI进程管理器（IIS ISAPI或Apache Module)
+
+        2.FastCGI进程管理器自身初始化，启动多个CGI解释器进程(可见多个php-cgi)并等待来自Web Server的连接。
+
+        3.当客户端请求到达Web Server时，FastCGI进程管理器选择并连接到一个CGI解释器。 Web server将CGI环境变量和标准输入发送到FastCGI子进程php-cgi。
+
+        4.FastCGI 子进程完成处理后将标准输出和错误信息从同一连接返回Web Server。
+        当FastCGI子进程关闭连接时， 请求便告处理完成。
+        FastCGI子进程接着等待并处理来自FastCGI进程管理器(运行在Web Server中)的下一个连接。 
+        在CGI模式中，php-cgi在此便退出了。
+
+php-fpm(PHP内置的一种fast-cgi)
