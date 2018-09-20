@@ -1,2 +1,0 @@
-web: http://www.cunmou.com/phpbook/preface.md
-web: http://www.php-internals.com/book/
