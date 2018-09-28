@@ -28,4 +28,4 @@ FastCGI:
         FastCGI子进程接着等待并处理来自FastCGI进程管理器(运行在Web Server中)的下一个连接。 
         在CGI模式中，php-cgi在此便退出了。
 
-php-fpm(PHP内置的一种fast-cgi)
+php-fpm(PHP内置的一种fast-cgi)  
