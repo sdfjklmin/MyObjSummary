@@ -14,6 +14,7 @@
 	ThinkPhp5
 	Laravle
 	Swoole
+	Swoft
 	Workman
 	MixPhp
 	海豚PHP
