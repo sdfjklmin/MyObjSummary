@@ -234,7 +234,7 @@ Vi Command	:
   	alias test="cd /minCmd"	
   	source /etc/bashrc  # 使更改配置生效
   b.建立shell脚本
-  	...... 不熟悉
+  c.linux自定义service	  	
 6.修改主机信息
   a.使用hostname
   	hostname 主机名称
