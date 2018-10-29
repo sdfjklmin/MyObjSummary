@@ -163,4 +163,5 @@ Other:
    insert into mysql.user(Host,User,Password) values("localhost","test",password("1234")); #新增用户
    flush privileges ; #刷新权限
    grant select on passport.*  to 'test'@'localhost' ; # 赋予select权限在passport数据库的所有表给 test 用户
+   grant select on *.* to 'admin'@'%' ;
    revoke select on *.*  from test@localhost ; #删除test对应所有数据库的select权限
