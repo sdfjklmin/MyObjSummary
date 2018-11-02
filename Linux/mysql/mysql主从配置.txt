@@ -165,3 +165,23 @@ Other:
    grant select on passport.*  to 'test'@'localhost' ; # 赋予select权限在passport数据库的所有表给 test 用户
    grant select on *.* to 'admin'@'%' ;
    revoke select on *.*  from test@localhost ; #删除test对应所有数据库的select权限
+
+   #命令帮助
+   help profile ;
+
+   #查看进程列表
+   show processlist ;   
+
+   #是否开启profile
+   show variables like '%pro%' ;
+
+   #设置参数
+   set profiling = 1 ;
+
+   #sql分析 
+   show profile ;
+
+   #sql分析
+   show profiles ;
+   #根据上面的查询ID 分析详细内容
+   show profile all for query 44 ;
