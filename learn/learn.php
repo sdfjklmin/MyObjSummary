@@ -94,6 +94,3 @@
 	new file: vendor/crazyfd/yii2-qiniu/README.md 
 	new file: vendor/crazyfd/yii2-qiniu/composer.json
 	DONE
-
-
-	show variables like '%increment%';  #查看ID自增设置	

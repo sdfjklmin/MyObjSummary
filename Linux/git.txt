@@ -87,3 +87,5 @@ new file: vendor/crazyfd/yii2-qiniu/Qiniu.php
 new file: vendor/crazyfd/yii2-qiniu/README.md 
 new file: vendor/crazyfd/yii2-qiniu/composer.json
 DONE
+
+git rm -r --cached . #删除当前项目的缓存
