@@ -95,3 +95,10 @@
     //进入到项目目录=> php -S localhost:8000     
     //启动时指定根目录=> php -S localhost:8000 -t foo/
 
+#12:获取数组第一个的值
+    current(['firstErr'=>'666',2=>'2332']) 
+    //666
+
+#13:list将数组的值解析到对应的变量中
+    $initArr = ['this is name','this is other'] ;
+    list($name,$other) = $initArr ;
