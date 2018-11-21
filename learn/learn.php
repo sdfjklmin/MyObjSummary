@@ -75,22 +75,5 @@
 	mklink /J D:\Obj\passport\common\core D:\Obj\core
 
 	mklink /J D:\Obj\passport\common\core[项目core,common中不用创建core文件夹] D:\Obj\core[真实的core]
-	禅道:shaojiamin qaq@1234
 
 
-	git reset --hard origin/master  
-
-
-	#扩展只有文件文件内容无法提交
-	所以使用下面命令： 
-	git rm -rf --cached vendor/crazyfd/yii2-qiniu 
-	git add vendor/crazyfd/yii2-qiniu/*
-	再次使用git status查看发现文件已经成功添加： 
-	Changes to be committed: 
-	(use "git reset HEAD <file>..." to unstage) 
-	deleted: vendor/crazyfd/yii2-qiniu 
-	new file: vendor/crazyfd/yii2-qiniu/LICENSE 
-	new file: vendor/crazyfd/yii2-qiniu/Qiniu.php 
-	new file: vendor/crazyfd/yii2-qiniu/README.md 
-	new file: vendor/crazyfd/yii2-qiniu/composer.json
-	DONE

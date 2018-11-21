@@ -89,3 +89,5 @@ new file: vendor/crazyfd/yii2-qiniu/composer.json
 DONE
 
 git rm -r --cached . #删除当前项目的缓存
+
+git reset --hard origin/master
