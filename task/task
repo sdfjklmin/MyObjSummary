@@ -1,7 +1,0 @@
-#!/usr/local/php7.0.14/bin/php
-<?php
-define('ROOT', __DIR__ . '/');
-include ROOT . 'base.php';
-
-// 执行项目
-lib\App::run();

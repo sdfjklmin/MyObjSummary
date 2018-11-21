@@ -1,44 +1,102 @@
 ## 目录
 - [MyObjSummary]
-  - [frame](#frame) 				框架设计
-  - [book](#book)           书籍
-  - [Html](#Html)           前端
-    - [Editer](#editer)      编辑器
-    - [Vue](#vue)      Vue
-  - [learn](#learn)         知识学习  
-  - [Linux](http://man.linuxde.net) 				Linux系统操作
-    - [ftp](#ftp) 					FTP相关介绍
-    - [html](#html) 				html知识总结和应用
-    - [mysql](#mysql) 				mysql配置,优化,面试
-    - [nginx](#nginx) 				nginx知识优化,配置详解
-    - [php](#php) 					php知识总结,归纳,应用
-    - [phpDll](#phpDll) 			php底层介绍,so扩展编写
-    - [redis](#redis) 				key-value介绍
-    - [swoole](#swoole)				框架应用介绍
-  - [PHP](http://php.net)
-    - [依赖注入](#依赖注入)  
-    - [设计模式](#设计模式)  
+  - [bookmarks](#bookmarks) 浏览器标签
+  - [docker](#docker)       Docker
+  - [frame](#frame) 		 框架
+  - [ftp](#ftp) 		     FTP服务
+  - [git](#git) 		     GIT
+  - [html](#html)           前端
+    - [editer](#editer)      编辑器
+    - [vue](#vue)      Vue
+  - [learn](#learn)         需要学习的知识  
+  - [linux](http://man.linuxde.net) 				Linux操作
+  - [mongodb](#mongodb)     mongodb 
+  - [mysql](#mysql)     mysql 
+  - [nginx](#nginx)     nginx 
+  - [php](http://php.net)
+    - [composer](#composer) 依赖注入  
+    - [designMode](#designMode) 设计模式  
     - [Laravel](#Laravel)  
-    - [知识问答](#知识问答)  
-    - [phpDll](#phpDll)  
-    - [Yar](#Yar)  
-   - [rest](#rest)					休息提醒CLI
-   - [salf](#salf)					安全介绍
-   - [task](#task)					项目脚本
-   - [editExplain](#editExplain)	编辑器介绍,扩展安装
-   - [nodeInstall](#nodeInstall)	node.js安装介绍
-   - [test.html](#test.html)		html知识测试(验证所收集到的知识)
-   - [test.php](#test.php)			php知识测试(验证所收集到的知识)
-   - [vue.js](#vue.js)				view/vue.js 源码 (配合html测试)
+    - [PhpAsy](#PhpAsy) 异步编程  
+    - [rpc](#rpc) 远程服务调用  
+    - [yar](#yar) 
+    - [依赖注入容器](#依赖注入容器)  
+    - [深入PHP内核](#深入PHP内核)  
+  - [rabbitMQ](#RabbitMQ)					MQ 
+  - [redis](#redis)					redis  
+  - [redisSubPub](#redisSubPub)		redis发布订阅  
+  - [rest](#rest)					休息提醒CLI
+  - [salf](#salf)					安全介绍
+  - [samba](#samba)				虚拟映射 
+  - [serviceMesh](#serviceMesh)   中间件
+  - [shell](#shell)   shell
+  - [ssl-key](#ssl-key)   ssl-key
+  - [swoole](#swool)   swoole
+  - [test](#test)   测试
+  - [tool](#tool)   常用工具
+  - [webSocket](#webSocket)   webSocket
+  - [分布式](#分布式)   分布式 
 
+   ### bookmarks
+        常用的浏览器标签
+   ### docker
+        docker相关
+   ### frame
+        框架源码学习
+   ### ftp
+        ftp服务构建     
+   ### git
+        git常用命令     
+   ### html 前端
+   #### editer 
+        编辑器    
+   #### vue 
+        vue框架        
+   ### learn
+        需要学习的知识    
+   ### linux
+        linux命令入口      
+   ### mongodb
+        mongodb    
    ### mysql
-
-   mysql主主配置、mysql主从配置、mysql问答优化、mysql面试、mysql命令、sql总结
-
+       mysql常用配置和命令      
    ### nginx
-
-   nginx反向代理、nginx负载均衡、nginx(conf)命令详解、nginx操作详解
-
+        nginx命令详解,配置,常用技巧      
    ### php
-
-   依赖注入容器、设计模式、laravel、php异步编程、QRcode(二维码)、php知识归纳
+        php官网入口 
+     #####composer 依赖注入
+     #####designMode 设计模式
+     #####Laravel Laravel
+     #####PhpAsy 异步编程
+     #####rpc 远程服务调用
+     #####yar Yar
+     #####依赖注入容器 依赖注入容器
+     #####深入PHP内核 深入PHP内核
+   ### rabbitMQ
+        RabbitMQ     
+   ### redis
+        redis      
+   ### redisSubPub
+        redis发布订阅      
+   ### rest
+        php cli模式下的 休息提醒器      
+   ### salf   [SomeSafety](https://github.com/sdfjklmin/SomeSafety)
+        安全知识,SQL注入,CSRF,漏洞等!详情请查看SomeSafety
+   ### samba
+        虚拟映射      
+   ### serviceMesh
+        中间键,主要来源,ali中间键博客      
+   ### shell
+        简单的shell处理      
+   ### ssl-key
+        ssl-key      
+   ### swoole
+        swoole      
+   ### test
+        测试入口      
+   ### tool
+        常用工具      
+   ### webSocket
+        webSocket 
+   ### 分布式
+        分布式                                                                                                                                                
