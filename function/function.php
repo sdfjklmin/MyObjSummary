@@ -166,6 +166,7 @@ if(!function_exists('pwdHash')) {
         if (function_exists('password_hash')) {
             return password_hash($password, PASSWORD_DEFAULT, ['cost' => $cost]);
         }
+        exit('there is not system password hash');
         $salt = getSalt($cost) ;
         //crypt为单向算法 不可逆
         $hash = crypt($password, $salt);
@@ -184,6 +185,7 @@ if(!function_exists('ckPwd')) {
         if(function_exists('password_verify')) {
            return password_verify($password,$pwdHash) ;
         }
+        exit('there is not system password verify');
         $salt = getSalt($cost) ;
         //crypt为单向算法 不可逆
         $hash = crypt($password, $salt);
