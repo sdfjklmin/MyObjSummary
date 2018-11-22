@@ -4,6 +4,7 @@
   - [docker](#docker)       Docker
   - [frame](#frame) 		 框架
   - [ftp](#ftp) 		     FTP服务
+  - [function](#function)  公共方法
   - [git](#git) 		     GIT
   - [html](#html)           前端
     - [editer](#editer)      编辑器
@@ -45,6 +46,8 @@
         框架源码学习
    ### ftp
         ftp服务构建     
+   ### function
+        公共方法          
    ### git
         git常用命令     
    ### html 前端
