@@ -14,7 +14,7 @@ Redis操作:
 服务器:
 	root   dnf123456
 	dis        192.168.5.235     nginx + mariadb + php7					mysql:123456
-	lnmp_m	   192.168.5.38      lnmp (nginx+mysql+php)					mysql:123456ss
+	lnmp_m	   192.168.5.38      lnmp (nginx+mysql+php)					mysql:123456
 	son_one	   192.168.5.47      nginx + mariadb + php5.6				mysql:123456
 	son_two    192.168.5.4 	     nginx + mariadb 			   			mysql:123456
 	dis_oracle 192.168.5.236     nginx + mariadb + php7 				mysql:123456
@@ -38,14 +38,3 @@ nginx:
 				方向代理,负载均衡     ip-hash
      son_one(访问地址) ---- lnmp_m(真实地址)   weight=1
      						dis(地址2)
-
-
-
-+++++++++++++++++++++++++++
-+ TYPE_2				  +
-+++++++++++++++++++++++++++
-<<<<<<< HEAD
-=======
-烽烟迷
-寒城涑
->>>>>>> c326d1ff34d6b821b6ec6b34be386a849d9f7d43

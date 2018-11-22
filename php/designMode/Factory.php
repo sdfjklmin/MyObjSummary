@@ -3,6 +3,7 @@
 # 定义一个用于创建对象的接口
 # 让子类决定实例化哪一类
 # 使用一个类的实例化延迟到子类
+namespace MyObjSummary\php\designMode ;
 	# 接口
     interface abstracted{
         public function realCreate();
@@ -50,4 +51,3 @@
     $instance = $create->create('Man');
     $instance->chromosome = "xy";
     $instance->realCreate()->action();
-?>
