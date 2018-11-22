@@ -31,7 +31,7 @@ if(isset($_POST['mode']) && !empty($_POST['mode'])) {
 
     # 引入文件
     require_once './'.$name .'.php';
-    exit("<div><a href='try.php' style='color: red;font-size: 18px'>backspace</a></div>");
+    exit("<div><a href='try.php' style='color: red;font-size: 18px'>Backspace</a></div>");
     # 自动加载 php 自带加载类(设计模式中有些是接口实现)
     /* function __autoload($class_name) {
          require_once $class_name . '.php';
@@ -50,7 +50,7 @@ $predefined =<<<PRE
     模式选择:<select name="mode">
             " $options "
         </select> <br />
-    <input type="submit" name="OK">
+    <input type="submit" style="color: red;font-size: 18px" value="Go">
 </form>
 PRE;
 echo $predefined ;

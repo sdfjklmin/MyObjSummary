@@ -284,4 +284,4 @@ $objObserver->removeObserver($sports);
 $objObserver->removeObserver($local);
 $objObserver->removeObserver($other);
 
-var_dump($objObserver) ;exit();
+var_dump($objObserver) ;
