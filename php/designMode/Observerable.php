@@ -252,6 +252,8 @@ class OtherNews implements Observer,DisplayElement
     }
 }
 
+// 获得主体和多个对应体  将多个对应体注册到主体中 主体统一操作多个对应体的信息 (统一处理|单独处理)
+
 //主体
 $objObserver = new NewsObserverable();
 

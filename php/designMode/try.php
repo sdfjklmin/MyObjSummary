@@ -3,6 +3,7 @@
  *  设计模式
  * @see  https://www.ctolib.com/docs-php-design-patterns-c-index.html
  */
+header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set('Asia/Shanghai');
 echo "<pre />";
 # 模式简码对应的文件和名称
@@ -11,6 +12,7 @@ $mode = [
 	'fac'=>['Factory','工厂模式',true],
 	'obs'=>['Observerable','观察者模式',true],
 	'pro'=>['Proxy','代理模式',false],
+	'dec'=>['Decorator','装饰模式',true],
 ] ;
 
 //参数处理

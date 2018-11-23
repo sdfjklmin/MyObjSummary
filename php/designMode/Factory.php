@@ -45,7 +45,8 @@
             return $create = new $create();
         }
     }
-
+    // 创建人类的接口类 创建男人类  创建女人类  男人类 女人类 人类工厂类
+    // 获得人类工厂 通过参数Man 获得 创建男人类 赋予男人的属性 创建
     # 测试
     $create = new PersonFactory();
     $instance = $create->create('Man');
