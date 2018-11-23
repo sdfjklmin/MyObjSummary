@@ -7,10 +7,10 @@ date_default_timezone_set('Asia/Shanghai');
 echo "<pre />";
 # 模式简码对应的文件和名称
 $mode = [
-	'sin'=>['Singleton','单例模式'],
-	'fac'=>['Factory','工厂模式'],
-	'obs'=>['Observerable','观察者模式'],
-	'pro'=>['Proxy','代理模式'],
+	'sin'=>['Singleton','单例模式',true],
+	'fac'=>['Factory','工厂模式',true],
+	'obs'=>['Observerable','观察者模式',true],
+	'pro'=>['Proxy','代理模式',false],
 ] ;
 
 //参数处理
@@ -24,14 +24,17 @@ if(isset($_POST['mode']) && !empty($_POST['mode'])) {
     }
 
     # 判断对应简码文件是否存在
-    list($name,$aliasName) = $mode[$arg];
+    list($name,$aliasName,$achieve) = $mode[$arg];
+    if(!$achieve) {
+        exitMsg('该模式正在验证中 。。。');
+    }
     if (!file_exists($name.'.php')) {
         exit('no file match');
     }
 
     # 引入文件
     require_once './'.$name .'.php';
-    exit("<div><a href='try.php' style='color: red;font-size: 18px'>Backspace</a></div>");
+    exitMsg();
     # 自动加载 php 自带加载类(设计模式中有些是接口实现)
     /* function __autoload($class_name) {
          require_once $class_name . '.php';
@@ -55,3 +58,9 @@ $predefined =<<<PRE
 PRE;
 echo $predefined ;
 
+//输出提醒
+function exitMsg($msg = '')
+{
+    if($msg) echo $msg ;
+    exit("<div><a href='try.php' style='color: red;font-size: 18px'>Backspace</a></div>");
+}
