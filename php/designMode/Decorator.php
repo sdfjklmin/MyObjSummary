@@ -10,7 +10,9 @@
  * Time: 10:06
  */
 namespace MyObjSummary\php\designMode ;
-
+echo <<<DES
+    <h2>装饰模式 : 动态的给一个对象添加一些额外的职责,就扩展功能而言比生成子类方式更为灵活</h2>
+DES;
 /** 留言板基类
  * Class MessageBoardHandler
  * @package MyObjSummary\php\designMode

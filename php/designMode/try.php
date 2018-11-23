@@ -13,6 +13,7 @@ $mode = [
 	'obs'=>['Observerable','观察者模式',true],
 	'pro'=>['Proxy','代理模式',false],
 	'dec'=>['Decorator','装饰模式',true],
+	'str'=>['Strategy','策略模式',true],
 ] ;
 
 //参数处理

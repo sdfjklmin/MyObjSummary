@@ -4,6 +4,9 @@
 # 让子类决定实例化哪一类
 # 使用一个类的实例化延迟到子类
 //namespace MyObjSummary\php\designMode ;
+echo <<<DES
+    <h2>工厂模式 : 定义一个用于创建对象的接口,让子类决定实例化哪一类,使用一个类的实例化延迟到子类</h2>
+DES;
 	# 接口
     interface abstracted{
         public function realCreate();

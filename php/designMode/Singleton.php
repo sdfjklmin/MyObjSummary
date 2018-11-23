@@ -1,9 +1,12 @@
-<?php 
-# 单例模式
+<?php
+#
 # 保证一个类仅有一个实例,并提供一个访问它的全局访问点
 # 通过 new 出两个对象在进行判断
 # 通过静态访问获取相同的对象
 namespace MyObjSummary\php\designMode ;
+echo <<<DES
+    <h2>单例模式 : 保证一个类仅有一个实例,并提供一个访问它的全局访问点</h2>
+DES;
 class Singleton 
 {
 	static private $_instance = null;

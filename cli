@@ -1,0 +1,11 @@
+<?php
+    // cli message
+    echo 'Listening on http://localhost:'.$argv[1]."\n";
+    echo 'Document root is '.__DIR__."\n";
+    echo 'Press Ctrl-C to quit.'."\n";
+
+    // run this command
+    exec('php -S localhost:'.$argv[1].' -t ./');
+
+    // end this code
+    exit() ;
