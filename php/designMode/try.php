@@ -41,6 +41,9 @@ if(isset($_POST['mode']) && !empty($_POST['mode'])) {
     /* function __autoload($class_name) {
          require_once $class_name . '.php';
      }*/
+    /*spl_autoload_register(function ($class_name) {
+       require_once './'.$class_name . '.php';
+    });*/
 
 }
 
