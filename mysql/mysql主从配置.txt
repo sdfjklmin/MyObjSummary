@@ -159,7 +159,7 @@ Tip:
 Other:
    show variables ; #查看所有状态  ->  show variables like '%t%' ;
    show grants ; #查看所有权限
-   show grants for root@loaclhost ; #查看root的权限      
+   show grants for root@localhost ; #查看root的权限
    insert into mysql.user(Host,User,Password) values("localhost","test",password("1234")); #新增用户
    flush privileges ; #刷新权限
    grant select on passport.*  to 'test'@'localhost' ; # 赋予select权限在passport数据库的所有表给 test 用户
