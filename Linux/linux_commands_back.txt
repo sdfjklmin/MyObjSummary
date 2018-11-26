@@ -9,10 +9,6 @@ CentOS7 :
             touch /.autorelabel
         重启系统
 			exec /sbin/init
-Tip: 
-	min	:min
-	test:123456
-	root:123456ss
 Folder:
 	/bin 二进制可执行命令
 	/dev 设备特殊文件

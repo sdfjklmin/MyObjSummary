@@ -46,11 +46,7 @@ CentOS7 :
 					IPADDR="192.168.1.108"
 					GATEWAY="192.168.1.1"
 					DNS1=192.168.1.1
-			servic network restart (重启网卡)	
-Tip: 
-	min	:min
-	test:123456
-	root:123456ss
+			servic network restart (重启网卡)
 Folder:
 	/bin 二进制可执行命令
 	/dev 设备特殊文件
