@@ -10,7 +10,7 @@ class ZendFileInterpreter
 {
     public function file($name='')
     {
-        $mode = require './config.php';
+        $mode = require './config/config.php';
         if(!isset($mode[$name])) return $mode ;
         return $mode[$name] ;
     }
@@ -61,12 +61,12 @@ class Zend
         if(!$achieve) {
             $this->exitMsg('该模式正在验证中 。。。');
         }
-        if (!file_exists($name.'.php')) {
+        if (!file_exists('./mode/'.$name.'.php')) {
             exit('no file match');
         }
 
         # 引入文件
-        require './'.$name .'.php';
+        require './mode/'.$name .'.php';
         $this->exitMsg();
     }
 

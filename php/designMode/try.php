@@ -7,7 +7,7 @@ header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set('Asia/Shanghai');
 echo "<pre />";
 
-$mode = require './config.php';
+$mode = require './config/config.php';
 
 //参数处理
 if(isset($_POST['mode']) && !empty($_POST['mode'])) {
@@ -24,12 +24,12 @@ if(isset($_POST['mode']) && !empty($_POST['mode'])) {
     if(!$achieve) {
         exitMsg('该模式正在验证中 。。。');
     }
-    if (!file_exists($name.'.php')) {
+    if (!file_exists('./mode/'.$name.'.php')) {
         exit('no file match');
     }
 
     # 引入文件
-    require_once './'.$name .'.php';
+    require_once './mode/'.$name .'.php';
     exitMsg();
     # 自动加载 php 自带加载类(设计模式中有些是接口实现)
     /* function __autoload($class_name) {
