@@ -6,13 +6,16 @@
 header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set('Asia/Shanghai');
 echo "<pre />";
+
 # 模式简码对应的文件和名称
 $mode = [
-	'sin'=>['Singleton','单例模式',true],
-	'fac'=>['Factory','工厂模式',true],
-	'obs'=>['Observerable','观察者模式',true],
-	'pro'=>['Proxy','代理模式',false],
-	'dec'=>['Decorator','装饰模式',true],
+    'ada'=>['Adapter','适配器模式',true],
+    'dec'=>['Decorator','装饰模式',true],
+    'fac'=>['Factory','工厂模式',true],
+    'int'=>['Interpreter','解释器模式',true],
+    'obs'=>['Observerable','观察者模式',true],
+    'pro'=>['Proxy','代理模式',false],
+    'sin'=>['Singleton','单例模式',true],
 	'str'=>['Strategy','策略模式',true],
 ] ;
 
@@ -47,12 +50,16 @@ if(isset($_POST['mode']) && !empty($_POST['mode'])) {
     });*/
 
 }
-
+$sin = $_GET['sin'] ?? '' ;
 //预定义页面输出
 $options = '' ;
 foreach ($mode as $m => $v) {
     list($enName,$zhName) = $v ;
-    $options .= " <option value='".$m."'>".$enName.' | '.$zhName."</option>" ;
+    if($m == $sin) {
+        $options .= " <option selected='selected' value='".$m."'>".$enName.' | '.$zhName." </option> " ;
+    }else{
+        $options .= " <option  value='".$m."'>".$enName.' | '.$zhName." </option> " ;
+    }
 }
 $predefined =<<<PRE
 <form method="post">
@@ -68,5 +75,6 @@ echo $predefined ;
 function exitMsg($msg = '')
 {
     if($msg) echo $msg ;
-    exit("<div><a href='try.php' style='color: red;font-size: 18px'>Backspace</a></div>");
+    $mode = $_POST['mode'] ?? '' ;
+    exit("<div><a href='try.php?sin=".$mode."' style='color: red;font-size: 18px'>Backspace</a></div>");
 }
