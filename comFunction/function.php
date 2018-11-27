@@ -1,5 +1,5 @@
 <?php
-namespace MyObjSummary;
+namespace MyObjSummary\comFunction ;
 /** 方法说明
  * @function dd()           打印
  * @function gerRand()      抽奖
