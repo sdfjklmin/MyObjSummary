@@ -19,6 +19,7 @@ defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html']) ;
 defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 
 //简单的路由配置
+//统一以 t-xx 为准
 require APP_ROOT.'CorePart.php';
 
 $label = getLink();
@@ -42,7 +43,7 @@ function getLink( $label = '',$directory = APP_ROOT ,$link = '')
         }else{
             $dirArr = explode('.',$dir) ;
             if( count($dirArr) == 2 && !in_array($dirArr[1],NOT_SUFFIX) ) {
-                $label .= "<li><a href='".$directory.$dir."'> $link  $dir </a></li>";
+                $label .= "<li><a target='_blank' href='".$directory.$dir."'> $link  $dir </a></li>";
             }else{
                 $label .= "<li><a> $link  $dir </a></li>";
             }

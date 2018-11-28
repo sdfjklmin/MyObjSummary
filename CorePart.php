@@ -12,7 +12,7 @@ namespace MyObjSummary;
  * Class CoreInterpreter
  * @package MyObjSummary
  */
-class CoreInterpreter
+abstract class CoreInterpreter
 {
     //这里没有明确的路由规则
     //只是简单的配置了解释器
@@ -20,7 +20,9 @@ class CoreInterpreter
     {
         switch ($path)
         {
-            case 'mode/index' : $link = 'php/designMode/Zend.php' ; break ;
+            case 't-mode' : $link = 'php/designMode/Zend.php';break ;
+            case 't-php'  : $link = 'test/index.php';break ;
+            case 't-html' : $link = 'test/index.html';break ;
             default : exit('no match this rule');break ;
         }
         defined('RULE_MATCH') or define('RULE_MATCH',$path) ;
@@ -32,9 +34,9 @@ class CoreInterpreter
  * Class CorePart
  * @package MyObjSummary
  */
-class CorePart
+class CorePart extends CoreInterpreter
 {
-    const PATH_NUM = 2 ;
+    const PATH_NUM = 1 ;
     public function run()
     {
         $path = trim($_SERVER['REQUEST_URI'],'/') ;
@@ -45,7 +47,7 @@ class CorePart
         if( count($pathArr) != self::PATH_NUM ) {
             exit(' this rule is forbid ');
         }
-        (new CoreInterpreter())->interpreter($path);
+        $this->interpreter($path);
         exit() ;
     }
 }
