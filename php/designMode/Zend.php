@@ -10,7 +10,7 @@ class ZendFileInterpreter
 {
     public function file($name='')
     {
-        $mode = require './config/config.php';
+        $mode = require __DIR__.'/config/config.php';
         if(!isset($mode[$name])) return $mode ;
         return $mode[$name] ;
     }
@@ -61,12 +61,12 @@ class Zend
         if(!$achieve) {
             $this->exitMsg('该模式正在验证中 。。。');
         }
-        if (!file_exists('./mode/'.$name.'.php')) {
+        if (!file_exists(__DIR__.'/mode/'.$name.'.php')) {
             exit('no file match');
         }
 
         # 引入文件
-        require './mode/'.$name .'.php';
+        require __DIR__.'/mode/'.$name .'.php';
         $this->exitMsg();
     }
 
@@ -74,7 +74,11 @@ class Zend
     public function exitMsg($msg = '')
     {
         if($msg) echo $msg ;
-        exit("<div><a href='Zend.php' style='color: red;font-size: 18px'>Backspace</a></div>");
+        $backFile = 'Zend.php';
+        if(defined('RULE_MATCH')) {
+           $backFile = '/'.RULE_MATCH ;
+        }
+        exit("<div><a href='".$backFile."' style='color: red;font-size: 18px'>Backspace</a></div>");
     }
 
 }
