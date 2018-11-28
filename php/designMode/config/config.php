@@ -8,6 +8,7 @@ return
         'int'=>['Interpreter','解释器模式',true],
         'obs'=>['Observerable','观察者模式',true],
         'pro'=>['Proxy','代理模式',false],
+        'res'=>['ResponseLink','职责链模式',true],
         'sin'=>['Singleton','单例模式',true],
         'str'=>['Strategy','策略模式',true],
         'vis'=>['Visitor','访问者模式',false],
