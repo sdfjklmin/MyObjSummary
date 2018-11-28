@@ -11,10 +11,15 @@
 //echo phpinfo();
 
 //目录入口
+defined('APP_DIR') or define('APP_DIR',__DIR__.'/');
 defined('APP_ROOT') or define('APP_ROOT','./');
+
 //不需要生成的 后缀
 defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html']) ;
 defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
+
+//简单的路由配置
+require APP_ROOT.'CorePart.php';
 
 $label = getLink();
 function getLink( $label = '',$directory = APP_ROOT ,$link = '')
