@@ -212,6 +212,8 @@ if(!function_exists('getDirTree')) {
                     'child' => getDirTree($directory.$dir.'/',[],$dir)  ,
                 ] ;
             }else{
+                // $parentDir ? 'icon-minus-sign' : 'icon-th' ,
+                // 目前不开放根目录文件 可通过icon样式显示
                 $label[] = [
                     'name'=>$dir ,
                     'icon'=>'icon-minus-sign' ,
