@@ -9,6 +9,7 @@ namespace MyObjSummary\comFunction ;
  * @function arrFirst()     获取数组第一个元素
  * @function pwdHash()      获取数据hash
  * @function ckPwd()        验证数据hash
+ * @function getDirTree()   获取目录树结构 配合static的样式
  */
 
 if(!function_exists('dd')) {
@@ -190,5 +191,38 @@ if(!function_exists('ckPwd')) {
         //crypt为单向算法 不可逆
         $hash = crypt($password, $salt);
         return $hash === $pwdHash ;
+    }
+}
+
+if(!function_exists('getDirTree')) {
+    function getDirTree( $directory ,$label = [] ,$parentDir ='')
+    {
+        $dirs  = scandir($directory) ;
+        foreach ($dirs as $dir) {
+            if( $dir[0] === '.' ||  in_array($dir,NOT_LINK) ) {
+                continue ;
+            }
+            if(is_dir($directory.$dir)) {
+                //$label[$dir]
+                $label[] = [
+                    'name' => $dir ,
+                    'code' => $dir ,
+                    'icon' => 'icon-th' ,
+                    'parentCode' => $parentDir ,
+                    'href' =>'',
+                    'child' => getDirTree($directory.$dir.'/',[],$dir)  ,
+                ] ;
+            }else{
+                $label[] = [
+                    'name'=>$dir ,
+                    'icon'=>'icon-minus-sign' ,
+                    'code'=>$dir ,
+                    'parentCode'=>$parentDir ,
+                    'href' => $directory.$dir ,
+                    'child'=>[] ,
+                ]  ;
+            }
+        }
+        return $label ;
     }
 }

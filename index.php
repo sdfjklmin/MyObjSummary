@@ -13,59 +13,165 @@
 //目录入口
 defined('APP_DIR') or define('APP_DIR',__DIR__.'/');
 defined('APP_ROOT') or define('APP_ROOT','./');
+defined('APP_STATIC') or define('APP_STATIC',APP_ROOT.'static/');
 
-//不需要生成的 后缀
-defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html']) ;
+//不需要生成的 后缀 可提成配置文件
+//文件夹
+defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html','composer','object','static','tool']) ;
+//文件后缀(避免无法解析时下载)
 defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 
 //简单的路由配置
 //统一以 t-xx 为准
 require APP_ROOT.'CorePart.php';
+require APP_ROOT.'comFunction/function.php';
 
-$label = getLink();
-function getLink( $label = '',$directory = APP_ROOT ,$link = '')
-{
-    $dirs  = scandir($directory) ;
-    if(!empty($link)) {
-        $link .= ' - ' ;
-    }
-    foreach ($dirs as $dir) {
-        if( $dir[0] === '.' ||  in_array($dir,NOT_LINK) ) {
-            continue ;
-        }
-        if(is_dir($directory.$dir)) {
-            if($link) {
-                $label .= '<h2>'.$link .' - '.$dir.'</h2>';
-            }else{
-                $label .= '<h2>'.' - '.$dir.'</h2>';
-            }
-            $label  = getLink($label,$directory.$dir.'/',' - ') ;
-        }else{
-            $dirArr = explode('.',$dir) ;
-            if( count($dirArr) == 2 && !in_array($dirArr[1],NOT_SUFFIX) ) {
-                $label .= "<li><a target='_blank' href='".$directory.$dir."'> $link  $dir </a></li>";
-            }else{
-                $label .= "<li><a> $link  $dir </a></li>";
-            }
-        }
-    }
-    return $label ;
-}
+//获取目录结构
+$link = \MyObjSummary\comFunction\getDirTree(APP_ROOT);
+$title = '目录浏览' ;
 ?>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <link rel="icon" href="/favicon.png" type="image/png">
-        <title>PHP</title>
-    </head>
-    <style>
-        /*去横线,去点*/
-        li,a{
-            text-decoration:none;
-            list-style-type:none;
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <title>PHP</title>
+    <!--图标样式-->
+    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>css/bootstrap.min.css"/>
+    <!--主要样式-->
+    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>css/style.css"/>
+    <script type="text/javascript" src="<?php echo APP_STATIC ;?>js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="tree well">
+        <ul id="rootUL">
+            <li style="font-size: 21px;color: black;font-weight: bold"><?php echo $title;?></li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        //数据
+        var list = eval('<?php echo json_encode($link);?>');
+        console.log(list);
+        /*var list =
+            [{
+                "name": "Index",
+                "code":"INDEX",
+                "icon": "icon-th",
+                "child": [
+                    {
+                        "name": "php",
+                        "icon": "icon-minus-sign",
+                        "code":"INDEX-PHP",
+                        "parentCode": "INDEX",
+                        "child": [
+                            {
+                                "name": "designMode",
+                                "code":"designMode",
+                                "icon": "icon-minus-sign",
+                                "parentCode": "INDEX-PHP",
+                                "child": [
+                                    {
+                                        "name": "element",
+                                        "code":"element",
+                                        "icon": "",
+                                        "parentCode": "designMode",
+                                        "child": [
+
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "designMode2",
+                        "code":"designMode2",
+                        "icon": "icon-minus-sign",
+                        "parentCode": "INDEX",
+                        "child": [
+                            {
+                                "name": "element2",
+                                "code":"element2",
+                                "icon": "",
+                                "parentCode": "designMode2",
+                                "child": [
+
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }];*/
+
+        function tree(data) {
+            for (var i = 0; i < data.length; i++) {
+                var data2 = data[i];
+                if (data[i].icon == "icon-th") {
+                    $("#rootUL").append("<li data-name='" + data[i].code + "'><span><i class='" + data[i].icon + "'></i> " + data[i].name + "</span></li>");
+                } else {
+                    var children = $("li[data-name='" + data[i].parentCode + "']").children("ul");
+                    if (children.length == 0) {
+                        $("li[data-name='" + data[i].parentCode + "']").append("<ul></ul>")
+                    }
+                    //父类末端跳转标签
+                    var hrefUrl = '' ;
+                    if(data[i].href) {
+                        hrefUrl = '<a target="_blank" href="'+data[i].href+'">'+data[i].name +'</a>' ;
+                    }else {
+                        hrefUrl = data[i].name ;
+                    }
+                    $("li[data-name='" + data[i].parentCode + "'] > ul").append(
+                        "<li data-name='" + data[i].code + "'>" +
+                        "<span>" +
+                        "<i class='" + data[i].icon + "'></i> " +
+                        hrefUrl +
+                        "</span>" +
+                        "</li>")
+                }
+                for (var j = 0; j < data[i].child.length; j++) {
+                    var child = data[i].child[j];
+                    var children = $("li[data-name='" + child.parentCode + "']").children("ul");
+                    if (children.length == 0) {
+                        $("li[data-name='" + child.parentCode + "']").append("<ul></ul>")
+                    }
+                    //子类末端跳转标签
+                    var childUrl = '' ;
+                    if(child.href) {
+                        childUrl = '<a target="_blank" href="'+child.href+'">'+child.name +'</a>' ;
+                    }else {
+                        childUrl = child.name ;
+                    }
+                    $("li[data-name='" + child.parentCode + "'] > ul").append(
+                        "<li data-name='" + child.code + "'>" +
+                        "<span>" +
+                        "<i class='" + child.icon + "'></i> " +
+                        childUrl +
+                        "</span>" +
+                        "</li>");
+                    var child2 = data[i].child[j].child;
+                    tree(child2)
+                }
+                tree(data[i]);
+            }
+
         }
-    </style>
-    <ul>
-        <?php echo $label ; ?>
-    </ul>
+        //渲染
+        tree(list) ;
+
+        //样式
+        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', '关闭');
+        $('.tree li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                $(this).attr('title', '展开').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+            } else {
+                children.show('fast');
+                $(this).attr('title', '关闭').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+            }
+            e.stopPropagation();
+        });
+    });
+</script>
 </html>
