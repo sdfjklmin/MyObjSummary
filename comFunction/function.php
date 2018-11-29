@@ -18,6 +18,7 @@ if(!function_exists('dd')) {
      */
 	function dd()
 	{
+	    echo "<pre />";
 		if(func_get_args()) {
 			foreach (func_get_args() as $key => $value) {
 				# code...
@@ -199,15 +200,13 @@ if(!function_exists('getDirTree')) {
     {
         $dirs  = scandir($directory) ;
         foreach ($dirs as $dir) {
-            if( $dir[0] === '.' ||  in_array($dir,NOT_LINK) ) {
-                continue ;
-            }
+            if( $dir[0] === '.' ||  in_array($dir,NOT_LINK) )  continue ;
             if(is_dir($directory.$dir)) {
                 //$label[$dir]
                 $label[] = [
                     'name' => $dir ,
                     'code' => $dir ,
-                    'icon' => 'icon-th' ,
+                    'icon' => $parentDir ? 'icon-minus-sign' : 'icon-th' ,
                     'parentCode' => $parentDir ,
                     'href' =>'',
                     'child' => getDirTree($directory.$dir.'/',[],$dir)  ,
