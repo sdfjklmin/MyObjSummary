@@ -31,6 +31,7 @@ $link = \MyObjSummary\comFunction\getDirTree(APP_ROOT);
 $title = '目录浏览' ;
 
 ?>
+
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -41,19 +42,33 @@ $title = '目录浏览' ;
     <!--主要样式-->
     <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>/tree/css/style.css"/>
     <script type="text/javascript" src="<?php echo APP_STATIC ;?>/common/js/jquery-1.7.2.min.js"></script>
+    <style>
+        .back-top {
+            position: fixed;
+            right: 8px;
+            bottom: 51px;
+            z-index: 999;
+            width: 35px;
+            font-size: 21px;
+        }
+    </style>
 </head>
 <body>
+    <!--目录-->
     <div class="tree well">
         <ul id="rootUL">
-            <li style="font-size: 21px;color: black;font-weight: bold"><?php echo $title;?></li>
+            <li style="font-size: 21px;color: black;font-weight: bold"> <?php echo $title;?> </li>
+            <li> <input type="button" class="btn btn-default" value="Collapse"> </li>
         </ul>
     </div>
+    <!--返回top-->
+    <div class="back-top"><a href="#" style="text-decoration:none" title="Top">Top</a></div>
 </body>
 <script type="text/javascript">
+    var changeButton = false ;
     $(function () {
         //数据
         var list = eval('<?php echo json_encode($link);?>');
-        console.log(list);
         /*var list =
             [{
                 "name": "Index",
@@ -104,7 +119,6 @@ $title = '目录浏览' ;
                     }
                 ]
             }];*/
-
         function tree(data) {
             for (var i = 0; i < data.length; i++) {
                 var data2 = data[i];
@@ -172,6 +186,19 @@ $title = '目录浏览' ;
                 $(this).attr('title', '关闭').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
             }
             e.stopPropagation();
+        });
+
+        //折叠样式
+        $('#rootUL li > input').on('click',function (e) {
+            if(changeButton) {
+                $('.tree li.parent_li > span > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+                $('.tree li.parent_li > ul > li').show();
+                changeButton = false ;
+            }else {
+                $('.tree li.parent_li > span > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+                $('.tree li.parent_li > ul > li').hide();
+                changeButton = true ;
+            }
         });
     });
 </script>
