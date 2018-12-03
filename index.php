@@ -9,7 +9,9 @@
 //header('location:/index.php');
 //以index为入口,根据入口访问路由做路由分配
 //echo phpinfo();
-
+//设置跨域
+//header('Access-Control-Allow-Origin','*') ;
+//file_put_contents('t.txt',json_encode($_REQUEST,true).PHP_EOL, FILE_APPEND) ;
 //目录入口
 defined('APP_DIR') or define('APP_DIR',__DIR__.'/');
 defined('APP_ROOT') or define('APP_ROOT','./');

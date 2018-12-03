@@ -1,4 +1,5 @@
 <?php
+    if(!isset($argv[1])) exit('please into port');
     // cli message
     echo 'Listening on http://localhost:'.$argv[1]."\n";
     echo 'Document root is '.__DIR__."\n";
