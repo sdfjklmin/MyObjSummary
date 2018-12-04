@@ -1,15 +1,16 @@
-{ 
+{
   "name": "build from",
   "version": "1.0",
   "manifest_version":2,
   "description": "This is a auto build from",
   "icons":{
-      "16":"16.png","48":"48.png","128":"128.png"
+    "16":"16.png","48":"48.png","128":"128.png"
   },
   "permissions": ["storage"],
   "browser_action": {
     "default_icon": "16.png"
   },
+  "homepage_url": "https://github.com/sdfjklmin/MyObjSummary/tree/master/chromeExe/mFrom",
   "web_accessible_resources" : ["one.js"] ,
   "content_scripts":[
     {

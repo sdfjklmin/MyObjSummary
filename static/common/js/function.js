@@ -350,6 +350,7 @@ var buildForm = function () {
         if(!method) method = 'POST';
         //xml对象
         var xmlhttp = new XMLHttpRequest();
+        //xhmhttp.getAllResponseHeaders(); 获取所有header
         //目标地址
         xmlhttp.open(method, url,true);
         //设置header

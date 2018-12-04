@@ -69,6 +69,7 @@
     "https://*/*" // 可以通过executeScript或者insertCSS访问的网站
   ],
   // 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的
+  // inject.js的变量可以全局访问 浏览器console可以打印
   "web_accessible_resources": ["js/inject.js"],
   // 插件主页，这个很重要，不要浪费了这个免费广告位
   "homepage_url": "https://www.baidu.com",
