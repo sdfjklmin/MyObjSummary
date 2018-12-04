@@ -1,6 +1,8 @@
 ## 目录
 - [MyObjSummary]
   - [bookmarks](#bookmarks) 浏览器标签
+  - [chromeExe](#chromeExe) chrome插件
+  - [comFunction](#comFunction) 公共方法
   - [docker](#docker)       Docker
   - [frame](#frame) 		 框架
   - [ftp](#ftp) 		     FTP服务
@@ -40,6 +42,10 @@
 
    ### bookmarks
         常用的浏览器标签
+   ### chromeExe
+        浏览器插件     
+   ### comFunction
+        公共方法     
    ### docker
         docker相关
    ### frame

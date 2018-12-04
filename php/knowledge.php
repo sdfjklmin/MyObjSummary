@@ -103,4 +103,6 @@
     $initArr = ['this is name','this is other'] ;
     list($name,$other) = $initArr ;
 #14:后台运行脚本程序 加 &
-#eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
+    #eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
+
+#15:去掉小数点后的00 : floatval(1.00) 1
