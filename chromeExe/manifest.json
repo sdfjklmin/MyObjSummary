@@ -27,6 +27,7 @@
     "default_icon": "img/icon.png",
     // 图标悬停时的标题，可选
     "default_title": "这是一个示例Chrome插件",
+    //点击插件时的页面,页面中不能有js代码如果要用js必须引入到popup.html中,引入的js不必入json配置
     "default_popup": "popup.html"
   },
   // 当某些特定页面打开才显示的图标
