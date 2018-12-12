@@ -37,13 +37,13 @@ $title = '目录浏览' ;
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="icon" href="<?php echo APP_STATIC ;?>/common/img/favicon.png" type="image/png">
+    <link rel="icon" href="<?php echo APP_STATIC ;?>common/img/favicon.png" type="image/png">
     <title>PHP</title>
     <!--图标样式-->
-    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>/common/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>common/css/bootstrap.min.css"/>
     <!--主要样式-->
-    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>/tree/css/style.css"/>
-    <script type="text/javascript" src="<?php echo APP_STATIC ;?>/common/js/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo APP_STATIC ;?>tree/css/style.css"/>
+    <script type="text/javascript" src="<?php echo APP_STATIC ;?>common/js/jquery-1.7.2.min.js"></script>
     <style>
         .back-top {
             position: fixed;

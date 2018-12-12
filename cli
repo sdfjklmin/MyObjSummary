@@ -1,12 +1,12 @@
 <?php
-    if(!isset($argv[1])) exit('please into port');
+    $version = current(explode('.',phpversion())) ;
+    if($version < 7) exit('php web server version must more than 7');
+    $port = $argv[1] ?? 20002 ;
     // cli message
-    echo 'Listening on http://localhost:'.$argv[1]."\n";
+    echo 'Listening on http://localhost:'.$port."\n";
     echo 'Document root is '.__DIR__."\n";
     echo 'Press Ctrl-C to quit.'."\n";
-
     // run this command
-    exec('php -S localhost:'.$argv[1].' -t ./');
-
+    exec('php -S localhost:'.$port.' -t ./');
     // end this code
     exit() ;
