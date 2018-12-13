@@ -36,7 +36,6 @@
   - [ssl-key](#ssl-key)   ssl-key
   - [swoole](#swool)   swoole
   - [test](#test)   测试
-  - [tool](#tool)   常用工具
   - [webSocket](#webSocket)   webSocket
   - [分布式](#分布式)   分布式 
 
@@ -103,8 +102,6 @@
         swoole      
    ### test
         测试入口      
-   ### tool
-        常用工具      
    ### webSocket
         webSocket 
    ### 分布式
