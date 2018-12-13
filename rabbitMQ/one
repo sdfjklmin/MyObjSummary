@@ -1,1 +1,36 @@
-http://www.rabbitmq.com/getstarted.html
+Tip:
+    rabbitmq官网:
+        http://www.rabbitmq.com/getstarted.html
+Step:
+    One:安装RabbitMQ
+        A:安装RabbitMQ之前首先要 安装Erlang语言开发包:
+            下载地址：http://www.erlang.org/download/otp_win32_R15B.exe
+     　     配置环境变量 ERLANG_HOME C:\Program Files (x86)\erl5.9
+            添加到PATH  %ERLANG_HOME%\bin;
+
+        B:下载安装RabbitMQ，下载地址：http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.4/rabbitmq-server-3.3.4.exe
+            配置环境变量 C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-2.8.0
+            添加到PATH %RABBITMQ_SERVER%\sbin;
+
+          然后到dos里面切换到RabbitMQ目录下，执行rabbitmq-plugins.bat enable rabbitmq_management， 安装完成之后以管理员身份启动 rabbitmq：输入命令：
+
+　　    C:
+        rabbitmq-service.bat stop
+    　　rabbitmq-service.bat install
+    　　rabbitmq-service.bat start
+        然后，浏览器中输入:127.0.0.1:15672,用户名密码是guest ,如果能登陆就说明安装成功。
+
+    Two:PHP install amqp
+        http://pecl.php.net/package/amqp 下载符合版本的PHP扩展
+    Three: Run you job
+
+RabbitMQ Started:
+    Chapter1:
+        P:
+            发送消息的程序是生产者
+        Queue:
+            队列是RabbitMQ中的邮箱的名称。虽然消息流经RabbitMQ和您的应用程序，但它们只能存储在队列中。
+            甲队列仅由主机的存储器＆磁盘限制约束，它本质上是一个大的消息缓冲器。
+            许多生产者可以发送到一个队列的消息，并且许多消费者可以尝试从一个队列接收数据
+        C:
+            一个消费者是一个程序，主要是等待接收信息

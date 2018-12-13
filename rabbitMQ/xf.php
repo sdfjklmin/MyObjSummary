@@ -23,14 +23,14 @@ $ex = new AMQPExchange($channel);
 $ex->setName($e_name);
 $ex->setType(AMQP_EX_TYPE_DIRECT); //direct类型
 $ex->setFlags(AMQP_DURABLE); //持久化
-echo "Exchange Status:".$ex->declare()."\n";
+//echo "Exchange Status:".$ex->declare()."\n";
 
 //创建队列
 $q = new AMQPQueue($channel);
 //var_dump($q->declare());exit();
 $q->setName($q_name);
 $q->setFlags(AMQP_DURABLE); //持久化
-echo "Message Total:".$q->declareQueue()."\n";
+//echo "Message Total:".$q->declareQueue()."\n";
 
 //绑定交换机与队列，并指定路由键
 echo 'Queue Bind: '.$q->bind($e_name, $k_route)."\n";

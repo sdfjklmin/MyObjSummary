@@ -25,16 +25,17 @@ $ex = new AMQPExchange($channel);
 $ex->setName($e_name);
 date_default_timezone_set("Asia/Shanghai");
 //发送消息
-//$channel->startTransaction(); //开始事务
+$channel->startTransaction(); //开始事务
 //for($i=0; $i<3; ++$i){
     sleep(1);//休眠1秒
     //消息内容
-    $message = "TEST MESSAGE!".date("h:i:sa");
-    echo "Send Message:".$ex->publish($message, $k_route)."\n";
+    $message = "TEST MESSAGE!".date("Y-m-d H:i:s");
+    echo "Send Message:".$ex->publish($message, 'key_1')."\n";
     echo "Send Message:".$ex->publish($message, 'key_2')."\n";
-    echo "Send Message:".$ex->publish($message, 'key_3')."\n";
+    //echo "Send Message:".$ex->publish($message, 'key_3')."\n";
 //}
-//$channel->commitTransaction(); //提交事务
+var_dump($ex);
+$channel->commitTransaction(); //提交事务
 
 $conn->disconnect();
 ?>
