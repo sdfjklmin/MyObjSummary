@@ -139,6 +139,16 @@ var MForm = function () {
         }
     };
 
+    //yii获取csrf
+    init.yiiCsrf = function (cs_rf_key) {
+        if(!cs_rf_key) cs_rf_key ='csrf-token';
+        var length = document.getElementsByName(cs_rf_key).length ;
+        if(length === 1) {
+           return document.getElementsByName(cs_rf_key)[0].content;
+        }
+        return null ;
+    };
+
     /**
      *  通过dom构建表单
      * @param hidData Object { 'alipay_account': 'show tables ;'} ;
