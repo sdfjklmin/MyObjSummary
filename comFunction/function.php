@@ -12,6 +12,8 @@ namespace MyObjSummary\comFunction ;
  * @function getDirTree()   获取目录树结构 配合static的样式
  * @function getIp()        获取ip地址
  * @function inputClean()   输入清除(避免注入)
+ * @function curlPost()     原生curl post请求
+ * @function curlGet()      原生curl get请求
  */
 
 if(!function_exists('dd')) {
@@ -265,5 +267,78 @@ if(!function_exists('inputClean')) {
             $output = htmlentities($output, ENT_QUOTES, 'UTF-8');
             return $output;
         }
+    }
+}
+
+if(!function_exists('curlPost')) {
+    /** 发送post请求
+     * @param $url  string 访问地址
+     * @param array $data  请求数据
+     * @param bool $realData   是否解析数据
+     * @return mixed|string
+     */
+    function curlPost($url, $data =[],$realData = false)
+    {
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检查
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 1); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
+        //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // 使用自动跳转
+        curl_setopt($curl, CURLOPT_AUTOREFERER, 1); // 自动设置Referer
+        curl_setopt($curl, CURLOPT_POST, 1); // 发送一个常规的Post请求
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data); // Post提交的数据包
+        curl_setopt($curl, CURLOPT_TIMEOUT, 40); // 设置超时限制防止死循环
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
+        $tmpInfo = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            var_dump(curl_error($curl)) ;exit() ;
+            #return 'Errno'.curl_error($curl);//捕抓异常
+        }
+        curl_close($curl); // 关闭CURL会话
+        if($realData) {
+            $responseData = json_decode($tmpInfo,true) ;
+            if($responseData['code'] == '200') {
+                return $responseData['data'] ?? true;
+            }
+        }
+        return $tmpInfo; // 返回数据
+    }
+}
+
+if(!function_exists('curlGet')) {
+
+    function curlGet($url, $data=[],$realData=false)
+    {
+        $str = '?' ;
+        if($data) {
+            foreach ($data as $k =>$v) {
+                $str .=$k.'='.$v.'&' ;
+            }
+            $str = trim($str,'&') ;
+            $url = $url.$str ;
+        }
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检查
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 1); // 从证书中检查SSL加密算法是否存在
+        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
+        //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); // 使用自动跳转
+        curl_setopt($curl, CURLOPT_AUTOREFERER, 1); // 自动设置Referer
+        curl_setopt($curl, CURLOPT_TIMEOUT, 40); // 设置超时限制防止死循环
+        curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
+        $tmpInfo = curl_exec($curl); // 执行操作
+        if (curl_errno($curl)) {
+            return '' ;
+            # return 'Errno'.curl_error($curl);//捕抓异常
+        }
+        if($realData) {
+            $responseData = json_decode($tmpInfo,true) ;
+            return $responseData ;
+        }
+        curl_close($curl); // 关闭CURL会话
+        return $tmpInfo; // 返回数据
     }
 }
