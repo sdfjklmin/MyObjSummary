@@ -27,6 +27,7 @@
 	jmeter
 发包工具:
 	jenkins
+	Capistrano(ruby编写) 发包工具
 PHP相关:
 	依赖注入
 	设计模式

@@ -8,8 +8,8 @@
 		6.路由控制
 		7.客户端优先超时的机制
 	分布式(不同业务模块分布到对应的服务器通过API相互访问)[模块]
-	集群(同一个系统分布到不同的服务器中)[系统]	
-	kafka 发布订阅消息系统(MQ)	
+	集群(同一个系统分布到不同的服务器中)[系统]
+	kafka 发布订阅消息系统(MQ)
 	Kerberos 安全网络认证系统
 	Kerberos 是Windows活动目录中使用的客户/服务器认证协议，为通信双方提供双向身份认证。
 	相互认证或请求服务的实体被称为委托人（principal）。参与的中央服务器被称为密钥分发中心（简称KDC）。
@@ -17,13 +17,13 @@
 							用户的登录信息对应KDC中有数据
 		用户登录   -------------------------------------------------->  KDC(kerberos center)  (princiacal{委托人}名称[用户名])
 				  <---------------------------------------------------
-				  	    返回KDC的ticket,用户和KDC都有同一份数据				
+				  	    返回KDC的ticket,用户和KDC都有同一份数据
 	单点登录  针对服务器集群一台服务器登录,其他服务器共享
 	分布式系统  把系统拆分成模块,把模块分布到不同的服务器上,之间用API请求,公共部分用RPC
 	服务中转站  通过统一的服务入口分发到不同服务器
 	密钥服务器(密钥分发中心)  用统一的密钥服务器发送密钥
 	微信活码	微信防封措施,二维码永久生效
-	线路跳转方式(短连接优化) 
+	线路跳转方式(短连接优化)
 	前端h5打包App(HBuilder)
 	二维码(芝麻,草料,新浪)
 	CDN
@@ -44,6 +44,7 @@
 
 	后台API启动 beauty_api  ./start-guz.sh
 	C端前端启动 frontend-customer npm run dev
+
 泰瑞亚:
 	(单点登录)passport.qaq.com : php-cgi -b 127.0.0.1:9001 php.ini  (QQ登录)
 	(前台登录)trade.qaq.com		(QQ登录)
@@ -64,16 +65,17 @@
 	#使用
 	MyCat
 
-	mklink /J D:\Obj\Link\test4 D:\Obj\Link\test5
-	为 D:\Obj\Link\test4 <<===>> D:\Obj\Link\test5 创建的联接
-
-	test4自动创建 指向 test5
-	rmdir D:\Obj\Link\test4 rmdir D:\Obj\Link\test5  #删除
-
-	mklink /J D:\Obj\steam_trade\common\core D:\Obj\core
-
-	mklink /J D:\Obj\passport\common\core D:\Obj\core
+    mklink /J D:\Obj\Link\test4 D:\Obj\Link\test5
+    test4自动创建 指向 test5
+    为 D:\Obj\Link\test4 <<===>> D:\Obj\Link\test5 创建的联接
+    rmdir D:\Obj\Link\test4 rmdir D:\Obj\Link\test5  #删除
 
 	mklink /J D:\Obj\passport\common\core[项目core,common中不用创建core文件夹] D:\Obj\core[真实的core]
 
+    Capistrano(ruby编写) 发包工具
 
+    rabbitMQ(消息系统)
+
+    serviceMesh(阿里中间件)
+
+    passport(单点登录系统)
