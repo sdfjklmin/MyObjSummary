@@ -18,6 +18,21 @@ var MForm = function () {
         console.log("更多插件相关：https://developer.chrome.com/extensions （你将有机会变成插件高手!）");
     } ;
 
+    //月份
+    init.month = function (one) {
+        var month = {
+            "Jan":"一月 Jan January","Feb":"二月 Feb February","Mar":" 三月 Mar March",
+            "Apr ":" 四月 Apr April","May ":" 五月 May  May","Jun":" 六月 Jun June",
+            "Jul":" 七月 Jul July","Aug ":" 八月 Aug August","Sept":" 九月 Sept September",
+            "Oct":"十月 Oct October","Nov":" 十一月 Nov November","Dec " :" 十二月 Dec December"
+        };
+        if(one && month[one]) {
+            init.error(month[one],200);
+        }else {
+            console.log(month);
+        }
+    };
+
     //基础提示
     init.errorCode = function (httpCode) {
         var code = {
