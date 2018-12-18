@@ -1,6 +1,8 @@
 CentOS6之前的版本和CentOS7重置密码不同具体请百度
 CentOS7 :
+
 	修改root密码:
+
 		选择系统,看下面的提示,然后按e,
 		编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
 		按Ctrl+X重启，并修改密码
@@ -9,6 +11,7 @@ CentOS7 :
             touch /.autorelabel
         重启系统
 			exec /sbin/init
+
 	网络连接:
 	
 			进入  /etc/sysconfig/network-scripts 编辑第一个网卡	将 ONBOOT改为yes(激活网卡)
@@ -17,6 +20,11 @@ CentOS7 :
 				  IPADDR=192.168.124.129
 				  NETMASK=255.255.255.0
 
+                  eg:最简单的配置
+                    将网络设置桥接服务物理地址
+                    BOOTPROTO=dhcp
+                    ONBOOT=yes
+
 				  eg:固定ip
 				  DEVICE="eth2"	#网卡名称
 				  NETMASK="255.255.255.0"   #网关
@@ -24,7 +32,6 @@ CentOS7 :
 				  GATEWAY="192.168.1.1"		#默认网关
 				  DNS='192.168.1.1'			#dns地址 ipconfig /all windows上的对应
 				  DNS1=61.139.2.69			#dns地址
-
 
 				  eg:
 					DIVICE=eth7
@@ -46,8 +53,10 @@ CentOS7 :
 					IPADDR="192.168.1.108"
 					GATEWAY="192.168.1.1"
 					DNS1=192.168.1.1
-			servic network restart (重启网卡)
+			service network restart (重启网卡)
+
 Folder:
+
 	/bin 二进制可执行命令
 	/dev 设备特殊文件
 	/etc 系统管理和配置文件
@@ -64,6 +73,7 @@ Folder:
 	/usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
 
 Commands :
+
  基本:
     halt  				//立刻关机 
     poweroff  			//立刻关机 
