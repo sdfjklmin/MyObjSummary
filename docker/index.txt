@@ -10,11 +10,13 @@
 	yum install -y epel-relase //安装依赖
 	yum install docker-io	//安装docker
 	service docker start //启动docker,根据安装方式不同启动命令也有不同
+	systemctl restart docker.service
 	
 	docker version //查看当前版本
 	docker search php-7.0 //搜索包名
 	docker pull php-7.0 //拉取包
-	
+	docker images php-7.0 //查看拉取的安装包
+
 	docekr rmi php-7 //删除包
 	docker ps //查看运行的容器
 	docker ps -a //所有
@@ -26,7 +28,7 @@
 	docker start <容器名orID>
 	docker kill <容器名orID>
 
-    运行容器
+3.运行容器
 	docker run -p 80:80 --name myNg -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
     -p 80:80 把容器80端口映射到服务80 =  -P
     --name 设置名字
@@ -37,4 +39,26 @@
 
 
 	docker run -p 80:80 --name myNg3 -v /docker/nginx/conf.d --privileged=true -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
-	须迹笙伐
+
+    eg:
+        docker run -p 8080:80 -d docker.io/nginx(拉取下来的包)
+
+	issue:
+	    1. could not change group /var/run/docker.sock to docker: group docker not found
+
+	       uname -r 查看内核
+	       Why:SELinux不支持 overlay2 graph driver
+	       Solve: vi /etc/sysconfig/docker
+	       在docker里禁用selinux-enabled=false,
+
+	       eg:
+	       OPTIONS='--selinux-enabled=false --log-driver=journald --signature-verification=false'
+           if [ -z "${DOCKER_CERT_PATH}" ]; then
+               DOCKER_CERT_PATH=/etc/docker
+           fi
+
+        2. /usr/bin/docker-current: Error response from daemon: error creating overlay mount to /var/lib/docker/overlay2/b35b5d54a4bb354ff5bbf4b8906db3acce819339c8c9bf378d9e388d9dedbed7-init/merged: invalid argument.
+           Solve:
+                rm -rf /var/lib/docker  #会删除docker images
+                vi /etc/sysconfig/docker-storage   指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
+                vi  /etc/sysconfig/docker 删除 --selinux-enabled
