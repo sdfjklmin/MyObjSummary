@@ -28,6 +28,7 @@
 	docker stop <容器名orID>
 	docker start <容器名orID>
 	docker kill <容器名orID>
+	docker restart <容器名orID>
 
     容器IP的查方法
 	docker inspect 容器ID或容器名 |grep '"IPAddress"'
@@ -45,7 +46,10 @@
 
 3.运行容器
 
-	#运行docker把服务器8080端口映射到容器的80 名字为 test_nginx 本地html映射容器html地址(容器html地址可以进入容器查看) 运行镜像
+	#运行docker
+	#把服务器8080端口映射到容器的80 名字为 test_nginx
+	#本地html映射容器html地址(容器html地址可以进入容器查看)(文件是同步的:在本机操作后docker中的文件会同步操作)
+	#运行镜像 可以通过 docker images查看默认为latest 手动指定 -d docker.io/php:7.1-fpm (REPOSITORY:TAG)
     docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
         -p      8000:80 把容器80端口映射到服务8000
         --name  设置名字
@@ -60,8 +64,26 @@
 	[
 	    docker run -p 8080:80 --name nginxweb -v /root/nginx/nginx.conf:/etc/nginx/nginx.conf -v /root/nginx/conf.d/:/etc/nginx/conf.d/ -v /www:/www -v /root/nginx/logs/:/home/nginx/logs/ nginx
 	]
+    [
+        docker run -p 9000:9000 --name  php-fpm -v /data/nginx/html:/usr/share/nginx/html -d docker.io/php:7.1-fpm
+    ]
 
+    eg: nginx+php(对应指向本机的html地址要相同)
 
+        docker search php:7.1-fpm
+        docker search nginx
+
+        docker pull nginx
+        docker pull php:7.1-fpm
+
+        nginx : docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
+        php:    docker run -p 9000:9000 --name  php-fpm -v /data/nginx/html:/usr/share/nginx/html -d docker.io/php:7.1-fpm
+
+        nginx配置：
+              	fastcgi_pass  172.17.0.3:9000;(对应容器中php的ip地址)
+              	//对应指向的nginx目录地址
+          		fastcgi_param  SCRIPT_FILENAME  /usr/share/nginx/html$fastcgi_script_name;
+        启动
 
     eg:
         常规:

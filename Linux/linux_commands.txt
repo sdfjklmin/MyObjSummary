@@ -98,6 +98,7 @@ Commands :
 	cat abc.php文件 查看abc.php文件
 	more +100 abc.php 从100行开始显示  逐行显示
 	less +100 abc.php 从100行开始显示  支持上下滚动查看
+    mkdir -p ~/nginx/www ~/nginx/logs ~/nginx/conf 批量创建目录
 
   挂载:
 	mount                       ### 输出系统目前的挂载信息
