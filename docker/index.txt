@@ -113,3 +113,13 @@
                 rm -rf /var/lib/docker  #会删除docker images
                 vi /etc/sysconfig/docker-storage   指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
                 vi  /etc/sysconfig/docker 删除 --selinux-enabled
+
+
+
+5.安装PHP扩展
+    进入容器 docker exec -it php-fpm /bin/bash
+    有安装源的:docker-php-ext + tab (docker自带的PHP安装扩展命令)
+    无: pecl install swoole
+        echo extension=swoole.so > php.ini
+
+    docker-php-source delete (删除安装包,避免docker过大)
