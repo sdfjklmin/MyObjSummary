@@ -16,6 +16,7 @@
 	docker search php-7.0 //搜索包名
 	docker pull php-7.0 //拉取包
 	docker images php-7.0 //查看拉取的安装包
+    docker images //查看安装包
 
 	docekr rmi php-7 //删除包
 	docker ps //查看运行的容器
@@ -28,22 +29,50 @@
 	docker start <容器名orID>
 	docker kill <容器名orID>
 
-3.运行容器
-	docker run -p 80:80 --name myNg -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
-    -p 80:80 把容器80端口映射到服务80 =  -P
-    --name 设置名字
-    -d 运行镜像
-
-	容器IP的查方法
+    容器IP的查方法
 	docker inspect 容器ID或容器名 |grep '"IPAddress"'
+    docker ps -aqf 'name=运行容器设置的名字' (查找对应名称的容器ID)
+
+    进入容器
+    docker exec -it 容器ID /bin/sh
+    sudo docker exec -it 容器ID /bin/bash
+
+    docker中没有 vi|vim
+    apt-get install vi (安装)
+    apt-get update (更新)
+    apt-get install -y vim
+    apt-get install vi (安装)
+
+3.运行容器
+
+	#运行docker把服务器8080端口映射到容器的80 名字为 test_nginx 本地html映射容器html地址(容器html地址可以进入容器查看) 运行镜像
+    docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
+        -p      8000:80 把容器80端口映射到服务8000
+        --name  设置名字
+        -d      运行镜像
+        -v /data/nginx/html:/usr/share/nginx/html (将本机的文件映射到容器中的文件)
+
+    docker nginx 默认地址:  /usr/share/nginx/html /etc/nginx/nginx.conf /var/log/nginx /etc/nginx/conf.d
+
+    [
+        docker run --name testName -d -p 8080:80 -v /data/nginx/html:/usr/share/nginx/html -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf  -v /data/nginx/logs:/var/log/nginx -v /data/nginx/conf.d:/etc/nginx/conf.d -d docker.io/nginx
+	]
+	[
+	    docker run -p 8080:80 --name nginxweb -v /root/nginx/nginx.conf:/etc/nginx/nginx.conf -v /root/nginx/conf.d/:/etc/nginx/conf.d/ -v /www:/www -v /root/nginx/logs/:/home/nginx/logs/ nginx
+	]
 
 
-	docker run -p 80:80 --name myNg3 -v /docker/nginx/conf.d --privileged=true -d registry.cn-beijing.aliyuncs.com/opendcp/nginx
 
     eg:
-        docker run -p 8080:80 -d docker.io/nginx(拉取下来的包)
-
-	issue:
+        常规:
+            docker run -p 8080:80 --name ng80 -d docker.io/nginx(拉取下来的包)
+            echo `docker ps -aqf 'name=ng80'`>docker80.log  #记录对应的容器ID
+            docker stop `cat docker80.log`
+            nginx默认挂载: /etc/nginx/conf.d/ 容器里面
+        自定义:
+            alias ng80-s="docker run -p 8080:80 --name ng80 -d docker.io/nginx &&  echo `docker ps -aqf 'name=ng80'`>/min/docker/d80.log"
+            alias ng80-t="docker stop `cat d80.log` && docker rm `cat /min/docker/d80.log` && echo ''>/min/docker/d80.log"
+4.issue:
 	    1. could not change group /var/run/docker.sock to docker: group docker not found
 
 	       uname -r 查看内核
