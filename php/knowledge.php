@@ -106,3 +106,10 @@
     #eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
 
 #15:去掉小数点后的00 : floatval(1.00) 1
+
+#16: compact 组建一个数组
+   $a = 'A' ;
+   $b = 'B' ;
+   $c = 'C' ;
+   compact('a','b','c') ;
+   // ['a'=>'A','b'=>'B','c'=>'C']

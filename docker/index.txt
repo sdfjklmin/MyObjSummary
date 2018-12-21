@@ -21,7 +21,7 @@
 	docekr rmi php-7 //删除包
 	docker ps //查看运行的容器
 	docker ps -a //所有
-	docker logs abcdkjlksd(容器ID)
+	docker logs (容器ID)
 	
 	docker rm myPHP //删除myPHP容器
 	
@@ -44,16 +44,20 @@
     apt-get install -y vim
     apt-get install vi (安装)
 
-3.运行容器
+3.运行容器(具体命令还需查看docker -h)
+
+    docker run -p 80:80  swoft/swoft(如果本地没有swoft,那么docker会自动去拉取并且启动)
+    docker run -p 80:80 --name swoft -d swoft/swoft(如果本地没有swoft,那么docker会自动去拉取并且启动)
+    docker run -p 80:80 --name swoft -v /data/nginx/html/swoft/swoft:/var/www/swoft swoft/swoft
 
 	#运行docker
 	#把服务器8080端口映射到容器的80 名字为 test_nginx
 	#本地html映射容器html地址(容器html地址可以进入容器查看)(文件是同步的:在本机操作后docker中的文件会同步操作)
-	#运行镜像 可以通过 docker images查看默认为latest 手动指定 -d docker.io/php:7.1-fpm (REPOSITORY:TAG)
+	#运行镜像 可以通过 docker images查看默认为latest 手动指定 -d docker.io/php:7.1-fpm (REPOSITORY:TAG) docker.io为默认可省
     docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
         -p      8000:80 把容器80端口映射到服务8000
         --name  设置名字
-        -d      运行镜像
+        -d      运行镜像(后台运行)
         -v /data/nginx/html:/usr/share/nginx/html (将本机的文件映射到容器中的文件)
 
     docker nginx 默认地址:  /usr/share/nginx/html /etc/nginx/nginx.conf /var/log/nginx /etc/nginx/conf.d

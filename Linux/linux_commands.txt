@@ -86,6 +86,7 @@ Commands :
 	mv  			    // 移动和重命名
 	rm  				//删除 rm -r 删除文件和文件夹   rm -rf 删除文件和文件夹不用提示
 	cp  				//复制
+	cp -r dir dir       //复制文件夹
 	whereis  abc   		// abc在哪里
 	who i am 			// 显示当前登录的人
 	/usr/bin:标准系统应用 /usr/local
