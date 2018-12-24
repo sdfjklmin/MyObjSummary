@@ -41,4 +41,7 @@
 	force create mode = 0777
 9.更改文件夹权限
 	chmod  -R 777 /minPro	
-			
+10.完整启动
+    systemctl stop firewalld.service 关闭防火墙
+    systemctl start smb.service  开启服务
+    setenforce 0  关闭setlinux
