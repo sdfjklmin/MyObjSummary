@@ -113,3 +113,22 @@
    $c = 'C' ;
    compact('a','b','c') ;
    // ['a'=>'A','b'=>'B','c'=>'C']
+
+#17:parse_str 进一串字符串数据解析成数组
+   $dataStr = "BillNo=1545792840227&FundChannel=CFT&ChannelNo=4200000224201812265299127294&MerNo=46548&Amount=0.01&BankNo=0230324421&OrderNo=0230324421&Succeed=88&Result=SUCCESS";
+   parse_str($dataStr,$data);
+   var_dump($data);
+
+#18:file_get_contents("php://input"); 获取请求参数
+   //数据格式根据请求参数解析,情况如下
+   //A=1&B=2&C=3   参数拼接(可能是POST|GET|其它)
+   //{'name':'abc'}  json
+   //<MerNo>46548</MerNo> xml
+   //more
+   $data = file_get_contents("php://input");
+
+#19: 标准xml解析(xml数据格式不对可能会出错)
+    $str = 'xml-data';
+    $a = simplexml_load_string($str);
+    $a = json_encode($a);
+    var_dump(json_decode($a, true));

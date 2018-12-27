@@ -8,7 +8,6 @@
 //重定向页面 非index入口重定向到index
 //header('location:/index.php');
 //以index为入口,根据入口访问路由做路由分配
-//echo phpinfo();
 //设置跨域
 //header('Access-Control-Allow-Origin','*') ;
 //file_put_contents('t.txt',json_encode($_REQUEST,true).PHP_EOL, FILE_APPEND) ;
@@ -23,13 +22,13 @@ defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html','composer','object
 //文件后缀(避免无法解析时下载)
 defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 
-//简单的路由配置
+//简单的路由配置,非入口常量定义
 //统一以 t-xx 为准
-require APP_ROOT.'CorePart.php';
 require APP_ROOT.'comFunction/function.php';
+require APP_ROOT.'CorePart.php';
 
-//获取目录结构
-$link = \MyObjSummary\comFunction\getDirTree(APP_ROOT);
+//目录数据
+$link = \MyObjSummary\FileCache::indexJson();
 $title = '目录浏览' ;
 
 ?>
@@ -70,7 +69,7 @@ $title = '目录浏览' ;
     var changeButton = false ;
     $(function () {
         //数据
-        var list = eval('<?php echo json_encode($link);?>');
+        var list = eval('<?php echo $link;?>');
         /*var list =
             [{
                 "name": "Index",

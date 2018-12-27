@@ -14,6 +14,8 @@ namespace MyObjSummary\comFunction ;
  * @function inputClean()   输入清除(避免注入)
  * @function curlPost()     原生curl post请求
  * @function curlGet()      原生curl get请求
+ * @function buildXml()     构建Xml数据
+ * @function decodeXml()    解析Xml数据
  */
 
 if(!function_exists('dd')) {
@@ -340,5 +342,71 @@ if(!function_exists('curlGet')) {
         }
         curl_close($curl); // 关闭CURL会话
         return $tmpInfo; // 返回数据
+    }
+}
+
+if(!function_exists('buildXml')){
+    /** 构建xml
+     * @param $data
+     * @param string $t
+     * @param bool $bast
+     * @return string
+     */
+    function buildXml(array $data,string $t='Request',bool $bast=true)
+    {
+        $str = '' ;
+        if($bast)
+            $str  = '<?xml version="1.0" encoding="utf-8"?>';
+        $str .= '<'.$t.'>';
+        foreach ($data as $k => $v) {
+            if (is_array($v)) {
+                $child = buildXml($v,$k,false);
+                $str .= $child;
+            } else {
+                $str .= '<'.$k.'>'.$v.'</'.$k.'>';
+            }
+        }
+        $str .='</'.$t.'>';
+        return $str;
+    }
+}
+
+if(!function_exists('decodeXml')){
+    /** 获取xml数据
+     * @param $x string|array xml对应的标签
+     * @param $str string 数据
+     * @param bool $only 是否唯一
+     * @return array
+     */
+    function decodeXml($x,$str,$only =true)
+    {
+        /*$a = simplexml_load_string($str);
+        $a = json_encode($a);
+        var_dump(json_decode($a, true));*/
+        $array = [] ;
+        if(is_array($x)) {
+            foreach ($x as $v) {
+                preg_match_all("/<".$v.">.*<\/".$v.">/", $str, $temp);
+                $strData = $only ?current($temp[0]):  $temp[0];
+                if($strData) {
+                    $strDataOne = str_replace('<'.$v.'>','',$strData);
+                    $strDataEnd = str_replace('</'.$v.'>','',$strDataOne);
+                    $array[$v] = $strDataEnd ;
+                }else{
+                    $array[$v] = '' ;
+                }
+            }
+        }else{
+            preg_match_all("/<".$x.">.*<\/".$x.">/", $str, $temp);
+            $strData = $only ?current($temp[0]):  $temp[0];
+            if($strData) {
+                $strDataOne = str_replace('<'.$x.'>','',$strData);
+                $strDataEnd = str_replace('</'.$x.'>','',$strDataOne);
+                $array[$x] = $strDataEnd ;
+            }else{
+                $array[$x] = '' ;
+            }
+        }
+        return $array ;
     }
 }

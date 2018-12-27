@@ -14,6 +14,16 @@ namespace MyObjSummary;
  */
 abstract class CoreInterpreter
 {
+    /** 是否刷新缓存文件
+     * @var bool
+     */
+    static $refresh = false ;
+
+    /**程序控制
+     * @var bool
+     */
+    protected $isExit = true;
+
     /** 路由过滤规则
      * @return mixed
      */
@@ -29,19 +39,57 @@ abstract class CoreInterpreter
             case 't-mode' : $link = 'php/designMode/Zend.php';break ;
             case 't-php'  : $link = 'test/index.php';break ;
             case 't-html' : $link = 'test/index.html';break ;
+            case 'up':
+                self::$refresh = true ; $link=''; $this->isExit = false;
+                break;
             default : exit('no match this rule');break ;
         }
         defined('RULE_MATCH') or define('RULE_MATCH',$path) ;
-        require APP_DIR.$link;
+        if(!empty($link))
+            require APP_DIR.$link;
     }
 }
 
+/**
+ * Class FileCache
+ * @package MyObjSummary
+ */
+class FileCache {
+    private function __construct()
+    {
+    }
+    private function __clone()
+    {
+        // TODO: Implement __clone() method.
+    }
+
+    /** 首页json缓存数据
+     * @param string $jsonFileName
+     * @return array|bool|string
+     */
+    public static function indexJson($jsonFileName = 'file.json')
+    {
+        //目录数据缓存
+        $fileJson = file_exists($jsonFileName);
+        if($fileJson && !empty(file_get_contents($jsonFileName)) && (CorePart::$refresh ==false)) {
+            $link = file_get_contents($jsonFileName);
+        }else{
+            //获取目录结构
+            $link = \MyObjSummary\comFunction\getDirTree(APP_ROOT);
+            $link = json_encode($link);
+            file_put_contents($jsonFileName,$link);
+        }
+        return $link;
+    }
+
+}
 /** 解析路由 特定的路由访问
  * Class CorePart
  * @package MyObjSummary
  */
 class CorePart extends CoreInterpreter
 {
+    #默认一级路由
     const PATH_NUM = 1 ;
 
     /** 规则实现
@@ -70,7 +118,8 @@ class CorePart extends CoreInterpreter
             return null ;
         }
         $this->interpreter($path);
-        exit() ;
+        if($this->isExit)
+            exit() ;
     }
 }
 (new CorePart())->run() ;
