@@ -69,7 +69,7 @@ $title = '目录浏览' ;
     var changeButton = false ;
     $(function () {
         //数据
-        var list = eval('<?php echo $link;?>');
+        var list = eval('<?= $link; ?>');
         /*var list =
             [{
                 "name": "Index",
