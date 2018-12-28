@@ -72,17 +72,20 @@
         docker run -p 9000:9000 --name  php-fpm -v /data/nginx/html:/usr/share/nginx/html -d docker.io/php:7.1-fpm
     ]
 
-    eg: nginx+php(对应指向本机的html地址要相同)
+    eg: nginx+php+mysql(对应指向本机的html地址要相同)
 
         docker search php:7.1-fpm
         docker search nginx
+        docker search mysql
 
         docker pull nginx
         docker pull php:7.1-fpm
+        docker pull mysql:5.7
 
         nginx : docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
         php:    docker run -p 9000:9000 --name  php-fpm -v /data/nginx/html:/usr/share/nginx/html -d docker.io/php:7.1-fpm
-
+        mysql:  docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+        //docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
         nginx配置：
               	fastcgi_pass  172.17.0.3:9000;(对应容器中php的ip地址)
               	//对应指向的nginx目录地址

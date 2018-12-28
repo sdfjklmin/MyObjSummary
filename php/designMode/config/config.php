@@ -12,4 +12,5 @@ return
         'sin'=>['Singleton','单例模式',true],
         'str'=>['Strategy','策略模式',true],
         'vis'=>['Visitor','访问者模式',false],
+        'sta'=>['State','状态模式',true],
     ] ;
