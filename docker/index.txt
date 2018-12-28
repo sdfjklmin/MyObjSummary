@@ -130,3 +130,22 @@
         echo extension=swoole.so > php.ini
 
     docker-php-source delete (删除安装包,避免docker过大)
+
+6.docker-compose安装(https://docs.docker.com/compose/completion/)
+
+  compose是一个定义和运行多容器的docker应用的工具。
+  compose 通过yaml文件配置应用服务，然后仅需一个命令就可以创建和运行所有配置中的服务。
+
+  下载:(https://github.com/docker/compose/releases)
+  sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+  更改权限
+  sudo chmod +x /usr/local/bin/docker-compose
+
+  命令插件(可省)
+  sudo curl -L https://raw.githubusercontent.com/docker/compose/1.21.2/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+  测试
+  docker-compose --version
+
+
