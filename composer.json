@@ -1,0 +1,10 @@
+{
+    "require": {
+        "fzaninotto/faker": "^1.8"
+    },
+    "autoload": {
+        "files": [
+            "comFunction/function.php"
+        ]
+    }
+}

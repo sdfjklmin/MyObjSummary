@@ -11,6 +11,8 @@
 //设置跨域
 //header('Access-Control-Allow-Origin','*') ;
 //file_put_contents('t.txt',json_encode($_REQUEST,true).PHP_EOL, FILE_APPEND) ;
+require './vendor/autoload.php';
+
 //目录入口
 defined('APP_DIR') or define('APP_DIR',__DIR__.'/');
 defined('APP_ROOT') or define('APP_ROOT','./');
@@ -24,7 +26,6 @@ defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 
 //简单的路由配置,非入口常量定义
 //统一以 t-xx 为准
-require APP_ROOT.'comFunction/function.php';
 require APP_ROOT.'CorePart.php';
 
 //目录数据

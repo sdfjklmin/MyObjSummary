@@ -75,7 +75,7 @@ class FileCache {
             $link = file_get_contents($jsonFileName);
         }else{
             //获取目录结构
-            $link = \MyObjSummary\comFunction\getDirTree(APP_ROOT);
+            $link = getDirTree(APP_ROOT);
             $link = json_encode($link);
             file_put_contents($jsonFileName,$link);
         }

@@ -1,5 +1,5 @@
 <?php
-namespace MyObjSummary\comFunction ;
+//公共方法composer引入不需要命名空间,否则找不到
 /** 方法说明
  * @function dd()           打印
  * @function gerRand()      抽奖
