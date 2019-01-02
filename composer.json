@@ -1,4 +1,5 @@
 {
+    "name": "my-obj-summary",
     "require": {
         "fzaninotto/faker": "^1.8"
     },

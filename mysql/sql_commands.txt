@@ -84,4 +84,7 @@ _13:查询替换和新增
 	 	insert(mobile_number, 4, 4, 'XXXX') ,
 	 	REPLACE(mobile_number, SUBSTR(mobile_number,4,4), 'XXXX')
 	FROM
-		play_order;	
+		play_order;
+_14:having 指定一组行或聚合的过滤条件,通常和group by连用
+    (通过column分组,查询出名称和对应的总数,获取总数大于10的)
+    SELECT count(id) as total,name FROM T GROUP BY column having total > 10

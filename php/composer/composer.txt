@@ -1,6 +1,6 @@
 看云地址:https://www.kancloud.cn/thinkphp/composer/35668 
 
-composer init // 初始化默认信息
+composer init // 初始化默认信息(composer.json的信息)
 composer install //安装composer.json中的依赖文件 如果有composer.lock文件则获取它的安装信息
 composer update //依赖升级
 composer update vendor/package vendor/package2 //单独升级某几个包
@@ -19,7 +19,7 @@ composer.phar create-project doctrine/orm path 2.2.* // create-project创建项�
 composer.phar diagnose // 诊断问题
 composer.phar help install //获取帮助
 
-require 'vendor/autoload.php'; //引入composer安装生成的文件,免费自动加载
+require 'vendor/autoload.php'; //引入composer安装生成的文件,自动加载
 
 
 composer.json
@@ -39,5 +39,15 @@ composer.json
         "files": [
             "comFunction/function.php"
         ]
+    },
+    "config": {
+        "process-timeout": 1800,
+        "preferred-install": "dist"
+    },
+    "repositories": {
+        "packagist": {
+          "type": "composer",
+          "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
