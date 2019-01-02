@@ -11,6 +11,10 @@ class ComposerStaticInit29a4b6f5f0ed4aced61286a65ec233bf
     );
 
     public static $prefixLengthsPsr4 = array (
+        'b' => 
+        array (
+            'bookLog\\' => 8,
+        ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -18,6 +22,10 @@ class ComposerStaticInit29a4b6f5f0ed4aced61286a65ec233bf
     );
 
     public static $prefixDirsPsr4 = array (
+        'bookLog\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/bookLog',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',

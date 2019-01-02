@@ -20,3 +20,24 @@ composer.phar diagnose // 诊断问题
 composer.phar help install //获取帮助
 
 require 'vendor/autoload.php'; //引入composer安装生成的文件,免费自动加载
+
+
+composer.json
+{
+    //引入的安装包
+    "require": {
+        "fzaninotto/faker": "^1.8"
+    },
+    //自动加载其他文件
+    "autoload": {
+        //psr-4文件加载,有命名空间
+        "psr-4": {
+            // 文件名\\: 文件夹路径(所有文件,需要命名空间)
+            "bookLog\\": "bookLog"
+        },
+        //文件加载,无命名空间
+        "files": [
+            "comFunction/function.php"
+        ]
+    }
+}
