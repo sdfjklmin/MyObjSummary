@@ -122,4 +122,4 @@ class CorePart extends CoreInterpreter
             exit() ;
     }
 }
-(new CorePart())->run() ;
+
