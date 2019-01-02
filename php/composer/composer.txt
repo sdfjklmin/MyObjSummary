@@ -21,6 +21,18 @@ composer.phar help install //获取帮助
 
 require 'vendor/autoload.php'; //引入composer安装生成的文件,自动加载
 
+Question:
+composer中vendor入库:(https://docs.phpcomposer.com/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.html)
+    限制自己安装标记版本（无 dev 版本），这样你只会得到 zip 压缩的安装，并避免 git“子模块”出现的问题。
+    使用 --prefer-dist 或在 config 选项中设置 preferred-install 为 dist。
+    在每一个依赖安装后删除其下的 .git 文件夹，然后你就可以添加它们到你的 git repo 中。你可以运行 rm -rf vendor/**/.git 命令快捷的操作，但这意味着你在运行 composer update 命令前需要先删除磁盘中的依赖文件。
+    新增一个 .gitignore 规则（vendor/.git）来忽略 vendor 下所有 .git 目录。这种方法不需要你在运行 composer update 命令前删除你磁盘中的依赖文件。
+为什么说“比较符”和“通配符”相结合的版本约束是?
+    这是人们常犯的一个错误，定义了类似 >=2.* 或 >=1.1.* 的版本约束。
+    >=2 表示资源包应该是 2.0.0 或以上版本。
+    2.* 表示资源包版本应该介于 2.0.0 （含）和 3.0.0（不含）之间。
+    Composer 将抛出一个错误，并告诉你这是无效的。想要确切的表达你意思，最简单的方法就是仅使用“比较符”和“通配符”其中的一种来定义约束。
+    eg: "php":">=7.0.0" ,"packet": "~2.1.0"
 
 composer.json
 {
