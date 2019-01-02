@@ -24,26 +24,35 @@ require 'vendor/autoload.php'; //引入composer安装生成的文件,自动加�
 
 composer.json
 {
+    "name": "包名",
+    "description": "描述",
+    "keywords": "关键字,用于搜索",
     //引入的安装包
     "require": {
         "fzaninotto/faker": "^1.8"
     },
     //自动加载其他文件
     "autoload": {
-        //psr-4文件加载,有命名空间
+        //psr-4文件加载,有命名空间 one
         "psr-4": {
             // 文件名\\: 文件夹路径(所有文件,需要命名空间)
             "bookLog\\": "bookLog"
         },
-        //文件加载,无命名空间
+        //psr-4 two
+        "psr-4": { "Monolog\\": ["src/", "lib/"] }
+        //可以用 classmap 生成支持支持自定义加载的不遵循 PSR-0/4 规范的类库
+        "classmap": ["src/", "lib/", "Something.php"]
+        //文件加载,无命名空间,作为函数库的载入方式（而非类库）
         "files": [
             "comFunction/function.php"
         ]
     },
+    //配置信息 (详情 https://docs.phpcomposer.com/04-schema.html )
     "config": {
         "process-timeout": 1800,
         "preferred-install": "dist"
     },
+    //使用自定义的包资源库
     "repositories": {
         "packagist": {
           "type": "composer",
