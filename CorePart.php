@@ -42,9 +42,12 @@ abstract class CoreInterpreter
             case 'up':
                 self::$refresh = true ; $link=''; $this->isExit = false;
                 break;
+            case 'default-way': $link = 'min/index.php';break;
             default : exit('no match this rule');break ;
         }
         defined('RULE_MATCH') or define('RULE_MATCH',$path) ;
+        if(!file_exists(APP_DIR.$link))
+            exit('file not find');
         if(!empty($link))
             require APP_DIR.$link;
     }
@@ -115,7 +118,7 @@ class CorePart extends CoreInterpreter
     {
         $path = $this->ruleFitter();
         if(!$path) {
-            return null ;
+            $path = 'default-way';
         }
         $this->interpreter($path);
         if($this->isExit)
