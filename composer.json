@@ -4,9 +4,7 @@
         "fzaninotto/faker": "^1.8"
     },
     "autoload": {
-
         "psr-4": {
-
             "bookLog\\": "bookLog"
         },
         "files": [

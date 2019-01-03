@@ -34,6 +34,8 @@
     }
     var_export($arr); # 输出变量的字符串表示
     //output:array(0=>1,1=>2,2=>2)，你的答案对了吗？为什么
+    $arr = var_export($arr,true); // 为true时,变量表示,将结果赋值给一个变量string
+    //$arr "array(0=>1,1=>2,2=>2)" ;
 
 #2:字符串替换 str_replace(search, replace, subject)
     var_dump(str_replace('a', 'b', 'a1a2a3')) ; #b1b2b3

@@ -2,6 +2,7 @@
 //公共方法composer引入不需要命名空间,否则找不到
 /** 方法说明
  * @function dd()           打印
+ * @function dda()          数据打印,输出PHP格式数据,可复用(主要用于Array)
  * @function gerRand()      抽奖
  * @function getNum2()      获取两位小数
  * @function repeatRank()   相同数据排名
@@ -24,17 +25,57 @@ if(!function_exists('dd')) {
      */
 	function dd()
 	{
-	    echo "<pre />";
+        if(PHP_SAPI == 'cli'){
+            $symbol = "\n";
+        }else{
+            $symbol = "<br />" ;
+            echo "<pre />";
+        }
+        $exitSwitch  = true;
 		if(func_get_args()) {
 			foreach (func_get_args() as $key => $value) {
+                /*if( is_string($value) &&
+                    ($value === 'exit-0') &&
+                    ($key+1) ===func_num_args() ) {
+                    $exitSwitch = false ;
+                    continue ;
+                }*/
 				# code...
-				echo "type: ".gettype($value)."<br />";
+				echo "type: ".gettype($value).$symbol;
 				echo "data: ";
-					var_dump($value) ;
+					print_r($value) ;
+                echo $symbol;
 			}
 		}
-		exit();
+		if($exitSwitch) {
+            exit();
+        }
 	}
+}
+
+if(!function_exists('dda')) {
+    /**
+     * 打印数据,以PHP格式返回(主要针对数组)
+     */
+    function dda()
+    {
+        if(PHP_SAPI == 'cli'){
+            $symbol = "\n";
+        }else{
+            $symbol = "<br />" ;
+            echo "<pre />";
+        }
+        if(func_get_args()) {
+            foreach (func_get_args() as $key => $value) {
+                # code...
+                echo "type: ".gettype($value).$symbol;
+                echo "data: ";
+                    var_export($value) ;
+                echo $symbol;
+            }
+        }
+        exit();
+    }
 }
 
 if(!function_exists('gerRand')) {

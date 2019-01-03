@@ -2,11 +2,6 @@
 namespace bookLog\buildApis ;
 use Faker\Factory;
 
-/**
- *
- * Class ChapterOne
- */
-
 /** build sender data
  *  构建基础数据
  * Class ChapterOne
