@@ -148,3 +148,15 @@
     if ('PUT' == $_SERVER['REQUEST_METHOD']) {
         parse_str(file_get_contents('php://input'), $_PUT);
     }
+
+#23:限定方法的参数类型
+    //输入为数组
+    function typeArg(array $arr)
+    {
+        return $arr;
+    }
+    //输入为null|array
+    function typeArg2(?array $arr)
+    {
+        return $arr ;
+    }

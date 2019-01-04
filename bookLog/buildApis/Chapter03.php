@@ -49,4 +49,11 @@ class Chapter03
     {
 
     }
+
+    //(new Chapter03())->test(function(){return 11;});
+    public function test(?callable $function)
+    {
+        $a = $function();
+        return $a ;
+    }
 }
