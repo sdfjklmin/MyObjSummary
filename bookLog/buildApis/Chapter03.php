@@ -3,7 +3,7 @@ namespace bookLog\buildApis;
 /**
  * @remark
  * 使用PHP和Guzzle HTTP库发出HTTP请求
- * GraphQL(所见即所需) 和 REST Ful API 的差异
+ * GraphQL(所见即所得) 和 REST Ful API 的差异
  *
  * 请求:
  *  POST /try.php HTTP/1.1
