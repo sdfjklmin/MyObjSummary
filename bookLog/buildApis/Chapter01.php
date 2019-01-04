@@ -2,12 +2,16 @@
 namespace bookLog\buildApis ;
 use Faker\Factory;
 
+/**
+ * @remark
+ * 快速构建安全可用的基础数据
+ */
 /** build sender data
  *  构建基础数据
  * Class ChapterOne
  * @package bookLog\buildApis
  */
-class ChapterOne{
+class Chapter01{
 
     public function build()
     {

@@ -123,7 +123,7 @@
 
 #18:file_get_contents("php://input"); 获取请求参数
    //数据格式根据请求参数解析,情况如下
-   //A=1&B=2&C=3   参数拼接(可能是POST|GET|其它)
+   //A=1&B=2&C=3  row 参数拼接(可能是POST|GET|PUT|其它)
    //{'name':'abc'}  json
    //<MerNo>46548</MerNo> xml
    //more
@@ -134,3 +134,17 @@
     $a = simplexml_load_string($str);
     $a = json_encode($a);
     var_dump(json_decode($a, true));
+
+#20:#bool property_exists ( mixed $class , string $property ) 检查对象或类是否具有该属性
+    #ethod_exists ( mixed $object , string $method_name ) 检查类的方法是否存在
+    #class_exists('MyClass') 检查类是否纯在
+    #interface_exists 检查接口是否已被定义
+    #get_class 返回对象的类名
+
+#21:php.ini => expose_php = Off|on 关闭PHP显示信息
+
+#22:$_SERVER['REQUEST_METHOD'] 获取请求方式: GET,POST,PUT,DELETE,...
+    $_PUT = array();
+    if ('PUT' == $_SERVER['REQUEST_METHOD']) {
+        parse_str(file_get_contents('php://input'), $_PUT);
+    }
