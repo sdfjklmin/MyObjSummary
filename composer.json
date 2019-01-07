@@ -3,7 +3,8 @@
     "require": {
         "fzaninotto/faker": "^1.8",
         "guzzlehttp/guzzle": "~6.0",
-        "webonyx/graphql-php": "^0.13.0"
+        "webonyx/graphql-php": "^0.13.0",
+        "hashids/hashids": "^3.0"
     },
     "autoload": {
         "psr-4": {

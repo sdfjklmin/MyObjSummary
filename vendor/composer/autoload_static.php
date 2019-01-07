@@ -23,6 +23,10 @@ class ComposerStaticInit29a4b6f5f0ed4aced61286a65ec233bf
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'H' => 
+        array (
+            'Hashids\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -44,6 +48,10 @@ class ComposerStaticInit29a4b6f5f0ed4aced61286a65ec233bf
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Hashids\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hashids/hashids/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
