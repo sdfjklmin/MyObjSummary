@@ -7,7 +7,8 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
 
-
+$t = new \bookLog\buildApis\Chapter04();
+dd($t->errorJsonApi());
 try {
     $queryType = new ObjectType([
         'name' => 'Query',
