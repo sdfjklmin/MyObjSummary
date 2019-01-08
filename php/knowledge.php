@@ -160,3 +160,8 @@
     {
         return $arr ;
     }
+
+#24: final class ;最终类(不能用于继承)
+#    abstract class ; 抽象类(只能用于继承,和实现里面的方法)
+#    interface class ;接口类(只用用于继承实现)
+#    static function ;静态方法(无需new class)
