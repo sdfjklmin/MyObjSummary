@@ -69,10 +69,12 @@ class Chapter05Behat implements SnippetAcceptingContext
      */
     public function iShouldHaveProductInTheBasket($count)
     {
-        \PHPUnit_Framework_Assert::assertCount(
+        $result = (intval($count) === $this->basket->count() );
+        if(!$result) echo 'iShouldHaveProductInTheBasket : count not match',"\n";
+        /*PHPUnit_Framework_Assert::assertCount(
             intval($count),
             $this->basket
-        );
+        );*/
     }
 
     /**
@@ -80,11 +82,24 @@ class Chapter05Behat implements SnippetAcceptingContext
      */
     public function theOverallBasketPriceShouldBePs($price)
     {
-        \PHPUnit_Framework_Assert::assertSame(
+        $result =  ( floatval($price) == $this->basket->getTotalPrice() );
+        if(!$result) echo 'theOverallBasketPriceShouldBePs : price not match',"\n" ;
+        /*\PHPUnit_Framework_Assert::assertSame(
             floatval($price),
             $this->basket->getTotalPrice()
-        );
+        );*/
     }
 }
-//$context = new  FeatureContext ;
-//dd($context);
+$context = new  Chapter05Behat ;
+//添加基础商品
+$context->thereIsAWhichCostsPs('bool',15.5);
+$context->thereIsAWhichCostsPs('pen',2.5);
+$context->thereIsAWhichCostsPs('paper',2);
+//添加商品到篮子中
+$context->iAddTheToTheBasket('bool');
+$context->iAddTheToTheBasket('pen');
+//$context->iAddTheToTheBasket('paper');
+//商品数
+$context->iShouldHaveProductInTheBasket(2);
+//商品总价
+$context->theOverallBasketPriceShouldBePs(18);

@@ -143,9 +143,9 @@ final class Chapter05Son
 
     public function getTotalPrice()
     {
-        return $this->productsPrice
-            + ($this->productsPrice * 0.2)
-            + ($this->productsPrice > 10 ? 2.0 : 3.0);
+        return $this->productsPrice ;
+            /*+ ($this->productsPrice * 0.2)
+            + ($this->productsPrice > 10 ? 2.0 : 3.0);*/
     }
 
     public function count()
