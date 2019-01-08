@@ -75,8 +75,8 @@ git stash pop
 git diff -w test.php #确认代码自动合并的情况
 
 
-//扩展只有文件文件内容无法提交
-sgit rm -rf --cached vendor/crazyfd/yii2-qiniu 
+//扩展只有文件文件内容无法提交(删除缓存,再添加)
+git rm -rf --cached vendor/crazyfd/yii2-qiniu
 git add vendor/crazyfd/yii2-qiniu/*
 再次使用git status查看发现文件已经成功添加： 
 Changes to be committed: 
@@ -91,3 +91,8 @@ DONE
 git rm -r --cached . #删除当前项目的缓存
 
 git reset --hard origin/master
+
+#git rm --cached 删除暂存区或分支上的文件，但是本地 '需要' 这个文件，只是 '不希望加入版本控制'，可以使用 'git rm --cached'
+git rm --cached -r vendor/
+
+#删除暂存区或分支上的文件，同时工作区 '不需要' 这个文件，可以使用 'git rm'
