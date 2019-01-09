@@ -21,24 +21,90 @@ namespace bookLog\buildApis;
  * 6.测试输出
  */
 
-/** API分形变换
- * Class Chapter06API
- * @package bookLog\buildApis
- */
-class Chapter06API
+abstract class Chapter06APICommonCode
 {
     const ERROR_ARGS = 400 ;
     const ERROR_FORBIDDEN = 403 ;
     const ERROR_NOT_FIND = 404 ;
+    const ERROR_SERVER = 500 ;
+    /**
+     * @var Chapter06API
+     */
+    private $before ;
+
+    /**
+     * Chapter06APICommonCode constructor.
+     * @param Chapter06API $conf
+     */
+    public function __construct(Chapter06API $conf)
+    {
+        $this->before = $conf;
+    }
+
+    /** 403
+     * @param string $msg
+     * @return string
+     */
+    public function errorForbidden($msg = 'Forbidden !')
+    {
+        $this->before->statusMsg = $msg ;
+        return $this->before->setStatusCode(self::ERROR_FORBIDDEN)->respondWithJson([]);
+    }
+
+    /** 404
+     * @param string $msg
+     * @return string
+     */
+    public function errorNotFind($msg = 'Not Find !')
+    {
+        $this->before->statusMsg = $msg ;
+        return $this->before->setStatusCode(self::ERROR_NOT_FIND)->respondWithJson([]);
+    }
+
+    /** 400
+     * @param string $msg
+     * @return string
+     */
+    public function errorWrongArgs($msg = 'Wrong Args !')
+    {
+        $this->before->statusMsg = $msg ;
+        return $this->before->setStatusCode(self::ERROR_ARGS)->respondWithJson([]);
+    }
+
+    /** 500
+     * @param string $msg
+     * @return string
+     */
+    public function errorServer($msg = 'Server Error !')
+    {
+        $this->before->statusMsg = $msg ;
+        return $this->before->setStatusCode(self::ERROR_SERVER)->respondWithJson([]);
+    }
+}
+
+/** API分形变换
+ * Class Chapter06API
+ * @package bookLog\buildApis
+ */
+class Chapter06API extends Chapter06APICommonCode
+{
     /**默认状态码
      * @var int
      */
-    protected $statusCode = 200 ;
+    public $statusCode = 200 ;
 
     /**默认操作提示
      * @var string | array(多个提示消息)
      */
-    protected $statusMsg = '请求成功!';
+    public $statusMsg = '请求成功!';
+
+    /**
+     * Chapter06API constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct($this);
+    }
 
     /**获取状态码
      * @return int
@@ -77,7 +143,7 @@ class Chapter06API
      * @param $data
      * @return string
      */
-    protected function respondWithJson($data)
+    public function respondWithJson($data)
     {
         $data = [
             'code' => $this->statusCode ,
@@ -106,40 +172,6 @@ class Chapter06API
     public function respondWithCollection($data,$callBack)
     {
         //TODO
-    }
-
-    /**
-     * @remark common code
-     */
-
-    /** 403
-     * @param string $msg
-     * @return string
-     */
-    public function errorForbidden($msg = 'Forbidden !')
-    {
-        $this->statusMsg = $msg ;
-        return $this->setStatusCode(self::ERROR_FORBIDDEN)->respondWithJson([]);
-    }
-
-    /** 404
-     * @param string $msg
-     * @return string
-     */
-    public function errorNotFind($msg = 'Not Find !')
-    {
-        $this->statusMsg = $msg ;
-        return $this->setStatusCode(self::ERROR_NOT_FIND)->respondWithJson([]);
-    }
-
-    /** 400
-     * @param string $msg
-     * @return string
-     */
-    public function errorWrongArgs($msg = 'Wrong Args !')
-    {
-        $this->statusMsg = $msg ;
-        return $this->setStatusCode(self::ERROR_ARGS)->respondWithJson([]);
     }
 }
 /**
@@ -189,13 +221,13 @@ class Chapter06 extends Chapter06API
     {
         //return $this->errorForbidden() ;
         $user = self::findOne('test');
-        if($user)    {
+        /*if($user)    {
             $this->statusCode = 500 ;
             $this->statusMsg = '无效的请求!' ;
             $this->setStatusMsg('错误','ERR_1');
             $this->setStatusMsg('错误了','ERR_2');
             return $this->respondWithJson([]);
-        }
+        }*/
         $data = $this->respondWithItem($user,'outputtingDataCom');
         return $data ;
     }
