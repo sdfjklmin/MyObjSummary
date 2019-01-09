@@ -14,11 +14,13 @@ namespace bookLog\buildApis;
  * 3.分形变换
  *      简单的API数据可以用json_encode,复杂多变的数据json_encode输出类型可能改变,
  *      提供一个单独的API输出方法或者类
+ *      http://fractal.thephpleague.com/
+ *      https://marshmallow.readthedocs.io/en/3.0/
  * 4.隐藏模式更新
  *   'website' => $data->website  update  'website' => $data->url
  * 5.输出错误
  *   API: 400 ,404 ,403
- * 6.测试输出
+ * 6.测试输出(有效输出)
  */
 
 abstract class Chapter06APICommonCode

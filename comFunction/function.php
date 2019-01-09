@@ -17,6 +17,7 @@
  * @function curlGet()      原生curl get请求
  * @function buildXml()     构建Xml数据
  * @function decodeXml()    解析Xml数据
+ * @function getTax()       获取个税
  */
 
 if(!function_exists('dd')) {
@@ -449,5 +450,37 @@ if(!function_exists('decodeXml')){
             }
         }
         return $array ;
+    }
+}
+
+if(!function_exists('getTax')){
+    function getTax($allMoney,$bastTax)
+    {
+        $tax = $bastTax['conf'] ;
+        $taxIndex = 0 ;
+        $taxMoney = bcsub($allMoney , $bastTax['money'],2);
+        foreach ($tax as $k => $son) {
+            /**
+             * @var $start int   最小金额
+             * @var $end   int   最大金额
+             * @var $rate  float 个税率
+             * @var $de    int   速算扣除数
+             */
+            list($start,$end,$rate,$de) = $son;
+            //金额在范围之内
+            if(($taxMoney > $start) && ($taxMoney <= $end)) {
+                $taxIndex  = $k ;
+                break ;
+            }
+            //金额超过最大值
+            if(($start == $end) && ($taxMoney > $start)) {
+                $taxIndex = $k ;
+                break ;
+            }
+        }
+       //金额*税率 -速算扣除数
+        list($st,$en,$ra,$de) = $tax[$taxIndex];
+        $sum = round(bcmul($taxMoney,$ra,2) - $de,2) ;
+        return $sum ;
     }
 }
