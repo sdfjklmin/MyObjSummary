@@ -34,7 +34,7 @@ namespace bookLog\buildApis;
  *   Json Api (优点:响应一致,结构相同|确定:无法多响应)
  *   名称空间
  */
-/**输入输出理论(HTTP请求和响应)32
+/**输入输出理论(HTTP请求和响应)
  * Class Chapter3
  * @package bookLog\buildApis
  */

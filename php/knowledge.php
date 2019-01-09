@@ -41,8 +41,6 @@
     var_dump(str_replace('a', 'b', 'a1a2a3')) ; #b1b2b3
     var_dump(str_replace(array('.','#'), array('/','.'), 'a.a.a#a#')); #a/a/a.a.
 
-
-
 #3:方法中的静态变量会保存每次调用的值
     #eg:可用于优化 require_once
     function statictest($val)
@@ -54,14 +52,15 @@
         }
         var_dump($_staticArr) ;
     }    
-
     statictest('a') ;statictest('b');statictest('c');
+
 #4: basename 返回路径中的文件名
     var_dump(basename('/home/index/index.php')) ;           # index.php  
     var_dump(basename('/home/index/index.php'),'.php') ;    # index
 
 #5: dirname 返回路径中的目录部分  
     var_dump(dirname('/home/index/index.php'))     ;    # /home/index
+
 #6: 'AbcdeFG'[0]   A  
     # ord()  返回对应的ASCII码值 可以对字符串做相应处理 如 ABcdE转换成 a_bcd_e
     ord('a') ;
@@ -104,6 +103,7 @@
 #13:list将数组的值解析到对应的变量中
     $initArr = ['this is name','this is other'] ;
     list($name,$other) = $initArr ;
+
 #14:后台运行脚本程序 加 &
     #eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
 
@@ -165,3 +165,33 @@
 #    abstract class ; 抽象类(只能用于继承,和实现里面的方法)
 #    interface class ;接口类(只用用于继承实现)
 #    static function ;静态方法(无需new class)
+
+#25: call_user_func_array(callable $callback , array $param_arr ) 调用回调函数，并把一个数组参数作为回调函数的参数
+     #调用 $foo->bar($arg1,$arg2)
+     call_user_func_array(array($foo, "bar"), array("three", "four"));
+     // bar($arg1,$arg2)
+     call_user_func_array('bar', array("three", "four"));
+
+#26:可变函数
+    function foo() {
+        echo "In foo()<br />\n";
+    }
+    function bar($arg = '') {
+        echo "In bar(); argument was '$arg'.<br />\n";
+    }
+    // 使用 echo 的包装函数
+    function echoit($string)
+    {
+        echo $string;
+    }
+    $func = 'foo';
+    $func();        // This calls foo()
+    $func = 'bar';
+    $func('test');  // This calls bar()
+    $func = 'echoit';
+    $func('test');  // This calls echoit()
+
+#27:可变参数 ...标识可变
+# $args为数组形式,无论传多少参数都会以数组的形式保存在$args中
+# $args一般为一维数组或者多维,主要看传参
+    function tt(...$args) { return 'change'; }
