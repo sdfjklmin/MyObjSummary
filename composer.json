@@ -11,7 +11,8 @@
             "bookLog\\": "bookLog"
         },
         "files": [
-            "comFunction/function.php"
+            "comFunction/function.php",
+            "ChromePhp.php"
         ]
     },
     "repositories": {
