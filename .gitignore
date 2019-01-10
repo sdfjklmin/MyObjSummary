@@ -1,4 +1,5 @@
 try.php
 # rm -rf vendor/**/.git (vendor入口限制)
 vendor/
+try.php
 #vendor/.git

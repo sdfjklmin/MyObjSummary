@@ -18,6 +18,7 @@
  * @function buildXml()     构建Xml数据
  * @function decodeXml()    解析Xml数据
  * @function getTax()       获取个税
+ * @function getTaper()     获取锥形体(金字塔)
  */
 
 if(!function_exists('dd')) {
@@ -482,5 +483,23 @@ if(!function_exists('getTax')){
         list($st,$en,$ra,$de) = $tax[$taxIndex];
         $sum = round(bcmul($taxMoney,$ra,2) - $de,2) ;
         return $sum ;
+    }
+}
+
+if(!function_exists('getTaper')){
+    function getTaper($num,$put='*',$link='&nbsp;'){
+        # $num总数
+        for ($i =0 ;$i<=$num;$i++) {
+            #$link的个数
+            for($k=0;$k<=($num-$i);$k++) {
+                echo $link;
+            }
+            #$put的个数
+            for ($m=0;$m<=$i;$m++) {
+                echo $put;
+                echo $link;
+            }
+            echo "<br/>";
+        }
     }
 }
