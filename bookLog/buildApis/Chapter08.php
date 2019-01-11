@@ -15,6 +15,7 @@ namespace bookLog\buildApis;
  *   调试面板
  *      发条: https://github.com/itsgoingd/clockwork-chrome (php)
  *      Chrome Logger : https://craig.is/writing/chrome-logger (多平台)
+ *      tampermonkey : https://tampermonkey.net/  (chrome 脚本控制)
  *    Chrome Logger(PHP版)使用
  *
  * 4.网络调试(工具调试)
