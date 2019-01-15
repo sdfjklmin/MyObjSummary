@@ -1,5 +1,6 @@
 ## 目录
 - [MyObjSummary]
+  - [bookLog](#bookLog) 书籍记录
   - [bookmarks](#bookmarks) 浏览器标签
   - [chromeExe](#chromeExe) chrome插件
   - [comFunction](#comFunction) 公共方法
@@ -13,6 +14,7 @@
     - [vue](#vue)      Vue
   - [learn](#learn)         需要学习的知识  
   - [linux](http://man.linuxde.net) 				Linux操作
+  - [min](#min) 				主入口
   - [mongodb](#mongodb)     mongodb 
   - [mysql](#mysql)     mysql 
   - [nginx](#nginx)     nginx 
@@ -39,6 +41,8 @@
   - [webSocket](#webSocket)   webSocket
   - [分布式](#分布式)   分布式 
 
+   ### bookLog
+        书籍记录  
    ### bookmarks
         常用的浏览器标签
    ### chromeExe
@@ -64,6 +68,8 @@
         需要学习的知识    
    ### linux
         linux命令入口      
+   ### min
+        主入口  
    ### mongodb
         mongodb    
    ### mysql
