@@ -107,7 +107,9 @@
 #14:后台运行脚本程序 加 &
     #eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
 
-#15:去掉小数点后的00 : floatval(1.00) 1
+#15:去掉小数点后的00 : floatval(1.00) //1
+#   ceil(4.3) //5 进一取整 ceil(-3.14);  // -3
+#   floor(4.3);   // 4 舍去取整
 
 #16: compact 组建一个数组
    $a = 'A' ;

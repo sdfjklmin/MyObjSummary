@@ -14,7 +14,7 @@ namespace bookLog\buildApis;
  *      HTTP Basic :
  *              HTTP基本身份验证(BA)实现是对web资源实施访问控制的最简单技术，因为它不需要cookie、会话标识符和登录页面。
  *              相反，HTTP基本身份验证使用静态的标准HTTP报头，这意味着不需要预先握手。 ——来源:维基百科
- *              (易实现,易理解,工作在浏览器和任何其他HTTP客户端)(HTTP上非常不安全,HTTPS相对安全,密码由浏览器保存不安全)
+ *              (易实现,易理解,工作在浏览器和任何其他HTTP客户端)(HTTP上非常不安全,HTTPS相当不安全,密码由浏览器保存不安全)
  *      摘要身份认证: 摘要是一种类似于Basic的身份验证方法，但旨在改进安全性问题。
  *      OAuth 1.0 |1.0a (OAuth Token and OAuth Token Secret) :
  *          无法轻松访问浏览器的移动和桌面应用程序设计
