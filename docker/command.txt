@@ -1,0 +1,91 @@
+说明 :
+    []          方括号表示 => 里面的参数可省
+    grep name   任何查询结果都可以通过 grep 进行筛选
+    #           注释符
+    ()          命令解释
+    <>          必填参数
+
+系统 :
+    安装容器 :
+              yum install -y epel-relase #安装依赖
+           	  yum install docker-io	#安装docker
+    容器服务 : systemctl <[start,stop,restart]> docker.service | service docker start
+    容器版本 : docker version
+
+仓库 : 仓库是集中存放镜像的地方[公有仓库,私有仓库] (注册服务器:存放仓库的具体服务器)
+    公有仓库 : Docker Hub => https://hub.docker.com/
+              docker login 输入用户信息登录到 => Docker Hub => 本地 .dockercfg保存用户的认证信息
+              docker search #不需要登录
+                            #官方的镜像一般为 基础镜像或者根镜像 => docker.io/mysql
+                            #个人用户的镜像一般为 用户名/镜像名称 => sokminyo/mysql-1
+              docker pull www.self.com/mysql #指定网站拉取镜像
+    自动创建 : 用户通过 Docker Hub指定跟踪一个目标网站上的项目,若有提交,则自动执行创建
+    创建和使用私有库 :
+            创建 : docker run -d -p 5000:5000 registry  #通过 registry镜像 来创建私有库,默认容器地址为 /tmp/registry,最好先拉取 docker pull registry
+            创建指定 : docker run -d -p 5000:5000 -v /data/nginx/html:/tmp/registry registry #指定路径创建
+            打上标签 :   docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG] => docker tag <33fbbf4a24e5> 127.0.0.1:5000/tt
+            上传镜像 : docker push 127.0.0.1:5000/tt
+
+镜像 :
+    获取镜像 : docker pull <名称>[:TAG(标签)]  =>  docker pull php
+    查看镜像 : docker images [名称]    =>  docker images
+    查看详情 : docker inspect <名称或Id>     =>  docker inspect php [-f(指定内容),...]  docker inspect php -f {{'.Id'}}
+    搜索镜像 : docker search [OPTIONS] TERM  => docker search php:7.1-fpm
+    删除镜像 : docker rmi <名称>         =>  docker rmi [-f(强制删除)] php:7.1-fpm   #正在运行的镜像无法删除
+    存出镜像 : docker save -o <存出的文件名.格式(php.tar)> <镜像名称或Id> =>  docker save -o php.tar 894f8d826f6a
+    载入镜像 : docker load --input php.tar(文件名称)
+
+容器 :
+    新建容器 : docker create -it <镜像名称或ID(php:7.1-fpm)> #默认情况下为不启动
+    新建并启动容器 : docker run
+    查看容器 : docker ps #查看当前运行的容器  docker ps -a #查看所有容器
+    运行容器 : docker run <容器名orID>
+    停止容器 : docker stop <容器名orID>
+    开启容器 : docker start <容器名orID>
+    终止容器 : docker kill <容器名orID>
+    重启容器 : docker restart <容器名orID>
+    容器日志 : docker logs <容器名orID>
+    容器端口 : docker port <容器名orID>
+    删除容器 : docker rm <容器名orID>
+    进入容器 : docker exec -it <容器名orID> /bin/bash
+    导出容器 : docker export <容器名orID> >文件名.格式   => docker export mysql >mysql.tar
+    导入容器 : docker import 文件名.格式
+
+容器中 :
+    安装vi|vim : apt-get install -y vi|vim
+    更新apt : apt-get update #安装其他功能时,更新-安装-更新
+
+数据卷 : 供容器使用的特殊目录 volume(卷)
+    创建 : 在运行的时候加上 -v 可以使用多个
+           docker run -d -p -v /data/nginx/html:/usr/share/nginx/html (将本机的文件映射到容器中的文件)
+           docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
+                   -p      8000:80 把容器80端口映射到服务8000
+                   --name  设置名字
+                   -d      后台运行|守护
+                   -v /data/nginx/html:/usr/share/nginx/html (将本机的文件映射到容器中的文件)
+    数据卷容器 : 容器之间共享数据(挂载在同一个文件夹中)
+           docker run -it -v /dbData --name dbData php  #删除卷 docker rm -v dbData
+           docker run -it --volumes-from dbData --name db1 php
+           docker run -it --volumes-from dbData --name db2 php
+    数据卷迁移数据 : 备份和恢复(自行了解)
+
+端口映射实现访问容器 :
+      端口映射 : docker run -p 端口:端口
+      自定义名称 : docker run --name 名称
+      容器互联 : docker run --link 容器名称
+      docker公开连接 : 环境变量(env) 或 更新 /etc/hosts文件
+
+使用Dockerfile创建镜像 :
+
+常见问题 :
+    docker组没有 : could not change group /var/run/docker.sock to docker: group docker not found
+             uname -r 查看内核
+             Why:SELinux不支持 overlay2 graph driver
+             Solve :
+                    vi /etc/sysconfig/docker,在docker里禁用selinux-enabled=false,
+
+    挂载失败 : /usr/bin/docker-current: Error response from daemon: error creating overlay mount to /var/lib/docker/overlay2/b35b5d54a4bb354ff5bbf4b8906db3acce819339c8c9bf378d9e388d9dedbed7-init/merged: invalid argument.
+               Solve :
+                      rm -rf /var/lib/docker  #会删除docker images
+                      vi /etc/sysconfig/docker-storage   #指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
+                      vi  /etc/sysconfig/docker #删除 --selinux-enabled
