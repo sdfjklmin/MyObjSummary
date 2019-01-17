@@ -7,22 +7,22 @@
 
 系统 :
     安装容器 :
-              yum install -y epel-relase #安装依赖
-           	  yum install docker-io	#安装docker
+              yum install -y epel-relase # 安装依赖
+           	  yum install docker-io	# 安装docker
     容器服务 : systemctl <[start,stop,restart]> docker.service | service docker start
     容器版本 : docker version
 
 仓库 : 仓库是集中存放镜像的地方[公有仓库,私有仓库] (注册服务器:存放仓库的具体服务器)
     公有仓库 : Docker Hub => https://hub.docker.com/
               docker login 输入用户信息登录到 => Docker Hub => 本地 .dockercfg保存用户的认证信息
-              docker search #不需要登录
-                            #官方的镜像一般为 基础镜像或者根镜像 => docker.io/mysql
-                            #个人用户的镜像一般为 用户名/镜像名称 => sokminyo/mysql-1
-              docker pull www.self.com/mysql #指定网站拉取镜像
+              docker search # 不需要登录
+                            # 官方的镜像一般为 基础镜像或者根镜像 => docker.io/mysql
+                            # 个人用户的镜像一般为 用户名/镜像名称 => sokminyo/mysql-1
+              docker pull www.self.com/mysql # 指定网站拉取镜像
     自动创建 : 用户通过 Docker Hub指定跟踪一个目标网站上的项目,若有提交,则自动执行创建
     创建和使用私有库 :
-            创建 : docker run -d -p 5000:5000 registry  #通过 registry镜像 来创建私有库,默认容器地址为 /tmp/registry,最好先拉取 docker pull registry
-            创建指定 : docker run -d -p 5000:5000 -v /data/nginx/html:/tmp/registry registry #指定路径创建
+            创建 : docker run -d -p 5000:5000 registry  # 通过 registry镜像 来创建私有库,默认容器地址为 /tmp/registry,最好先拉取 docker pull registry
+            创建指定 : docker run -d -p 5000:5000 -v /data/nginx/html:/tmp/registry registry # 指定路径创建
             打上标签 :   docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG] => docker tag <33fbbf4a24e5> 127.0.0.1:5000/tt
             上传镜像 : docker push 127.0.0.1:5000/tt
 
@@ -31,14 +31,14 @@
     查看镜像 : docker images [名称]    =>  docker images
     查看详情 : docker inspect <名称或Id>     =>  docker inspect php [-f(指定内容),...]  docker inspect php -f {{'.Id'}}
     搜索镜像 : docker search [OPTIONS] TERM  => docker search php:7.1-fpm
-    删除镜像 : docker rmi <名称>         =>  docker rmi [-f(强制删除)] php:7.1-fpm   #正在运行的镜像无法删除
+    删除镜像 : docker rmi <名称>         =>  docker rmi [-f(强制删除)] php:7.1-fpm   # 正在运行的镜像无法删除
     存出镜像 : docker save -o <存出的文件名.格式(php.tar)> <镜像名称或Id> =>  docker save -o php.tar 894f8d826f6a
     载入镜像 : docker load --input php.tar(文件名称)
 
 容器 :
-    新建容器 : docker create -it <镜像名称或ID(php:7.1-fpm)> #默认情况下为不启动
+    新建容器 : docker create -it <镜像名称或ID(php:7.1-fpm)> # 默认情况下为不启动
     新建并启动容器 : docker run
-    查看容器 : docker ps #查看当前运行的容器  docker ps -a #查看所有容器
+    查看容器 : docker ps # 查看当前运行的容器  docker ps -a # 查看所有容器
     运行容器 : docker run <容器名orID>
     停止容器 : docker stop <容器名orID>
     开启容器 : docker start <容器名orID>
@@ -53,7 +53,7 @@
 
 容器中 :
     安装vi|vim : apt-get install -y vi|vim
-    更新apt : apt-get update #安装其他功能时,更新-安装-更新
+    更新apt : apt-get update # 安装其他功能时,更新-安装-更新
 
 数据卷 : 供容器使用的特殊目录 volume(卷)
     创建 : 在运行的时候加上 -v 可以使用多个
@@ -64,7 +64,7 @@
                    -d      后台运行|守护
                    -v /data/nginx/html:/usr/share/nginx/html (将本机的文件映射到容器中的文件)
     数据卷容器 : 容器之间共享数据(挂载在同一个文件夹中)
-           docker run -it -v /dbData --name dbData php  #删除卷 docker rm -v dbData
+           docker run -it -v /dbData --name dbData php  # 删除卷 docker rm -v dbData
            docker run -it --volumes-from dbData --name db1 php
            docker run -it --volumes-from dbData --name db2 php
     数据卷迁移数据 : 备份和恢复(自行了解)
@@ -75,7 +75,63 @@
       容器互联 : docker run --link 容器名称
       docker公开连接 : 环境变量(env) 或 更新 /etc/hosts文件
 
-使用Dockerfile创建镜像 :
+使用Dockerfile创建镜像 : 文本格式的配置文件
+      指令 : 一般格式为 instruction(指令) arguments(参数) , 指令包括 from , maintainer(维护者) , run , cmd 等 .
+      组成部分(一般而言) : 基础镜像信息 , 维护者信息 , 镜像操作指令 , 容器操作指令
+          eg :
+                # 第一行必须指定基于的基础镜像
+                # FROM <image>[:<tag>]
+                FROM php:7.1
+
+                # 维护者信息
+                # MAINTAINER <name>
+                MAINTAINER huangzhhui <h@swoft.org>
+
+                # ENV <key> <value> 指定一个环境变量 , 可供 RUN 命令使用 , 并在容器中保持运行 
+                ENV PHPREDIS_VERSION 4.0.0
+                ENV HIREDIS_VERSION 0.13.3
+                ENV SWOOLE_VERSION 4.0.3
+
+                # 镜像操作指令(可以有多个)
+                # RUN <command>  在shell终端中运行命令,即 /bin/sh -C
+                # 或者
+                # RUN ["executalbe","param1","param2"] 这里的[]非说明中的 , 使用 exec 执行
+                RUN curl -sS https://getcomposer.org/installer | php \
+                    && mv composer.phar /usr/local/bin/composer \
+                    && composer self-update --clean-backups
+
+                # 容器暴露的端口号
+                # EXPOSE <port> [<port>...]
+                EXPOSE 80 22 443
+
+                # 容器操作指令
+                ......
+
+                # (只能有一个,如果有多个只会执行一个)
+                # CMD ["executalbe","param1","param2"] 这里的[]非说明中的 , 使用 exec 执行 (推荐)
+                # 或者
+                # CMD command param1 param2 在 /bin/sh 中执行
+                # 或者
+                # CMD ["param1","param2"] 提供给 entrypoint 的默认参数
+                CMD /usr/sbin/nginx
+      其他指令 :
+          ADD <src> <dest> : 复制指定的 src 到容器中的 dest
+          COPY <src> <dest> : 复制本地的 src 到容器 dest
+          ENTRYPOINT : 配置容器启动后执行的命令 ,只能有一个 , 如果有多个只会执行一个(最后一个生效)
+                       1 : ENTRYPOINT command param1 param2 在 /bin/sh 中执行
+                        or
+                       2 : ENTRYPOINT ["param1","param2"]
+          VOLUME : VOLUME ["/data"] # 创建一个可以从本地主机或其他容器挂载的挂载点 , 一般用于存放数据和保持数据
+          USER : USER daemon # 指定运行容器是的用户名或UID
+          WORKDIR : WORKDIR /path/to/workdir # 为后续 RUN , CMD , ENTRYPOINT 等指令配置工作目录 . 可多个 如果后续路径为相对路径,则会基于之前的指令
+                    WORKDIR /a
+                    WORKDIR b
+                    WORKDIR c
+                    RUN pwd   # /a/b/c
+          ONBUILD : ONBUILD [INSTRUCTION]
+      创建镜像 : 完成 dockerFile 后 , 可通过 docker build [option] 来创建镜像
+                可配置 .dockerignore 文件 , 来忽略 docker 路径下的 目录和文件
+
 
 常见问题 :
     docker组没有 : could not change group /var/run/docker.sock to docker: group docker not found
@@ -86,6 +142,6 @@
 
     挂载失败 : /usr/bin/docker-current: Error response from daemon: error creating overlay mount to /var/lib/docker/overlay2/b35b5d54a4bb354ff5bbf4b8906db3acce819339c8c9bf378d9e388d9dedbed7-init/merged: invalid argument.
                Solve :
-                      rm -rf /var/lib/docker  #会删除docker images
-                      vi /etc/sysconfig/docker-storage   #指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
-                      vi  /etc/sysconfig/docker #删除 --selinux-enabled
+                      rm -rf /var/lib/docker  # 会删除docker images
+                      vi /etc/sysconfig/docker-storage   # 指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
+                      vi  /etc/sysconfig/docker # 删除 --selinux-enabled
