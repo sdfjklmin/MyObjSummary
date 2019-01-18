@@ -96,3 +96,10 @@ git reset --hard origin/master
 git rm --cached -r vendor/
 
 #删除暂存区或分支上的文件，同时工作区 '不需要' 这个文件，可以使用 'git rm'
+
+echo "# chrome-extension" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/sdfjklmin/chrome-extension.git
+git push -u origin master
