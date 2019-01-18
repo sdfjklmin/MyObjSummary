@@ -97,9 +97,20 @@ git rm --cached -r vendor/
 
 #删除暂存区或分支上的文件，同时工作区 '不需要' 这个文件，可以使用 'git rm'
 
+#git 新项目 新增文件
 echo "# chrome-extension" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
-git remote add origin https://github.com/sdfjklmin/chrome-extension.git
+git remote add origin https://web.com
 git push -u origin master
+
+#项目拉取 建议用 ssh 而不是 https(每次都要输入用户名和密码,若配置个人信息 不安全 .. )
+
+#修改git项目标记
+#github是使用 Linguist 来detect所使用的语言,通过统计哪种语言代码数量最多的作为当前项目主语言
+.gitattributes
+*.html linguist-language=python
+*.js   linguist-language=python
+*.css  linguist-language=python
+# 将.js、.css、.html当作python语言来统计
