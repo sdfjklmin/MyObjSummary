@@ -1,0 +1,21 @@
+php-scr(源码)目录介绍:
+    build       和编译有关的目录。
+    ext         扩展库代码，例如 MySQL、zlib、iconv 等我们熟悉的扩展库。其中/ext/standard/ 目录下是常用的标准函数集。
+    main        主目录包含主要的 PHP 宏和定义。
+    sapi        和各种服务器的接口调用，例如apache、IIS等，也包含一般的fastcgi、cgi等。
+    win32       和 Windows 下编译 PHP 有关的脚本。
+    Zend        文件夹核心的引擎，所有的 Zend API 定义与宏等。
+    scripts     Linux 下的脚本目录。
+    tests       测试脚本目录
+    sapi        各类 Web 服务器的接口。
+    TSRM        Zend 和 PHP 的 “线程安全资源管理器” (TSRM) 目录。
+    pear        这个目录就是“PHP 扩展与应用仓库”的目录。包含了PEAR 的核心文件。
+    其它目录     不同的PHP版本,可能会有不同的文件文件,但核心的基础文件夹大致相同
+
+其中几个重要的文件绝对值得你共时间去了解：
+
+php-src/main/php.h, 位于PHP 主目录。这个文件包含了绝大部分 PHP 宏及 API 定义。
+
+php-src/Zend/zend.h, 位于 Zend 主目录。这个文件包含了绝大部分 Zend 宏及 API 定义。
+
+php-src/Zend/zend_API.h, 也位于 Zend 主目录，包含了Zend API 的定义

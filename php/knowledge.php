@@ -197,3 +197,9 @@
 # $args为数组形式,无论传多少参数都会以数组的形式保存在$args中
 # $args一般为一维数组或者多维,主要看传参
     function tt(...$args) { return 'change'; }
+
+#28: 内置web server服务
+#   php -S localhost:20002 -t ./
+#    -S  启动内置服务
+#    -t  指定运行目录 文件夹形式 ,默认文件为 index.php
+#    省略-t  php -S localhost:20002 index.php  以index.php作为路由文件
