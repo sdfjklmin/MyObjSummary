@@ -65,12 +65,13 @@
 	#使用
 	MyCat
 
-    mklink /J D:\Obj\Link\test4 D:\Obj\Link\test5
-    test4自动创建 指向 test5
-    为 D:\Obj\Link\test4 <<===>> D:\Obj\Link\test5 创建的联接
-    rmdir D:\Obj\Link\test4 rmdir D:\Obj\Link\test5  #删除
-
-	mklink /J D:\Obj\passport\common\core[项目core,common中不用创建core文件夹] D:\Obj\core[真实的core]
+    创建软链接 :
+	    mklink /J D:\Obj\passport\common\core[项目core,common中不用创建core文件夹] D:\Obj\core[真实的core]
+        为 D:\Obj\passport\common\core <<===>> D:\Obj\core 创建的联接
+    删除软链接 :
+        rmdir D:\Obj\passport\common\core
+        rmdir D:\Obj\core
+        rmdir删除虚拟目录     del实际删除
 
     Capistrano(ruby编写) 发包工具
 
