@@ -14,6 +14,6 @@
     即便如此，随着企业的业务发展和人员规模的壮大，不同业务所形成的微服务群之间的协同却面临新的挑战(单一语言独大,多语言不融合等)。
     
 #### Service Mesh 的形态
-    Service Mesh 的核心思路与微服务软件架构的思路是一脉相承的，即通过拆分实现解耦——将 SDK 中频繁变更的逻辑与业务逻辑分别放到不同的进程中。    
-
+    Service Mesh 的核心思路与微服务软件架构的思路是一脉相承的，
+    即通过拆分实现解耦——将 SDK 中频繁变更的逻辑与业务逻辑分别放到不同的进程中。    
 ![Image text](https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png)
