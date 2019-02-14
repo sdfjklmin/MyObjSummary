@@ -16,4 +16,9 @@
 #### Service Mesh 的形态
     Service Mesh 的核心思路与微服务软件架构的思路是一脉相承的，
     即通过拆分实现解耦——将 SDK 中频繁变更的逻辑与业务逻辑分别放到不同的进程中。    
+    如图所示:
 ![Image text](https://github.com/sdfjklmin/MyObjSummary/blob/master/serviceMesh/img/shape.png)
+    
+    拆分之后，服务调用的流量通过技术手段以应用无感的形式导入 sidecar 进程。
+    每个服务进程边上新增的 sidecar 使得完整的服务调用链中客户端和服务端分别增加了一跳，
+    这是享受 Service Mesh 技术所需付出的成本。
