@@ -16,4 +16,4 @@
 #### Service Mesh 的形态
     Service Mesh 的核心思路与微服务软件架构的思路是一脉相承的，
     即通过拆分实现解耦——将 SDK 中频繁变更的逻辑与业务逻辑分别放到不同的进程中。    
-![Image text](https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png)
+![Image text](https://github.com/sdfjklmin/MyObjSummary/blob/master/serviceMesh/img/shape.png)
