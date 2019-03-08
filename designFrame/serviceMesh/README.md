@@ -1,4 +1,4 @@
-### 微服务 Service Mesh 
+### Service Mesh 
     “Smart endpoint and dumb pipes”
         是微服务架构在集成服务时采用的一个核心理念，
         这一理念改变了过去臃肿集中的ESB（企业服务总线）
