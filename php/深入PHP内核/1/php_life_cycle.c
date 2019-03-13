@@ -1,17 +1,18 @@
 /*
  * PHP生命周期
  * PHP程序的启动
- *              前置初始化(Apache相关操作)
+ *              前置初始化(Apache或Nginx相关操作)
  *              模块初始化       对应扩展 php.dll
- *              请求初始化       $_SERVER等参数                       I
- *      frame   执行php脚本      code                               I   I  重复执行
- *              请求处理完成     request                            I
+ *              请求初始化       $_SERVER等参数      I
+ *      frame   执行php脚本      code               I   I可以重复执行(一般为框架内容)
+ *              请求处理完成     request            I
  *              关闭模块        close
  *
  * Apache:
  *       A: php作为Apache的一个模块的启动和终止.
  *          这次php会初始化一些必要的数据(PHP_MINIT_FUNCTION),比如和Apache有关的,这些数据时常驻内存的!终止与之对应.
  *       B: Apache分配一个页面请求过来的时候,php会有一次启动和终止
+ *
  * PHP扩展周期:
  *      http://www.cunmou.com/phpbook/1.md
  *      Module init、Request init、Request Shutdown、Module shutdown 四个过程
