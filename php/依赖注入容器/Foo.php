@@ -232,7 +232,7 @@ $foo->doSomething();
 
 echo "<br />","-------------------------------------------------","<br />";
 
-// 后期静态绑定 灬弹妖妖` M.Commander
+// 后期静态绑定
 class IoC
 {
     protected static $registry = [];
