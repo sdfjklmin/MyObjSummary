@@ -59,7 +59,7 @@ class ApplePay
             return $this->code400() ;
         }
         //环境配置
-        if ($this->sandbox) {
+        if($this->sandbox) {
             $endpoint = 'https://sandbox.itunes.apple.com/verifyReceipt';//沙箱地址
         } else {
             $endpoint = 'https://buy.itunes.apple.com/verifyReceipt';//真实运营地址
@@ -83,7 +83,7 @@ class ApplePay
         curl_close($ch);
         if ($errno != 0) {
             return $this->code400('curl请求有错误!') ;
-        }else{
+        } else {
             $data = json_decode($response, true);
             if (!is_array($data)) {
                 return $this->code400('数据错误!') ;
