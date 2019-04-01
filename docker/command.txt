@@ -34,6 +34,7 @@
     删除镜像 : docker rmi <名称>         =>  docker rmi [-f(强制删除)] php:7.1-fpm   # 正在运行的镜像无法删除
     存出镜像 : docker save -o <存出的文件名.格式(php.tar)> <镜像名称或Id> =>  docker save -o php.tar 894f8d826f6a
     载入镜像 : docker load --input php.tar(文件名称)
+    载入镜像 :  docker network ls(查看网络方式[bridge:桥接,host:本机,none:无指定])
 
 容器 :
     新建容器 : docker create -it <镜像名称或ID(php:7.1-fpm)> # 默认情况下为不启动

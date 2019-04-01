@@ -209,3 +209,12 @@
 #访问https://curl.haxx.se/docs/caextract.html，下载cacert.pem，并在php.ini文件添加
 #curl.cainfo="extras/ssl/cacert.pem"
 #openssl.cafile="extras/ssl/cacert.pem"
+
+#30 array_combine($key,$data) 组合key和data
+    $key = [2,3] ;
+    $data = ['2data','3data'] ;
+    array_combine($key,$data);
+    /*array:2 [
+        2 => "2data"
+        3 => "3data"
+    ]*/
