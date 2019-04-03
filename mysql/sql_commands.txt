@@ -88,3 +88,14 @@ _13:查询替换和新增
 _14:having 指定一组行或聚合的过滤条件,通常和group by连用
     (通过column分组,查询出名称和对应的总数,获取总数大于10的)
     SELECT count(id) as total,name FROM T GROUP BY column having total > 10
+_15:
+    LIKE “%name”或者LIKE “%name%”，这种查询会导致索引失效而进行全表扫描。但是可以使用LIKE “name%”。
+    那如何查询%name%？使用全文索引
+    eg: select id,fnum,fdst from table_name where user_name like '%zhangsan%' ;
+    新增全文索引:(全文索引不能用InnoDB,用MyISAM,MySQL5.6.24上InnoDB引擎也加入了全文索引)
+        ALTER TABLE `table_name` ADD FULLTEXT
+        INDEX `idx_user_name` (`user_name`);
+    新查询: select id,fnum,fdst from table_name
+    where match(user_name) against('zhangsan' in boolean mode);
+    全文索引格式:
+         MATCH (columnName,...) AGAINST ('string')
