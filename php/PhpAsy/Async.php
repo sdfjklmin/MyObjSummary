@@ -38,11 +38,11 @@ function xrange($start, $end, $step = 1) {
     echo $num, "\n";
 }*/
 
-$xRange = xrange(1,100);
+/*$xRange = xrange(1,100);
 
 var_dump($xRange); // object(Generator)#1 (0) { }
 
-var_dump($xRange instanceof Iterator); // bool(true)
+var_dump($xRange instanceof Iterator); // bool(true)*/
 
 //协程的支持是在迭代生成器的基础上, 增加了数据传输(调用者发送数据给被调用的生成器函数).
 //这就把生成器到调用者的单向通信转变为两者之间的双向通信
@@ -58,9 +58,9 @@ function logger($fileName) {
         fwrite($fileHandle, yield . "\n");
     }
 }
-$logger = logger(__DIR__ . '/log');
+/*$logger = logger(__DIR__ . '/log');
 $logger->send('Foo');
-$logger->send('Bar');
+$logger->send('Bar');*/
 
 /**
  * yield数据传输
@@ -72,10 +72,10 @@ function gen() {
     $ret = (yield 'yield2');
     var_dump($ret);
 }
-$gen = gen();
+/*$gen = gen();
 var_dump($gen->current());
 var_dump($gen->send('ret1'));
-var_dump($gen->send('ret2'));
+var_dump($gen->send('ret2'));*/
 
 
 /**
