@@ -246,7 +246,23 @@ Vi Command	:
   	alias test="cd /minCmd"	
   	source /etc/bashrc  # 使更改配置生效
   b.建立shell脚本
-  c.linux自定义service	  	
+  c.linux自定义service
+    tt.service
+    [Unit]
+    Description=Yii Queue Worker1 %I
+
+    [Service]
+    User=www
+    Group=www
+    ExecStart=/usr/local/php/bin/php /var/www/passport/yii queue/listen
+    Restart=on-failure
+
+    [Install]
+    WantedBy=multi-user.target
+
+
+
+
 6.修改主机信息
   a.使用hostname
   	hostname 主机名称
