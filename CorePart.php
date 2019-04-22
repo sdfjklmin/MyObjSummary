@@ -39,8 +39,9 @@ abstract class CoreInterpreter
             case 't-mode' : $link = 'php/designMode/Zend.php';break ;
             case 't-php'  : $link = 'test/index.php';break ;
             case 't-html' : $link = 'test/index.html';break ;
-            case 'up':
+            case 'up-json':
                 self::$refresh = true ; $link=''; $this->isExit = false;
+                FileCache::indexJson();
                 break;
             case 'default-way': $link = 'min/index.php';break;
             default : exit('no match this rule');break ;
@@ -111,11 +112,24 @@ class CorePart extends CoreInterpreter
         return $path ;
     }
 
-    /** 运行入口
-     * @return null
+    /** 注册 MIN_PARAM 到 $_SERVER
+     * @param $config
      */
-    public function run()
+    private function _initConf($config)
     {
+        $_SERVER['MIN_PARAM'] = $config ;
+    }
+
+
+    /**  运行入口
+     * @param array $config
+     */
+    public function run($config = [])
+    {
+        if(!empty($config)) {
+            $this->_initConf($config);
+        }
+
         $path = $this->ruleFitter();
         if(!$path) {
             $path = 'default-way';

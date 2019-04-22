@@ -247,13 +247,19 @@ if(!function_exists('ckPwd')) {
 if(!function_exists('getDirTree')) {
     function getDirTree( $directory ,$label = [] ,$parentDir ='')
     {
+        /** @var array $minParam 文件名称 */
+        $minParam = $_SERVER['MIN_PARAM']['dir_name'] ?? [];
         $dirs  = scandir($directory) ;
         foreach ($dirs as $dir) {
             if( $dir[0] === '.' ||  in_array($dir,NOT_LINK) )  continue ;
+            /** @var string $temDir 临时文件名称 */
+            $temDir = $directory.$dir;
+            $temDir = ltrim($temDir,'./');
+            $title = isset($minParam[$temDir.'.name']) ? $dir.' | '.$minParam[$temDir.'.name'] : $dir ;
             if(is_dir($directory.$dir)) {
                 //$label[$dir]
                 $label[] = [
-                    'name' => $dir ,
+                    'name' => $title ,
                     'code' => $dir ,
                     'icon' => $parentDir ? 'icon-minus-sign' : 'icon-th' ,
                     'parentCode' => $parentDir ,
@@ -264,7 +270,7 @@ if(!function_exists('getDirTree')) {
                 // $parentDir ? 'icon-minus-sign' : 'icon-th' ,
                 // 目前不开放根目录文件 可通过icon样式显示
                 $label[] = [
-                    'name'=>$dir ,
+                    'name'=>$title ,
                     'icon'=>'icon-minus-sign' ,
                     'code'=>$dir ,
                     'parentCode'=>$parentDir ,

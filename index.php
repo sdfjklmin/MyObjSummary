@@ -19,7 +19,7 @@ defined('APP_STATIC') or define('APP_STATIC',APP_ROOT.'static/');
 
 //不需要生成的 后缀 可提成配置文件
 //文件夹
-defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html','composer','object','static','tool','vendor','min']) ;
+defined('NOT_LINK') or define('NOT_LINK', ['.','frame','html','composer','object','static','tool','vendor','min','config']) ;
 //文件后缀(避免无法解析时下载)
 defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 
@@ -28,5 +28,9 @@ defined('NOT_SUFFIX') or define('NOT_SUFFIX', ['png','md','jpg','zip']) ;
 require './vendor/autoload.php';
 require APP_ROOT.'CorePart.php';
 
+$config = array_merge(
+    require APP_ROOT.'config/dir_name.php'
+);
+
 //运行
-(new \MyObjSummary\CorePart())->run() ;
+(new \MyObjSummary\CorePart())->run($config) ;
