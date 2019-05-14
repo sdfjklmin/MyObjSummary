@@ -99,3 +99,9 @@ _15:
     where match(user_name) against('zhangsan' in boolean mode);
     全文索引格式:
          MATCH (columnName,...) AGAINST ('string')
+_16:
+    DESC table_name; #显示table列的信息
+
+    SHOW CREATE TABLE table_name; #显示创建table的SQL
+
+    SHOW INDEX FROM table_name; #显示table的索引
