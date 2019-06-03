@@ -92,6 +92,7 @@ make install
 
 	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-dtrace --enable-maintainer-zts --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
 	#--with-png-dir --with-freetype-dir --with-jpeg-dir --with-gd 暂时有问题
+	#./configure –enable-pcntl 编译pcntl,多线程
 
 	由于系统的版本不同,有些内置的模块没有,需要根据错误提示进行安装扩展
 	error:no acceptable C compiler found in $PATH (没有gcc)
