@@ -1,0 +1,205 @@
+#!/usr/local/bin/php -Cq
+<?php
+class PHPCli
+{
+    /** 命令名称
+     * @var string
+     */
+    private $command = 'phpCli';
+
+    /** 输入数据
+     * @var
+     */
+    private $initData ;
+
+    /** 首个数据
+     * @var
+     */
+    private $initFirst ;
+
+    /** 格式化输出
+     * @var bool
+     */
+    private $format = true;
+
+    /** @var array 命令支持 */
+    private $runCommand = ['ds','dsa'] ;
+
+    /** @var array  */
+    private $shellMap = [
+            'ds'  => 'docker ps',
+            'dsa' => 'docker ps -a'
+    ] ;
+
+    /** 执行shell
+     * @var
+     */
+    private $shell ;
+
+    /**
+     * PHPCli constructor.
+     * @param $argv
+     */
+    public function __construct($argv)
+    {
+        # 基本参数 入口文件
+        $this->initFirst = $argv[0] ;
+        array_shift($argv);
+
+        $this->initData = $argv ;
+    }
+
+    /** 格式输出
+     * @param bool $end
+     */
+    private function putFormat($end = false)
+    {
+        print "\n";
+        if($end) {
+            exit();
+        }
+    }
+
+    /*
+     * 使用说明
+     */
+    private function help()
+    {
+        $this->putFormat();
+        print 'Usage: '.$this->command.' Command'."\n";
+        $this->putFormat();
+
+        print 'Options:'."\n";
+        print '         -v  Show phpCli version'."\n";
+        print '         -m  Show php model'."\n";
+        print '         -h  Display this help'."\n";
+        $this->putFormat();
+
+        print 'Commands:'."\n";
+        print '          ds     Run docker command `docker ps`'."\n";
+        print '          dsa    Run docker command `docker ps -a`'."\n";
+        $this->putFormat();
+        exit();
+    }
+
+    /** shell运行
+     * @return mixed
+     */
+    private function shell()
+    {
+        if(!$this->shell) {
+            exit();
+        }
+        if($this->format) {
+            //$status 格式输出
+            system($this->shell, $status);
+        }else{
+            // $status 以数组形式返回
+            exec($this->shell, $status);
+        }
+        //passthru();
+        return $status ;
+    }
+
+    /**
+     * 功能入口
+     */
+    public function run()
+    {
+        $label = $this->initData[0] ?? '' ;
+        if(empty($label)) {
+            $this->help();
+        }
+        if($label[0] == '-') {
+            switch ($label)
+            {
+                //可扩展其它短命令
+                case '-m':
+                    $this->shell = 'php -m';
+                    break;
+                case '-v':
+                    echo $this->command.' 1.0.1-dev (cli)';
+                    $this->putFormat(true);
+                    break;
+                case '-h':
+                case '-help':
+                    $this->help();
+                    break;
+                default:
+                    $this->help();
+                    break;
+            }
+        }else{
+            if(in_array($label,$this->runCommand)) {
+                //可扩展更多shell
+                $this->shell = $this->shellMap[$label];
+            }else{
+                echo "Run '".$this->command." -help' for more information on a command.";
+                $this->putFormat(true);
+            }
+        }
+        $this->shell();
+
+    }
+
+}
+$phpCli = new PHPCli($argv);
+$phpCli->run();
+exit();
+//1.头部为 Hash-Bang 声明
+//将脚本放置 linux 系统 默认shell执行位置 /usr/local/bin
+//文件名(一般无后缀)就是命令名称 phpCli 对应执行命令为 /usr/local/bin/php -Cq /usr/local/bin/phpCli 参数输入
+//脚本操作比较大时建议 用后即焚 (关闭文件操作符,清空数组,关闭连接等)
+//eg : phpCli test ; 此时 $argv[0] = '/usr/local/bin/php' ;(当PHP最后开始运行是,它会导入 ./phpCli 和 输入参数 到 $argv 中)
+    /*array(2) {
+        [0]=>
+        string(6) "phpCli"
+        [1]=>
+        string(4) "test"
+    }*/
+# 基本参数 入口文件
+// cli 模式下,参数会保存在$argv中
+
+
+
+
+//2.用户输入,标准输入在 PHP流的 STDIN 中,或者 unix风格的 '终端输入' 设备 /dev/tty 中获得
+/*print 'please input something !'."\n";
+$message = trim(fgets(STDIN));
+var_dump($message);*/
+
+//3.解析命令行选项
+//PEAR 提供了 Console_Getopt包可以同时支付简短和长格式(GNU风格)的选项.
+//默认是与PHP绑定安装的,除非你关闭了PEAR
+//也可以自行定义
+
+//4.良好的习惯
+//使用信息
+//退出代码
+//错误信息
+//大多数都是用 一个简短信息来响应 -h | -help
+
+//5.进程控制(546)
+//进程概念
+//Forking概念
+
+    /*pcntl_fork — 在当前进程当前位置产生分支（子进程）。
+    译注：fork是创建了一个子进程，父进程和子进程 都从fork的位置开始向下继续执行，
+    不同的是父进程执行过程中，得到的fork返回值为子进程 号，而子进程得到的是0。 */
+
+/*    $pid = pcntl_fork();
+    //父进程和子进程都会执行下面代码
+    if ($pid == -1) {
+        //错误处理：创建子进程失败时返回-1.
+        die('could not fork');
+    } else if ($pid) {
+        //父进程会得到子进程号，所以这里是父进程执行的逻辑
+        echo 'this is parent test' ;
+        pcntl_wait($status); //等待子进程中断，防止子进程成为僵尸进程。
+    } else {
+        //子进程得到的$pid为0, 所以这里是子进程执行的逻辑。
+        echo 'this is son test';
+    }*/
+
+
+
