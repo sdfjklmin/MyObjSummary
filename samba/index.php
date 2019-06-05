@@ -5,6 +5,7 @@
 	service smb start  或者 systemctl restart smb.service
 3.配置
 	/etc/samba 复制示例文件 修改配置
+    /etc/samba/smb.conf
 	添加访问用户
 	smbpasswd -a user1 #user1要和linux下的用户匹配
 4.windows访问

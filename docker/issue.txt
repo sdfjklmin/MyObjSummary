@@ -1,0 +1,22 @@
+1. could not change group /var/run/docker.sock to docker: group docker not found
+
+        uname -r 查看内核
+
+        原因:
+            SELinux不支持 overlay2 graph driver
+
+        解决:
+            vi /etc/sysconfig/docker
+            在 docker 里禁用 selinux-enabled=false,
+        eg:
+            OPTIONS='--selinux-enabled=false --log-driver=journald --signature-verification=false'
+            if [ -z "${DOCKER_CERT_PATH}" ]; then
+            DOCKER_CERT_PATH=/etc/docker
+            fi
+
+2. /usr/bin/docker-current: Error response from daemon: error creating overlay mount to /var/lib/docker/overlay2/b35b5d54a4bb354ff5bbf4b8906db3acce819339c8c9bf378d9e388d9dedbed7-init/merged: invalid argument.
+
+        解决:
+            rm -rf /var/lib/docker  #会删除docker images
+            vi /etc/sysconfig/docker-storage   指定  DOCKER_STORAGE_OPTIONS="--storage-driver overlay"
+            vi  /etc/sysconfig/docker 删除 --selinux-enabled
