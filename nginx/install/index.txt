@@ -1,24 +1,41 @@
 1.必备软件
     a.安装 pcre 为了支持 rewrite 功能，我们需要安装 pcre
 
-        #yum install pcre //如过你已经装了，请跳过这一步
+        #yum install pcre* //如过你已经装了，请跳过这一步
 
         yum -y install pcre-devel (建议)
 
     b.安装 openssl 需要 ssl 的支持，如果不需要 ssl 支持，请跳过这一步
 
-        #yum install openssl
+        #yum install openssl*
 
         yum -y install openssl openssl-devel (建议)
 
+    c. C compiler cc is not found
+    
+         yum -y install gcc-c++    
+
+    d.nginx cache purge 清缓存模块安装(可选)
+        
+        wget http://labs.frickle.com/files/ngx_cache_purge-1.3.tar.gz
+        wget http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
+     
+        (当前包与nginx不兼容,下载最新包即可)
+        no ngx_cache_purge-1.3/./configure/config was found
+
  2.安装
+
     a.下载 wget http://nginx.org/download/nginx-1.16.0.tar.gz (自行选择版本,建议最新的稳定版本),自行解压.
 
     b.进入对应文件夹运行
          (旧版本)./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_spdy_module --with-http_stub_status_module --with-pcre
-         (新版本)./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_v2_module --with-http_stub_status_module --with-pcre
+         (新版本)
+             ./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_v2_module --with-http_stub_status_module --with-pcre --with-http_realip_module --add-module=../ngx_cache_purge-2.3
+
          spdy : 用以最小化网络延迟，提升网络速度，优化用户的网络使用体验
          stub_status : 支出nginx 状态查询,新版已经没有 http_spdy_module ,新增 http_v2_module
+         realip : 模块（将用户 IP 转发给后端服务器）
+         ngx_cache_purge : 添加缓存清除扩展模块(文件和nginx同级目录)
 
     c.成功提示
 
@@ -138,3 +155,34 @@
          –with-openssl= 指向 openssl 安装目录
          –with-openssl-opt 在编译时为 openssl 设置附加参数
          –with-debug 启用 debug 日志
+4.内核优化
+
+     vi /etc/sysctl.conf
+    参数如下 : 
+        net.ipv4.netfilter.ip_conntrack_tcp_timeout_established = 1800
+        net.ipv4.ip_conntrack_max = 16777216 #如果使用默认参数,容易出现网络丢包
+        net.ipv4.netfilter.ip_conntrack_max = 16777216 # 如果使用默认参数,容易出现网络丢包
+        net.ipv4.tcp_max_syn_backlog = 65536
+        net.core.netdev_max_backlog = 32768
+        net.core.somaxconn = 32768
+        net.core.wmem_default = 8388608
+        net.core.rmem_default = 8388608
+        net.core.rmem_max = 16777216
+        net.core.wmem_max = 16777216
+        net.ipv4.tcp_timestamps = 0
+        net.ipv4.tcp_synack_retries = 2
+        #net.ipv4.tcp_syn_retries = 1
+        net.ipv4.tcp_tw_recycle = 1
+        net.ipv4.tcp_tw_reuse = 1
+        net.ipv4.tcp_mem = 94500000 915000000 927000000
+        net.ipv4.tcp_max_orphans = 3276800
+        net.ipv4.ip_local_port_range = 1024 65535
+    配置生效 :
+        sysctl –p
+    修改 iptables 启动脚本,在 star()函数里面加上(没有就不用操作)
+        # vi /etc/init.d/iptables
+        /sbin/sysctl -p
+
+ 
+ (配置范例站点站点)              
+
