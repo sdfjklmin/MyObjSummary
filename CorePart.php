@@ -101,7 +101,7 @@ class CorePart extends CoreInterpreter
      */
     protected function ruleFitter()
     {
-        $path = trim($_SERVER['REQUEST_URI'],'/') ;
+        $path = trim($_SERVER['PATH_INFO'] ?? '','/') ;
         if(empty($path)) {
             return null;
         }

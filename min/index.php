@@ -2,6 +2,27 @@
 //目录数据
 $link = \MyObjSummary\FileCache::indexJson();
 $title = '目录浏览' ;
+
+if(isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
+    $arrLink = json_decode($link,true);
+
+    function searchLink($arrLink,$search,$backLink = [])
+    {
+        foreach ($arrLink as $key => $oneLink) {
+            if(stripos($oneLink['name'],$search) !==false ) {
+                $backLink[] = $oneLink ;
+            }/*else{
+                if(!empty($oneLink['child'])) {
+                    searchLink($oneLink['child'],$search,$backLink,$arrLink,$key);
+                }
+            }*/
+        }
+        return $backLink ;
+    }
+    //dd(searchLink($arrLink,$search));
+    $link = json_encode(searchLink($arrLink,$search),true);
+}
 ?>
 <html >
 <head>
@@ -29,7 +50,8 @@ $title = '目录浏览' ;
 <div class="tree well">
     <ul id="rootUL">
         <li style="font-size: 21px;color: black;font-weight: bold"> <?php echo $title;?> </li>
-        <li> <input type="button" class="btn btn-default" value="Collapse"> </li>
+        <li> <input type="button" id="collapse" class="btn btn-default" value="Collapse"> </li>
+        <li> <input type="text" value="<?php echo $search ?? '' ;?>" style="height: 25px" id="search" class="btn btn-default" placeholder="Search for ..."> </li>
     </ul>
 </div>
 <!--返回top-->
@@ -92,7 +114,7 @@ $title = '目录浏览' ;
             }];*/
         function tree(data) {
             for (var i = 0; i < data.length; i++) {
-                var data2 = data[i];
+                //var data2 = data[i];
                 if (data[i].icon == "icon-th") {
                     $("#rootUL").append("<li data-name='" + data[i].code + "'><span><i class='" + data[i].icon + "'></i> " + data[i].name + "</span></li>");
                 } else {
@@ -160,7 +182,8 @@ $title = '目录浏览' ;
         });
 
         //折叠样式
-        $('#rootUL li > input').on('click',function (e) {
+        //$('#rootUL li > input').on('click',function (e) {
+        $('#collapse').on('click',function (e) {
             if(changeButton) {
                 $('.tree li.parent_li > span > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
                 $('.tree li.parent_li > ul > li').show();
@@ -169,6 +192,17 @@ $title = '目录浏览' ;
                 $('.tree li.parent_li > span > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
                 $('.tree li.parent_li > ul > li').hide();
                 changeButton = true ;
+            }
+        });
+        
+        $('#search').on('keyup',function (event) {
+            if (event.keyCode == "13") {
+                var search = $(this).val() ;
+                if(search) {
+                    window.location='/?search='+$(this).val() ;
+                }else {
+                    window.location='/' ;
+                }
             }
         });
     });
