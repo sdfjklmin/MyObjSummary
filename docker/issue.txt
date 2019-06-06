@@ -23,10 +23,11 @@
 
 3.Error response from daemon: oci runtime error: container_linux.go:235:
 
-原因: 
-    相关系统软件不兼容,建议升级
+        原因:
+            相关系统软件不兼容,建议升级
 
-解决:
-    yum update
-开机自启:
-    systemctl enable docker
+        解决:
+            yum update
+
+        开机自启:
+            systemctl enable docker
