@@ -1,0 +1,56 @@
+1.必备软件
+    a.安装 pcre 为了支持 rewrite 功能，我们需要安装 pcre
+
+        #yum install pcre //如过你已经装了，请跳过这一步
+
+        yum -y install pcre-devel (建议)
+
+    b.安装 openssl 需要 ssl 的支持，如果不需要 ssl 支持，请跳过这一步
+
+        #yum install openssl
+
+        yum -y install openssl openssl-devel (建议)
+
+ 2.安装
+    a.下载 wget http://nginx.org/download/nginx-1.16.0.tar.gz (自行选择版本,建议最新的稳定版本),自行解压.
+
+    b.进入对应文件夹运行
+         (旧版本)./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_spdy_module --with-http_stub_status_module --with-pcre
+         (新版本)./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_v2_module --with-http_stub_status_module --with-pcre
+         spdy : 用以最小化网络延迟，提升网络速度，优化用户的网络使用体验
+         stub_status : 支出nginx 状态查询,新版已经没有 http_spdy_module ,新增 http_v2_module
+
+    c.成功提示
+
+        nginx path prefix: "/usr/local/nginx"
+        nginx binary file: "/usr/local/nginx/sbin/nginx"
+        nginx modules path: "/usr/local/nginx/modules"
+        nginx configuration prefix: "/usr/local/nginx/conf"
+        nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+        nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+        nginx error log file: "/usr/local/nginx/logs/error.log"
+        nginx http access log file: "/usr/local/nginx/logs/access.log"
+        nginx http client request body temporary files: "client_body_temp"
+        nginx http proxy temporary files: "proxy_temp"
+        nginx http fastcgi temporary files: "fastcgi_temp"
+        nginx http uwsgi temporary files: "uwsgi_temp"
+        nginx http scgi temporary files: "scgi_temp"
+
+    d.编译
+
+        make && make install
+    e.
+        启动服务:
+            /usr/local/nginx/sbin/nginx
+        关闭服务:
+            /usr/local/nginx/sbin/nginx -s stop
+        平滑重启:
+            /usr/local/nginx/sbin/nginx -s reload
+        查看进程对应的id:
+            cat /usr/local/nginx/logs/nginx.pid
+        查看nginx服务:
+            ps -ef | grep nginx
+
+    f.测试
+
+         curl -s http://localhost | grep nginx.com
