@@ -90,7 +90,7 @@
 
          curl -s http://localhost | grep nginx.com
 
- 3.参数详解(部分参数由于版本原因可能已弃用,请参照官网进行配置)(12)
+ 3.参数详解(部分参数由于版本原因可能已弃用,请参照官网进行配置)
          –prefix= 指向安装目录
          –sbin-path 指向（执行）程序文件（nginx）
          –conf-path= 指向配置文件（nginx.conf）
@@ -201,6 +201,5 @@
         # vi /etc/init.d/iptables
         /sbin/sysctl -p
 
- 
- (配置范例站点站点)              
+
 
