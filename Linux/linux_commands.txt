@@ -272,13 +272,22 @@ Vi Command	:
     192.169.124.130 hostname
 
 7.将安装命令加入到系统环境中
-	vi /etc/profile
-	添加
-		PATH=$PATH:/(对应php的安装运行目录[bin])
-		PATH=$PATH:/(对应mongo的安装运行目录[bin])
-		export PATH
-	source /etc/profile  配置生效	
-	echo $PATH 查看
+	a.永久生效
+        vi /etc/profile
+        添加
+            PATH=$PATH:/(对应php的安装运行目录[bin])
+            PATH=$PATH:/(对应mongo的安装运行目录[bin])
+            export PATH
+        source /etc/profile  配置生效
+        echo $PATH 查看
+
+	b.  当前用户生效
+        cd ~
+        vi .bash_profile 修改文件中PATH一行，将路径加入到PATH=$PATH:$HOME/bin一行之后
+
+    c.临时生效
+		export PATH=$PATH:/(对应php的安装运行目录)
+
 
 8.ctrl + 回撤键	 #命令行模式输入删除
 
