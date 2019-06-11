@@ -146,7 +146,13 @@ php5.6安装:
 
 	php --ri yar // 查看yar的版本信息
 
+
 	安装nginx
+
+	cd /usr/local/nginx
+    mkdir conf.d
+	vi nginx.conf 末尾添加 include /usr/local/nginx/conf/conf.d/*
+
 	添加或修改Nginx.conf
 		location ~ \.php$ {
 
