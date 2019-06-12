@@ -31,7 +31,6 @@
         重启
 
  2.安装
-
     a.下载 wget http://nginx.org/download/nginx-1.16.0.tar.gz (自行选择版本,建议最新的稳定版本),自行解压.
 
     b.进入对应文件夹运行
@@ -174,7 +173,6 @@
          –with-openssl-opt 在编译时为 openssl 设置附加参数
          –with-debug 启用 debug 日志
 4.内核优化
-
      vi /etc/sysctl.conf
     参数如下 : 
         net.ipv4.netfilter.ip_conntrack_tcp_timeout_established = 1800
@@ -201,5 +199,143 @@
         # vi /etc/init.d/iptables
         /sbin/sysctl -p
 
+5.配置PHP(详情PHP部分)
+
+6.nginx配置多个虚拟主机(多server,详见配置)
+
+7.location 配置
+    语法规则： location [=|~|~*|^~] /uri/ { … }
+    = 表示精确匹配,这个优先级也是最高的
+    ^~ 表示 uri 以某个常规字符串开头，理解为匹配 url 路径即可。nginx 不对 url 做编码，因此请求为 /static/20%/aa，可以被规则^~ /static/ /aa 匹配到（注意是空格）。
+    ~  表示区分大小写的正则匹配
+    ~* 表示不区分大小写的正则匹配(和上面的唯一区别就是大小写)
+    !~和!~*分别为区分大小写不匹配及不区分大小写不匹配的正则
+    / 通用匹配，任何请求都会匹配到，默认匹配.
+
+    示例 :
+    location ~* .*\.(js|css)?$ {
+          expires 7d; //7 天过期
+          access_log off; //不保存日志
+    }
+
+    location ~* .*\.(png|jpg|gif|jpeg|bmp|ico)?$ {
+          expires 7d;
+          access_log off;
+    }
+
+    location ~* .*\.(zip|rar|exe|msi|iso|gho|mp3|rmvb|mp4|wma|wmv|rm)?$
+    {
+        deny all; //禁止这些文件下载，大家可以根据自己的环境来配置
+    }
+
+8.文件路径配置 root 和 alias (两者分别以不同的方式将请求映射到 服务器文件上)
+    [root]
+        语法：root path
+        默认值: root html
+        配置段: http、server、location、if
+        示例:
+            [info]root 会根据完整的 URI 请求来映射，也就是/path/uri
+    [alias]
+        语法：alias path
+        配置段：location
+        注意 : 目录名后面一定要加 " / "
 
 
+    eg:
+        站点: tt.com
+        访问路径 : tt.com/logs/error.log
+
+            root : (目录)
+            location ~ ^/logs/ {
+                root /data/www/tt.com;
+                autoindex on;
+                auth_basic            "Restricted";
+                auth_basic_user_file  passwd/weblogs;
+            }
+            root服务器地址:
+            /data/www/tt.com/logs/error.log
+
+            alias : (把当前匹配到的目录指向到指定的目录)
+            location ~ ^/logs/ {
+                alias /data/error/ ;
+            }
+            alias服务器地址:
+            /data/error/logs/error.log
+
+9.日志切割
+    1. 定义日志轮滚策略
+        # vim nginx-log-rotate 添加如下内容
+        /usr/local/nginx/logs/*.log {
+        daily
+        rotate 5
+        missingok
+        notifempty
+        sharedscripts
+        postrotate
+            if [ -f /usr/local/nginx/logs/nginx.pid ]; then
+                kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+            fi
+        endscript
+        }
+
+    2.定时执行
+        让logrotate每天进行一次滚动,在crontab中添加一行定时脚本。
+        #crontab -e
+        59 23 * * *  /usr/sbin/logrotate -f /[path:对应文件的地址]
+
+    3.说明
+        daily：日志文件每天进行滚动
+        rotate：保留最5次滚动的日志
+        notifempty：日志文件为空不进行滚动
+        sharedscripts：运行postrotate脚本
+        下面是一个脚本
+        postrotate
+            if [ -f /usr/local/nginx/logs/nginx.pid ]; then
+                kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+            fi
+        endscript
+        脚本让nginx重新生成日志文件
+
+10.重写规则rewrite
+
+11.nginx 逻辑运算
+
+12.CDN调度
+
+13.PHP 安全配置
+
+    a. 使用 open_basedir限制虚拟主机跨目录访问
+        [HOST=www.ttlsa.com]
+        open_basedir=/data/site/www.ttlsa.com/:/tmp/
+
+        [HOST=test.ttlsa.com]
+        open_basedir=/data/site/test.ttlsa.com/:/tmp/
+
+        若没有 www.ttlsa.com 和 test.ttlsa.com 可相互访问,有木马风险!
+
+    b.禁用不安全 PHP函数
+        disable_functions = show_source,system,shell_exec,passthru,exec,popen,proc_open,proc_get_status,phpin
+
+    c.php用户只读
+
+    d.关闭 php错误日志
+      display_errors = On 改为 display_errors = Off
+
+    e.上传分离
+      举个例子： php 站点 www.ttlsa.com，目录/data/site/www.ttlsa.com
+      静态文件站点 static.ttlsa.com，目录/data/site/static.ttlsa.com
+      文件直接被传到了/data/site/static.ttlsa.com，上传的文件无法通过 www.ttlsa.com 来访问，
+      只能使用 static.ttlsa.com 访问，但是 static.ttlsa.com 不支持 php.
+
+    f.关闭 php信息
+      expose_php = On 改为 expose_php = Off
+
+    g. 禁止动态加载链接库
+      disable_dl = On; 改为 enable_dl = Off;
+
+    h.禁用打开远程 url
+      allow_url_fopen = On 改为 allow_url_fopen = Off
+
+      file_get_contents("http://www.baidu.com/") 无法访问
+
+14.nginx tcp配置
