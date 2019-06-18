@@ -80,3 +80,8 @@
     serviceMesh(阿里中间件)
 
     passport(单点登录系统)
+
+   (各系统登录使用的是 Yii2 user 组件登录, cache 为 redis 和 cookie )
+   A(访问) -> 发送jsonp请求(前端) ->  passport(login,缓存登录信息)
+              已登陆(请求A登录->单点登录并记录公用缓存信息然后回调传参SESSION_KEY到A系统通过缓存共用一个SESSION_KEY,获取用户信息,实行本地登录
+              未登录(无操作)
