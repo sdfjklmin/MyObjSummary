@@ -1,2 +1,5 @@
-chrome://version/     谷歌信息
-chrome://extensions/  谷歌扩展
+chrome://version         信息
+chrome://extensions      扩展
+chrome://accessibility   正在使用的页面
+chrome://about           关于
+chrome://apps            应用
