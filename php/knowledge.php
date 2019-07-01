@@ -218,3 +218,19 @@
         2 => "2data"
         3 => "3data"
     ]*/
+
+#31 官方建议PHP文件以 ? > 结尾 ，但是语法标准和文件中并未这样做，为什么 ？
+# 避免文件引入的时候有多余的空格或者其它字符已2引起报错
+
+#32 在设置 header() 前不能有任何输出，否则PHP文件会报错 。
+
+#33 setcookie() 定义了 Cookie，会和剩下的 HTTP 头一起发送给客户端。
+# 和其他 HTTP 头一样，必须在脚本产生任意输出之前发送 Cookie（由于协议的限制）。
+# 请在产生任何输出之前（包括 <html> 和 <head> 或者空格）调用本函数。
+#一旦设置 Cookie 后，下次打开页面时可以使用 $_COOKIE 读取。 Cookie 值同样也存在于 $_REQUEST。
+
+#33 浏览的Cookie操作都是通过HTTP Header(俗称“Http头”) 来实现。
+#所有的服务器与客户端之间Cookie数据传输都是通过Http请求头来操作。
+#PHP中setCookie(函数的实现)，就是对HTTP头进行封装，由此看来 使用 header 与 使用setCookie是一样的。
+#由于header头信息属于HTTP协议内容，必须先把头信息发送到服务器，再进行数据下载等其他操作，
+#所以在setCookie 与 header 之前不能有任何内容输出（例如：echo/printf等）
