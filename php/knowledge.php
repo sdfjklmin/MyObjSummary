@@ -266,3 +266,6 @@
 
 #36 框架模型
 #laravel分为三大数据库操作(DB facade[原始查找]，查询构造器[Query Builder]，Eloquent ORM（ActiveRecord）)：
+
+#37 composer  是 PHP 的一个依赖管理工具 。
+# classmap , files , namespaces , psr4 , static
