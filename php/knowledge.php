@@ -220,7 +220,7 @@
     ]*/
 
 #31 官方建议PHP文件以 ? > 结尾 ，但是语法标准和文件中并未这样做，为什么 ？
-# 避免文件引入的时候有多余的空格或者其它字符已2引起报错
+# 避免文件引入的时候有多余的空格或者其它字符引起报错
 
 #32 在设置 header() 前不能有任何输出，否则PHP文件会报错 。
 
@@ -234,3 +234,35 @@
 #PHP中setCookie(函数的实现)，就是对HTTP头进行封装，由此看来 使用 header 与 使用setCookie是一样的。
 #由于header头信息属于HTTP协议内容，必须先把头信息发送到服务器，再进行数据下载等其他操作，
 #所以在setCookie 与 header 之前不能有任何内容输出（例如：echo/printf等）
+
+
+#34
+# https://blog.csdn.net/baixiaoshi/article/details/71848383
+# https://blog.csdn.net/zhangbijun1230/article/details/80474988
+#进程 ： 系统进行资源分配和调度的基本单位 （pcntl_fork）（可通过 缓存、数据库、共享内存进行数据处理）
+#       一个执行中的程序 ， 一个进程中至少有一个执行的流程（主线程），也可以开启新的执行流程（线程）
+#线程 ： 操作系统能够进行运算调度的最小单位
+#       多个执行流程 ， 一个线程可以执行多个协程
+#协程 ： 用户态完成程序的调度，像系统调度进程和线程一样
+#       比线程更加轻量级 ，完全被程序代码所调度和掌控， 不用操作系统介入
+#       使用setjmp和longjmp跳转来实现上下文的恢复来实现协程、使用ucontext库函数来实现协程、腾讯开源的libco协程库
+
+#35 jsonp 解决跨域问题 Json of Padding (调用js文件是不受跨域影响)
+/*$.ajax({
+             type: "get",
+             async: false,
+             url: "http://flightQuery.com/jsonp/flightResult.aspx?code=CA1998",
+             dataType: "jsonp",
+             jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+             jsonpCallback:"flightHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+             success: function(json){
+                alert('您查询到航班信息：票价： ' + json.price + ' 元，余票： ' + json.tickets + ' 张。');
+            },
+             error: function(){
+                alert('fail');
+            }
+         });
+     })*/
+
+#36 框架模型
+#laravel分为三大数据库操作(DB facade[原始查找]，查询构造器[Query Builder]，Eloquent ORM（ActiveRecord）)：
