@@ -3,3 +3,4 @@ try.php
 vendor/
 try.php
 #vendor/.git
+.idea/
