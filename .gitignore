@@ -4,3 +4,5 @@ vendor/
 try.php
 #vendor/.git
 .idea/
+composer.lock
+file.json
