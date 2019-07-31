@@ -291,27 +291,27 @@
 	
 	
 ##### 32. Mysql读写性能是多少,有哪些性能相关的配置 ?
-    	读写性能可以根据压力测试来进行获取.
-    	相关配置:
-    		max_connecttions :	最大连接数
-    		table_cache		 :	缓存打开表的数量
-    		key_buffer_size	 :	索引缓存大小
-    		query_buffer_size:	查询缓存大小
-    		sort_buffer_size :	排序缓存大小
-    		read_buffer_size :	顺序读缓存大小
-    		具体查询配置:
-    			show variables like '%max_connecttions%'
+    读写性能可以根据压力测试来进行获取.
+    相关配置:
+        max_connecttions :	最大连接数
+        table_cache		 :	缓存打开表的数量
+        key_buffer_size	 :	索引缓存大小
+        query_buffer_size:	查询缓存大小
+        sort_buffer_size :	排序缓存大小
+        read_buffer_size :	顺序读缓存大小
+        具体查询配置:
+            show variables like '%max_connecttions%'
 ##### 33. SQL层面已经难以优化,请求量还在增加的对应策略 ?
-    	分库分表
-    	使用集群(master-slave),读写分离
-    	增加业务层的cache层
-    	使用连接层
+    分库分表
+    使用集群(master-slave),读写分离
+    增加业务层的cache层
+    使用连接层
 ##### 34. 如何防止DB误操作和做好防灾 ?	
-    	重要DB数据的手工修改操作，操作前需做到2点：
-    		1.先在测试环境操作 
-    		2.备份数据:根据业务重要性做定时备份，考虑系统可承受的恢复时间
-    		进行容灾演练，感觉很必要
-    	MySql备份和恢复	
+    重要DB数据的手工修改操作，操作前需做到2点：
+        1.先在测试环境操作 
+        2.备份数据:根据业务重要性做定时备份，考虑系统可承受的恢复时间
+        进行容灾演练，感觉很必要
+    MySql备份和恢复	
     
 ##### 35. MySql内部结构有哪些层次 ?
     Connectors：连接器。接收不同语言的Client交互
