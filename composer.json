@@ -1,11 +1,5 @@
 {
     "name": "my-obj-summary",
-    "require": {
-        "fzaninotto/faker": "^1.8",
-        "guzzlehttp/guzzle": "~6.0",
-        "webonyx/graphql-php": "^0.13.0",
-        "hashids/hashids": "^3.0"
-    },
     "autoload": {
         "psr-4": {
             "bookLog\\": "bookLog"
@@ -20,9 +14,5 @@
             "type": "composer",
             "url": "https://packagist.phpcomposer.com"
         }
-    },
-    "require-dev": {
-        "behat/behat": "^3.5",
-        "phpunit/phpunit": "^7.5"
     }
 }
