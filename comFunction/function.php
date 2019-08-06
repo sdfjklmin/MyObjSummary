@@ -25,34 +25,24 @@ if(!function_exists('dd')) {
     /**
      * 打印信息
      */
-	function dd()
-	{
-        if(PHP_SAPI == 'cli'){
+    function dd()
+    {
+        if(PHP_SAPI === 'cli'){
             $symbol = "\n";
         }else{
             $symbol = "<br />" ;
             echo "<pre />";
         }
-        $exitSwitch  = true;
-		if(func_get_args()) {
-			foreach (func_get_args() as $key => $value) {
-                /*if( is_string($value) &&
-                    ($value === 'exit-0') &&
-                    ($key+1) ===func_num_args() ) {
-                    $exitSwitch = false ;
-                    continue ;
-                }*/
-				# code...
-				echo "type: ".gettype($value).$symbol;
-				echo "data: ";
-					print_r($value) ;
+        if(func_get_args()) {
+            foreach (func_get_args() as $key => $value) {
+                echo "type: ".gettype($value).$symbol;
+                echo "data: ";
+                print_r($value) ;
                 echo $symbol;
-			}
-		}
-		if($exitSwitch) {
-            exit();
+            }
         }
-	}
+        exit();
+    }
 }
 
 if(!function_exists('dda')) {
