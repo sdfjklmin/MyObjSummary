@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>hash_hmac sha1 签名校验工具</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://video.qcloud.com/signature/lib/bootstrap.min.css">
+    <style>
+        .form-value{
+            width:74% !important;
+        }
+        .form-name{
+            width:25% !important;
+        }
+        .form-block{
+            width: 100% !important;
+        }
+        .text-danger{
+            color:red;
+        }
+        .form-inline{
+            margin-bottom: 10px;
+        }
+        .control-label{
+            text-align: left !important;
+            padding:0 0 0 15px;
+        }
+        .non-required-form .control-label{
+            font-weight: normal;
+        }
+        .non-required-form{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="text-center">
+        <h2>hash_hmac sha1 签名校验工具</h2>
+    </div>
+
+    <form class="form-horizontal" style="padding:0 12%" >
+        <!-- 签名 -->
+
+        <div class="form-group form-inline">
+            <label class="col-sm-3 control-label">签名结果串(必填)<span class="text-danger">*<span></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control form-block" name="signature" placeholder="">
+            </div>
+            <div class="col-sm-2">
+                <button type="button" name="button" class="btn btn-success" id="decodeSig" style="width: 100%;">解析签名</button>
+            </div>
+        </div>
+
+
+
+        <div class="form-group form-inline">
+            <label class="col-sm-3 control-label">中间结果(Query String)</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-block" name="queryString" placeholder="" readonly>
+            </div>
+        </div>
+
+
+
+        <!-- 解析结果 -->
+        <div class="form-group form-inline required-form">
+            <label class="col-sm-3 control-label">Secret ID</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-name" value="secretId" readonly>
+                <input type="text" class="form-control form-value" name="secretId" readonly>
+            </div>
+        </div>
+        <div class="form-group form-inline required-form">
+            <label class="col-sm-3 control-label">当前时间戳</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-name" value="currentTimeStamp" readonly>
+                <input type="text" class="form-control form-value" name="currentTimeStamp" readonly>
+                <span class="currentTimeStampHuman"></span>
+            </div>
+        </div>
+        <div class="form-group form-inline required-form">
+            <label class="col-sm-3 control-label">签名失效时间戳</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-name" value="expireTime" readonly>
+                <input type="text" class="form-control form-value" name="expireTime" readonly>
+                <span class="expireTimeHuman"></span>
+            </div>
+        </div>
+        <div class="form-group form-inline required-form">
+            <label class="col-sm-3 control-label">随机数</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-name" value="random" readonly>
+                <input type="text" class="form-control form-value" name="random" readonly>
+            </div>
+        </div>
+
+        <!-- Secret Key -->
+        <div class="form-group form-inline">
+            <label class="col-sm-3 control-label">Secret Key(必填)<span class="text-danger">*<span></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control form-block" name="secretKey" placeholder="">
+            </div>
+            <div class="col-sm-2">
+                <button type="button" name="button" class="btn btn-success" id="checkSecretkey" style="width: 100%;">校验</button>
+            </div>
+
+        </div>
+
+        <div class="form-group form-inline">
+            <label class="col-sm-3 control-label">签名校验结果</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-block" name="decodeResult" placeholder="" readonly style="color: red;">
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://video.qcloud.com/signature/lib/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://video.qcloud.com/signature/lib/bootstrap.min.js"></script>
+<script src="https://video.qcloud.com/signature/lib/uploaderh5V3.js" charset="utf-8"></script>
+<script>
+    var signature,secret_key;
+    $("#decodeSig").click(function(){
+        signature = $("input[name=signature]").val();
+        if(!signature) {
+            alert('签名结果串 不能为空');
+        } else {
+            var signature = $("input[name=signature]").val();
+            decodeSignature(signature);
+        }
+    });
+
+    $("#checkSecretkey").click(function(){
+        signature = $("input[name=signature]").val();
+        secret_key = $("input[name=secretKey]").val();
+        var checkResult;
+        if(!secret_key) {
+            $("input[name=decodeResult]").val('Secret Key 不能为空');
+        } else {
+            checkResult = check(signature, secret_key);
+            if(checkResult){
+                if(checkResult == 'expired') {
+                    $("input[name=decodeResult]").val('签名已过期');
+                } else if(checkResult == 'notInt') {
+                    $("input[name=decodeResult]").val('时间戳和随机数必须为纯数字');
+                } else if (checkResult == 'wrongExpireTime') {
+                    $("input[name=decodeResult]").val('expireTime 不可小于 currentTimeStamp');
+                } else {
+                    $("input[name=decodeResult]").val('签名校验通过');
+                }
+            }else {
+                $("input[name=decodeResult]").val('签名校验失败');
+            }
+        }
+    });
+
+    var decodeSignature = function(signature){
+        // var sha = CryptoJS.HmacSHA1(argStr, secret_key);
+        // sha.concat(CryptoJS.enc.Utf8.parse(argStr))
+        // var signature = CryptoJS.enc.Base64.stringify(sha);
+        $(".non-required-form").hide();
+        $(".required-form .form-value").val("");
+        $("input[name=queryString]").val("");
+
+        var queryString = getOriginalStr(signature);
+        //将解析的结果填入input
+        $("input[name=queryString]").val(queryString);
+        var arr = queryString.split("&");
+        arr.map(function(item){
+            var name = item.split("=")[0].replace(/\./,"_");
+            var value = decodeURIComponent(item.split("=")[1]);
+            if(!name || !value) {
+                alert('签名结果串格式不合法，请检查输入的签名结果串');
+                return;
+            }
+            var input = $("input[name='"+escape(name)+"']");
+            if(input.length>=1){
+                $(input).val(value);
+                $(input).closest(".non-required-form").show();
+
+                if (name === 'currentTimeStamp') {
+                    $('.currentTimeStampHuman').text(new Date(value * 1000))
+                }
+                if (name === 'expireTime') {
+                    $('.expireTimeHuman').text(new Date(value * 1000))
+                }
+            }else{
+                var customInput = '<div class="form-group form-inline non-required-form" style="display:block">'
+                    + '<label class="col-sm-3 control-label"></label>'
+                    + '<div class="col-sm-9">'
+                    + '<input type="text" class="form-control form-name" disabled>'
+                    + '<input type="text" class="form-control form-value" disabled>'
+                    + '</div></div>';
+                $(".required-form:last").after(customInput);
+                $(".required-form:last").next().find('.form-name').val(name);
+                $(".required-form:last").next().find('.form-value').val(value);
+            }
+        })
+
+    }
+
+    function getOriginalStr(signature) {
+
+        var buffer = CryptoJS.enc.Base64.parse(signature);
+        var argBuffer = CryptoJS.lib.WordArray.create(buffer.words.slice(5), buffer.sigBytes-20);
+        return argBuffer.toString(CryptoJS.enc.Utf8);
+
+    }
+
+    function check(signature, secret_key) {
+        // 先做 base64 解码，拿到整个数据的 buffer
+        var buffer = CryptoJS.enc.Base64.parse(signature);
+        // 前 5 个单元是 sha1
+        var shaBuffer = CryptoJS.lib.WordArray.create(buffer.words.slice(0, 5), 20);
+        // 后 5 个单元是 querystring，并且是 UTF8 编码的
+        var argBuffer = CryptoJS.lib.WordArray.create(buffer.words.slice(5), buffer.sigBytes-20);
+        // 把 querystring 从 UTF8 编码的 buffer 转成 string
+        var argStr = argBuffer.toString(CryptoJS.enc.Utf8);
+        // 再次用 sk + querystring 计算出 sha
+        var sha = CryptoJS.HmacSHA1(argStr, secret_key);
+        // 对比两个 sha 是不是一样的
+
+        if(!$("input[name=expireTime]").val()) {
+            decodeSignature(signature);
+        }
+        if(+$("input[name=currentTimeStamp]").val() > +$("input[name=expireTime]").val()) {
+            return 'wrongExpireTime';
+        }
+        // 校验时间是否过期
+        if(+$("input[name=expireTime]").val() < Math.floor((+new Date())/1000)) {
+            return 'expired';
+        }
+        if(isNaN($("input[name=random]").val()) || isNaN($("input[name=currentTimeStamp]").val()) || isNaN($("input[name=expireTime]").val())) {
+            return 'notInt';
+        }
+
+
+        return sha.toString(CryptoJS.enc.Base64) === shaBuffer.toString(CryptoJS.enc.Base64);
+    }
+
+</script>
+<script>
+    var _mtac = {};
+    (function() {
+        var mta = document.createElement("script");
+        mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500428027");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+    })();
+</script>
+
+</body>
+</html>
