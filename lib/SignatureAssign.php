@@ -1,14 +1,24 @@
 <?php
 
-/** build sign and assign sign.
- * Class SignatureAssign
+/**
+ * Class SignatureBase
  */
-class SignatureAssign
+abstract class SignatureBase
 {
     /** 签名后缀key
      * @var string
      */
     protected $sign_suffix_key = '_signSuffixKey';
+
+    /** 随机数
+     * @var
+     */
+    protected $random;
+
+    /** 时间戳
+     * @var
+     */
+    protected $cur_time;
 
     /** code
      * @var int
@@ -20,23 +30,37 @@ class SignatureAssign
      */
     protected $message = 'success';
 
-    /** md5签名
-     * @param $signData array 数据
-     * @param string $signPrefix 前缀
-     * @param string $signSuffix 后缀
-     * @return mixed
+    /**
+     * SignatureBase constructor.
      */
-    public function signMd5($signData, $signPrefix='pre', $signSuffix='suf')
+    public function __construct()
     {
-        //签名步骤一：按字典序排序参数
-        $string = $this->signSort($signData);
-        //签名步骤二：在string后加入KEY
-        $string = $this->signFix($string,$signPrefix,$signSuffix);
-        //签名步骤三：MD5加密
-        $string = md5($string);
-        //签名步骤四：所有字符转为大写
-        $result = strtoupper($string);
-        return $result;
+        $this->random    = rand();
+        $this->cur_time = time();
+    }
+
+    /** 设置签名后缀key
+     * @param $key
+     */
+    public function setSignSuffixKey($key)
+    {
+        $this->sign_suffix_key = '_'.$key;
+    }
+
+    /** 获取处理code
+     * @return int
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /** 获取处理message
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     /** 签名固定串
@@ -70,20 +94,11 @@ class SignatureAssign
         return $res;
     }
 
-    /** 设置签名后缀key
-     * @param $key
-     */
-    public function setSignSuffixKey($key)
-    {
-        $this->sign_suffix_key = '_'.$key;
-    }
-
-
     /** 产生随机字符串，不长于32位
      * @param int $length
      * @return string
      */
-    public function getNonceStr($length = 32)
+    protected function getNonceStr($length = 32)
     {
         $chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#%^&*;:-=_+,.";
         $str ="";
@@ -93,20 +108,64 @@ class SignatureAssign
         return $str;
     }
 
-    /** 获取处理code
-     * @return int
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /** 获取处理message
+    /** 获取签名内容
      * @return string
      */
-    public function getMessage()
+    protected function getSignatureContent()
     {
-        return $this->message;
+        $nonce = $this->getNonceStr();
+        $rand  = rand();
+        $time  = time();
+        $content = "The signature : nonce={$nonce}; rand={$rand}; time={$time}, by sok yo!";
+        return $content;
+    }
+}
+
+/**
+ * Class SignatureCenter
+ */
+class SignatureCenter extends SignatureBase
+{
+    /** md5签名
+     * @param $signData array 数据
+     * @param string $signPrefix 前缀
+     * @param string $signSuffix 后缀
+     * @return mixed
+     */
+    public function signMd5($signData, $signPrefix='pre', $signSuffix='suf')
+    {
+        //$signData 一般来说会包含随机数和时间戳或者随机字符串
+        //签名步骤一：按字典序排序参数
+        $string = $this->signSort($signData);
+        //签名步骤二：在string后加入KEY
+        $string = $this->signFix($string,$signPrefix,$signSuffix);
+        //签名步骤三：MD5加密
+        $string = md5($string);
+        //签名步骤四：所有字符转为大写
+        $result = strtoupper($string);
+        return $result;
+    }
+
+    /** 简单的sha1签名
+     *  一般会通过参数或者请求头信息的方式来传递secret_id,nonce,cur_time
+     * @example
+     *   $headers = [
+     *          'headers' => [
+     *          'AppKey' => $secret_id,
+     *          'Nonce' => $nonce ,
+     *          'CurTime' => $cur_time ,
+     *          'CheckSum' => $this->simpleSha1($secret,$nonce,$curTime) ,
+     *          //'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
+     *          ],
+     *     ];
+     * @param $secret
+     * @param $nonce
+     * @param $curTime
+     * @return string
+     */
+    public function signSha1Simple($secret,$nonce,$curTime)
+    {
+        return sha1($secret.$nonce.$curTime);
     }
 
     /** 生成sha1的secret
@@ -115,10 +174,7 @@ class SignatureAssign
      */
     public function signSha1Create()
     {
-        $nonce = $this->getNonceStr();
-        $rand  = rand();
-        $time  = time();
-        $content = "The signature : nonce={$nonce}; rand={$rand}; time={$time}, by sok yo!";
+        $content = $this->getSignatureContent();
         //生成签名内容
         file_put_contents('signature.txt', $content);
         $signature = hash_hmac_file('SHA1','signature.txt','secret');
@@ -206,8 +262,3 @@ class SignatureAssign
         }
     }
 }
-$model = new SignatureAssign();
-$secretKey = '82c7100ce6adbe9bdf253fd8b6f915cfd51c5423';
-$secretId  = 'abc1234Def453';
-$checkSign = $model->signSha1Encrypt($secretId,$secretKey);
-var_dump($checkSign);
