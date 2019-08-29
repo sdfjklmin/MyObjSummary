@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @doc https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html
+ * Class ApplePay
+ */
 class ApplePay
 {
     /** 环境配置(建议提成配置)
@@ -69,6 +74,14 @@ class ApplePay
         $postData = json_encode(
             array('receipt-data' => $receipt)
             ,JSON_UNESCAPED_SLASHES);
+        //自动订阅
+        /*$postData = json_encode(
+            array(
+                //票证
+                'receipt-data' => $receipt,
+                //自动订阅 app store 秘钥
+                'password'=>'4751d1ff0ecf44b092c6115fd62e7a73')
+            ,JSON_UNESCAPED_SLASHES);*/
         //日志记录
         $this->log($postData);
         //curl操作
