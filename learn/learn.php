@@ -87,53 +87,35 @@
               未登录(无操作)
 
 顶层：(ubuntu)
-    //修改hosts
+    php时间类:
+    DateInterval
+    DateTime
+    Carbon
+
+    php开启错误信息:
+    php.ini
+    display_errors = On (开启错误信息) => 代码 ini_set('display_errors','yes');
+
+    修改hosts:
     sudo vim /etc/hosts
     sudo /etc/init.d/dns-clean start
     sudo /etc/init.d/networking restart
 
-    php.ini
-    display_errors = On (开启错误信息) => 代码 ini_set('display_errors','yes');
-
-    //.user.ini无法删除
+    .user.ini无法删除:
     chattr +i /home/wwwroot/yoursite/.user.ini
     sudo chattr -i .user.ini rm -rf .user.ini
 
-    //rar解压
+    rar解压:
     sudo apt-get install rar
     sudo apt-get install unrar
     rar x test.rar
 
-    改变别人的不方便也就方便了自己
-    不管什么时候都要有面对生活的勇气，知难而退是明智，迎难而上是勇气。
-    要有勇气面对生活的难
+    zip解压:
+    sudo apt-get install unar //安装unar解压工具
+    unar document.zip //解压相应的zip文件
+    //瞬间就能解决zip解压中文乱码的问题。
 
-    //zip解压
-    安装unar解压工具
-    sudo apt-get install unar
-    解压相应的zip文件
-    unar document.zip
-    瞬间就能解决zip解压中文乱码的问题。
-
-    //ngiux server
-    server {
-        server_name example.com;
-
-        location /mail/ {
-            proxy_pass http://example.com:protmail/;
-        }
-
-        location /com/ {
-            proxy_pass http://example.com:portcom/main/;
-        }
-
-        location / {
-            proxy_pass http://example.com:portdefault;
-        }
-    }
-
-
-    //git缓慢
+    git缓慢:
     1、在hosts文件里追加以下内容（IP需要替换掉），以下5个域名一个都不要少，有些文章只写了一部分，我一开始就少了个github.com，结果速度就还是很慢。
     151.101.109.194 github.global.ssl.fastly.net
     185.199.110.153 assets-cdn.github.com
@@ -141,3 +123,19 @@
     151.101.76.133 avatars1.githubusercontent.com
     192.30.253.112 github.com
     2、IP替换方法，打开 http://tool.chinaz.com/dns ,查询域名IP映射，把以上5个域名挨个查询一下，找一个TTL值比较小的IP替换掉。注意替换前要把IP先Ping一下，确保是通的才替换，否则是无效的。
+
+    ngiux proxy_pass:
+    //将 www.vd.com 转发至指定地址
+    server {
+    server_name www.vd.com;
+
+    location / {
+    proxy_pass http://localhost/obj/ppsns-tp51/public/index.php?s=;
+    }
+    }
+
+    navicat乱码:
+    选择工具-首选项，常规页签下，字体选择Noto Sans Mono CJK TC Regular
+    编辑器页签下编辑器字体选择Noto Sans CJK SC Regular
+    记录页签下网格字体选择Noto Sans Mono CJK TC Regular
+    修改完成后，重启软件后，编码问题即可解决
