@@ -36,7 +36,7 @@ class TimeDeal
      * @param string $init
      * @param bool $is_string
      */
-    public function __construct(string $init = 'now',$is_string=true)
+    private function __construct(string $init = 'now',$is_string=true)
     {
         if(!$is_string) {
             $init = date('Y-m-d H:i:s',$init);
@@ -220,7 +220,7 @@ class TimeDeal
      */
     public static function now(string $init = 'now',bool $is_string=true)
     {
-        $timeDeal = new TimeDeal($init,$is_string);
+        $timeDeal = new self($init,$is_string);
 
         return $timeDeal;
     }
@@ -265,9 +265,10 @@ class TimeDeal
 }
 
 //demo
-/*$now   = TimeDeal::now()->setFormat()->getTimeStartEnd();
+$now   = TimeDeal::now()->setFormat()->getTimeStartEnd();
 $week  = TimeDeal::week(true);
 $month = TimeDeal::month(true);
-var_dump($now,$week,$month);*/
+var_dump($now,$week,$month);
+
 
 
