@@ -339,3 +339,7 @@ Vi Command	:
 
 21.查看本机外网IP
    curl ifconfig.me
+
+22.yum centos中使用才可以，ubuntu默认软件包管理器不是yum，而是dpkg，
+   安装软件时用apt-get你说的网上常见法解决方法，命令改为代码:sudo apt-get install net-tools，
+   这样就安装好了
