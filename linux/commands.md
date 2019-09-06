@@ -1,20 +1,59 @@
 ## Linux 常用命令
 
+### 系统命令
+
+- top  **显示当前系统中耗费资源最多的进程**
+- date  **显示系统当前时间**
+
+      date "+[params]"      #特定输入要带上+ 
+      date "+%d"            #输出当日
+      date "+%Y-%m-%d"      #2019-09-06
+      date "+现在时间是: %Y-%m-%d %H:%M:%S"
+      
+      date +%Y%m%d               #显示前天年月日 
+      date -d "+1 minute" +%Y%m%d   #显示前一分钟的日期 
+      date -d "+1 day" +%Y%m%d      #显示前一天的日期 
+      date -d "-1 day" +%Y%m%d      #显示后一天的日期 
+      date -d "-1 month" +%Y%m%d    #显示上一月的日期 
+      date -d "+1 month" +%Y%m%d    #显示下一月的日期 
+      date -d "-1 year" +%Y%m%d     #显示前一年的日期 
+      date -d "+1 year" +%Y%m%d     #显示下一年的日期
+
+
+- 命令替换
+ 
+      $( ) 与 ` `（反引号）都是用来作命令替换的。
+      与变量替换差不多，都是用来重组命令行的，先完成引号里的命令行，然后将其结果替换出来，再重组成新的命令行。
+
+- df 显示系统可用空间, df -h 便于可读方式
+
+- du 显示指定目录以及子目录已使用磁盘空间的总和
+
+      du -s     #指定目录的总和,以目录显示。 du -s * , 当前所有
+      du -h     #便于可读方式
+      du -sh    #结合使用
+      
+- free 当前内存和交换空间的使用情况
+      
+- hostname 当前主机名称      
+
+### 操作命令
+
 ##### Folder(目录介绍)
-    /bin 二进制可执行命令
-    /dev 设备特殊文件
-    /etc 系统管理和配置文件
+    /bin (binaries)二进制可执行命令
+    /dev (devices)设备特殊文件
+    /etc (etcetera)系统管理和配置文件
     /etc/rc.d 启动的配置文件和脚本
     /home 用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示
-    /lib 标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件
-    /sbin 超级管理命令，这里存放的是系统管理员使用的管理程序
-    /tmp 公共的临时文件存储点
+    /lib (library)标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件
+    /sbin (super user binaries)存放二进制可执行文件，只有root才能访问,超级管理命令，这里存放的是系统管理员使用的管理程序
+    /tmp (temporary)公共的临时文件存储点
     /root 系统管理员的主目录
-    /mnt 系统提供这个目录是让用户临时挂载其他的文件系统
+    /mnt (mount)系统提供这个目录是让用户临时挂载其他的文件系统
     /lost+found这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里
     /proc 虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。
-    /var 某些大文件的溢出区，比方说各种服务的日志文件
-    /usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
+    /var (variable)用于存放运行时需要改变数据的文件,某些大文件的溢出区，比方说各种服务的日志文件
+    /usr (unix shared resources)最庞大的目录，要用到的应用程序和文件几乎都在这个目录
     /usr/local/bin (该目录下的执行命令为全局执行命令,自定义的需要 chmod +x command,在执行)
 
 ##### 系统小命令
@@ -36,6 +75,7 @@
     echo > file             #清空file    
     echo 'test' > file      #覆盖file文件,填入内容test
     echo 'test' >> file     #向file文件中,追加内容test
+    echo '32'               #输出32
     
 ##### cat
     cat file                #查看file内容
@@ -44,7 +84,7 @@
     cat -n file1 > file2    #把file1内容带编号输入到file2中
     cat --help              #查看更多
        
-##### more less
+##### more less head tail
     more :
          -d          显示帮助而非响铃
          -f          计算逻辑行数，而非屏幕行数
@@ -57,7 +97,30 @@
          +<数字>     从指定行开始显示文件
          +/<字符串>  从匹配搜索字符串的位置开始显示文件
     more +100 abc.php 从100行开始显示  逐行显示
+    
     less +100 abc.php 从100行开始显示  支持上下滚动查看
+    
+    head    file           #查看文本开头部分,默认10行
+        -[num]          #指定行数
+         
+    tail    file           #查看文本结尾部分,默认10行,
+        -[num]          #指定行数
+        -f              #循环滚动读取文件并动态显示在屏幕上,根据文件属性跟踪
+        -F              #循环滚动读取文件并动态显示在屏幕上,文件文件名跟踪
+        
+    tail -f log.log | nl  #带行号
+    
+    tail -f index.php  | grep -e error -e ERROR -n
+    #显示error和ERROR并带上行号
+   
+    tail -f  $(date +%d).log | grep -n error
+    #显示当前日期的.log文件中的 error
+
+##### 文本统计
+    wc      file        #统计文本的 行数、字数、字符数
+       -m               #字符数    
+       -w               #文本字数
+       -l               #文本行数
     
 ##### 移动删除复制
     mv file /home/ 		#移动file到/home下 
@@ -70,6 +133,9 @@
 ##### 创建文件夹
     mkdir dir #创建文件夹dir
     mkdir -p ~/nginx/www ~/nginx/logs ~/nginx/conf  #批量创建目录      
+
+##### 创建文件
+    touch file  #创建file文件
 
 ##### 包管理    
 
@@ -116,7 +182,7 @@
     chmod 永远更改一个文件的权限,主要有读取,写入,执行其中 所有者,用户组,其他 各占三个,因此 ls -l以看到如下的信息
     -rwxr--r-- 1 locez users   154 Aug 30 18:09 filename
     其中 r=read ， w=write ， x=execute
-    4			 2			1		
+        4		  2			1		
     chmod +x filename        ### 为 user ，group ，others 添加执行权限
     chmod -x filename        ### 取消 user ， group ，others 的执行权限
     chmod +w filename        ### 为 user 添加写入权限
@@ -174,15 +240,27 @@
     find path -option parm ;    路径 	 操作参数 
     
 ##### Vi
-    wq! 强制保存退出
-    :/a 文本中搜索a   n下一个  N上一个
-    :nu 显示行号
-    :set nu 全文显示行号 	set nonu 取消行号显示
-    u 撤回命令
-    yy 复制一行
-    P  粘贴一行
-    dd 删除一行
-    ctrl + r  在历史记录中选择
+    i   #在光标前插入
+    A   #在光标当前行末尾插入
+    o   #在光标当前行的下一行插入
+    O   #在光标当前行的上一行插入
+    wq! #强制保存退出
+    :/a #文本中搜索a   n下一个  N上一个
+    :nu #显示行号
+    :set nu #全文显示行号 	
+    :set nonu #取消行号显示
+    gg  #跳到首行
+    G   #跳到末行
+    :n  #跳到值定行 :4
+    r   #替换光标当前的字符
+    R   #从光标开始处替换,ESC结束
+    u #撤回命令
+    yy #复制一行
+    P  #粘贴一行
+    dd #删除一行
+    dG #删除当前光标所在行到末尾的内容
+    :5,7d #删除指定行的内容
+    shift + zz #保存退出等同于 :wq
     
 #####1.添加用户和密码
 	adduser  test  
