@@ -48,7 +48,9 @@ composer.json
         //psr-4文件加载,有命名空间 one
         "psr-4": {
             // 文件名\\: 文件夹路径(所有文件,需要命名空间)
-            "bookLog\\": "bookLog"
+            "bookLog\\": "bookLog",
+            // lib文件夹下的main文件中的文件
+            "lib\\main\\": "lib/main"
         },
         //psr-4 two
         "psr-4": { "Monolog\\": ["src/", "lib/"] }
