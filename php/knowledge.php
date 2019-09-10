@@ -322,3 +322,15 @@ echo $a.''.$b ;
 
 #42
 #strip_tags — 从字符串中去除 HTML 和 PHP 标记
+
+#43 命名空间
+//namespace app\common;  申明命名空间
+//use app\common\model\System\SystemConfig; 使用某个文件
+//use function function\dd; 使用某个方法,示例如下
+/*`
+    namespace function;
+    function dd()
+    {
+        echo 11;
+    }
+`*/
