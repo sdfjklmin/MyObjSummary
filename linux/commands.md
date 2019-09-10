@@ -262,13 +262,13 @@
     :5,7d #删除指定行的内容
     shift + zz #保存退出等同于 :wq
     
-#####1.添加用户和密码
+##### 1.添加用户和密码
 	adduser  test  
 	useradd -m -g users -G audio -s /usr/bin/bash newuser     
      -m 创建home目录 -g 所属的主组 -G 指定该用户在哪些附加组 -s 设定默认的 shell,newuser 为新的用户名
 	passwd  test
 	
-#####2.赋予root权限
+##### 2.赋予root权限
 	修改 etc/sudoers 
 	方法一：找到下面一行，把前面的注释（#）去掉
 	## Allows people in group wheel to run all commands
@@ -283,14 +283,14 @@
 	tommy   ALL=(ALL)     ALL
 	修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作。
 	
-#####3.禁止root登陆
+##### 3.禁止root登陆
 	vi /etc/ssh/sshd_config	
 	PermitRootLogin no
 
-#####4.登录提示信息
+##### 4.登录提示信息
 	编辑 vi /etc/motd 即可
 
-#####5.自定义命令
+##### 5.自定义命令
     a.直接修改系统命令
         vi /etc/bashrc
         在最后一行添加
@@ -339,7 +339,7 @@
         [Install]运行级别下服务安装的相关设置，可设置为多用户，即系统运行级别为3
     
 
-#####6.修改主机信息
+##### 6.修改主机信息
     a.使用hostname
         hostname 主机名称
         su #使修改生效
@@ -347,7 +347,7 @@
         新增:
         192.169.124.130 hostname
 
-#####7.将安装命令加入到系统环境中
+##### 7.将安装命令加入到系统环境中
 	a.永久生效
         vi /etc/profile
         添加
@@ -365,27 +365,27 @@
 		export PATH=$PATH:/(对应php的安装运行目录)
 
 
-#####8.ctrl + 回撤键	 #命令行模式输入删除
+##### 8.ctrl + 回撤键	 #命令行模式输入删除
 
-#####9.往文件中追加信息
+##### 9.往文件中追加信息
 	echo '追加信息' >> addinfo.php
 
-#####10.覆盖文件中的信息
+##### 10.覆盖文件中的信息
 	echo '' > addinfo.php
 
-#####11.如果命令太长可以使用反斜杠Enter来输出  \[Enter] 
+##### 11.如果命令太长可以使用反斜杠Enter来输出  \[Enter] 
     cd /usr/local/\
     php
 
-#####12.env查看所有环境变量的信息
+##### 12.env查看所有环境变量的信息
 
-#####13.用set可以查看所有的变量
+##### 13.用set可以查看所有的变量
 
-#####14.alias查看所有的别名
+##### 14.alias查看所有的别名
 
-#####15.type cd #查看cd命令的说明
+##### 15.type cd #查看cd命令的说明
 
-#####16.杀死进程
+##### 16.杀死进程
 	a.查看进程
 		ps -aux 或者 ps -ef
 	b.查看某个进程 [管道]
@@ -397,26 +397,26 @@
 	2.pgrep和kill！pkill＝pgrep+kill。
 	  pkill php-fpm
 
-#####17.查看用户的历史命令记录
+##### 17.查看用户的历史命令记录
 	cat ~user.bash_history > cat ~root.bash_history
 
-#####18.telnet
+##### 18.telnet
 	yum install telnet
 	yum install telnet-server	
 	/usr/bin/telnet ip prot
 
-#####19.开机自启
+##### 19.开机自启
 	/etc/rc.local 加入你需要启动的命令
 	/etc/rc.d/init.d/	加入你需要启动的脚本服务
 
-#####20.开启端口(centos7)
+##### 20.开启端口(centos7)
 	firewall-cmd --zone=public --add-port=80/tcp --permanent
 	重启 systemctl restart firewalld.service
 
-#####21.查看本机外网IP
+##### 21.查看本机外网IP
     curl ifconfig.me
 
-#####22.修改root密码(CentOS7)
+##### 22.修改root密码(CentOS7)
     选择系统,看下面的提示,然后按e,
     编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
     按Ctrl+X重启，并修改密码
@@ -426,7 +426,7 @@
     重启系统
         exec /sbin/init
         
-#####23.网络连接
+##### 23.网络连接
     进入  /etc/sysconfig/network-scripts 编辑第一个网卡	将 ONBOOT改为yes(激活网卡)
     vi ifcfg-eno..
     
