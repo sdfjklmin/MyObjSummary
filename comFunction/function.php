@@ -419,6 +419,8 @@ if(!function_exists('decodeXml')){
      */
     function decodeXml($x,$str,$only =true)
     {
+        //LIBXML_NOCDATA 解析CDATA数据
+        //$a = simplexml_load_string($xml, null, LIBXML_NOCDATA);
         /*$a = simplexml_load_string($str);
         $a = json_encode($a);
         var_dump(json_decode($a, true));*/

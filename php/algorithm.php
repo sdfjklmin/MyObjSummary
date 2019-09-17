@@ -74,8 +74,8 @@
                 $left[]  = $arr[$i] ;
             }
         }
-        $left  = $this->quickSort($left);
-        $right = $this->quickSort($right);
+        $left  = quickSort($left);
+        $right = quickSort($right);
         return array_merge($left,[$init],$right);
     }
 
