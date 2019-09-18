@@ -77,7 +77,7 @@ class OldCacheAdapter implements Cacheable
 $objCache = new OldCacheAdapter();
 $objCache->set("test",1);
 $objCache->get("test");
-$objCache->del("test",1);
+$objCache->del("test");
 
 //对比
 $objCache->_oldCache->store('test',1);
