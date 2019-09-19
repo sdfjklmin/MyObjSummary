@@ -139,3 +139,9 @@
     编辑器页签下编辑器字体选择Noto Sans CJK SC Regular
     记录页签下网格字体选择Noto Sans Mono CJK TC Regular
     修改完成后，重启软件后，编码问题即可解决
+
+    ubuntu U盘
+    sudo apt-get install exfat-utils
+    重启生效
+
+    winetricks 安装windows程序
