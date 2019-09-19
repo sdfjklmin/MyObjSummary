@@ -145,3 +145,10 @@
     重启生效
 
     winetricks 安装windows程序
+
+
+    //视频时长
+    include_once '../extend/getidmaster/getidthree/getid3.php';
+    $t = new \getID3();
+    $ThisFileInfo = @$t->analyze($path); //分析文件，$path为音频文件的地址（文件绝对路径）
+    $ThisFileInfo['playtime_seconds']; //时长
