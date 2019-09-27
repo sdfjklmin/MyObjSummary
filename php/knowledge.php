@@ -334,3 +334,59 @@ echo $a.''.$b ;
         echo 11;
     }
 `*/
+
+#44 parse_ini_file  解析一个配置文件
+#parse_ini_file() 载入一个由 filename 指定的 ini 文件，并将其中的设置作为一个联合数组返回。
+
+
+#45 Closure类 用于代表 匿名函数 的类.
+$a = function(){
+    echo 11;
+};
+$a(); //11
+var_dump($a instanceof \Closure); //true
+
+#46 ArrayAccess（数组式访问）接口 可以以数组形式访问类
+
+#47 IteratorAggregate（聚合式迭代器）接口
+//无论你用的是什么结构（链表也好、数组也好、数也好、图也好、hash表也好），
+//总之， 你可以不关心任何细节遍历细节，（下面看好了） 从一个起点(begin)触发到达，到达终点(end)，
+//并且保证每个节点都能走到且只走一次。
+class myData implements IteratorAggregate {
+    public $property1 = "Public property one";
+    public $property2 = "Public property two";
+    public $property3 = "Public property three";
+
+    public function __construct() {
+        $this->property4 = "last property";
+    }
+
+    public function getIterator() {
+        //这里使用的数组迭代器
+        return new ArrayIterator($this);
+    }
+}
+
+$obj = new myData;
+
+foreach($obj as $key => $value) {
+    var_dump($key, $value);
+    echo "\n";
+}
+/*string(9) "property1"
+string(19) "Public property one"
+
+string(9) "property2"
+string(19) "Public property two"
+
+string(9) "property3"
+string(21) "Public property three"
+
+string(9) "property4"
+string(13) "last property"*/
+
+#48 类实现 Countable 可被用于 count() 函数.
+//Countable::count — 统计一个对象的元素个数
+
+#48 预定义接口 : https://www.php.net/manual/zh/reserved.interfaces.php
+#49 PHP标准库 (SPL) : https://www.php.net/manual/zh/book.spl.php
