@@ -387,6 +387,19 @@ string(13) "last property"*/
 
 #48 类实现 Countable 可被用于 count() 函数.
 //Countable::count — 统计一个对象的元素个数
+class myData2 implements Countable {
+
+    public function count()
+    {
+        //return '18446744073709551616' ;
+        return '1' ;
+    }
+}
+$obj = new myData2;
+echo "<pre    >";
+var_dump(count($obj),$obj->count());
+//1,1
+//count($obj) 中的值有最大值，当数据超过最大值时，只会返回默认最大值
 
 #48 预定义接口 : https://www.php.net/manual/zh/reserved.interfaces.php
 #49 PHP标准库 (SPL) : https://www.php.net/manual/zh/book.spl.php
