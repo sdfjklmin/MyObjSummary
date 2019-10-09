@@ -390,12 +390,15 @@
 		ps -aux 或者 ps -ef
 	b.查看某个进程 [管道]
 		ps -aux | grep php-fpm	 或者 pgrep php-fpm
-	c.查看就是xx的PID	
+	c.查看xx的PID	
 		pidof php-fpm   
 	
 	1.pidof php-fpm | xargs kill #杀死php-fpm
 	2.pgrep和kill！pkill＝pgrep+kill。
 	  pkill php-fpm
+	  pkill -9 php-fpm
+	3.kill -s 9 [pid]  
+	  -s 9 制定了传递给进程的信号是９，即强制、尽快终止进程。各个终止信号及其作用见附录
 
 ##### 17.查看用户的历史命令记录
 	cat ~user.bash_history > cat ~root.bash_history
