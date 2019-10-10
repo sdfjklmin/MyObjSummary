@@ -501,3 +501,19 @@ if(!function_exists('getTaper')){
         }
     }
 }
+
+if(!function_exists('classContent')) {
+    function classContent($file)
+    {
+        if(!file_exists($file)) {
+            echo '';die();
+        }
+        $content = file_get_contents($file);
+        //将字符转换为 HTML 转义字符
+        $class = htmlentities($content);
+        //将空格替换成html标签
+        $class = str_replace(' ','&nbsp;',$class);
+        //在字符串所有新行之前插入 HTML 换行标记
+        print_r(nl2br($class));exit();
+    }
+}
