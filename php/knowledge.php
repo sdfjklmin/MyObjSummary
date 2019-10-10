@@ -417,3 +417,12 @@ $str = mb_convert_case($str, MB_CASE_UPPER, "UTF-8");
 echo $str; // 输出 MARY HAD A LITTLE LAMB AND SHE LOVED IT SO
 $str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
 echo $str; // 输出 Mary Had A Little Lamb And She Loved It So
+
+#51 htmlentities
+//$class = 类的文本内容
+//将字符转换为 HTML 转义字符
+$class = htmlentities($class);
+//将空格替换成html标签
+$class = str_replace(' ','&nbsp;',$class);
+//在字符串所有新行之前插入 HTML 换行标记
+print_r(nl2br($class));
