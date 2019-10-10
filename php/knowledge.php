@@ -403,3 +403,17 @@ var_dump(count($obj),$obj->count());
 
 #48 预定义接口 : https://www.php.net/manual/zh/reserved.interfaces.php
 #49 PHP标准库 (SPL) : https://www.php.net/manual/zh/book.spl.php
+
+#50 ucwords(str_replace('_',' ',$table));
+#upper change first
+ucfirst('im'); #Im
+#lower change first
+lcfirst('Im'); #im
+ucwords('im boy'); #Im Boy
+strtolower('AAAA'); #aaa
+strtoupper('aaa'); #AAA
+$str = "mary had a Little lamb and she loved it so";
+$str = mb_convert_case($str, MB_CASE_UPPER, "UTF-8");
+echo $str; // 输出 MARY HAD A LITTLE LAMB AND SHE LOVED IT SO
+$str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+echo $str; // 输出 Mary Had A Little Lamb And She Loved It So

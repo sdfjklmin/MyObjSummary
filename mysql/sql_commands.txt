@@ -31,6 +31,8 @@ _6.创建一张临时表
 _7.查看表的列
    DESC cp_bets ; 	
    SHOW columns FROM  cp_bets ;
+   show full columns from table; #查看完整的字段信息
+
 _8.explain sql语句 (查看sql语句,看索引是否生效)   
  
 _9.触发器
