@@ -2,6 +2,19 @@
 
 #### SQL 
     组合索引 : alter table {table_name} add index {index_name} ({column},{column});
+    
+    show variables like '%connection%';
+    
+    show variables like '%max_user_connections%';
+    
+    
+    SHOW  STATUS LIKE '%max_used_connections%';
+    
+    SHOW PROCESSLIST;
+    
+    SHOW FULL PROCESSLIST;
+    
+    show status like 'Threads%';
 
 ##### 1.MySQL的复制原理以及流程
     (1) 主：binlog线程——记录下所有改变了数据库数据的语句，放进master上的binlog中；
