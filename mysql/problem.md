@@ -1,5 +1,8 @@
 ## MySQL
 
+#### SQL 
+    组合索引 : alter table {table_name} add index {index_name} ({column},{column});
+
 ##### 1.MySQL的复制原理以及流程
     (1) 主：binlog线程——记录下所有改变了数据库数据的语句，放进master上的binlog中；
     (2) 从：io线程——在使用start slave 之后，负责从master上拉取 binlog 内容，放进 自己的relay log中；
@@ -72,20 +75,13 @@
 
 ##### 7.SQL优化
     (1) explain出来的各种item的意义；
-        select_type 
-        表示查询中每个select子句的类型
-        type
-        表示MySQL在表中找到所需行的方式，又称“访问类型”
-        possible_keys 
-        指出MySQL能使用哪个索引在表中找到行，查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询使用
-        key
-        显示MySQL在查询中实际使用的索引，若没有使用索引，显示为NULL
-        key_len
-        表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度
-        ref
-        表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值 
-        Extra
-        包含不适合在其他列中显示但十分重要的额外信息
+        select_type 表示查询中每个select子句的类型
+        type 表示MySQL在表中找到所需行的方式，又称“访问类型”
+        possible_keys 指出MySQL能使用哪个索引在表中找到行，查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询使用
+        key 显示MySQL在查询中实际使用的索引，若没有使用索引，显示为NULL
+        key_len 表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度
+        ref 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值 
+        Extra 包含不适合在其他列中显示但十分重要的额外信息
     
     (2) profile的意义以及使用场景；
         查询到 SQL 会执行多少时间, 并看出 CPU/Memory 使用量, 执行过程中 Systemlock, Table lock 花多少时间等等
@@ -188,6 +184,10 @@
 
 ##### 21.组合索引采用的是最左原则进行索引命中的。
     A、B、C为组合和索引，查询时 ABC生效，AC生效，BC不生效
+    在Innodb引擎下or无法使用组合索引
+    (select * from table where A=* or B=*)
+    改进
+    (select * from table where A=*) union (select * from table where B=*)
     索引的劣势（虽然提示了查询速度但是也会降低更新表的速度，更新时会更新数据和保存索引文件，
     建立索引会占用磁盘空间的索引文件）
     
@@ -293,7 +293,10 @@
 ##### 32. Mysql读写性能是多少,有哪些性能相关的配置 ?
     读写性能可以根据压力测试来进行获取.
     相关配置:
-        max_connecttions :	最大连接数
+        max_connections :	最大连接数,整个mysql服务器的最大连接数
+        max_user_connections :	最大连接数,指的是每个数据库用户的最大连接数，是限制用户连接的。
+                                比如：虚拟主机可以用这个参数控制每个虚拟主机用户的数据库最大连接数
+        (max_connections是指MySQL实例的最大连接数，上限值是16384，max_user_connections是指每个数据库用户的最大连接数。)                                
         table_cache		 :	缓存打开表的数量
         key_buffer_size	 :	索引缓存大小
         query_buffer_size:	查询缓存大小
@@ -328,3 +331,40 @@
     b.独立一个buffer pool，专门进行多块读，针对next extent，一次读取到buffer pool中，这种方式就和Oracle的multiblock-read比较类似了；
     c.终极优化方法，就是使用并行查询，Oracle在全表扫描的时候，使用/* parallel */ hint方法启动多个进程完成查询，InnoDB的聚簇索引结构，需要逻辑分片，针对每一个分片启动一个线程完成查询。
    
+   
+##### 37. Specified key was too long; max key length is 767 bytes
+    原因
+        数据库表采用utf8编码，其中varchar(255)的column进行了唯一键索引
+        而mysql默认情况下单个列的索引不能超过767位(不同版本可能存在差异)
+        于是utf8字符编码下，255*3 byte 超过限制
+    解决
+        1  使用innodb引擎；
+        2  启用innodb_large_prefix选项，将约束项扩展至3072byte；
+        3  重新创建数据库；
+     
+    my.cnf配置：
+        default-storage-engine=INNODB
+        innodb_large_prefix=on
+    一般情况下不建议使用这么长的索引，对性能有一定影响；   
+    
+##### 38. 索引失效
+
+        a.单列索引无法储null值，复合索引无法储全为null的值。
+        b.查询时，采用is null条件时，不能利用到索引，只能全表扫描。
+        select * from talbe where index = null;
+    
+        为什么索引列无法存储Null值？
+        a.索引是有序的。NULL值进入索引时，无法确定其应该放在哪里。
+        （将索引列值进行建树，其中必然涉及到诸多的比较操作，null 值是不确定值无法　　
+        比较，无法确定null出现在索引树的叶子节点位置。）　
+        b.如果需要把空值存入索引，
+        其一，把NULL值转为一个特定的值，在WHERE中检索时，用该特定值查找。
+        其二，建立一个复合索引。例如　
+        create index ind_a on table(col1,1);
+        通过在复合索引中指定一个非空常量值，而使构成索引的列的组合中，不可能出现全空值。　  
+        
+        不适合键值较少的列（重复数据较多的列）        
+        
+        前导模糊查询不能利用索引(like '%XX'或者like '%XX%')  
+        
+        or like != 等非成立表达式
