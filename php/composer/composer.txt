@@ -19,6 +19,12 @@ composer.phar create-project doctrine/orm path 2.2.* // create-project创建项�
 composer.phar diagnose // 诊断问题
 composer.phar help install //获取帮助
 
+composer默认使用是当前系统环境变量中的php地址，如果想要换不同版本的可以使用如下命令:
+php7.3 composer --h
+[配置的php7.3的版本命令] [系统中的composer命令]
+=>原始命令为
+/usr/local/php/bin/php /usr/local/bin/composer
+
 require 'vendor/autoload.php'; //引入composer安装生成的文件,自动加载
 
 Question:

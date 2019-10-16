@@ -144,8 +144,23 @@ php5.6安装:
 
 	echo "extension=pthreads.so" >> /etc/php.ini #添加配置
 
-	php --ri yar // 查看yar的版本信息
+	按照php系统扩展:
+	 undefined reference to `libiconv_open 无法编译PHP libiconv
 
+	 #wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
+     #tar -zxvf libiconv-1.13.1.tar.gz
+     #cd libiconv-1.13.1
+     # ./configure --prefix=/usr/local/libiconv
+     # make
+     # make install
+     再检查php，指定 iconv的位置  --with-iconv=/usr/local/libiconv
+     #./configure --with-iconv=/usr/local/libiconv
+     #make
+     #make installx
+     或者
+     --without-iconv #不安装:-D
+
+	php --ri yar // 查看yar的版本信息
 
 	安装nginx
 

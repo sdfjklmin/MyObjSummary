@@ -292,7 +292,7 @@
 
 ##### 5.自定义命令
     a.直接修改系统命令
-        vi /etc/bashrc
+        vi /etc/bashrc | vi /etc/bash.bashrc | vi ~/.bashrc(只针对当前用户生效，其它为全局生效)
         在最后一行添加
         alias test="cd /minCmd"	
         source /etc/bashrc  # 使更改配置生效
@@ -364,6 +364,7 @@
     c.临时生效
 		export PATH=$PATH:/(对应php的安装运行目录)
 
+    /home/sjm/php-lib/version/php-7.3.10/main/bin
 
 ##### 8.ctrl + 回撤键	 #命令行模式输入删除
 
