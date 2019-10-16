@@ -472,3 +472,7 @@
     DNS1=192.168.1.1
     
     service network restart (重启网卡)
+    
+##### 24.删除文件夹下的特定文件
+    find . -name "file_name" | xargs rm -Rf 
+    xargs:支持|管道来传递参数,然后进行处理 
