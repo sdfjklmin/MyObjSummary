@@ -426,3 +426,25 @@ $class = htmlentities($class);
 $class = str_replace(' ','&nbsp;',$class);
 //在字符串所有新行之前插入 HTML 换行标记
 print_r(nl2br($class));
+
+
+#52 基于结果判断
+$user = new ArrayObject();
+if($user) {
+    if($user->name == 'test') {
+        echo 'test';
+        //more if
+    }else{
+        echo 'false';
+    }
+}else{
+    echo 'false';
+}
+//卫语句(条件反转):将else部分条件取反进行结构优化，最终输出结果，避免内层条件越来越多
+if(!$user) {
+    echo 'false';
+}
+if($user->name != 'test') {
+    echo 'false';
+}
+echo 'test';
