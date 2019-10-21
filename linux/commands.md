@@ -484,3 +484,11 @@
     查看端口情况: netstat -anp | grep 9501
     列出所有连接: netstat -a
     只列出 TCP 或 UDP 协议的连接: netstat -at , netstat -au
+    
+##### 26.crontab : no crontab for root - using an empty one 
+    #选择编辑器,可选vim.basic。
+    select-editor   
+    
+    crontab -e
+    
+    service cron status|start|restart 
