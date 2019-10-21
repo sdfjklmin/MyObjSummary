@@ -477,3 +477,10 @@
 ##### 24.删除文件夹下的特定文件
     find . -name "file_name" | xargs rm -Rf 
     xargs:支持|管道来传递参数,然后进行处理 
+    
+##### 25.netstat 
+    介绍: Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，
+         包括 tcp, udp 以及 unix 套接字，另外它还能列出处于监听状态（即等待接入请求）的套接字
+    查看端口情况: netstat -anp | grep 9501
+    列出所有连接: netstat -a
+    只列出 TCP 或 UDP 协议的连接: netstat -at , netstat -au
