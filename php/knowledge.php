@@ -450,3 +450,6 @@ if($user->name != 'test') {
     echo 'false';
 }
 echo 'test';
+
+#53 创建空对象
+$tt = new \StdClass();
