@@ -492,3 +492,12 @@
     crontab -e
     
     service cron status|start|restart 
+    
+##### 27. htop 显示进程、cpu、io等系统信息，top已经老了O(∩_∩)O
+    sudo apt install htop
+    
+    #进入显示界面
+    htop
+    
+    #具体操作可根据下方提示进行操作，F1很好用
+    
