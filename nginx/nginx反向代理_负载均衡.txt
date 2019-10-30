@@ -81,7 +81,7 @@ A.安装ngiux相关依赖
         CORE_LIBS="$CORE_LIBS $OPENSSL/.openssl/lib/libcrypto.a"
         CORE_LIBS="$CORE_LIBS $NGX_LIBDL"
         去掉.openssl(根据错误信息/usr/local/openssl/.openssl/include/openssl/ssl.h),查找到对应的ss.h目录,并没有.openssl这一层
-   a.2
+   a.2 "proxy_pass" directive is not allowed , proxy_pass位置错误。
    	 编辑nginx.conf #添加 include vhosts/*.conf; #如果没有vhost文件夹,就先mkdir ,引入配置
      直接修改nginx.conf	
      在http{} 中添加
