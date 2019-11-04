@@ -147,6 +147,12 @@
     yum install php
     yum install -y epel-relase #自动安装依赖
     yum search php
+    
+    #安装本地包
+    yum localinstall pkg.rpm
+    
+    #安装本地包，不验证签名
+    yum localinstall pkg.rpm --nogpgcheck
 ###### dpkg(ubuntu)
 
 ###### apt|apt-get(deb包管理式)
