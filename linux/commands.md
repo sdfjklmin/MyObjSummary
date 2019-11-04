@@ -542,3 +542,13 @@ systemd : 为了解决这些问题而诞生的。它的设计目标是，为系�
     事实上，现在还有很多人反对使用 Systemd，理由就是它过于复杂，与操作系统的其他部分强耦合，违反"keep simple, keep stupid"的Unix 哲学。
 其它知识请自行扩展
 ~~~
+
+##### 29. 配置host域名访问
+    #修改信息
+    sudo vim /etc/hosts
+    
+    #dns-clean start
+    sudo /etc/init.d/dns-clean start
+    
+    #networking restart
+    sudo /etc/init.d/networking restart
