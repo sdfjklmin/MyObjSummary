@@ -15,17 +15,32 @@
 ## 设置PHP版本号
     Settings -> Languages && Framworks -> PHP(点击选中,可以修改版本号) --版本号无法选择--> 点击PHP下的Composer -> IDE Setting with composer.json (取消勾选)
     
-## 注解插件
+## 插件
     Settings -> Plugins(插件) -> PHP Annotation(注解)(search and install) -> resart IDE
     
-    #背景图片插件
+    #搜索背景图片
     Background Image Plus
+    View -> Set Background Image
     
 ## 内置请求
     Tools ->  Http Client -> Test RESTFul Web Service
     
-## Alt+Shift+Enter(快速生成)
+## 快捷使用
+    
+#### Alt+Shift+Enter(快速生成)
     把光标指向要自动生成的代码上,使用快捷键快速生成,可生成(对应使用的命名空间,对应类的属性,方法等)  
 
-## Alt+Enter(自定义完善对应的属性,方法,类等)
-    把光标指向要自动生成的代码上,使用快捷键快速生成,可生成(对应使用的命名空间,对应类的属性,方法等)    
+#### Alt+Enter(自定义完善对应的属性,方法,类等)
+    把光标指向要自动生成的代码上,使用快捷键快速生成,可生成(对应使用的命名空间,对应类的属性,方法等)
+
+#### Alt+INS
+    文件中使用(快速生成 构造函数，属性等)
+    目录使用(快速生成文件)
+
+#### Alt+Enter
+    快速生成当前方法的注释      
+    快速改变当前方法的属性，public private protected。
+    
+#### Ctrl+ Alt +Shift + 2 (快速打开当前文件夹所在的路径)
+
+#### File -> New Scratch File(生成[抹掉,忽略]文件)
