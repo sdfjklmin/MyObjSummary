@@ -115,6 +115,7 @@ php5.6安装:
         /usr/local/php/sbin/php-fpm #可能会报php-fpm.d的错误
         cd /usr/local/php/etc/php-fpm.d
         cp www.conf.default www.conf   #文件中的用户和组都是www最好新建一个www用户
+	sudo groupadd nobody  #新增用户组 => cannot get gid for group ‘nobody’
 
 
         没有php.ini
