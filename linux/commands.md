@@ -269,10 +269,10 @@
     shift + zz #保存退出等同于 :wq
     
     安装vim,移除自带的
-   sudo apt-get remove vim-common
-   sudo apt-get update
-  sudo apt-get install
-   sudo apt-get install vim
+    sudo apt-get remove vim-common
+    sudo apt-get update
+    sudo apt-get install
+    sudo apt-get install vim
     
 ##### 1.添加用户和密码
 	adduser  test  
