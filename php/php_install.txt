@@ -35,6 +35,7 @@ php5.6安装:
     	yum install libmcrypt libmcrypt-devel mcrypt mhash
     	yum install readline-devel
     	yum install systemtap-sdt-devel#静态指针前置包
+	yum install libssl-dev# => configure: error: Cannot find OpenSSL's <evp.h>
 
     	如果没有找到对应的源码需要扩展yum源
     	yum install epel-release
