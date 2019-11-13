@@ -2,12 +2,7 @@
 
 define('DI_EOL',"\n");
 
-interface DiContainerInterface
-{
-    public function run();
-}
-
-class DiContainerA implements DiContainerInterface
+class DiContainerA
 {
 
     public function run()
@@ -16,18 +11,18 @@ class DiContainerA implements DiContainerInterface
     }
 }
 
-class DiContainerB implements DiContainerInterface
+class DiContainerB
 {
     /**
-     * @var DiContainerInterface
+     * @var DiContainerA
      */
     private $diContainer;
 
     /** 只限制于Interface
      * DiContainerB constructor.
-     * @param DiContainerInterface $diContainer
+     * @param DiContainerA $diContainer
      */
-    public function __construct(DiContainerInterface $diContainer)
+    public function __construct(DiContainerA $diContainer)
     {
         $this->diContainer = $diContainer;
     }
@@ -39,7 +34,7 @@ class DiContainerB implements DiContainerInterface
     }
 }
 
-class DiContainerC implements DiContainerInterface
+class DiContainerC
 {
     /**
      * @var DiContainerB
@@ -66,11 +61,29 @@ class DiContainer
 {
     private $attr = [];
 
+    private static $_self = null;
+
+    private function __construct()
+    {
+    }
+
+    private function __clone()
+    {
+        // TODO: Implement __clone() method.
+    }
+
     public function __set($name, $value)
     {
        $this->attr[$name] = $value;
     }
 
+    public static function init()
+    {
+        if(!self::$_self) {
+            self::$_self = new self();
+        }
+        return self::$_self;
+    }
 
     /** 自动绑定（Autowiring）
      *  自动解析（Automatic Resolution）
@@ -100,9 +113,9 @@ class DiContainer
         $reflector = new \ReflectionClass($class);
 
         //检查类是否可实例化, 排除抽象类abstract和对象接口interface
-        /*if($reflector->isInstantiable()) {
+        if(!$reflector->isInstantiable()) {
             throw new \Exception("Can't instantiate this.");
-        }*/
+        }
 
         /** @var \ReflectionMethod $constructor 获取类的构造函数 */
         $constructor = $reflector->getConstructor();
@@ -165,13 +178,11 @@ class DiContainer
 }
 
 //Test One ...
-$container = new DiContainer();
+$container = DiContainer::init();
 
 //build DiContainerA - C
 $container->A = 'DiContainerA';
-$container->B = function ($container) {
-    return new DiContainerB($container->A);
-};
+$container->B =  new DiContainerB($container->A);
 $container->C = function ($container)
 {
     return new DiContainerC($container->B);
@@ -187,4 +198,16 @@ $c->run();
 $a = $container->A;
 $a->run();
 //A run ...
+
+$container->B->run();
+
+class OtherB
+{
+    public function run()
+    {
+        echo 'OtherB run ...',PHP_EOL;
+    }
+}
+$container->B = 'OtherB';
+$container->B->run();
 
