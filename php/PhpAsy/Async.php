@@ -1,5 +1,5 @@
 <?php
-echo "<pre />";
+
 
 interface Async
 {
@@ -64,19 +64,33 @@ $logger->send('Bar');*/
 
 /**
  * yield数据传输
+ * 生成器是一种可中断的函数, 在它里面的yield构成了中断点
+ * 程序为从右往左执行
+ * 每次执行到yield的地方中断
  * @return Generator
  */
 function gen() {
-    $ret = (yield 'yield1');
-    var_dump($ret);
-    $ret = (yield 'yield2');
-    var_dump($ret);
+    $ret1 = (yield 'yield1'); //st1
+    var_dump($ret1);          //st2
+    $ret2 = (yield 'yield2'); //st3
+    var_dump($ret2);          //st4
 }
-/*$gen = gen();
-var_dump($gen->current());
-var_dump($gen->send('ret1'));
-var_dump($gen->send('ret2'));*/
+$gen = gen();//返回生成器
+// yield1
+var_dump($gen->current());           //当前中继点 执行到st1 -有yield返回-> yield1
+// ret1 yield2
+var_dump($gen->send('ret1')); //发送数据 执行 st2 -$ret1为当前send的值-> ret1 ,st3 -有yield返回-> yield2
+// ret2 null
+var_dump($gen->send('ret2')); //发送数据 执行 st4 -$ret2为当前send的值-> ret2 , 无yield数据返回 -输出->null
 
+var_dump('---------------------');
+$gen2 = gen();
+//直接发送数据 st1 -跳过当前yield-> $ret1 = tt, st2 -> tt , st3 -> yield2
+var_dump($gen2->send('tt'));
+// 当前 yield st3 -> yield2
+var_dump($gen2->current());
+// gen2-1 , null
+var_dump($gen2->send('gen2-1'));
 
 /**
  * Class Task
