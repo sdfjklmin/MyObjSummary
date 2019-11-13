@@ -24,7 +24,23 @@
     
 ## 内置请求
     Tools ->  Http Client -> Test RESTFul Web Service
-    
+
+#### 内置请求文件快捷操作
+    新建 name.http 文件(api格式)
+    命令 : 
+         gtr  => get request(普通get请求)
+         gtrp => get request params(普通get请求带参数)
+         http|https =>  请求
+         
+         ptr  => post request(普通的post请求)
+         ptrp => post request params(带参数请求 id=1&name=11)
+         fptr => file post request (文件格式请求)
+         mptr => multipart post request(post请求,带参数)
+               --WebAppBoundary
+               Content-Disposition: form-data; name="field-name"
+               
+               field-value
+               --WebAppBoundary--
 ## 快捷使用
     
 #### Alt+Shift+Enter(快速生成)
