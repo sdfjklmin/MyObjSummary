@@ -1,60 +1,46 @@
-php7安装:
-		#安装对应的rpm依赖的时候,可能文件包不存在,最好是进入网页查看
-		#找到对应的安装包信息
-		rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+#### 必备软件
+    #error:no acceptable C compiler found in $PATH (没有gcc)
+    yum install gcc
+    
+    yum install libxml2-devel
+    
+    yum install openssl openssl-devel
+    
+    yum install bzip2 bzip2-devel
+    
+    yum -y install curl-devel
+    
+    yum install libmcrypt libmcrypt-devel mcrypt mhash
+    
+    yum install readline-devel
+    
+    #静态指针前置包
+    yum install systemtap-sdt-devel
+    
+    #configure: error: Cannot find OpenSSL's <evp.h>
+    yum install libssl-dev 
+    
+    如果没有找到对应的源码需要扩展yum源
+    yum install epel-release
+    #yum  install epel-release
+    yum update
+    
+    Ubuntu版本需要apt-get update,apt-get install,若还是不能安装依赖[应用程序 -> 软件和更新 -> 更新 -> 勾选 重要安全更新 和 推荐更新]
+    
+#### 下载 [官网地址]()
+    官方下载 php.tar.gz
+    
+    tar -zxvf php-7.1.gz 解压进入
 
-		#安装PHP7和相关依赖
-		rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-
-		yum install php70w
-
-		#安装过后没有pecl
-
-
-		===========================
-		rpm -q abc 查找abc.rpm安装包
-		rpm -e abc 删除abc.rpm安装包
-
-php5.6安装:
-		epel源
-		rpm -Uvh http://ftp.iij.ad.jp/pub/linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
-		rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm		
-		remi源
-		yum install epel-release
-		rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-		安装
-		 yum install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mcrypt php-mysqlnd php-phpunit-PHPUnit php-pecl-xdebug php-pecl-xhprof
-
-手动编译安装:
-    必备软件:
-        yum install gcc
-    	yum install libxml2-devel
-    	yum install openssl openssl-devel
-    	yum install bzip2 bzip2-devel
-    	yum -y install curl-devel
-    	yum install libmcrypt libmcrypt-devel mcrypt mhash
-    	yum install readline-devel
-    	yum install systemtap-sdt-devel#静态指针前置包
-	yum install libssl-dev# => configure: error: Cannot find OpenSSL's <evp.h>
-
-    	如果没有找到对应的源码需要扩展yum源
-    	yum install epel-release
-    	#yum  install epel-release
-    	yum update
-
-	a.官方下载php.tar.gz
-
-	b. tar -zxvf php-7.1.gz 解压进入
-
-    c.配置说明
+#### 配置说明
     ./configure --help                #查看配置命令
     ./configure --help | grep enable  #查看可选配置
 
 	./configure 
-	--prefix=/usr/local/php 		  #安装地址
+	--prefix=/usr/local/php           #安装地址
 	--with-config-file-path=/etc      #配置文件
 	--enable-inline-optimization 	  #开启功能	
-	--disable-debug					  #关闭debug	
+	--disable-debug                   #关闭debug	
 	--disable-rpath 
 	--enable-shared
 	--enable-opcache 
@@ -91,64 +77,87 @@ php5.6安装:
 	--enable-dtrace #静态探针
 	--with-png-dir --with-freetype-dir --with-jpeg-dir --with-gd #gd库安装
 
+    #完整示例
 	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-dtrace --enable-maintainer-zts --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
 	#--with-png-dir --with-freetype-dir --with-jpeg-dir --with-gd 暂时有问题
 	#./configure –enable-pcntl 编译pcntl,多线程
 
-	由于系统的版本不同,有些内置的模块没有,需要根据错误提示进行安装扩展
-	eg: error:no acceptable C compiler found in $PATH (没有gcc)
-	yum install gcc
 
-	d.编译
-	    make && make install
+#### 编译
+    make && make install
 
-	e.配置
-        安装完后 会提示对应的安装地址
-        对应的php安装地址
-        /usr/loacl/php/bin 配置系统变量
+#### 配置
+* 配置 php
 
-        配置php-fpm
-        cd /usr/local/php/etc
-        cp php-fpm.conf.default php-fpm.conf #生成配置文件
-
-        启动
-        /usr/local/php/sbin/php-fpm #可能会报php-fpm.d的错误
-        cd /usr/local/php/etc/php-fpm.d
-        cp www.conf.default www.conf   #文件中的用户和组都是www最好新建一个www用户
-	sudo groupadd nobody  #新增用户组 => cannot get gid for group ‘nobody’
+    
+    安装完后 会提示对应的安装地址
+    对应的php安装地址
+    /usr/loacl/php/bin 配置系统变量
+    
+* 配置 php-fpm    
 
 
-        没有php.ini
-        如果安装过后没有对应的php.ini
-        /usr/local/php/bin/php --ini //查看ini的对应目录
-        搜索php.ini相关配置
-        find / -name php.ini*
-        复制一份开发配置到对应的php ini目录
-        --with-config-file-path=/etc (这里指定的目录是etc)
+    配置php-fpm
+    cd /usr/local/php/etc
+    cp php-fpm.conf.default php-fpm.conf #生成配置文件
 
-	f.PHP扩展安装
-	建议在php对应的安装目录运行安装
-	/usr/local/php/bin
-	eg: pecl install msgpack
-	 PHP Startup: Unable to load dynamic library '/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so' - /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so: cannot open shared object file: No such file or directory in Unknown on line 0
-     对应安装的扩展没有在php.ini的扩展目录中
-     find / -name swoole.so  //查找已有的扩展目录(对应的有两个地址)
-     find / -name msgpack.so //新安装的扩展(复制到对应php扩展目录) 
+* 配置 www.conf
 
-     /usr/local/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so  //系统pecl安装的默认扩展目录
-	/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so //php.ini系统扩展目录
 
-	手动编译扩展
+    cd /usr/local/php/etc/php-fpm.d
+    
+    #文件中的用户和组都是www最好新建一个www用户
+    cp www.conf.default www.conf   
+    
+* 配置 php.ini
+
+
+    如果安装过后没有对应的php.ini
+    /usr/local/php/bin/php --ini //查看ini的对应目录
+    
+    在 php.tar.gz 的解压文件中(对应的安装源码) 复制 php.ini-development
+    到对应的php ini目录 --with-config-file-path=/etc (这里指定的目录是etc)    
+
+* 启动
+
+    
+    /usr/local/php/sbin/php-fpm #可能会报php-fpm.d的错误
+    
+    #cannot get gid for group ‘nobody’(新增用户组)
+    sudo groupadd nobody
+    
+
+
+#### PHP扩展安装
+    建议在php对应的安装目录运行安装
+    /usr/local/php/bin
+    
+    eg: pecl install msgpack
+    
+    #具体报错可以根据提示进行解决
+    PHP Startup: Unable to load dynamic library '/usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so' - /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so: cannot open shared object file: No such file or directory in Unknown on line 0
+    对应安装的扩展没有在php.ini的扩展目录中
+    find / -name swoole.so  //查找已有的扩展目录(对应的有两个地址)
+    find / -name msgpack.so //新安装的扩展(复制到对应php扩展目录) 
+    
+    /usr/local/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so  //系统pecl安装的默认扩展目录
+    /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so //php.ini系统扩展目录
+
+#### 手动编译扩展
 	wget http://youExtension.tgz
 	tar -zxvf
-	cd youExtension-3.1.6
-	/usr/local/php7/bin/phpize #生成./configue文件
+	cd youExtension
+	
+	#生成./configue文件
+	/usr/local/php7/bin/phpize
+	
+	#配置 php-config 地址 
 	./configure --with-php-config=/usr/local/php7/bin/php-config
 	make && make install
 
 	echo "extension=pthreads.so" >> /etc/php.ini #添加配置
 
-	按照php系统扩展:
+#### 扩展依赖:
 	 undefined reference to `libiconv_open 无法编译PHP libiconv
 
 	 #wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
@@ -164,58 +173,29 @@ php5.6安装:
      或者
      --without-iconv #不安装:-D
 
-	php --ri yar // 查看yar的版本信息
+#### CLI命令
+    #查看yar的版本信息
+    php --ri yar 
 
-	安装nginx
+#### 安装配置nginx
+#### hosts设置
+    #windows hosts配置
+    192.168.124.129  mint.test  #如果nginx没有min.test站点那么对应的是默认站点
+    192.168.124.129  mint.1     #对应nginx的站点min.1
 
-	cd /usr/local/nginx
-    mkdir conf.d
-	vi nginx.conf 末尾添加 include /usr/local/nginx/conf/conf.d/*
-
-	添加或修改Nginx.conf
-		location ~ \.php$ {
-
-			root /www/test; #网站指定的目录
-
-			fastcgi_pass 127.0.0.1:9000;
-
-			fastcgi_index index.php;
-
-			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-
-			include fastcgi_params;
-
-			}
-		添加新站点可以通过引入文件的方法引入,这里直接修改
-
-		在对应的server相同等级下添加
-			server {
-				listen       80;
-				#listen       somename:8080;
-				server_name  min.1;
-
-				location / {
-				root   /minAobj/min.1;
-				index  index.html index.htm index.php;
-				}
-
-				location ~ \.php$ {
-				root           /minAobj/min.1;
-				fastcgi_pass   127.0.0.1:9000;
-				fastcgi_index  index.php;
-				fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-				include        fastcgi_params;
-				}
-
-			}
-		windows hosts配置
-		192.168.124.129  mint.test  #如果nginx没有min.test站点那么对应的是默认站点
-		192.168.124.129  mint.1     #对应nginx的站点min.1
-
+    #Linux
+    sudo vim /etc/hosts
+    sudo /etc/init.d/dns-clean start
+    sudo /etc/init.d/networking restart
+    
+#### 权限修改
 	搭建完成之后有些操作可能无法执行(权限问题)
-	chown -R www www/	 # 把www文件夹下的所以文件归属于www用户/组  用户 文件夹
+	#这里根据对应运行的用户进行设置
+	#把www文件夹下的所以文件归属于www用户/组  用户 文件夹
+	chown -R www www/	 
 
-	Please check your autoconf installation and the
+#### 其它安装
+    Please check your autoconf installation and the
 	$PHP_AUTOCONF environment variable. Then, rerun this script.
 	错误提示:没有autoconf.autoconf依赖于m4
 	yum install m4
@@ -244,7 +224,8 @@ php5.6安装:
 	下载mongodb的压缩包
 	pecl install mongodb-1.13.14.tgz
 
-	php重启1:
+#### 重启
+    php重启1:
 	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
 	ps aux | grep php-fpm 
 	kill 15891 # 对应的master进程ID 
