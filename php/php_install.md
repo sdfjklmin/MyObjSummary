@@ -27,7 +27,7 @@
     
     Ubuntu版本需要apt-get update,apt-get install,若还是不能安装依赖[应用程序 -> 软件和更新 -> 更新 -> 勾选 重要安全更新 和 推荐更新]
     
-#### 下载 [官网地址]()
+#### 下载 [官网地址](https://www.php.net/downloads.php)
     官方下载 php.tar.gz
     
     tar -zxvf php-7.1.gz 解压进入
