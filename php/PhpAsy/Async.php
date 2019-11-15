@@ -107,7 +107,7 @@ var_dump($gen->send('ret2')); //发送数据 执行 st4 -$ret2为当前send的�
 
 var_dump('---------------------');
 $gen2 = gen();
-//直接发送数据 st1 -跳过当前yield-> $ret1 = tt, st2 -> tt , st3 -> yield2
+//直接发送数据 st1 -忽略当前yield返回值-> $ret1 = tt, st2 -> tt , st3 -> yield2
 var_dump($gen2->send('tt'));
 // 当前 yield st3 -> yield2
 var_dump($gen2->current());
