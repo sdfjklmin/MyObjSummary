@@ -103,7 +103,18 @@
 #13:list将数组的值解析到对应的变量中
     $initArr = ['this is name','this is other'] ;
     list($name,$other) = $initArr ;
-
+    //骚操作
+    $arr = [
+        ['tt','tt1','tt2'],
+        ['ss','ss1','ss2'],
+        ['bb','bb1','bb2'],
+    ];
+    //只取二维数组第一个
+    foreach ($arr as list($item)) {
+        //list($item) = $item
+        //扩展 list($one,$two,$three) = $item
+        var_dump($item);// tt ss bb
+    }
 #14:后台运行脚本程序 加 &
     #eg: /usr/local/php/bin/php /var/www/passport/yii queue/listen &
 

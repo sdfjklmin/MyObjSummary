@@ -149,6 +149,9 @@ $scheduler->newTask(task2());
 $scheduler->run();*/
 
 /** 系统调用，执行某些系统内核操作
+ *  不是简单地把调度器传递给任务（这样就允许它做它想做的任何事),
+ *  我们将通过给yield表达式传递信息来与系统调用通信.
+ *  这儿yield即是中断, 也是传递信息给调度器（和从调度器传递出信息）的方法
  * Class SystemCall
  * @author sjm
  * @package php\phpAsy
@@ -241,6 +244,75 @@ class SchedulerSystem {
     {
         return $this->taskMap;
     }
+
+    //非阻塞IO
+
+    // resourceID => [socket, tasks]
+    protected $waitingForRead = [];
+    protected $waitingForWrite = [];
+
+    public function waitForRead($socket, Task $task) {
+        if (isset($this->waitingForRead[(int) $socket])) {
+            $this->waitingForRead[(int) $socket][1][] = $task;
+        } else {
+            $this->waitingForRead[(int) $socket] = [$socket, [$task]];
+        }
+    }
+
+    public function waitForWrite($socket, Task $task) {
+        if (isset($this->waitingForWrite[(int) $socket])) {
+            $this->waitingForWrite[(int) $socket][1][] = $task;
+        } else {
+            $this->waitingForWrite[(int) $socket] = [$socket, [$task]];
+        }
+    }
+
+    protected function ioPoll($timeout) {
+        $rSocks = [];
+        foreach ($this->waitingForRead as list($socket)) {
+            $rSocks[] = $socket;
+        }
+
+        $wSocks = [];
+        foreach ($this->waitingForWrite as list($socket)) {
+            $wSocks[] = $socket;
+        }
+
+        $eSocks = []; // dummy
+
+        if (!stream_select($rSocks, $wSocks, $eSocks, $timeout)) {
+            return;
+        }
+
+        foreach ($rSocks as $socket) {
+            list(, $tasks) = $this->waitingForRead[(int) $socket];
+            unset($this->waitingForRead[(int) $socket]);
+
+            foreach ($tasks as $task) {
+                $this->schedule($task);
+            }
+        }
+
+        foreach ($wSocks as $socket) {
+            list(, $tasks) = $this->waitingForWrite[(int) $socket];
+            unset($this->waitingForWrite[(int) $socket]);
+
+            foreach ($tasks as $task) {
+                $this->schedule($task);
+            }
+        }
+    }
+
+    protected function ioPollTask() {
+        while (true) {
+            if ($this->taskQueue->isEmpty()) {
+                $this->ioPoll(null);
+            } else {
+                $this->ioPoll(0);
+            }
+            yield;
+        }
+    }
 }
 
 function getTaskId2() {
@@ -312,11 +384,74 @@ function task3() {
     }
 }
 
-$scheduler = new SchedulerSystem();
+/*$scheduler = new SchedulerSystem();
 $scheduler->newTask(task3());
-$scheduler->run();
+$scheduler->run();*/
 
 //现在你可以实现许多进程管理调用.
 // 例如 wait（它一直等待到任务结束运行时),
 // exec（它替代当前任务)和fork（它创建一个当前任务的克隆). fork非常酷,
 // 而且你可以使用PHP的协程真正地实现它, 因为它们都支持克隆
+
+//非阻塞IO 服务器在一个时间点上只能处理一个连接
+//解决方案是确保在真正对套接字读写之前该套接字已经“准备就绪”.
+//为了查找哪个套接字已经准备好读或者写了, 可以使用 流选择函数.
+function waitForRead($socket) {
+    return new SystemCall(
+        function(Task $task, SchedulerSystem $scheduler) use ($socket) {
+            $scheduler->waitForRead($socket, $task);
+        }
+    );
+}
+
+function waitForWrite($socket) {
+    return new SystemCall(
+        function(Task $task, SchedulerSystem $scheduler) use ($socket) {
+            $scheduler->waitForWrite($socket, $task);
+        }
+    );
+}
+
+function server($port) {
+    echo "Starting server at port $port...\n";
+
+
+    $socket = @stream_socket_server("tcp://localhost:$port", $errNo, $errStr);
+
+    if (!$socket) throw new Exception($errStr, $errNo);
+
+    stream_set_blocking($socket, 0);
+
+    while (true) {
+        yield waitForRead($socket);
+        $clientSocket = stream_socket_accept($socket, 0);
+        yield newTask(handleClient($clientSocket));
+    }
+}
+
+function handleClient($socket) {
+    yield waitForRead($socket);
+    $data = fread($socket, 8192);
+
+    $msg = "Received following request:\n\n$data";
+    $msgLength = strlen($msg);
+
+    $response = <<<RES
+HTTP/1.1 200 OK\r
+Content-Type: text/plain\r
+Content-Length: $msgLength\r
+Connection: close\r
+\r
+$msg
+
+RES;
+
+    yield waitForWrite($socket);
+    fwrite($socket, $response);
+
+    fclose($socket);
+}
+//并没有通过测试
+$scheduler = new Scheduler;
+$scheduler->newTask(server(8000));
+$scheduler->run();
