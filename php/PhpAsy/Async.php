@@ -114,3 +114,22 @@ var_dump($gen2->current());
 // gen2-1 , null
 var_dump($gen2->send('gen2-1'));
 
+
+/** 设置异常
+ * @return Generator
+ */
+function gen22() {
+    echo "Foo\n"; #1
+    try {
+        yield;   #2
+    } catch (Exception $e) {
+        #4
+        echo "Exception: {$e->getMessage()}\n";
+    }
+    echo "Bar\n"; #3
+}
+
+$gen = gen22();
+$gen->rewind();                     // echos "Foo" 1 -> 2，程序停留在 2 之后，然后设置异常进行处理
+$gen->throw(new Exception('Test')); // echos "Exception: Test"
+// and "Bar"

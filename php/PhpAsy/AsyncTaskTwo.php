@@ -11,6 +11,9 @@ use SplQueue;
  */
 class Job
 {
+    //+++++++++++++++++++++++++++++++
+    // 简单的任务 Job
+    //+++++++++++++++++++++++++++++++
     public static function task1()
     {
         for ($i = 1; $i <= 10; $i++) {
@@ -27,6 +30,9 @@ class Job
         }
     }
 
+    //+++++++++++++++++++++++++++++++
+    // 带参数的任务 Job
+    //+++++++++++++++++++++++++++++++
     public static function task3()
     {
         echo "[ INFO ] start task3 \n";
@@ -46,6 +52,37 @@ class Job
         echo "[ INFO ] start task5 \n";
         $tt = yield;
         $tt->tt5 = 'task5';
+    }
+
+    //+++++++++++++++++++++++++++++++
+    // 通过系统调用执行 Job
+    //+++++++++++++++++++++++++++++++
+    public static function task6()
+    {
+        return new SystemCall(function (Task $task,Scheduler $scheduler) {
+            //设置当前任务ID
+            $task->setValue($task->getTaskId());
+            //将任务加入队列中
+            $scheduler->intoQueue($task);
+        });
+    }
+
+    public static function task7()
+    {
+        $id = yield self::task6(); #系统调用
+        for ($i = 1; $i <= 10; $i++) {
+            echo "This is Job task7 {$i} {$id}...\n";
+            yield;
+        }
+    }
+
+    public static function task8()
+    {
+        $id = yield self::task6();
+        for ($i = 1; $i <= 5; $i++) {
+            echo "This is Job task8 {$i} {$id}...\n";
+            yield;
+        }
     }
 }
 
@@ -220,6 +257,34 @@ class Scheduler
         }
     }
 
+
+    /**
+     * 执行入口
+     */
+    public function runSysCall()
+    {
+        //当前队列不为空，说明有任务脚本
+        while (!$this->taskQueue->isEmpty()) {
+            //获取队列中的数据
+            /** @var Task $task */
+            $task = $this->taskQueue->dequeue();
+            //执行
+            $retval = $task->run();
+            if ($retval instanceof SystemCall) {
+                //将任务和调度器交个系统操作
+                $retval($this,$task);
+                continue;
+            }
+            if($task->isFinished()) {
+                //去除已经执行完成的任务
+                unset($this->taskMap[$task->getTaskId()]);
+            }else{
+                //没有执行完成，重新进入队列
+                $this->intoQueue($task);
+            }
+        }
+    }
+
     /**
      * @return int
      */
@@ -236,6 +301,7 @@ class Scheduler
         return $this->taskMap;
     }
 }
+
 class TT
 {
     public $tt3 ;
@@ -246,11 +312,57 @@ class TT
 //流程:
 //创建调度器 -> 调用 newTask 生成任务[传入 Job(迭代器)] ->
 // 初始化 Task -> 加入队列中 -> run(执行) ->  从队列中获取 Task -> 运行 Task run() -> 判断是否完成 -> 重新加入队列
-$scheduler  = new Scheduler;
+// 调度器 执行 任务脚本，这个可行么 ？ 有一定的风险存在，如果任务脚本是操作一些系统或者非自己的脚本时，会存在问题
+// 使用系统调用
+/*$scheduler  = new Scheduler;
 $tt = new TT();
 $scheduler->newTask(Job::task3(),$tt);
 $scheduler->newTask(Job::task4(),$tt);
 $scheduler->newTask(Job::task5(),$tt);
 $scheduler->run();
-var_dump($tt);
+var_dump($tt);*/
 
+
+/** 系统调用
+ * Class SystemCall
+ * @author sjm
+ * @package php\phpAsy\two
+ */
+class SystemCall
+{
+    /** 定义系统调用的方法
+     * @var callable
+     */
+    protected $callback;
+
+    public function __construct(callable $callback)
+    {
+        $this->callback = $callback;
+    }
+
+    /**
+     * @example
+     *  $SystemCall = new SystemCall(function(){
+     *     echo 'something';
+     *  });
+     *  #会触发__invoke
+     *  $SystemCall();
+     * @param Scheduler $scheduler
+     * @param Task $task
+     * @return mixed
+     */
+    public function __invoke(Scheduler $scheduler, Task $task)
+    {
+        $callback = $this->callback;
+        return $callback($task,$scheduler);
+    }
+}
+//执行步骤
+//创建调度器 -> 创建 newTask 任务传入 Job::task7() -> task7 中 中继点 调用 task6 -> task6 设置个系统调用
+// -> 此时 newTask中的Generator为系统调用类 -> 将 系统调用类 放入队列中
+$scheduler = new Scheduler();
+$scheduler->newTask(Job::task7());
+//同理
+$scheduler->newTask(Job::task8());
+//执行 runSysCall -> 从队列中获取任务 -> 执行 Task中的run 获得 系统调用类 -> 之后代码不用解释了吧
+$scheduler->runSysCall();
