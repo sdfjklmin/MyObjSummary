@@ -133,3 +133,6 @@ $gen = gen22();
 $gen->rewind();                     // echos "Foo" 1 -> 2，程序停留在 2 之后，然后设置异常进行处理
 $gen->throw(new Exception('Test')); // echos "Exception: Test"
 // and "Bar"
+
+//简单来说，yield可以处理大数据、协程处理、IO并发处理等、CPU在处理程序的这段时间可以用yield来处理其它事情。
+//当请求到达 服务器 -> php-fpm 为阻塞进程 -> 使用 yield 来处理其它请求
