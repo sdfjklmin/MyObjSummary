@@ -424,8 +424,10 @@ function server($port) {
 
     while (true) {
         yield waitForRead($socket);
-        $clientSocket = stream_socket_accept($socket, 0);
-        yield newTask(handleClient($clientSocket));
+        $clientSocket = @stream_socket_accept($socket, 0);
+        if($clientSocket) {
+            yield newTask(handleClient($clientSocket));
+        }
     }
 }
 
@@ -453,5 +455,5 @@ RES;
 }
 //并没有通过测试
 $scheduler = new Scheduler;
-$scheduler->newTask(server(8000));
+$scheduler->newTask(server(30000));
 $scheduler->run();
