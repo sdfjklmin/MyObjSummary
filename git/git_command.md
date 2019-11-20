@@ -135,11 +135,12 @@ git push --set-upstream origin mantis_80_withdraw
 ##### 将远程分支和本来分支建立联系
     git branch --set-upstream-to=origin/远程分支的名字 本地分支的名字 
 
-##### 代码冲突解决
-    git stash #将本地文件存入缓存
+##### 代码冲突解决 stash(藏) pop(抛出)
+    git stash #将本地文件存入缓存,先藏起来
     git pull  #更新代码
-    git stash pop
-    git diff -w test.php #确认代码自动合并的情况
+    git stash pop #将 藏 起来的代码 抛出
+    git diff #本次代码的不同之处
+    git diff -w test.php #单一文件的不同之处
 
 
 ##### 扩展只有文件文件内容无法提交(删除缓存,再添加)

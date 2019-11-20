@@ -11,7 +11,6 @@
 //设置跨域
 //header('Access-Control-Allow-Origin','*') ;
 //file_put_contents('t.txt',json_encode($_REQUEST,true).PHP_EOL, FILE_APPEND) ;
-//tt hard
 //目录入口
 defined('APP_DIR') or define('APP_DIR',__DIR__.'/');
 defined('APP_ROOT') or define('APP_ROOT','./');
