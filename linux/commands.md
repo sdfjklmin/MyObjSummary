@@ -384,7 +384,8 @@
 
 	b.  当前用户生效
         cd ~
-        vi .bash_profile 修改文件中PATH一行，将路径加入到PATH=$PATH:$HOME/bin一行之后
+        vi .bash_profile|.bashrc 修改文件中PATH一行，将路径加入到PATH=$PATH:$HOME/bin一行之后
+        或 新增 export PATH=$PATH:/(对应可执行命令的地址)
 
     c.临时生效
 		export PATH=$PATH:/(对应php的安装运行目录)
