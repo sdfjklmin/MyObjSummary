@@ -232,6 +232,8 @@
     grep -l  -option	path 		 	列出文件名(扯淡)
          -n  -option	path 			显示行号
          -v  -option	path			输出不是a1的
+         -w  -option	    			完全匹配 grep -w error
+         -l  -option	path			文件匹配 grep -w error -l *.log
          ^a1 			path 		 	^符号视作特殊字符,用于指定一行或者一个单词的开始
          a1$ 			path 		 	以a1结尾的 $符号视作特殊字符,用于指定一行或者一个单词的结尾。
          -r  -option	path      		递归去查找(文件夹)
@@ -246,6 +248,8 @@
     ls  | find a1	
     grep -option parm path ;    操作参数 路径
     find path -option parm ;    路径 	 操作参数 
+    grep -w error -l *.log #显示　*.log　中　有　error　的
+    cat 20.log | grep -n -w error #显示20.log中带 error 的,带行号 
     
 ##### Vi
     i   #在光标前插入
