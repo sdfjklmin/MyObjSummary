@@ -85,6 +85,7 @@
     cat -b file             #查看file内容带数字编号但不对空白行编号
     cat -n file1 > file2    #把file1内容带编号输入到file2中
     cat --help              #查看更多
+    cat -n 20.log | head -n 500 | tail -n +450  #查看　450 - 500 行
        
 ##### more less head tail
     more :
