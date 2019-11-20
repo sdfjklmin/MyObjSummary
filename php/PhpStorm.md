@@ -41,6 +41,21 @@
                
                field-value
                --WebAppBoundary--
+               
+    配置 : 新建 http-client.env.json ，配置 development
+        {
+          "development": {
+            "host": "localhost:9501",
+            "username": "sjm",
+            "password": "123456",
+            "api-tt" : "index/ttPost",
+            "api-tt-params": "id=11&name=sjm&pwd=123456",
+            "api-t": {
+              "name" : "tt"
+            }
+          }
+        }               
+
 ## 快捷使用
     
 #### Alt+Shift+Enter(快速生成)
