@@ -113,6 +113,9 @@
         
     tail -f log.log | nl  #带行号
     
+    tail -10 log.log #显示10行
+    tail +10 log.log #从第10行开始，显示到末尾
+    
     tail -f index.php  | grep -e error -e ERROR -n
     #显示error和ERROR并带上行号
    
