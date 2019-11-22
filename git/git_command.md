@@ -193,3 +193,19 @@ git push --set-upstream origin mantis_80_withdraw
     git config --global --add alias.st status
     git config --global --add alias.ps push
     git config --global --add alias.pl pull
+    
+#### git缓慢
+1.在hosts文件里追加以下内容（IP需要替换掉），以下5个域名一个都不要少
+
+    151.101.109.194 github.global.ssl.fastly.net
+    185.199.110.153 assets-cdn.github.com
+    151.101.108.133 avatars0.githubusercontent.com
+    151.101.76.133 avatars1.githubusercontent.com
+    192.30.253.112 github.com
+
+2.IP替换方法 [站长工具](http://tool.chinaz.com/dns)
+    
+    打开 http://tool.chinaz.com/dns ,查询域名IP映射，
+    把以上5个域名挨个查询一下，找一个TTL值比较小的IP替换掉。
+    注意替换前要把IP先Ping一下，确保是通的才替换，否则是无效的。
+    
