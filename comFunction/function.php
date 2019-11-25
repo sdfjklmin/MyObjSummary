@@ -274,19 +274,21 @@ if(!function_exists('getDirTree')) {
 }
 
 if(!function_exists('getIp')) {
+    //官方$_SERVER : https://www.php.net/manual/zh/reserved.variables.server.php (real_ip(),详细获取)
     function getIp()
     {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
-        {
-            $ip=$_SERVER['HTTP_CLIENT_IP'];
-        }
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-        {
-            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        else
-        {
-            $ip=$_SERVER['REMOTE_ADDR'];
+        /** @var $serverKey $_SERVER可以获取IP的Key */
+        $serverKey = array(
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        );
+        $ip = '';
+        foreach ($serverKey as $k) {
+            if(isset($_SERVER[$k]) && !empty($_SERVER[$k])) {
+                $ip = getenv($k);
+                break;
+            }
         }
         return $ip;
     }
