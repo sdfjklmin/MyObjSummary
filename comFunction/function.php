@@ -275,7 +275,7 @@ if(!function_exists('getDirTree')) {
 
 if(!function_exists('getIp')) {
     //官方$_SERVER : https://www.php.net/manual/zh/reserved.variables.server.php (官方例子:real_ip())
-    function getIp()
+    function getIp($ip2long = false)
     {
         /** @var $serverKey $_SERVER可以获取IP的Key */
         $serverKey = array(
@@ -290,7 +290,7 @@ if(!function_exists('getIp')) {
                 break;
             }
         }
-        return $ip;
+        return $ip2long ? ip2long($ip) : $ip;
     }
 }
 
