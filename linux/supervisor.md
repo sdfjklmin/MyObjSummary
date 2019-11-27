@@ -3,13 +3,16 @@
 
 #### 默认路径
     /etc/supervisor
+    
+#### 配置文件，若没有可以生成 `echo_supervisord_conf > /etc/supervisor/supervisord.conf ` 
+    supervisord.conf   
 
 #### supervisor.sock 地址
     /run/supervisor.sock
     
 #### 创建一个conf，　demo.conf
     具体的放置地址，请查看　supervisord.conf
-###### 内容
+###### 内容 `;` 为注释符
 ```
 [program:MGToastServer] ;程序名称，终端控制时需要的标识
 command=dotnet MGToastServer.dll ; 运行程序的命令
@@ -54,6 +57,7 @@ stopsignal=INT
     
     #其它
     supervisord : 启动supervisor
+    supervisorctl shutdown :关闭
     supervisorctl reload :修改完配置文件后重新启动supervisor
     supervisorctl status :查看supervisor监管的进程状态
     supervisorctl start 进程名 ：启动XXX进程
