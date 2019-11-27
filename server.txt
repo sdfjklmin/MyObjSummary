@@ -42,7 +42,7 @@ Redis操作:
 mariadb: 
                  主从同步
      dis(主数据库)----son_one(从数据库) 
-nginx:
+nginxtt:
    
 				方向代理,负载均衡     ip-hash
      son_one(访问地址) ---- lnmp_m(真实地址)   weight=1
