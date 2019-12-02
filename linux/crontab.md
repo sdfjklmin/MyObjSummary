@@ -145,6 +145,8 @@ Linux系统任务是由 cron (crond) 这个系统服务来控制的，这个系�
   CRON: pam_unix(cron:session): session closed for user root
   
   `cron的日志信息会不停的记录上面的信息`
+  
+  `cat /var/log/auth.log`
   ~~~
   cd /etc/pam.d
   vi common-session-noninteractive
