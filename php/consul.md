@@ -81,4 +81,41 @@ echo '{"service":
     #yum
     yum install -y socat
     
-### 添加KV    
+    
+### 添加KV `consul kv <subcommand> [options] [args]`  
+```
+Subcommands:
+    delete    Removes data from the KV store
+    export    Exports a tree from the KV store as JSON
+    get       Retrieves or lists data from the KV store
+    import    Imports a tree stored as JSON to the KV store
+    put       Sets or updates data in the KV store
+```
+#### 具体例子
+```
+# 设置或者更新
+consul kv put key value
+
+# 获取
+consul kv get key
+
+#单个命令的更多使用
+consul kv get -h
+
+#获取某个 key 的详细信息
+consul kv get -detailed key
+
+#获取带有 key 的所有数据
+consul kv get -keys key
+
+#获取所有数据
+consul kv get -keys
+
+# 删除带有 redis 前缀的数据
+consul kv delete -recurse redis
+
+```
+
+### UI `http://localhost:8500/ui`
+
+## [Implementation](https://learn.hashicorp.com/consul/datacenter-deploy/day1-deploy-intro)
