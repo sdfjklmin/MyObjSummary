@@ -65,6 +65,9 @@ composer.phar self-update
 #查看,更改配置
 composer config --list
 
+#将 Composer 镜像设置为阿里云镜像，加速国内下载速度
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+
 #create-project创建项目
 composer.phar create-project doctrine/orm path 2.2.*
 
