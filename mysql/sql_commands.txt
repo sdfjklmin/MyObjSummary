@@ -107,3 +107,37 @@ _16:
     SHOW CREATE TABLE table_name; #显示创建table的SQL
 
     SHOW INDEX FROM table_name; #显示table的索引
+_17:表 user_table, 存在 多条用户数据并状态不同 , 需要将用户数据合并成一条 以不同字段 显示数据
+    (不建议使用SQL查询， 应当按照结果去创建对应的表结构， 通过任务脚本进行数据填充)
+    user_table
+    id  user_id state
+    1   1       1
+    2   1       2
+    3   1       3
+    =>
+    user_id state1 state2 state3
+    1       1       1       1
+
+    SQL1:
+        select
+                  user_id,
+                  ( select count(*) from user_table as t1 where t1.user_id = temp.user_id and  state = 1) as state1,
+                  ( select count(*) from user_table as t1 where t1.user_id = temp.user_id and  state = 2) as state2,
+                  ( select count(*) from user_table as t1 where t1.user_id = temp.user_id and  state = 3) as state3
+        from (
+                # 主sql
+                select user_id from user_table group by user_id
+             )
+        as temp;
+
+    SQL2:根据 user 表进行连表查询
+    select
+        ut.user_id,
+       (select count(*) from user_table as t1 where state = 1 and t1.user_id = u.id) as state1,
+       (select count(*) from user_table as t1 where state = 2 and t1.user_id = u.id) as state2,
+       (select count(*) from user_table as t1 where state = 3 and t1.user_id = u.id) as state3
+
+    from user as u
+             left join user_table as ut on u.id = ut.user_id
+    where ut.user_id != ''
+    group by pma.id
