@@ -15,7 +15,7 @@
 ## 设置PHP版本号
     Settings -> Languages && Framworks -> PHP(点击选中,可以修改版本号) --版本号无法选择--> 点击PHP下的Composer -> IDE Setting with composer.json (取消勾选)
     
-## 插件
+## [插件](https://plugins.jetbrains.com/phpstorm)
     Settings -> Plugins(插件) -> PHP Annotation(注解)(search and install) -> resart IDE
     
     #搜索背景图片
