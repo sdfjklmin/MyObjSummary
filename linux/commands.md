@@ -644,3 +644,6 @@ fuser 80/tcp -v
 #nmap工具
  
 ```
+
+##### 33. 查看系统开启服务耗时 
+analyze(分析) blame(责备) `systemd-analyze blame`
