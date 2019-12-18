@@ -82,6 +82,7 @@ echo '{"service":
     yum install -y socat
     
     
+    
 ### 添加KV `consul kv <subcommand> [options] [args]`  
 ```
 Subcommands:
@@ -116,6 +117,7 @@ consul kv delete -recurse redis
 
 ```
 
-### UI `http://localhost:8500/ui`
+### UI 
+`http://localhost:8500/ui`
 
 ## [Implementation](https://learn.hashicorp.com/consul/datacenter-deploy/day1-deploy-intro)
