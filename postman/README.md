@@ -3,6 +3,7 @@
 ## [官方文档](https://learning.getpostman.com/docs/postman/launching-postman/introduction/)
 
 ## 常用快捷键
+
 |快捷键|应用|
 | --------          | :-----: |
 | Ctrl + t          | 新开窗口 |
@@ -15,11 +16,11 @@
 | Ctrl + Shift + f  | 内容查找 |
 | Ctrl + Shift + i  | 开发工具 |
 
-## 新建请求,点击 顶部左边的 [`+ New ▾`](https://learning.getpostman.com/docs/postman/launching-postman/newbutton/)
+## 顶部左边的 [`+ New ▾`](https://learning.getpostman.com/docs/postman/launching-postman/newbutton/)
 
 #### `+ New` 创建新的,具体是什么自行选择. `▾` 快捷创建
 ~~~~
-Request(请求)  Collection(集合) Environment(环境变量)
+Request(请求)  Collection(集合)  Environment(环境变量)
 
 API Document(api 文档)    Mock Server(模拟服务器)      Monitor(监听器,性能响应)
 
@@ -60,18 +61,18 @@ No Environment      ⓔ                   ✲
 {{key}}
 ~~~
 
-#### 环境变量中的变量受限于环境,全局变量中的变量没有限制可以在任意环境中使用
+#### 环境变量中的变量受限于环境,全局变量中的变量没有限制可以在任意环境中使用,{{$ }} 内置环境变量
 
 ## 发送请求
-* Params
-* Authorization
-* Headers
-* Body
-* Pre-request Script
-* Tests
-* Settings
-* Cookies
-* Code
+* Params 参数
+* Authorization 认证
+* Headers 请求头
+* Body 请求体
+* Pre-request Script 预请求脚本
+* Tests 请求后的测试
+* Settings 设置
+* Cookies cookie管理
+* Code 对应请求的代码
 
 #### URL编码 decode|encode
 ~~~
@@ -119,14 +120,78 @@ Postman将启用语法突出显示并将相关标头附加到您的请求。
 
 #### Authorization : 验证
 
+###### 单一授权
+~~~
+在 TYPE 栏目,选择你需要的 验证方式(比如 Basic Auth)
+填写 你的加密信息
+点击 Preview Request , 这时在 Headers -> Temporary Headers 中会生成对应的加密信息
+~~~
+
+###### 继承认证
+~~~
+在 左侧导航栏中 点击 Collections ,
+指向你要添加的 Common Api(集合项目) 点击后面的 ...  选择 edit,进入弹框后选择 Authorization,重复 单一授权.
+~~~
+* 新建或更改接口, 将对应接口保存到 Common Api(集合项目) 中会继承对应的认证
+* 认证依据,  Authorization -> TYPE -> inherit(继承) auth from parent -> Common Api
+
+###### 认证类型
+* `inherit auth from parent` 继承认证
+* `no auth` 无认证
+* `bearer token` bearer(持票人),令牌是文本字符串,包含在请求标头中.
+
+    Bearer < Your API key >
+    
+    "Authorization": "Bearer 223232323"
+    
+* `basic auth` 基本身份验证涉及随请求一起发送经过验证的用户名和密码
+
+    Basic < Base64 encoded username and password >
+    
+    "Authorization": "Basic MTgwMTE1MzMwMDI6YWIxMjM0NTY="
+    
+* `digest auth` 摘要授权
+
+    将包含用户名和密码的加密数据数组与从服务器接收到的数据相结合(可以设置更多参数加密)，发送回去。
+    服务器使用传递的数据来生成加密的字符串，并将其与您发送的字符串进行比较，以认证您的请求。
+
+* `OAuth 1.0` OAuth 1.0允许客户端应用程序访问第三方API提供的数据
+
+    OAuth Token and OAuth Token Secret,无须暴露登录信息.
+    
+* `OAuth 2.0` OAuth 1.0允许客户端应用程序访问第三方API提供的数据
+
+    删除了秘密令牌,只需获得一个访问令牌.无须暴露登录信息.
+    
+* 其它 `Hawk`, `AWS signature`    
+
 #### Headers : 请求头信息
-###### Presets(headers栏目下最后面),点击 Manager Presets 进行添加管理
+###### Headers : 设置头部信息
+* Presets(headers栏目下最后面),点击 Manager Presets 进行添加管理
+
+###### Temporary Headers : 临时header,认证,请求协议,类型等信息
 
 #### Cookies
 ~~~
 点击 Cookies 
 Manager Cookies
-  www.tt.com (输入域名名称,点击 Add )
+  www.tt.com (输入域名名称,不带端口号,点击 Add )
 
 在 www.tt.com 下,点击 Add Cookie,新增 信息
 ~~~
+
+#### 证书 
+    (请单击标题工具栏右侧的扳手图标，选择“设置”，然后选择“ 证书”选项卡,点击Add certificate)
+
+#### 代理
+    对于Postman本机应用程序，如果网站启用了HSTS，则无法通过HTTPS捕获请求。大多数网站都有此检查
+
+###### 局部代理 : 请单击标题工具栏右侧的雷达图标,开启代理(proxy)即可.
+    手机连接需要在同一个网段,将WiFi代理设置为本机IP,端口为Postman代理设置的端口,默认5555
+    
+###### 全局代理 : (请单击标题工具栏右侧的扳手图标，选择“设置”，然后选择“ Proxy”选项卡)    
+
+## `Runner` 运行集合
+## `Monitor` 监听器
+## `API Document` api 文档
+## `Mock Server` 模拟服务器

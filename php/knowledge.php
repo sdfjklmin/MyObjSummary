@@ -464,3 +464,33 @@ echo 'test';
 
 #53 创建空对象
 $tt = new \StdClass();
+
+#54 获取header
+function getHeader()
+{
+    $header = [];
+    if (function_exists('apache_request_headers') && $result = apache_request_headers()) {
+        //apache function
+        $header = $result;
+    } elseif (function_exists('getallheaders') && $result = getallheaders()) {
+        //apache function based on apache_request_headers
+        $header = $result;
+    } else {
+        $server = $_SERVER;
+        foreach ($server as $key => $val) {
+            if (0 === strpos($key, 'HTTP_')) {
+                $key          = str_replace('_', '-', strtolower(substr($key, 5)));
+                $header[$key] = $val;
+            }
+        }
+        if (isset($server['CONTENT_TYPE'])) {
+            $header['content-type'] = $server['CONTENT_TYPE'];
+        }
+        if (isset($server['CONTENT_LENGTH'])) {
+            $header['content-length'] = $server['CONTENT_LENGTH'];
+        }
+    }
+    //array_change_key_case 将数组的 key 全部变为大写或小写
+    $header = array_change_key_case($header);
+    return $header;
+}
