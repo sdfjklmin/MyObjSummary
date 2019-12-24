@@ -10,9 +10,12 @@
     1.要时刻保持跳出当前层级和环境来思考的习惯。
     2.充分利用思维导图工具，不断延展知识边界。
     3.沟通与交流时提高视野的最快捷的方式。
+    
 ## 声明
     若有侵权，请私信于我，谢谢！
     
+## 鸣谢 [jetbrains]( https://www.jetbrains.com/?from=php-map)  
+  
 ## 以PHP为基础,向外扩张知识图谱
 - [MyObjSummary]
   - [bookLog](#bookLog) 书籍记录
