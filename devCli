@@ -1,0 +1,124 @@
+#!/usr/local/bin/php -Cq
+<?php
+class devCli
+{
+    /**
+     * @var mixed
+     */
+    private $init_first;
+
+    /**
+     * @var array
+     */
+    private $init_data;
+
+    /**
+     * @var string
+     */
+    private $port;
+
+    /**
+     * @var string
+     */
+    private $dirs;
+
+    /**
+     * @var string
+     */
+    private $index = '/index.php';
+
+    /**
+     * @var string
+     */
+    private $cli_name = 'Quickly WebSite';
+
+    /**
+     * @var string
+     */
+    private $cli_version = '1.0.1-dev (cli)';
+
+    /**
+     * devCli constructor.
+     * @param array $params
+     */
+    public function __construct($params = [])
+    {
+        if(PHP_SAPI !== 'cli') {
+            $this->format('this file must be cli model',true);
+        }
+        $this->init_first = $params[0];
+        array_shift($params);
+        $this->init_data = $params;
+        $this->port = '20002';
+        $this->dirs = './public';
+    }
+
+    /**
+     * @param string $msg
+     * @param bool $stop
+     */
+    protected function format($msg = '', $stop = false)
+    {
+        if($msg) {
+            echo $msg,"\n";
+        }
+        echo "\n";
+        if($stop) {
+            exit();
+        }
+    }
+
+    /**
+     *
+     */
+    protected function cliMessage()
+    {
+        echo "{$this->cli_name} {$this->cli_version}"."\n";
+        echo 'This cli can only be used for development'."\n";
+        echo 'Listening on http://localhost:'.$this->port."\n";
+        echo 'Press Ctrl-Click url to website '."\n";
+        echo 'Document index is '.__DIR__.ltrim($this->dirs,'.').$this->index."\n";
+        echo "Simple find PID : `lsof -i:{$this->port}`"."\n";
+        echo 'Press Ctrl-C to quit'."\n";
+    }
+
+    /**
+     * @param $command
+     */
+    protected function runShell($command)
+    {
+        shell_exec($command);
+    }
+
+    /**
+     *
+     */
+    protected function setParams()
+    {
+        if(isset($this->init_data[0])) {
+            $this->port = $this->init_data[0];
+        }
+        if(isset($this->init_data[1])) {
+            $this->dirs = $this->init_data[1];
+        }
+        if(!is_numeric($this->port)) {
+            $this->format('port must be a number',true);
+        }
+        if(!file_exists($this->dirs.$this->index)) {
+            $this->format('index.php not find',true);
+        }
+    }
+
+    /**
+     *
+     */
+    public function run()
+    {
+        $this->setParams();
+        $command = "php -S localhost:{$this->port} -t {$this->dirs}";
+        $this->cliMessage();
+        $this->runShell($command);
+    }
+}
+$model = new devCli($argv);
+$model->run();

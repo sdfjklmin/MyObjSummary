@@ -1,8 +1,9 @@
 {
-    "name": "my-obj-summary",
+    "name": "Map_Website_Book ",
     "autoload": {
         "psr-4": {
-            "bookLog\\": "bookLog"
+            "bookLog\\": "_bookLog",
+            "app\\": "_application"
         },
         "files": [
             "comFunction/function.php",

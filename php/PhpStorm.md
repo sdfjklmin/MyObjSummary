@@ -1,5 +1,7 @@
 ## [官网地址](https://www.jetbrains.com/help/phpstorm/quick-start-guide-phpstorm.html)
 
+## [免费申请](https://www.jetbrains.com/shop/eform/opensource)
+
 ## 具体设置选项的地方可能有版本差异，可能层级有所不同，但大体位置是相同的
 
 ## 取消代码重复提醒
