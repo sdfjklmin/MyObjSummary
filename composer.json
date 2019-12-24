@@ -6,8 +6,7 @@
             "app\\": "_application"
         },
         "files": [
-            "comFunction/function.php",
-            "comFunction/ChromePhp.php"
+            "_function/function.php"
         ]
     },
     "repositories": {

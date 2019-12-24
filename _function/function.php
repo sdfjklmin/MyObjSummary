@@ -1,5 +1,4 @@
 <?php
-//公共方法composer引入不需要命名空间,否则找不到
 /** 方法说明
  * @function dd()           打印
  * @function dda()          数据打印,输出PHP格式数据,可复用(主要用于Array)
@@ -19,6 +18,9 @@
  * @function decodeXml()    解析Xml数据
  * @function getTax()       获取个税
  * @function getTaper()     获取锥形体(金字塔)
+ * @function classContent() 获取对应文件的文本内容
+ * @function mobileReq()    是否为手机访问
+ * @function recursive()    递归示例
  */
 
 if(!function_exists('dd')) {
@@ -520,11 +522,11 @@ if(!function_exists('classContent')) {
     }
 }
 
-if(!function_exists('is_mobile_request')) {
+if(!function_exists('mobileReq')) {
     /** 是否为手机访问
      * @return bool
      */
-    function is_mobile_request()
+    function mobileReq()
     {
         $_SERVER['ALL_HTTP'] = isset($_SERVER['ALL_HTTP']) ? $_SERVER['ALL_HTTP'] : '';
         $mobile_browser = '0';
@@ -562,5 +564,50 @@ if(!function_exists('is_mobile_request')) {
             return true;
         else
             return false;
+    }
+}
+
+if(!function_exists('recursive')) {
+    /** 递归
+     * @param $data
+     * @param string $dataKey 父节点的key
+     * @param string $sonKey  子节点的key
+     * @param int $pid
+     * @return array
+     * @example
+     * $data = [
+     *   ['name'=>'parent','id'=>1,'pid'=>0],
+     *   ['name'=>'1-2','id'=>2,'pid'=>1],
+     *   ['name'=>'1-3','id'=>3,'pid'=>1],
+     *   ['name'=>'1-3-4','id'=>4,'pid'=>3],
+     *   ['name'=>'1-3-4','id'=>5,'pid'=>3],
+     *   ['name'=>'1-2-6','id'=>6,'pid'=>2],
+     *   ['name'=>'1-2-6-7','id'=>7,'pid'=>6],
+     *   ];
+     */
+    function recursive($data, $dataKey='', $sonKey='son', $pid = 0)
+    {
+        $source = [];
+        foreach ($data as $key => $datum) {
+            //父节点
+            if($datum['pid'] == $pid) {
+                unset($data[$key]);
+                if(!empty($dataKey) && !empty($sonKey)) {
+                    $temp = [
+                        $dataKey => $datum,
+                        $sonKey  => [recursive($data,$dataKey,$sonKey,$datum['id'])]
+                    ];
+                    $source [] = $temp;
+                }else{
+                    //保存节点数据
+                    $source[$datum['id']] = $datum;
+                    //递归寻找子节点
+                    $source[$datum['id']][$sonKey][] = recursive($data,'','',$datum['id']);
+                }
+
+
+            }
+        }
+        return $source;
     }
 }
