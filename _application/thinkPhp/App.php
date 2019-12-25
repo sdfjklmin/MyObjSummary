@@ -83,8 +83,12 @@ class App
                 $method->invoke($classModel);
             }
         }else{
-            $suffix = $this->request->get('suffix','md');
-            $filePath = APP_INIT_ROOT.$path.'.'.$suffix;
+            $suffix = $this->request->get('suffix');
+            if($suffix) {
+                $filePath = APP_INIT_ROOT.$path.'.'.$suffix;
+            }else{
+                $filePath = APP_INIT_ROOT.$path;
+            }
             classContent($filePath);
         }
 

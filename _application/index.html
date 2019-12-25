@@ -26,7 +26,7 @@
     <ul id="rootUL">
         <li style="font-size: 21px;color: black;font-weight: bold"> <?php echo $title;?> </li>
         <li> <input type="button" id="collapse" class="btn btn-default" value="Collapse"> </li>
-        <li> <input type="text" value="<?php echo $search ?? '' ;?>" style="height: 25px" id="search" class="btn btn-default" placeholder="Search for ..."> </li>
+<!--        <li> <input type="text" value="<?php echo $search ?? '' ;?>" style="height: 25px" id="search" class="btn btn-default" placeholder="Search for ..."> </li>-->
     </ul>
 </div>
 <!--返回top-->
@@ -61,7 +61,23 @@
                                         "icon": "",
                                         "parentCode": "designMode",
                                         "child": [
+                                            {
+                                                "name": "test",
+                                                "code":"designMode",
+                                                "icon": "icon-minus-sign",
+                                                "parentCode": "element",
+                                                "child": [
+                                                    {
+                                                        "name": "test2",
+                                                        "code":"test2",
+                                                        "icon": "",
+                                                        "parentCode": "test",
+                                                        "child": [
 
+                                                        ]
+                                                    }
+                                                ]
+                                            }
                                         ]
                                     }
                                 ]
