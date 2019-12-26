@@ -44,7 +44,7 @@
 	--disable-rpath 
 	--enable-shared
 	--enable-opcache 
-	--enable-fpm                      #运行php-fpm
+	--enable-fpm                      #运行php-fpm,如果没有配置,则不会生成 sbin/php-fpm
 	--with-fpm-user=www               #运行用户
 	--with-fpm-group=www 
 	--with-mysql=mysqlnd 
