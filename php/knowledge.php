@@ -494,3 +494,9 @@ function getHeader()
     $header = array_change_key_case($header);
     return $header;
 }
+
+#55 验证字符串时间格式
+$dataTime = '2019-12-27 13:35:04';
+$ret1 = date_parse($dataTime);
+$ret2 = date_parse_from_format('Y-m-d H:i:s',$dataTime);
+//当 ret1,ret2 中的 warning_count,error_count 都为0的时候通过
