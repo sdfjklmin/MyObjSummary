@@ -74,15 +74,26 @@
     快速改变当前方法的属性，public private protected。
     
     
+    
 #### Ctrl+ Alt +Shift + 2 (快速打开当前文件夹所在的路径)
     快速打开当前文件夹所在的路径
 
 #### File -> New Scratch File(生成[抹掉,忽略]文件)
     生成[抹掉,忽略]文件
     
+    
 #### Ctrl + 减号(- 或者 +)  
      逐层折叠(展开)代码
+     
      
 #### Ctrl +  Shift +  减号(- 或者 +)     
     全部折叠(展开)代码
     可以先 Ctrl + Shift + 减号,全部折叠,然后使用 Ctrl + 加号,查看各个方法
+    
+#### Ctrl + Alt + L (快速格式代码)
+    Settings -> Editor -> Code Style -> PHP->( Wrapping(包装) and Braces(大括号) 
+        #设置 等号 对齐
+        -> Assignment(分配) statemnet(申明) -> `勾选`  Align(对齐) consecutive(连续) assignments
+        #数组设置 多行对齐, key=>value 对齐
+        -> Array initializer ->  `勾选` Align when multiline , Align key-value pairs
+        )
