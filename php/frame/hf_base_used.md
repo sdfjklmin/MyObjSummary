@@ -97,7 +97,7 @@ protected $request;
  */
 ```
 
-## 配置config
+## 配置 config
 ```
 <?php
 
@@ -145,6 +145,8 @@ class ConfigUseController extends BaseController
 }
 
 ```
+    
+    
     
     
     
@@ -317,3 +319,11 @@ class CoroutineUseController
     }
 }
 ```
+
+## [视图](https://doc.hyperf.io/#/zh/view)
+~~~
+相对简单，直接参照官网。
+注意点： 资源存放在 根目录下 public 中，访问方式为 http://127.0.0.1:9501/css/style.css
+        对应的资源路径会根据 访问路由进行动态变化 ， 可设置 访问变量 $HoGoAssets = 'http://127.0.0.1:9501'；
+        <link href="{{$HoGoAssets}}/css/dark-sidebar.css" rel="stylesheet">
+~~~
