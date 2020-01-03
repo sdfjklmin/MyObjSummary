@@ -439,7 +439,10 @@ class SignSha1 extends SignatureBase
 	}
 }
 
-
+/**
+ * Class SignatureFactory
+ * @author sjm
+ */
 class SignatureFactory
 {
 	//签名类常量
@@ -502,12 +505,12 @@ exit();*/
 
 // sha1
 /** @var SignSha1 $sha1Model */
-$sha1Model   = new SignatureFactory(SignatureFactory::SIGN_SHA1);
+/*$sha1Model   = new SignatureFactory(SignatureFactory::SIGN_SHA1);
 $secretId    = 123456;
 $secretKey   = 'f76f58e3ba30ec46f5b3265c2f3989851c5c582a';
 $sha1Encrypt = $sha1Model->encrypt($secretId, $secretKey);
 var_dump($sha1Encrypt, $sha1Model->decrypt($sha1Encrypt, '', $secretId, $secretKey));
-exit();
+exit();*/
 
 
 //----------------------------
