@@ -319,15 +319,50 @@ nginx将结果通过http返回给浏览器*/
 #均衡负载能够平均分配客户请求到服务器列阵，借此提供快速获取重要数据，解决大量并发访问服务问题。
 
 #40 1 6
-# if(expr) 按照布尔求值
+# 运算符优先级
+# @link https://www.php.net/manual/zh/language.operators.precedence.php
+$a = 3 ;
+$b = 5;
+if($a = 5 || $b = 7) {
+	//t.  ||,一边条件成立即可,优先级大于 = 的优先级
+	//a.  以下是猜的
+	//e.  $a = 5 || $b = 7
+	//0.  先执行 ||,一边成立即可
+	//1.  5 || $b; 5 为 true,这时候$b不会被赋值,因为5为true,获取 true
+	//2.  $a = true; 获得 true;
+	//3.  执行 if 内的代码
+
+	// $a = 0 || $b = 7;  0 为false,执行 $b=7; $a = ( 0 || true) = true;
+	$a++;
+	$b++;
+}
+echo $a.' '.$b,"\n" ; // 1  6
+var_dump($a,$b); // true  6
+
+
 $a = 3 ;
 $b = 5 ;
-if($a = 5 || $b=7) {
-    $a++;
-    $b++;
-}
-echo $a.''.$b ;
+$c = 7 ;
+if( $a = 1 && $b = 2  && $c = 5 ) {
+	//t.  &&,两边条件都成立,优先级大于 = 的优先级
+	//a.  以下是猜的
+	//e.  $a = 1 && $b = 0 && $c = 9
+	//0.  先执行第一个 && 而 $b 的值依赖于 后面的内容,则先执行依赖,即最后一个 &&
+	//1.  $c = 0; 获得 false;
+	//2.  $b = (2 && false); 获得 false;
+	//3.  $a = (1 && false); 获得 false;
+	//4.  $a = false;
+	//o.  false , false , 0
+	//r.  遇到多个 && 是,代码先从左执行,但是它的值依赖于最后一个 && ,所以最后一个 && 先运算
 
+	//echo 'into',"\n";
+	$a++;
+	$b++;
+	$c++;
+}
+
+echo $a.' '.$b.' '.$c,'---',"\n";
+var_dump($a,$b,$c);exit();
 
 #41
 #分布式(不同业务模块分布到对应的服务器通过API相互访问)[模块]
@@ -500,3 +535,9 @@ $dataTime = '2019-12-27 13:35:04';
 $ret1 = date_parse($dataTime);
 $ret2 = date_parse_from_format('Y-m-d H:i:s',$dataTime);
 //当 ret1,ret2 中的 warning_count,error_count 都为0的时候通过
+
+#56 echo,exit 为语法结构,var_dump(),print_r为函数
+echo true;#1
+echo false;#没有输出
+var_dump(true);//true
+var_dump(false);//false
