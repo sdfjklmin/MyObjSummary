@@ -27,6 +27,9 @@
 * [html](html) 前端知识
 * [learn](learn) 需要掌握的知识
 * [linux](linux) Linux常用命令,软件集合
+    * [基础命令](linux/commands.md)
+    * [crontab](linux/crontab.md)
+    * [supervisor](linux/supervisor.md) 进程守护
 * [md](md) markdown的基础使用
 * [mysql](mysql) mysql安装,优化,配置
 * [nginx](nginx) nginx安装,优化,配置,模块解析
