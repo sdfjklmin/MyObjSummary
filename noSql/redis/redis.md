@@ -56,6 +56,17 @@ row value
     Append-only file（缩写aof）的方式
     虚拟内存
     diskstore
-		
+    
+#### 常用命令
+| 命令 | 说明 |    
+| :---: | :---: |    
+| select index | 选择对应的db,index为(0-15)|
+| flushdb | 清空当前db内容		|
+| flushall | 清空所有db内容		|
+| keys * | 查看当前db所有的key	|
+| ---String | 操作--- |
+| get key | 获取|
+| SET key value [EX seconds] [PX milliseconds] [NX或XX] | 设置|
+
 ####参考文献
 * [Redis单线程为何速度如此之快](https://blog.csdn.net/wangwenru6688/article/details/82467890)		
