@@ -59,6 +59,7 @@
         }               
 ## 连接远程服务器
     Tools -> Deployment -> 新增(configuration -> +) | 浏览(browse remote host -> 点击 Remote Host 中的 ... )
+    
 ## 快捷使用
     
 #### Alt+Shift+Enter(快速生成)
