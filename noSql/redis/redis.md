@@ -129,12 +129,19 @@ row value
 #### 常用命令
 | 命令 | 说明 |    
 | :---: | :---: |    
+| src/redis-server [path] |  启动redis,path为对应的redis.conf,可省.更多 -h|
+| src/redis-cli |  快速进入redis命令行,具体可以 -h|
+| src/redis-cli shutdown	|  关闭redis|
+| cli> auth 123456 | 如果有密码,操作前需要认证权限 |
+| cli> config get requirepass | 获取当前密码 |
+| cli> config set requirepass 123456| 设置当前密码为 123456,一般不使用,可修改配置 |
+| vi redis.conf -> `requirepass abcd`| 取消注释,设置密码 abcd,保存退出并重启 |
 | select index | 选择对应的db,index为(0-15)|
 | flushdb | 清空当前db内容		|
 | flushall | 清空所有db内容		|
 | keys * | 查看当前db所有的key	|
 | ---String | 操作--- |
-| get key | 获取|
+| GET key | 获取|
 | SET key value [EX seconds] [PX milliseconds] [NX或XX] | 设置|
 
 ####参考文献

@@ -16,6 +16,11 @@ class DateTimeDiff
 	 */
 	private static $_format = ['y','m','d','h','i','s'];
 
+	/**
+	 * @var string
+	 */
+	private static $_onlineTip = '当前在线';
+
 	/** 年
 	 * @param $diff
 	 * @return string
@@ -61,7 +66,7 @@ class DateTimeDiff
 		if($diff > 15) {
 			return "{$diff}分钟之前";
 		}else{
-			return '当前在线';
+			return self::$_onlineTip;
 		}
 	}
 
@@ -71,7 +76,7 @@ class DateTimeDiff
 	 */
 	protected static function sFormat($diff)
 	{
-		return '当前在线';
+		return self::$_onlineTip;
 	}
 
 	/** 入口
@@ -95,7 +100,7 @@ class DateTimeDiff
 				return self::$method($diff);
 			}
 		}
-		//默认异常
-		return '---';
+		//默认值,当时间相同时不会走上面的流程
+		return self::$_onlineTip;
 	}
 }
