@@ -75,8 +75,6 @@
     快速生成当前方法的注释      
     快速改变当前方法的属性，public private protected。
     
-    
-    
 #### Ctrl+ Alt +Shift + 2 (快速打开当前文件夹所在的路径)
     快速打开当前文件夹所在的路径
 
@@ -99,3 +97,13 @@
         #数组设置 多行对齐, key=>value 对齐
         -> Array initializer ->  `勾选` Align when multiline , Align key-value pairs
         )
+        
+#### Ctrl + w (快速选中文本,可重复按 w ,逐层选择)
+    
+#### Ctrl + F4 (关闭当前窗口)
+
+#### Ctrl + TAB (窗口切换)
+
+#### Shift + DEl (删除当前行)
+
+#### Shift + Enter (跳转到新生成的一行)
