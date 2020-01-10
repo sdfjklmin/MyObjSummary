@@ -14,7 +14,7 @@
 ## 专研层次
     1.要时刻保持跳出当前层级和环境来思考的习惯。
     2.充分利用思维导图工具，不断延展知识边界。
-    3.沟通与交流时提高视野的最快捷的方式。
+    3.沟通与交流是提高视野的最快捷的方式。
     
 ## 目录结构
 * [_xx]() 实际的应用例子,可以使用 `devCli` 启动
@@ -34,13 +34,15 @@
 * [mysql](mysql) mysql安装,优化,配置
 * [nginx](nginx) nginx安装,优化,配置,模块解析
 * [node](node) node相关
-* [nosql](nosql) 缓存服务器的使用
+* [nosql](noSql) 缓存服务器的使用
+    * [mongodb](noSql/mongodb) mongodb使用
+    * [redis](noSql/redis) redis原理,使用,配置
 * [php](php/README.md) PHP相关
     * [composer](php/composer.md) PHP包管理　
     * [core](php/core) 深入内核,了解基础宏,实现一个自己的扩展　
     * [designMode](php/designMode) 设计模式　
     * [di_and_ioc](php/di_and_ioc) 依赖注入容器,IOC/DI容器,自动绑定,自动解析　
-    * [frame](php/frame/README.md) 框架总结与使用
+    * [frame](php/frame/README.md) 框架总结与使用(hyperf,laravel,yii2,tp,swoole,swoft,minxPHP,...)
     * [phpAsy](php/phpAsy) 异步编程,手写服务器
     * [rpc](php/rpc) rpc使用
     * [yar](php/yar) Yar
@@ -50,11 +52,22 @@
     * [魔术方法](php/magicFunc.php)　魔术方法
     * [安装](php/php_install.md) 基础安装，扩展，自定义命令
     * [PhpStorm](php/PhpStorm.md) PhpStorm使用
-* [phpLib](phpLib) 常用的功能类    
+* [phpLib](phpLib) 常用的功能类  
+    * [ssl-key](phpLib/ssl-key) ssl加密  
+    * [苹果支付验证](phpLib/ApplePay.php)  
+    * [常见错误码](phpLib/CodeError.php)  
+    * [Curl客户端](phpLib/CurlClient.php)  
+    * [时间差值](phpLib/DateTimeDiff.php)  
+    * [日志](phpLib/Log.php)  
+    * [签名认证](phpLib/SignatureAssign.php)  
+    * [自定义服务器](phpLib/StreamSocket.php)  
+    * [时间处理](phpLib/TimeDeal.php) 简单的`Carbon` 
 * [postman](postman) postman使用    
 * [rabbitMQ](rabbitMQ)   
 * [safe](safe) 安全相关
+* [samba](samba) Linux网络映射Windows
 * [shell](shell) shell编程
+* [swoole](swoole)
 * [webSocket](webSocket)
        
     
