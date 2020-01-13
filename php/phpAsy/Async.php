@@ -90,27 +90,44 @@ var_dump($gen->send('something'));
  * 程序为从右往左执行
  * 每次执行到yield的地方中断
  * @return Generator
+ * @tip
+ * 	yield 作为 中断点类似于 return;
+ *  yield 作为 数据传输类似于 赋值或形参或表达式;
  */
 function gen() {
-    $ret1 = (yield 'yield1'); //st1
-    var_dump($ret1);          //st2
-    $ret2 = (yield 'yield2'); //st3
-    var_dump($ret2);          //st4
+	$ret1 = (yield 'yield1'); //st1
+	var_dump($ret1);          //st2
+	$ret2 = (yield 'yield2'); //st3
+	var_dump($ret2);          //st4
 }
 $gen = gen();//返回生成器
-// yield1
-var_dump($gen->current());           //当前中继点 执行到st1 -有yield返回-> yield1
-// ret1 yield2
-var_dump($gen->send('ret1')); //发送数据 执行 st2 -$ret1为当前send的值-> ret1 ,st3 -有yield返回-> yield2
-// ret2 null
-var_dump($gen->send('ret2')); //发送数据 执行 st4 -$ret2为当前send的值-> ret2 , 无yield数据返回 -输出->null
+
+//当前中继点 执行到st1 -有yield,此时yield类似于(return)返回-> yield1
+//ret: yield1
+var_dump($gen->current());
+
+//发送数据:
+//	 执行 st1 -($ret1 = yield),此时yield类似于表达式或形式参数.
+//	 st2 -$ret1为当前send的值-> ret1 ,st3 -有yield返回-> yield2
+//ret: ret1 yield2
+var_dump($gen->send('ret1'));
+
+//发送数据:
+//	 同上,最后 无yield数据返回 -输出->null
+//ret:  ret2 null
+var_dump($gen->send('ret2'));
 
 var_dump('---------------------');
 $gen2 = gen();
+
 //直接发送数据 st1 -忽略当前yield返回值-> $ret1 = tt, st2 -> tt , st3 -> yield2
+// tt yield2
 var_dump($gen2->send('tt'));
-// 当前 yield st3 -> yield2
+
+// 当前 yield st3 -> yield2,此时类似于 return 'yield2';
+// yield2
 var_dump($gen2->current());
+
 // gen2-1 , null
 var_dump($gen2->send('gen2-1'));
 
@@ -123,15 +140,17 @@ function gen22() {
     try {
         yield;   #2
     } catch (Exception $e) {
-        #4
+        #3-1
         echo "Exception: {$e->getMessage()}\n";
     }
-    echo "Bar\n"; #3
+    echo "Bar\n"; #3-0
 }
 
 $gen = gen22();
 $gen->rewind();                     // echos "Foo" 1 -> 2，程序停留在 2 之后，然后设置异常进行处理
-$gen->throw(new Exception('Test')); // echos "Exception: Test"
+
+$gen->throw(new Exception('Test'));
+// echos "Exception: Test"
 // and "Bar"
 
 //简单来说，yield可以处理大数据、协程处理、IO并发处理等、CPU在处理程序的这段时间可以用yield来处理其它事情。

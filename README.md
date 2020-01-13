@@ -68,7 +68,7 @@
 * [samba](samba) Linux网络映射Windows
 * [shell](shell) shell编程
 * [swoole](swoole)
-* [webSocket](webSocket)
+* [webSocket](webSocket) 简单版聊天室
        
     
 ## 声明
