@@ -50,6 +50,13 @@ requirepass 123456  #设置密码
 slaveof 172.16.59.180 6379  #主服务器IP和地址,这里没有 : 
 masterauth 123456   #主服务器配置的密码	
 ```
+###### 复制步骤和原理
+~~~
+建立连接,数据同步,命令传播
+slaveof 127.0.0.1 6333 -> slae 6333 -> (
+保存主节点信息,建立socket连接,发送ping命令,权限验证,同步数据集,命令持续复制
+) -> master 6379
+~~~
 ###### Error
 * WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.    
 ~~~
