@@ -25,8 +25,8 @@ while (true) {
 	//socket_select（）接受套接字数组，并等待它们更改状态
 	//成功时，socket_select（）返回修改后的数组中包含的套接字资源的数量
     socket_select($changed, $null, $null, 0, 10);
+	//当文件句柄有改变时,$changed才会有值
 
-    //如果有新的连接
     if (in_array($socket, $changed)) {
         //接受并加入新的socket连接
         $socket_new = socket_accept($socket);
