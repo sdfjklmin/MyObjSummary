@@ -4,21 +4,26 @@ $host = '127.0.0.1';
 $port = '12345';
 $null = NULL;
 
-//创建tcp socket
+//创建tcp socket,IPV4套接层
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+//设置参数
 socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
+//绑定IP和端口
 @socket_bind($socket, 0, $port);
 
-//监听端口
+//监听连接
 socket_listen($socket);
 
-//连接的client socket 列表
+//连接的client socket 列表,用户改变后的判断
 $clients = array($socket);
 
 //设置一个死循环,用来监听连接 ,状态
 while (true) {
 
     $changed = $clients;
+	//等待客户端用户连接,等待改变
+	//socket_select（）接受套接字数组，并等待它们更改状态
+	//成功时，socket_select（）返回修改后的数组中包含的套接字资源的数量
     socket_select($changed, $null, $null, 0, 10);
 
     //如果有新的连接
