@@ -94,7 +94,7 @@ git log --graph
 #只显示提交ID和提交信息的第一行
 git log --oneline
 
-#--stat 选项显示每次提交的文件增删数量
+#--stat(统计) 选项显示每次提交的文件增删数量
 git log --stat
 
 # -p 显示修改详情
