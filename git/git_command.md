@@ -37,6 +37,7 @@ ssh-keygen -t rsa -C 'git账号'
 
 #添加到git
 ~~~
+
 ##### 克隆到非空文件
 ~~~
 克隆到一个空的文件中然后将
@@ -78,6 +79,32 @@ git push -u origin master:master
         git reset --hard  #放弃本地冲突代码
         git pull
 ```
+
+##### 日志
+```
+#获取更多帮助
+git log -h
+
+#查看提交日志
+git log
+
+#查看提交日志,以图表形式
+git log --graph
+
+#只显示提交ID和提交信息的第一行
+git log --oneline
+
+#--stat 选项显示每次提交的文件增删数量
+git log --stat
+
+# -p 显示修改详情
+git log -p
+
+#当你想要知道 Hello, World! 字符串是什么时候加到项目中哪个文件中去的
+git log -S "Hello, World!"
+
+```
+
 ##### 分支管理
 ```
 #查看本地分支
@@ -128,6 +155,7 @@ git push
 git push --set-upstream origin mantis_80_withdraw
 
 ```
+
 ##### 忽略管理:
     .gitignore 文件
  	.git/info/exclude 增加忽略的内容 
@@ -193,6 +221,7 @@ git push --set-upstream origin mantis_80_withdraw
     git config --global --add alias.st status
     git config --global --add alias.ps push
     git config --global --add alias.pl pull
+    
     
 #### git缓慢
 1.在hosts文件里追加以下内容（IP需要替换掉），以下5个域名一个都不要少

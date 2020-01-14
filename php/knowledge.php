@@ -547,3 +547,6 @@ echo true;#1
 echo false;#没有输出
 var_dump(true);//true
 var_dump(false);//false
+
+#57 如何防止重复提交?(幂等性)
+//前端业务逻辑(disabled) -> 后端入口(速率验证) -> 记录单次请求缓存 -> 数据库约束,唯一索引
