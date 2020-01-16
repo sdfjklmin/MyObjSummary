@@ -20,6 +20,15 @@ class RedisCommand
 		}
 	}
 
+	/** 设置密码
+	 * @param $pwd
+	 * @return bool
+	 */
+	public function password($pwd)
+	{
+		return $this->_server->auth($pwd);
+	}
+
 	/** string get
 	 * @param $key
 	 * @param string $default
