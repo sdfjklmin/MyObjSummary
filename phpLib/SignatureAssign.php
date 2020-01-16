@@ -511,35 +511,3 @@ $secretKey   = 'f76f58e3ba30ec46f5b3265c2f3989851c5c582a';
 $sha1Encrypt = $sha1Model->encrypt($secretId, $secretKey);
 var_dump($sha1Encrypt, $sha1Model->decrypt($sha1Encrypt, '', $secretId, $secretKey));
 exit();*/
-
-
-//----------------------------
-// 异常处理					 |
-//----------------------------
-//php5中无法捕捉异常,注册关闭函数来进行错误监控
-//注册一个会在php终止时执行的函数
-/*register_shutdown_function(function () {
-	//获取最后发生的错误
-	$error = error_get_last();
-	if (!empty($error)) {
-		print_r($error);
-	}
-});*/
-
-//我们还可以通过 set_error_handler() 把一些Deprecated、Notice、Waning等错误包装成异常，让 try {} catch 能够捕获到。
-/*error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-//捕获Deprecated、Notice、Waning级别错误
-set_error_handler(function ($errno, $errstr, $errfile) {
-	throw new \Exception($errno . ' : ' . $errstr . ' : ' . $errfile);
-	//返回true，表示错误处理不会继续调用
-});
-
-try {
-	$data = [];
-	echo $data['index'];
-} catch (\Exception $e) {
-	//捕获Notice: Undefined index
-	echo $e->getMessage();
-}
-exit();*/
