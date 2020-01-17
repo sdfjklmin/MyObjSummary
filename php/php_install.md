@@ -33,6 +33,9 @@
     tar -zxvf php-7.1.gz 解压进入
 
 #### 配置说明
+    ./buildconf                       #没有configure则生成configure文件
+    ./buildconf --force               #强制生成configure
+    
     ./configure --help                #查看配置命令
     ./configure --help | grep enable  #查看可选配置
 

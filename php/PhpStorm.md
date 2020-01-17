@@ -8,7 +8,7 @@
     Settings -> Editor -> Inspection -> General -> duplicated code framework (去重勾选)
     
 ## 代码库提示
-    External Libraires(项目文件夹下方) -> 点击右键 ->  Configure PHP Include Paths -> Include Path (点击+号，条件提示代码库)
+    External Libraires(项目文件夹下方) -> 点击右键 ->  Configure PHP Include Paths -> Include Path (点击+号，添加提示代码库)
     
 ## 命令脚本 
     Add Configuration(屏幕右上方) -> 点击+号 -> PHP Script -> 设置 Name(脚本名称), File(对应脚本地址,/tt/tt.php), Arguments(对应参数,start),
