@@ -4,7 +4,13 @@ $webSocket = new swoole_websocket_server('0.0.0.0',9502);
 //监听WebSocket连接打开事件
 $webSocket->on('open', function ($ws, $request) {
 	var_dump($request->fd, $request->get, $request->server);
-	$ws->push($request->fd, "hello, welcome\n");
+	$sign = $request->get['sign'] ?? '';
+	//签名验证可以使用 sha1,前端有对应的签名组件
+	if($sign != 'test') {
+		$ws->disconnect($request->fd,403,'没有权限,主动关闭');
+	}else{
+		$ws->push($request->fd, "hello, welcome\n");
+	}
 });
 
 //监听WebSocket消息事件
@@ -21,7 +27,10 @@ $webSocket->on("request", function(swoole_http_request $request, swoole_http_res
 	foreach ($webSocket->connections as $fd) {
 		// 需要先判断是否是正确的websocket连接，否则有可能会push失败
 		if ($webSocket->isEstablished($fd)) {
+			//发送消息
 			$webSocket->push($fd, $request->post['scene']);
+			//主动关闭连接当前连接
+			//$webSocket->disconnect($fd,404,'主动关闭');
 		}
 	}
 });
