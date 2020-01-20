@@ -645,6 +645,8 @@ fuser 80/tcp -v
 
 #nmap工具
  
+#pidof
+pidof php-fpm
 ```
 
 ##### 33. 查看系统开启服务耗时 
@@ -652,3 +654,11 @@ analyze(分析) blame(责备) `systemd-analyze blame`
 
 ##### 34. ssh 
     登录:  ssh username@ip
+    
+    
+##### 35. strace 跟踪,性能分析,问题诊断 ,内核态的函数调用跟踪用「strace」，用户态的函数调用跟踪用「ltrace」
+    #跟踪包含forks出来的PID
+    strace -f -p [PID]   
+    
+    #以时间收集PID 
+    strace -cp [PID]
