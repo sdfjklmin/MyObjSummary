@@ -32,6 +32,7 @@
 * 简单说下epoll(基于Linux)
 ~~~
 只对发生变化的文件句柄感兴趣,工作机制类似于"事件"
+通过 epoll_create 创建fd,
 通过 epoll_ctl 注册文件描述符fd,一旦该fd就绪,
 内核就会采用类似 callback 的回调机制来激活该fd, 
 epoll_wait 便可以收到通知, 并通知应用程序.
