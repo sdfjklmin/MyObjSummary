@@ -3,6 +3,7 @@ $webSocket = new swoole_websocket_server('0.0.0.0',9502);
 
 //监听WebSocket连接打开事件
 $webSocket->on('open', function ($ws, $request) {
+	//可以将 fd 和 用户信息 进行绑定
 	var_dump($request->fd, $request->get, $request->server);
 	$sign = $request->get['sign'] ?? '';
 	//签名验证可以使用 sha1,前端有对应的签名组件
