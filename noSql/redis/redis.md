@@ -31,8 +31,14 @@
   
 * 简单说下epoll(基于Linux)
 ~~~
+支持一个进程打开大数目的socket描述符(fd)
 只对发生变化的文件句柄感兴趣,工作机制类似于"事件"
-通过 epoll_create 创建fd,
+通过 epoll_create 创建 epoll对象,
+ linux内核会创建一个eventpoll结构体(
+ 重要的两个成员:
+    红黑树的根节点: 这棵树中存储着所有添加到epoll中的事件，也就是这个epoll监控的事件。
+    双向链表rdllist: 保存着将要通过epoll_wait返回给用户的、满足条件的事件。  
+)
 通过 epoll_ctl 注册文件描述符fd,一旦该fd就绪,
 内核就会采用类似 callback 的回调机制来激活该fd, 
 epoll_wait 便可以收到通知, 并通知应用程序.
