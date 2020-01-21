@@ -14,7 +14,7 @@
     var wsServer = 'ws://127.0.0.1:9502';
     //调用websocket对象建立连接：
     //参数：ws/wss(加密)：//ip:port （字符串）
-    var websocket = new WebSocket(wsServer+"?sign=test");
+    var websocket = new WebSocket(wsServer+"?sign=test&user_id=1");
     //打印出websocket可以查看对应的方法和属性
     if(websocket.readyState != 1) {
     	msg.innerHTML = 'websocket连接失败!' ;

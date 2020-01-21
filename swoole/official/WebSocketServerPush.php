@@ -27,6 +27,7 @@ class WebSocketServerPush
 	public function send()
 	{
 		$param['scene'] = '牛皮啊1';
+		$param['user_id'] = '1';
 		$this->curl($param);   // 主动推送消息
 	}
 }
