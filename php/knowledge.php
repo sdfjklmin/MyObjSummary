@@ -76,9 +76,10 @@
 #8: sprintf 字符串替换     
     # -s 字符类型
     # -u 数字类型
+    # -d 数字类型
     $n = 2;
     $str = "Shanghai";
-    $txt = sprintf("test %u %s %s",$number,$str,$str);
+    $txt = sprintf("test %u %s %s",$n,$str,$str);
 
 #9: extract  从数组中将变量导入到当前的符号表(用于前端解析)
     $t = 'test' ;
