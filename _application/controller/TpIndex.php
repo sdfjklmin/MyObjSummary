@@ -66,4 +66,12 @@ class TpIndex extends Controller
             'link' => $link,
         ]);
     }
+
+	/**
+	 * @path /_index/test
+	 */
+	public function test()
+	{
+		echo 11;exit();
+    }
 }
