@@ -17,6 +17,10 @@ $swoole->on('request', function(swoole_http_request $request, swoole_http_respon
 	echo "-----------each response http Server","\n";
 	//谷歌浏览器的默认机制会去请求 /favicon.ico 找到则显示,未找到则 404,
 	//所以这里用 谷歌浏览器 访问会输出两次,用 postman,curl,httpClient 则会输出一次
+	if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico') {
+		 $response->end();
+	}
+	//应用程序可以根据 $request->server['request_uri'] 实现路由
 	var_dump($request->server);
     $response->end("<h1>hello swoole</h1>");
 	echo "-----------each end http Server","\n";
