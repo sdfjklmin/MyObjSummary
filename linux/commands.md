@@ -662,3 +662,8 @@ analyze(分析) blame(责备) `systemd-analyze blame`
     
     #以时间收集PID 
     strace -cp [PID]
+    
+##### 36. ulimit 控制shell程序的资源
+    
+    #同一时间最多可开启的文件数
+    ulimit -n

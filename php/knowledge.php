@@ -551,3 +551,11 @@ var_dump(false);//false
 
 #57 如何防止重复提交?(幂等性)
 //前端业务逻辑(disabled) -> 后端入口(速率验证) -> 记录单次请求缓存 -> 数据库约束,唯一索引
+
+#58 gethostbyname(); 根据host获取id
+# 系列函数: gethost{name | byname | byaddr | bynamel}
+var_dump(gethostbyname('www.baidu.com'));
+
+#59
+# ip2long ,将 IPV4 的字符串互联网协议转换成长整型数字
+# long2ip ,将长整型转化为字符串形式带点的互联网标准格式地址（IPV4）
