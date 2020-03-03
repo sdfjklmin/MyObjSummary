@@ -667,3 +667,5 @@ analyze(分析) blame(责备) `systemd-analyze blame`
     
     #同一时间最多可开启的文件数
     ulimit -n
+    
+##### 37. CTRL+Z 挂起进程并放入后台    

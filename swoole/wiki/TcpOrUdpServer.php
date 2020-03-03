@@ -9,7 +9,7 @@
  */
 $server = new \Swoole\Server( '127.0.0.1',  $port = 9502,  $mode = SWOOLE_PROCESS,  $sockType = SWOOLE_SOCK_TCP);
 //-------------------------
-// 绑定服务
+// 绑定服务,方法
 //-------------------------
 // 您可以混合使用UDP/TCP，同时监听内网和外网端口，多端口监听参考 addlistener小节。
 // 添加 TCP
@@ -31,9 +31,9 @@ $server = new \Swoole\Server( '127.0.0.1',  $port = 9502,  $mode = SWOOLE_PROCES
 //echo $port->port,"\n";
 
 //-------------------------
-// 设置参数
+// 设置参数,配置
 //-------------------------
-$server->set([
+/*$server->set([
 	#reactor(反应堆)数量,设置启动的 Reactor 线程数,一般与cup核数保持一致
 	'reactor_num' => 4 , # <= swoole_cpu_num() * 4
 
@@ -52,19 +52,45 @@ $server->set([
 	#配置时候需要注册 onTask,onFinish
 	//'task_worker_num' => '',
 	//'task_相关配置'    => '请参考官方文档'
-	'dispatch_func' => function ($serv, $fd, $type, $data) {
-	    echo '-----self dispatch func start',"\n";
-		var_dump($fd, $type, $data);
-	    echo '-----self dispatch func end',"\n";
-		return intval($data[0]);
-	},
-]);
+	//'dispatch_func' => function ($serv, $fd, $type, $data) {
+	//    echo '-----self dispatch func start',"\n";
+	//	var_dump($fd, $type, $data);
+	//    echo '-----self dispatch func end',"\n";
+	//	return intval($data[0]);
+	//},
+
+	//守护进程化【默认值：0】,1为后台守护进程
+	'daemonize' => 0,
+
+	//设置对应log file
+	'log_file'  => '/home/wwwroot/php-map/tryLogFile',
+
+	//设置检测死连接
+    //Keep-Alive机制不会强制切断连接，如果连接存在但是一直不发生数据交互。Keep-Alive不会切断连接。
+	//推荐使用heartbeat_check实现心跳检测
+	'open_tcp_keepalive' => 1,
+	//详细参数
+	'tcp_keepidle' => 4, //4s没有数据传输就进行检测
+    'tcp_keepinterval' => 1, //1s探测一次
+    'tcp_keepcount' => 2, //探测的次数，超过2次后还没回包close此连接
+
+	//启用心跳检测
+	//在设置时间*2内没有向服务器发送任何数据，此连接将被强制关闭
+	//这里是 120s 内
+	//其它辅助参数请查看文档
+	'heartbeat_check_interval' => 60,
+
+	//TCP粘包(一直拼接数据包,直到收到结束语句如 \n\r,超出缓存区时,会自动删除数据,剔除连接)
+	'open_eof_check' => false,
+
+	//'package_相关' => '请参考官方文档'
+	//'open_类型_protocol' => '请参考官方文档'
+	//'其它配置信息' => '请参考官方文档'
+]);*/
 
 //--------------------------------------------
-// 注册事件
+// 注册事件,事件
 // 不同的服务类型有不同的必要事件,否则服务无法启动
-//  TCP 必须要有 onReceive
-//  UPD 必须要有 onPacket
 //--------------------------------------------
 $server->on('connect',function (\Swoole\Server $servers, $fd) {
 	echo "当前服务器共有 " . count($servers->connections) . " 个连接\n";
