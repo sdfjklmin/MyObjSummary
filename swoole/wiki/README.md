@@ -30,4 +30,22 @@
     * 相关配置 [`参考官网`](https://wiki.swoole.com/#/http_server?id=%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9)
         
 #### [WebSocket Server  (Swoole\WebSocket\Server 继承自 Swoole\Http\Server)](WebSocketServer.php)   [link](https://wiki.swoole.com/#/websocket_server)
-* 基础操作 `方法,属性,配置,事件` 同 `Http Server`  
+* 基础操作 `方法,属性,配置,事件` 同 `Http Server` 
+* 事件同 `HttpServer, Server`
+* handShake -> open -> massage -> close
+* 额外事件
+    * onMessage(Swoole\Websocket\Server  $server, Swoole\Websocket\Frame $frame) 回调函数为必选
+    * onOpen(握手成功后执行) 和 onHandShake(自定义握手协议) 回调函数为可选 
+* 方法(Swoole\WebSocket\Serve)
+    * push, exist, pack, unpack, disconnect等  
+    
+#### [RedisServer (Swoole\Redis\Server 继承自 Server)](https://wiki.swoole.com/#/redis_server)
+~~~
+请参考官方示例
+~~~    
+
+
+#### 示例代码缺少必要事件
+* 文档链接: https://wiki.swoole.com/#/server/port?id=%e5%a4%9a%e7%ab%af%e5%8f%a3%e4%b8%8b%e7%9a%84%e8%bf%9e%e6%8e%a5%e9%81%8d%e5%8e%86
+* 实际内容: 代码中使用了 `Swoole\WebSocket\Server()`,但未设置必要事件 `onMessage`
+* 期望内容: 完善代码
