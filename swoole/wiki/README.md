@@ -43,9 +43,3 @@
 ~~~
 请参考官方示例
 ~~~    
-
-
-#### 示例代码缺少必要事件
-* 文档链接: https://wiki.swoole.com/#/server/port?id=%e5%a4%9a%e7%ab%af%e5%8f%a3%e4%b8%8b%e7%9a%84%e8%bf%9e%e6%8e%a5%e9%81%8d%e5%8e%86
-* 实际内容: 代码中使用了 `Swoole\WebSocket\Server()`,但未设置必要事件 `onMessage`
-* 期望内容: 完善代码
