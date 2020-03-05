@@ -334,5 +334,36 @@ var MForm = function () {
             );
     };
 
+    //获取小红书图片
+    init.getXHSImg = function () {
+
+        var count = document.getElementsByClassName('slide')[0].childElementCount;
+        var imgHtml = '';
+        for(var i = 0; i < count; i ++) {
+
+            var str = document.getElementsByClassName('slide')[0].children[i].innerHTML;
+
+            var strArr= new Array();
+            strArr=str.split("ci.xiaohongshu.com/");
+
+            var imgPartArr = [];
+            imgPartArr = strArr[1].split("?");
+
+            var imgUrl = "https://ci.xiaohongshu.com/"+imgPartArr[0];
+
+            imgHtml += "<img style='margin: 15px' src='"+imgUrl+"'> <div style='margin: 10px'><div>";
+            console.log(imgUrl)
+        }
+        var nwin = window.open(''); //新开空白标签页
+        nwin.document.write(imgHtml); //将内容写入新标签页
+    };
+
+    //浏览器消息通知
+    /*if(window.Notification && Notification.permission !== "denied") {
+        Notification.requestPermission(function(status) {
+            var n = new Notification('通知标题', { body: '有消息啦！' });
+        });
+    }*/
+
     return init ;
 }();

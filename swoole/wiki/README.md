@@ -20,11 +20,14 @@
     * onFinish 事件仅在 worker 进程中发生
     * onStart/onManagerStart/onWorkerStart 3 个事件的执行顺序是不确定的
     
-#### [Http Server (Http\Server 继承自 Server)](HttpServer.php)  [link](https://wiki.swoole.com/#/http_server) 
+#### [Http Server (Swoole\Http\Server 继承自 Swoole\Server)](HttpServer.php)  [link](https://wiki.swoole.com/#/http_server) 
 * 基础操作 `方法,属性,配置,事件` 同 `Server`  
 * 差异
     * Http\Server->on 不接受 onConnect/onReceive 回调设置
     * Http\Server->on 额外接受 1 种新的事件类型 onRequest
         * Request `请求常规操作,header,post,get,server 等`
         * Response `响应对象`
-    * 相关配置 [`参考官网`](https://wiki.swoole.com/#/http_server?id=%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9)    
+    * 相关配置 [`参考官网`](https://wiki.swoole.com/#/http_server?id=%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9)
+        
+#### [WebSocket Server  (Swoole\WebSocket\Server 继承自 Swoole\Http\Server)](WebSocketServer.php)   [link](https://wiki.swoole.com/#/websocket_server)
+* 基础操作 `方法,属性,配置,事件` 同 `Http Server`  
