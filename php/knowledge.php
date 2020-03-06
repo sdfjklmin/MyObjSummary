@@ -154,6 +154,7 @@
     #class_exists('MyClass') 检查类是否纯在
     #interface_exists 检查接口是否已被定义
     #get_class 返回对象的类名
+	#get_parent_class() 获取父类名称
 
 #21:php.ini => expose_php = Off|on 关闭PHP显示信息
 
@@ -559,3 +560,16 @@ var_dump(gethostbyname('www.baidu.com'));
 #59
 # ip2long ,将 IPV4 的字符串互联网协议转换成长整型数字
 # long2ip ,将长整型转化为字符串形式带点的互联网标准格式地址（IPV4）
+
+#60 为一个类创造一个别名
+#class_alias ( string $original , string $alias [, bool $autoload = TRUE ] ) : bool
+class TestAlias
+{
+	public function __construct()
+	{
+		echo "init test alias";
+	}
+}
+class_alias(TestAlias::class,TA::class);
+$model = new TA();
+var_dump($model);

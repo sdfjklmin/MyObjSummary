@@ -3,7 +3,7 @@
 ### 快速入门
 * 和之前没多大差别, 请移步[official](../official)
 
-### [服务端](https://wiki.swoole.com/#/server/init)
+### [服务端(异步风格:即所有事件都需要设置回调函数,Swoole\Server))](https://wiki.swoole.com/#/server/init)
 
 #### [TCP/UDP Server (Swoole\Server)](TcpOrUdpServer.php) [link](https://wiki.swoole.com/#/server/tcp_init)
 * 方法 `$server->set(),$server->addlistener(),$server->bind(),等`
@@ -43,3 +43,17 @@
 ~~~
 请参考官方示例
 ~~~    
+
+### [服务端(协程风格:不需要设置回调函数,Swoole\Coroutine\Server)](https://wiki.swoole.com/#/server/co_init)
+* 与 `异步风格` 的服务端不同之处在于，Swoole\Coroutine\Server 是完全协程化实现的服务器
+* 不需要设置回调函数
+* 不会自动创建多个进程
+* 需要配合 Process\Pool 模块使用才能利用多核
+* `Co` 协程短名,需要配置 php.ini `swoole.use_shortname=On/Off`
+* 具体参考官方列举的 `方法`
+
+#### [TCP(Swoole\Coroutine\Server)](TcpCo.php)
+* `方法` 参考官网
+
+#### [HTTP(Co\Http\Server extends Co\Server)](HttpCo.php)
+* `方法` 参考官网
