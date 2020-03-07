@@ -123,6 +123,9 @@
    
     tail -f  $(date +%d).log | grep -n error
     #显示当前日期的.log文件中的 error
+    
+    tail -F log
+    #动态查看log
 
 ##### 文本统计
     wc      file        #统计文本的 行数、字数、字符数
@@ -669,3 +672,27 @@ analyze(分析) blame(责备) `systemd-analyze blame`
     ulimit -n
     
 ##### 37. CTRL+Z 挂起进程并放入后台    
+
+##### 38. `cd -` 切回到上一个工作目录
+
+##### 39. 别名使用 `ll, la` 具体看操作系统
+
+##### 40. 用`;`一个接一个的运行命令 ` command_1; command_2; command_3`
+
+##### 41. 用`&&`仅在上一个命令成功的情况下，才能在一个命令中运行多个命令 ` command_1 && command_2 && command_3`
+
+##### 42. Ctrl-Q 解除Linux终端意外冻结的
+
+##### 43. 移至行首`Ctrl + A`或行尾`Ctrl + E`
+
+##### 44. 使用 `!$` 重新使用上一个命令中的最后一项
+~~~
+-> mkdir abc
+-> cd !$ 等同于 cd abc
+~~~
+
+##### 45. 用 `!!` 重用当前命令中的上一个命令。一般用户需要验证root的时候
+~~~
+-> vi abc.txt
+-> sudo !! 等同于 sudo vi abc.txt
+~~~
