@@ -21,6 +21,9 @@ git add -A
 #添加本次修改备注
 git commit -m '我修改的'
 
+#使用新的一次commit，来覆盖上一次commit
+git commit --amend -m "message"
+
 #推送代码
 git push 
 ~~~
@@ -56,7 +59,19 @@ git pull -u origin master:master
 git status    			
 
 #对应变化
-git diff 				
+git diff 	
+    
+    #查看文件在工作区和暂存区区别
+    git diff file-name
+
+    #查看暂存区和本地仓库区别
+    git diff --cached  file-name
+    
+    #查看文件和另一个分支的区别
+    git diff branch-name file-name
+    
+    #查看两次提交的区别
+    git diff commit-id commit-id			
 
 #新添加文件
 git add file1.py 		
@@ -78,6 +93,37 @@ git push -u origin master:master
     1.冲突
         git reset --hard  #放弃本地冲突代码
         git pull
+```
+
+##### git rest
+```
+#将未commit的文件移出Staging区
+git reset HEAD
+
+#重置Staging区与上次commit的一样
+git reset --hard
+
+#重置Commit代码和远程分支代码一样
+git reset --hard origin/master
+
+#回退到上个commit
+git reset --hard HEAD^
+
+#回退到前3次提交之前，以此类推，回退到n次提交之前
+git reset --hard HEAD~3
+
+#回退到指定commit
+git reset --hard commit-id
+
+```
+
+##### 标签
+```
+#查看指定标签的提交信息
+git show tag-name
+
+#查看具体的某次改动
+git show commit-id
 ```
 
 ##### 日志
