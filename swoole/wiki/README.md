@@ -10,6 +10,7 @@
 * 属性 `$server->master_pid,$serverr->worker_id,等`
 * 配置 `$server->set(array())`
 * 事件 `$server->on('connect',function (\Swoole\Server $servers, $fd) {});等`
+    * 事件中的参数如 `\Swoole\Server $servers`可以去调用对应的 `方法和属性`
     * 事件执行顺序
     * 所有事件回调均在 $server->start 后发生
     * 服务器关闭程序终止时最后一次事件是 onShutdown
@@ -19,6 +20,7 @@
     * onTask 事件仅在 task 进程中发生
     * onFinish 事件仅在 worker 进程中发生
     * onStart/onManagerStart/onWorkerStart 3 个事件的执行顺序是不确定的
+* 事件提示参考 [_ide_swoole_helper.php](/_ide_swoole_helper.php)  
     
 #### [Http Server (Swoole\Http\Server 继承自 Swoole\Server)](HttpServer.php)  [link](https://wiki.swoole.com/#/http_server) 
 * 基础操作 `方法,属性,配置,事件` 同 `Server`  
