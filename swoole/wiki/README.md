@@ -72,3 +72,14 @@
 * [demo](Scheduler.php)    
 
 ### [客户端](https://wiki.swoole.com/#/client?id=swooleclient)
+#### [同步阻塞客户端](https://wiki.swoole.com/#/client)
+~~~
+方法,属性,常量,配置
+~~~
+
+#### [一键化协程 Hook](https://wiki.swoole.com/#/runtime)
+```
+Co::set(['hook_flags'=> SWOOLE_HOOK_ALL]);//v4.4+版本使用此方法。
+或
+Swoole\Runtime::enableCoroutine(int $flags = SWOOLE_HOOK_ALL);
+```
