@@ -83,3 +83,14 @@ Co::set(['hook_flags'=> SWOOLE_HOOK_ALL]);//v4.4+版本使用此方法。
 或
 Swoole\Runtime::enableCoroutine(int $flags = SWOOLE_HOOK_ALL);
 ```
+#### [协程客户端](https://wiki.swoole.com/#/coroutine_client/init)
+##### [TCP/UDP Swoole\Coroutine\Client](https://wiki.swoole.com/#/coroutine_client/client)
+~~~
+可以类同 \Swoole\Client 使用,但并非继承关系
+~~~
+* 方法 `connect,send,recv,close,peek,set`
+
+##### [HTTP/Websocket Swoole\Coroutine\Http\Client](https://wiki.swoole.com/#/coroutine_client/http_client)
+* 属性 `errCode,body,statusCode`
+* 方法 `set,get,push ... ` 具体请查看类
+* 参考项目 [Saber](https://github.com/swlib/saber)
