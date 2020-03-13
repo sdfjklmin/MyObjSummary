@@ -92,5 +92,17 @@ Swoole\Runtime::enableCoroutine(int $flags = SWOOLE_HOOK_ALL);
 
 ##### [HTTP/Websocket Swoole\Coroutine\Http\Client](https://wiki.swoole.com/#/coroutine_client/http_client)
 * 属性 `errCode,body,statusCode`
-* 方法 `set,get,push ... ` 具体请查看类
+* 方法 `set,get,push ... ` 具体请查看类,可类比于 `postman`可以设置的都有对应的方法
 * 参考项目 [Saber](https://github.com/swlib/saber)
+* 示例
+```
+Swoole\Runtime::enableCoroutine( $flags = SWOOLE_HOOK_ALL);
+go(function (){
+	$cli = new Swoole\Coroutine\Http\Client('127.0.0.1', 8081);
+	$cli->get('/index.php');
+	echo $cli->body;
+	var_dump(json_decode($cli->body));
+	$cli->close();
+});
+
+```
