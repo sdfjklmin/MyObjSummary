@@ -7,14 +7,15 @@ const N = 1024;
 \Swoole\Runtime::enableCoroutine();
 $s = microtime(true);
 Swoole\Coroutine\run(function () {
-	$pool = new \Swoole\Database\PDOPool((new PDOConfig)
+	$pool = new \Swoole\Database\PDOPool(
+							(new PDOConfig)
 							->withHost('127.0.0.1')
 							->withPort(3306)
 							// ->withUnixSocket('/tmp/mysql.sock')
-							->withDbName('test')
+							->withDbName('pp_sns')
 							->withCharset('utf8mb4')
 							->withUsername('root')
-							->withPassword('root')
+							->withPassword('root123')
 	);
 	for ($n = N; $n--;) {
 		Coroutine::create(function () use ($pool) {

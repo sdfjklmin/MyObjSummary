@@ -151,10 +151,10 @@
 	tar -zxvf
 	cd youExtension
 	
-	#生成./configue文件
+	#生成./configue文件, phpize的绝对地址
 	/usr/local/php7/bin/phpize
 	
-	#配置 php-config 地址 
+	#配置 php-config (shell文件) 地址,一般来说这里的 php-config 都在 bin 中
 	./configure --with-php-config=/usr/local/php7/bin/php-config
 	make && make install
 
