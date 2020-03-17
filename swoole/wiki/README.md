@@ -111,3 +111,10 @@ go(function (){
 ~~~
 同 HTTP/Websocket,参照官网
 ~~~
+
+#### 协程高级
+##### [协程API Swoole\Coroutine::method](CoApi.php)
+##### [channel Swoole\Coroutine\Channel 协程之间的通信](CoChannel.php)
+##### [并发调用 子协程(go)+ 通道(channel)](CoGoChan.php)
+##### [waitGroup](waitGroup.php)
+##### [连接池](connectionPool.php)
