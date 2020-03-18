@@ -696,3 +696,21 @@ analyze(分析) blame(责备) `systemd-analyze blame`
 -> vi abc.txt
 -> sudo !! 等同于 sudo vi abc.txt
 ~~~
+
+##### 46. gdb 调试
+```
+#进入gdb 加载php相关模块
+gdb php
+
+#运行文件
+gdb:>run file.php
+
+#打印数据
+gdb:>print 参数
+
+#启动
+gdb:>start
+
+#显示堆栈
+gdb:>bt
+```
