@@ -24,9 +24,7 @@ Swoole\Timer::tick(3000, function (int $timer_id, $paramA, $paramB) {
 		\Swoole\Timer::clear($timer_id);
 	});
 	\Swoole\Timer::clear($timer_id);
-},$paramA,$paramB);
-
-exit();
+},'$paramA','$paramB');
 
 
 //在指定的时间后执行函数,是一个一次性定时器，执行完成后就会销毁
