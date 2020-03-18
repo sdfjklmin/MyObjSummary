@@ -52,6 +52,7 @@ register_shutdown_function(function () {
 
 //我们还可以通过 set_error_handler() 把一些Deprecated、Notice、Waning等错误包装成异常，让 try {} catch 能够捕获到。
 /*error_reporting(E_ALL);
+//配置错误显示,生成关闭,一个未定义的参数会有两次报错,一个是底层自带一个是配置为on
 ini_set('display_errors', 'on');
 //捕获Deprecated、Notice、Waning级别错误
 set_error_handler(function ($errno, $errstr, $errfile) {
