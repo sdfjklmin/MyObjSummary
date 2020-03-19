@@ -64,6 +64,10 @@ stopsignal=INT
     supervisorctl stop 进程名 ：停止XXX进程
     supervisorctl stop all：停止全部进程，注：start、restart、stop都不会载入最新的配置文件。
     supervisorctl update：根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启
+
+#### 可能问题
+* Exited too quickly (process log may have details) `程序退出太快,主要针对于脚本,设置个睡眠时间或者时间缓冲`
+* command error `命令尽量使用绝对路径`
     
 #### 开机脚本(/usr/lib/systemd/system/supervisord.service)
 ```

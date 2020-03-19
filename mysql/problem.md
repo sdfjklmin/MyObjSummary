@@ -7,11 +7,12 @@
     
     show variables like '%max_user_connections%';
     
-    
     SHOW  STATUS LIKE '%max_used_connections%';
     
+    #查看进程
     SHOW PROCESSLIST;
     
+    #查看所有进程
     SHOW FULL PROCESSLIST;
     
     show status like 'Threads%';
@@ -90,7 +91,7 @@
     (3) Mixedlevel: 是以上两种level的混合使用，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则 采用row格式保存binlog,MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择 一种.新版本的MySQL中队row level模式也被做了优化，并不是所有的修改都会以row level来记录，像遇到表结构变更的时候就会以statement模式来记录。至于update或者delete等修改数据的语句，还是会记录所有行的 变更。
 
 ##### 6.MySQL数据库cpu飙升到500%的话他怎么处理？
-    列出所有进程  show processlist  观察所有进程  多秒没有状态变化的(干掉)
+    列出所有进程  show [full(可省)] processlist  观察所有进程  多秒没有状态变化的(干掉 kill ID)
     查看超时日志或者错误日志 (做了几年开发,一般会是查询以及大批量的插入会导致cpu与i/o上涨,,,,当然不排除网络状态突然断了,,导致一个请求服务器只接受到一半，比如where子句或分页子句没有发送,,当然的一次被坑经历)
 
 ##### 7.SQL优化
@@ -140,7 +141,7 @@
     INSERT INTO `helei` VALUES (3,21,5,14,'2016-10-18 06:19:24','susu');
 
 ##### 10.500台db，在最快时间之内重启
-    puppet，dsh
+    puppet自动化，安装dsh
 
 ##### 11.innodb的读写参数优化
     (1) 读取参数
@@ -236,18 +237,52 @@
     (1) InnoDB的B+ Tree可能存储的是整行数据，也有可能是主键的值   
 ##### 25.2 那这两者有什么区别吗 ？   (聚簇索引和非聚簇索引)
     在 InnoDB 里，索引B+ Tree的叶子节点存储了整行数据的是主键索引，也被称之为聚簇索引。而索引B+ Tree的叶子节点存储了主键的值的是非主键索引，也被称之为非聚簇索引
-##### 25.3 那么，聚簇索引和非聚簇索引，在查询数据的时候有区别吗？    
+##### 25.3 那么，聚簇索引(聚集索引)和非聚簇索引(普通索引)，在查询数据的时候有区别吗？    
     聚簇索引查询会更快
     因为主键索引树的叶子节点直接就是我们要查询的整行数据了。
     而非主键索引的叶子节点是主键的值，查到主键的值以后，还需要再通过主键的值再进行一次查询
     主键索引查询只会查一次，而非主键索引需要回表查询多次（回表）。
+    
+###### 25.3.1 回表 : 先定位主键值,再定位行记录,它的性能较扫一遍索引树更低  
+    表信息: test ( id:pk , name:index , sex)
+    数据 : 
+        1  boy  男
+        3  girl 女
+        7  cam  男
+        9  sun  女
+        
+    主键索引: id(聚簇索引) 的树结构
+             1-9
+           /     \  
+        1-3      7-9
+       /   \     /  \
+      1     3   7    9
+         这里保存了整行数据
+        (1  boy  男), ...
+     
+     select name from test where id = 1;  
+     通过ID查找直接获取到整条数据,然后去name的值
+     
+    普通索引 : name 的树结构
+                b-s
+               /   \
+            b-c    g-s
+           /  \   /   \
+        boy cam girl  sun 
+        这里保存的是主键值
+        1    7    3    9
+    select * from test where name = 'boy';  
+    通过 name 查找到数据的主键值,再通过主键值去找整条数据  
+    
 ##### 25.4  是所有情况都是这样的吗？非主键索引一定会查询多次吗？
     通过覆盖索引也可以只查询一次
+    
 ##### 25.5 覆盖索引？
     覆盖索引（covering index）指一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取。也可以称之为实现了索引覆盖。
     当一条查询语句符合覆盖索引条件时，MySQL只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I/O提高效率。
-    如，表covering_index_sample中有一个普通索引 idx_key1_key2(key1,key2)。
-    当我们通过SQL语句：select key2 from covering_index_sample where key1 = 'keytest';的时候，就可以通过覆盖索引查询，无需回表。
+    表 test 中有添加一个组合索引 name_sex(`name`,'sex') ,这个时候子节点的值为 `boy,男,1`, `girl,女,9`, ...
+    语句：
+        select sex from test where key1 = 'boy'; 的时候，就可以通过覆盖索引查询，无需回表,因为节点上有对应的数据。
     
 ##### 26. 联合索引多个字段之间顺序你们是如何选择？
     把识别度最高的字段放到最前面 ？
@@ -264,8 +299,12 @@
     官方文档中给的例子和解释如下：
     people表中（zipcode，lastname，firstname）构成一个索引
     SELECT * FROM people WHERE zipcode='95054' AND lastname LIKE '%etrunia%' AND address LIKE '%Main Street%';
-    如果没有使用索引下推技术，则MySQL会通过zipcode='95054'从存储引擎中查询对应的数据，返回到MySQL服务端，然后MySQL服务端基于lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断数据是否符合条件。
-    如果使用了索引下推技术，则MYSQL首先会返回符合zipcode='95054'的索引，然后根据lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断索引是否符合条件。如果符合条件，则根据该索引来定位对应的数据，如果不符合，则直接reject掉。有了索引下推优化，可以在有like条件查询的情况下，减少回表次数。
+    如果没有使用索引下推技术，则MySQL会通过zipcode='95054'从存储引擎中查询对应的数据，返回到MySQL服务端，
+        然后MySQL服务端基于lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断数据是否符合条件。
+    如果使用了索引下推技术，则MYSQL首先会返回符合zipcode='95054'的索引，
+        然后根据lastname LIKE '%etrunia%'和address LIKE '%Main Street%'来判断索引是否符合条件。
+        如果符合条件，则根据该索引来定位对应的数据，如果不符合，则直接reject掉。
+        有了索引下推优化，可以在有like条件查询的情况下，减少回表次数。
 
 ##### 28. 索引生效，或者使用索引查询统计 ？
     可以通过explain查看sql语句的执行计划，通过执行计划来分析索引使用情况
