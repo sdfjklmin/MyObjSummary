@@ -1,9 +1,0 @@
-1. Uncaught PDOException: SQLSTATE[HY000] [1130] Host '192.168.1.108' is not allowed to connect to this MariaDB server
-	a.外部ip不允许访问,给对应的ip设置访问权限
-		grant all privileges on *.* to 'root'@'192.168.5.34' identified by 'passwd';
-	b.如果是本机ip,将ip换成localhost
-		Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory
-			出现这个问题的原因是PDO无法找到mysql.sock或者mysqld.sock
-			a.把ip改成127.0.0.1
-			b.找到相应的.sock文件,并设置php.ini文件中的pdo_mysql.default_socket的值为.sock文件的路径。
-				pdo_mysql.default_socket= /tmp/mysqld.sock  

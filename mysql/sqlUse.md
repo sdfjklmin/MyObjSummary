@@ -1,21 +1,26 @@
 _1.更新数据字段(数据集合)
 	update `table` t1 INNER JOIN (`查询集合`) t2 on t1.pid = t2.id set t1.name = t2.pid_name where t1.pid != 0;
+	
 _2. str存在strlist中 
     FIND_IN_SET(str,strlist)
+    
 _3. 将查询结果插入到表中
 	insert into tab (a,b,c) 
 	select * from tab2
+	
 _4.查看表名的字段
 	information_schema系统库(mysql相关的信息都能在系统库中找到)
-	SELECT COLUMN_NAME FROM information_schema.COLUMNS where table_name = 'tab_name';	
+	SELECT COLUMN_NAME FROM information_schema.COLUMNS where table_name = 'tab_name';
+		
 _5.复制一张表
    CREATE TABLE abc AS
    SELECT * FROM test t 	会把test的结构和数据都会创建到abc中
+   
 _6.创建一张临时表
    CREATE TEMPORARY TABLE abc
    SELECT * FROM m_b_address
-
    SHOW CREATE TABLE abc;   #  查看创建表的sql
+   
 _7.查看表的列
    DESC cp_bets ; 	
    SHOW columns FROM  cp_bets ;
@@ -29,8 +34,10 @@ _9.触发器
    所以不要编写过于复杂的触发器，
    也不要增加过得的触发器，这样会对数据的插入、修改或者删除带来比较严重的影响，
    同时也会带来可移植性差的后果，所以在设计触发器的时候一定要有所考虑。
+   
 _10.this is incompatible with sql_mode=only_full_group_by
 	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上any_value
+	
 _11.mysql循环插入数据
 	#创建存储过程
 	CREATE PROCEDURE test_insert () 
@@ -60,6 +67,7 @@ _11.mysql循环插入数据
 	SHOW PROCEDURE STATUS ;
 	#查看创建存储过程的语句
 	SHOW CREATE PROCEDURE test_insert8 ;
+	
 _12.原生导出
 	select * from `user` into outfile 't1.xls';	
 	CHARACTER SET gbk ; #设置编码excl默认为gbk
@@ -69,15 +77,18 @@ _12.原生导出
 	#secure-file-priv=  或者 secure-file-priv='保存导出的地址'
 	#上面不填写的地址默认为mysql data的地址
 	#保存 重启 执行
+	
 _13:查询替换和新增
 	SELECT
 	 	insert(mobile_number, 4, 4, 'XXXX') ,
 	 	REPLACE(mobile_number, SUBSTR(mobile_number,4,4), 'XXXX')
 	FROM
 		play_order;
+		
 _14:having 指定一组行或聚合的过滤条件,通常和group by连用
     (通过column分组,查询出名称和对应的总数,获取总数大于10的)
     SELECT count(id) as total,name FROM T GROUP BY column having total > 10
+    
 _15:
     LIKE “%name”或者LIKE “%name%”，这种查询会导致索引失效而进行全表扫描。但是可以使用LIKE “name%”。
     那如何查询%name%？使用全文索引
@@ -91,10 +102,9 @@ _15:
          MATCH (columnName,...) AGAINST ('string')
 _16:
     DESC table_name; #显示table列的信息
-
     SHOW CREATE TABLE table_name; #显示创建table的SQL
-
     SHOW INDEX FROM table_name; #显示table的索引
+    
 _17:表 user_table, 存在 多条用户数据并状态不同 , 需要将用户数据合并成一条 以不同字段 显示数据
     (不建议使用SQL查询， 应当按照结果去创建对应的表结构， 通过任务脚本进行数据填充)
     user_table
