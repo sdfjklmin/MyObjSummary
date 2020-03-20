@@ -121,3 +121,7 @@ go(function (){
 
 #### [定时器](Timer.php)
 #### [进程间共享内存](Table.php)
+####  进程间同步
+* new Swoole\Atomic  |  new Swoole\Atomic\Long
+* new Swoole\Lock(SWOOLE_MUTEX);
+* 了解类中的方法
