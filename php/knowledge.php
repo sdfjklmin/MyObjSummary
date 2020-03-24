@@ -573,3 +573,6 @@ class TestAlias
 class_alias(TestAlias::class,TA::class);
 $model = new TA();
 var_dump($model);
+
+#61 cli_set_process_title()
+# 设置当前 PHP 脚本名称
