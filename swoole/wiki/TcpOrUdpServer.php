@@ -103,6 +103,8 @@ $server->on('receive',function (\Swoole\Server $servers, $fd, $reactor_id, $data
 	echo date('Y-m-d H:i:s'),"\n";
 	//主动关闭
 	//$servers->close($fd);
+	//通过特定指令来进行重启
+	//$servers->reload();
 });
 
 $server->on('close',function ($serv, $fd, $from_id){
