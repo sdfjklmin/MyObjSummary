@@ -125,3 +125,8 @@ go(function (){
 * new Swoole\Atomic  |  new Swoole\Atomic\Long
 * new Swoole\Lock(SWOOLE_MUTEX);
 * 了解类中的方法
+
+#### 进程管理
+#### [单进程 Swoole\Process 类似于 pcntl](Process.php)
+
+#### [事件](Event.php)
