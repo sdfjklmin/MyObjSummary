@@ -71,7 +71,9 @@ try {
 }catch (AgeException $ageException) {
 	echo 'ageException : '.$ageException->getMessage(),"\n";
 }catch (Exception $exception) {
-	echo 'baseException',"\n";
+	echo 'baseException',"\n"; #常用类 实现于 Throwable
+}catch (Throwable $exception){
+	echo 'base interface '; #基类接口
 }finally {
 	// 无论抛出什么样的异常都会执行，并且在正常程序继续之前执行
 	var_dump(3232);
