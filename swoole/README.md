@@ -14,7 +14,7 @@ m为TaskWorker进程数，
 ~~~
 ![ThreadAndProcess](./official/ThreadProcess.png)
 ##### 进程
-
+![ProcessStructure](./process_structure.png)
 ##### worker `主要的业务逻辑处理`
 * 对收到的数据进行处理，包括协议解析和响应请求。未设置 worker_num，底层会启动与 CPU 数量一致的 Worker 进程。
 * 启动失败扩展内会抛出致命错误，请检查 php error_log 的相关信息。errno={number} 是标准的 Linux Errno，可参考相关文档。
@@ -42,3 +42,6 @@ m为TaskWorker进程数，
 - [WebSocket](./official/WebSocket.php) [Official](https://wiki.swoole.com/wiki/page/397.html)
 - [WebSocketServerPush](./official/WebSocketServerPush.php)
 - [Timer](./official/Timer.php) [Official](https://wiki.swoole.com/wiki/page/p-timer.html)
+
+### 自绘图
+![SwooleAll](swoole.png)
