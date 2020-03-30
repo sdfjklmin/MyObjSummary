@@ -86,7 +86,7 @@
         docker pull mysql:5.7
 
         nginx : docker run -p 8080:80 --name test_nginx -v /data/nginx/html:/usr/share/nginx/html -d docker.io/nginx
-                (将服务起8081端口映射到容器的81端口,nginx配置端口为81,浏览器访问端口为8081)
+                (将服务器 8080 端口映射到容器的 80 端口,nginx配置端口为81,浏览器访问端口为8081)
         php:    docker run -p 9000:9000 --name  php-fpm -v /data/nginx/html:/usr/share/nginx/html -d docker.io/php:7.1-fpm
             (将服务起9001端口映射到容器的9001端口,nginx的PHP配置端口为9000或者9001,未知调试)
         mysql:  docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7

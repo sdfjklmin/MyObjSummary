@@ -36,7 +36,7 @@ _9.触发器
    同时也会带来可移植性差的后果，所以在设计触发器的时候一定要有所考虑。
    
 _10.this is incompatible with sql_mode=only_full_group_by
-	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上 any_value
+	select version();  #查看版本信息 >5.7 -> 修改配置支持group( sql_mode = '' ) 或者在字段前加上 any_value
     #table
     user_id tag_name
     1           2
