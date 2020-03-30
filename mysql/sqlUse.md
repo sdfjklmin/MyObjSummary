@@ -36,7 +36,15 @@ _9.触发器
    同时也会带来可移植性差的后果，所以在设计触发器的时候一定要有所考虑。
    
 _10.this is incompatible with sql_mode=only_full_group_by
-	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上any_value
+	select version();  #查看版本信息 >5.7 -> 修改配置支持group 或者在字段前加上 any_value
+    #table
+    user_id tag_name
+    1           2
+    1           3
+     	
+	select user_id,tag_name from table group by user_id.
+	此时 user_id = 1,有两条数据,mysql无法判断到底获取哪一条数据,就会出现 only_full_group_by
+
 	
 _11.mysql循环插入数据
 	#创建存储过程
