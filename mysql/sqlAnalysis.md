@@ -371,3 +371,35 @@ select * from t where id=1 for update;
 如果一个会话占有了索引记录R的共享/排他锁，其他会话不能立刻在R之前的区间插入新的索引记录。
 临键锁的主要目的，也是为了避免幻读(Phantom Read)。如果把事务的隔离级别降级为RC，临键锁则也会失效。
  ~~~
+
+### 搜索方案
+#### 优化等级
+* 普通 LIKE, 尽量命中索引
+* 全文索引, 尽量避免与 CURD 冲突, 5.6以后 innodb 已经支持,(只支持英文检索), 5.8支持中文
+* 开源外置索引(ES)
+* 自研搜索引擎
+    * 短文类 (DAT,...)
+    
+#### 网站搜索
+    
+    (站长)                              (用户)  
+      |                                   |          
+      V                                   V  
+   (gen-web)                         (search-item) 
+      |1                           a/                ^ 
+      V                 (send data)                    \ d
+   (spider)  -2-> (web)             \b  (index)  -c->  rank
+                     3\ (build data) /4  
+    
+    （1）全网搜索引擎系统由spider， search&index， rank三个子系统构成
+    （2）站内搜索引擎与全网搜索引擎的差异在于，少了一个spider子系统
+    （3）spider和search&index系统是两个工程系统，rank系统的优化却需要长时间的调优和积累
+    （4）正排索引（forward index）是由网页url_id快速找到分词后网页内容list<item>的过程
+    （5）倒排索引（inverted index）是由分词item快速寻找包含这个分词的网页list<url_id>的过程
+    （6）用户检索的过程，是先分词，再找到每个item对应的list<url_id>，最后进行集合求交集的过程
+    （7）有序集合求交集的方法有
+             a）二重for循环法，时间复杂度O(n*n)
+             b）拉链法，时间复杂度O(n)
+             c）水平分桶，多线程并行
+             d）bitmap，大大提高运算并行度，时间复杂度O(n)
+             e）跳表，时间复杂度为O(log(n))
