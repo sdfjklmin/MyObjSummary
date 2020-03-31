@@ -23,6 +23,7 @@
     show status like 'Threads%';
     
     
+    
 #### Error
 ##### Uncaught PDOException: SQLSTATE[HY000] [1130] Host '192.168.1.108' is not allowed to connect to this MariaDB server
 	a.外部ip不允许访问,给对应的ip设置访问权限
@@ -859,14 +860,14 @@ max_binlog_size               # 可以不设置
 innodb_additional_mem_pool_size    #小于2G内存的机器，推荐值是20M。32G内存以上100M
 ```
 
-#### 40.主从一致
+##### 40.主从一致
     主从DB存在一定的同步时间,在这个时间段中有可能读取到旧数据
     (1)半同步复制 -> 等主从同步完成之后，主库上的写请求再返回, semi-sync
     (2)强制读主
     (3)数据库中间件  -> 数据库请求通过中间件完成,记录写的key,在同步时间内读取主库
     (4)缓存记录写key -> 同 中间件,记录写的key和对应的同步时间,时间内走主库,不在走从库
     
-#### 41.秒杀
+##### 41.秒杀
     两个 架构优化思路：
     （1）尽量将请求拦截在系统上游（越上游越好）；
     （2）读多写少的常用多使用缓存（缓存抗读压力）；
