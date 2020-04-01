@@ -403,3 +403,19 @@ select * from t where id=1 for update;
              c）水平分桶，多线程并行
              d）bitmap，大大提高运算并行度，时间复杂度O(n)
              e）跳表，时间复杂度为O(log(n))
+#### 简单设计
+    假设网站 属性,类别等都分非常多
+    test_1(id,uid,name,ext)
+    1 21 手机  {"type":"苹果","money":"6500"}{"type":"小米","money":"1988"}
+    2 23 工作  {"ways":"厨师","money":"6500"}{"ways":"烹饪","money":"1988"}
+    如果一个类目下数据非常多,那么 ext 数据必然会持续增加.
+    
+    将 ext 中的数据key抽离出来,固定表
+    test_2(id,t1_id,key,name,verify)
+    1 1 type  类型     int
+    2 2 ways  工作类型  string
+    3 1 money 金额     int
+    
+    test_1 数据
+    1 21 手机 {"1":"苹果","3":"6500"} 
+    
