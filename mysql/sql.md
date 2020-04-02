@@ -55,3 +55,10 @@ show index from {table_name}
 ```
 drop index `{index_name}` on {table_name}
 ```
+
+#### 强制使用索引
+```
+#语法: force index(`索引名称`)
+#位置: from table 之后
+select name from table force index(`PRIMARY`) where user_id = 1 and id = 1 ;
+```
