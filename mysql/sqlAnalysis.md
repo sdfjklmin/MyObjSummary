@@ -385,10 +385,10 @@ select * from t where id=1 for update;
     (站长)                              (用户)  
       |                                   |          
       V                                   V  
-   (gen-web)                         (search-item) 
+    (gen-web)                         (search-item) 
       |1                           a/                ^ 
       V                 (send data)                    \ d
-   (spider)  -2-> (web)             \b  (index)  -c->  rank
+    (spider)  -2-> (web)             \b  (index)  -c->  rank
                      3\ (build data) /4  
     
     （1）全网搜索引擎系统由spider， search&index， rank三个子系统构成
