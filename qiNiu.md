@@ -144,3 +144,8 @@ format : http://domain.com/key?vframe/[jpg|png]/(offset/秒数)/(w/宽度)/(h/�
 img    : http://domain.com/key?vframe/jpg/offset/0
 imgAll : http://domain.com/key?vframe/jpg/offset/0/w/960/h/1280/rotate/90
 ```
+
+##### 扩展信息
+```
+http://domain.com/key?exif
+```
