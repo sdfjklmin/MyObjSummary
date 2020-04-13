@@ -47,4 +47,3 @@ nginx:
 				方向代理,负载均衡     ip-hash
      son_one(访问地址) ---- lnmp_m(真实地址)   weight=1
      						dis(地址2)
-2112
