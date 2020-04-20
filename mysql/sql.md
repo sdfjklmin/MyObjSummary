@@ -66,7 +66,7 @@ select name from table force index(`PRIMARY`) where user_id = 1 and id = 1 ;
 #### 更改表,字段的字符集
 ```
 #更改表 
-# cha re c ter  字符
+# char e c ter  字符
 # ˈkar,i,k,tər
 alter table {table_name} character set = {uft8 | utf8mb4};
 
