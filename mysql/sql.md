@@ -62,3 +62,15 @@ drop index `{index_name}` on {table_name}
 #位置: from table 之后
 select name from table force index(`PRIMARY`) where user_id = 1 and id = 1 ;
 ```
+
+#### 更改表,字段的字符集
+```
+#更改表 
+# cha re c ter  字符
+# ˈkar,i,k,tər
+alter table {table_name} character set = {uft8 | utf8mb4};
+
+#更改表字段
+alter table {table_name}
+modify column `{column_name}` varchar(80) character set utf8mb4 not null default '' after `{在column_name之前的字段}`;
+```
