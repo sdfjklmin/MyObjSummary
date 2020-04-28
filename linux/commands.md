@@ -205,6 +205,7 @@
     chown -R root folder       ### 改变 folder 文件夹及其子文件的所有者为 root
     
     chmod 永远更改一个文件的权限,主要有读取,写入,执行其中 所有者,用户组,其他 各占三个,因此 ls -l以看到如下的信息
+    -所有者,用户组,其他
     -rwxr--r-- 1 locez users   154 Aug 30 18:09 filename
     其中 r=read ， w=write ， x=execute
         4		  2			1		
@@ -302,6 +303,9 @@
 	useradd -m -g users -G audio -s /usr/bin/bash newuser     
      -m 创建home目录 -g 所属的主组 -G 指定该用户在哪些附加组 -s 设定默认的 shell,newuser 为新的用户名
 	passwd  test
+	
+	#删除用户
+	userdel test 
 	
 ##### 2.赋予root权限
 	修改 etc/sudoers 
