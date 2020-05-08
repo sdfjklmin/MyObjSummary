@@ -59,8 +59,14 @@ php composer.phar validate
 #检测依赖包是否有修改
 composer.phar status
 
+#依赖包有修改,列出详细
+composer.phar status -v 
+
 #自我更新到最新的版本 
 composer.phar self-update
+
+#回退到之前的版本,重复操作会一直回退
+composer self-update --rollback
 
 #查看,更改配置
 composer config --list
@@ -71,7 +77,7 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
 #create-project创建项目
 composer.phar create-project doctrine/orm path 2.2.*
 
-#诊断问题
+#诊断问题,dia.g.nose
 composer.phar diagnose
 
 #获取帮助
@@ -115,6 +121,7 @@ require 'vendor/autoload.php';
             "fzaninotto/faker": "^1.8"
         },
         //自动加载其他文件
+        //大体为5中类型: classmap , files , namespaces , psr4 , static
         "autoload": {
             //psr-4文件加载,有命名空间 one
             "psr-4": {
