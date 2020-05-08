@@ -99,7 +99,15 @@ server {
 	每当客户请求CGI的时候，WEB服务器就请求操作系统生成一个新的CGI解释器进程(如php-cgi.exe)，
 	CGI 的一个进程则处理完一个请求后退出，下一个请求来时再创建新进程。
 	当然，这样在访问量很少没有并发的情况也行。可是当访问量增大，并发存在，这种方式就不 适合了。于是就有了fastcgi。
-
+	
+	        单个请求,多个请求重复操作
+                    (web)
+                      ↓
+                   (server)
+                      ↓
+                (CGI解释器进程)              
+                      ↓
+                 (处理并返回)
 ##### FastCGI
 	像是一个常驻(long-live)型的CGI，它可以一直执行着，只要激活后，
 	不会每次都要花费时间去fork一次（这是CGI最为人诟病的fork-and-execute 模式）。
@@ -112,7 +120,18 @@ server {
           当FastCGI子进程关闭连接时， 请求便告处理完成。
           FastCGI子进程接着等待并处理来自FastCGI进程管理器(运行在Web Server中)的下一个连接。 
           在CGI模式中，php-cgi在此便退出了。
-
+         
+        |           server
+        |---------------------------------  
+        |  (server start)                |
+        |         ↓                      |
+        | (FastCGI进程管理器)          ↙   ←  (请求来了)   ←      (web)
+        |         ↓  等待请求  → (接活了) → (php-cgi1接客)           
+        | (php-cgi1,php-cgi2,php-cgi3,..)|    ↓
+        |--------------------------------|(处理完成返回)
+        |         ↑ 其它羡慕了                  ↓
+        |         ←   (干活真开心:)  ←     (php-cgi1回来了)    
+        
 ##### php-fpm(PHP内置的一种fast-cgi)  
     php-fpm即php-Fastcgi Process Manager.
     php-fpm是 FastCGI 的实现，并提供了进程管理的功能。
@@ -132,17 +151,17 @@ server {
     |
             |
          配置解析    
-    路由到 www.example.com/index.php
+    路由到 www.example.com/index.php(根据配置加载,如果是静态文件index.html不会走这里)
     |
             |
-    加载 nginx 的 fast-cgi 模块
+    加载 nginx 的 fast-cgi 模块 (ngx_http_fastcgi_module),配置基于(nginx.conf)
     |
             |
     fast-cgi 监听 127.0.0.1:9000 地址
-    通过 fast-cgi 协议将请求转发给 php-fpm 处理
+    通过 fast-cgi 协议将请求转发给 php-fpm 处理,配置基于(php-fpm.conf)
     |
             |
-    请求到达 127.0.0.1:9000
+    请求到达 127.0.0.1:9000 (接收到请求转发到php-fpm)
     |
             |
     php-fpm 监听 127.0.0.1:9000
@@ -154,7 +173,7 @@ server {
     (worker进程 会抢占式的获得 cgi 请求进行处理)
     |
             |
-        php-fpm 处理请求
+        PHP解释器 处理请求
     |       
             |
          处理详解
