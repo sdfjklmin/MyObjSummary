@@ -1,6 +1,65 @@
 ### sql 分析
+#### explain extended + show warnings
+    explain extended：会在 explain  的基础上额外提供一些查询优化的信息。
+    紧随其后通过 show warnings 命令可以 得到优化后的查询语句，从而看出优化器优化了什么。
+    额外还有 filtered 列，是一个半分比的值，rows * filtered/100 可以估算出将要和 explain 中前一个表进行连接的行数
+    （前一个表指 explain 中的id值比当前表id值小的表）。    
+```
+mysql> show columns from admin;
++------------+-----------+------+-----+-------------------+----------------+
+| Field      | Type      | Null | Key | Default           | Extra          |
++------------+-----------+------+-----+-------------------+----------------+
+| id         | int(11)   | NO   | PRI | NULL              | auto_increment |
+| email      | char(30)  | NO   | UNI | NULL              |                |
+| pwd        | char(60)  | NO   |     | NULL              |                |
+| token      | char(60)  | NO   |     |                   |                |
+| id_char    | char(35)  | NO   | UNI |                   |                |
+| create_at  | timestamp | NO   |     | CURRENT_TIMESTAMP |                |
+| updated_at | timestamp | YES  |     | NULL              |                |
++------------+-----------+------+-----+-------------------+----------------+
+7 rows in set (0.01 sec)
 
-#### explain sql
+mysql> explain extended select id,email from admin;
++----+-------------+-------+-------+---------------+----------+---------+------+------+----------+-------------+
+| id | select_type | table | type  | possible_keys | key      | key_len | ref  | rows | filtered | Extra       |
++----+-------------+-------+-------+---------------+----------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | admin | index | NULL          | admin_pk | 120     | NULL |    1 |   100.00 | Using index |
++----+-------------+-------+-------+---------------+----------+---------+------+------+----------+-------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> show warnings;
++-------+------+---------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                       |
++-------+------+---------------------------------------------------------------------------------------------------------------+
+| Note  | 1003 | /* select#1 */ select `hyperf`.`admin`.`id` AS `id`,`hyperf`.`admin`.`email` AS `email` from `hyperf`.`admin` |
++-------+------+---------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+#### explain partitions
+    相比 explain 多了个 partitions 字段，如果查询是基于分区表的话，会显示查询将访问的分区。
+
+#### [explain sql](https://dev.mysql.com/doc/refman/5.7/en/explain-output.html)
+    在 select 语句之前增加 explain 关键字，
+    MySQL 会在查询上设置一个标记，执行查询时，会返回执行计划的信息，而不是执行这条SQL
+    （如果 from 中包含子查询，仍会执行该子查询，将结果放入临时表中）
+
+
+##### [參考](https://www.cnblogs.com/butterfly100/archive/2018/01/15/8287569.html)
+
+
+##### id列
+    id列的编号是 select 的序列号，有几个 select 就有几个id，
+    并且id的顺序是按 select 出现的顺序增长的
+    
+##### select_type 
+* simple: 简单查询,查询不包含子查询和union
+* primary: 复杂查询中最外层的 select
+* subquery: 包含在 select 中的子查询（不在 from 子句中）
+* derived: 包含在 from 子句中的子查询。
+    MySQL会将结果存放在一个临时表中，也称为派生表(derived的英文含义)
+* union：在 union 中的第二个和随后的 select
+* union result: 从 union 临时表检索结果的 select
 
 ##### table
 ~~~
@@ -10,7 +69,17 @@
 ##### type
 ~~~
 显示连接类型(the join type),它描述了找到所需数据使用的扫描方式(由快到慢)
-系统, 常量, 等值参考, 参考, 范围, 索引树, 全部
+system  const  eq_ref   ref   range  index   all
+系统     常量   等值参考   参考  范围    索引树   全部
+
+ref:reference(re,fen,ce)[參考]
+system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery > index_subquery > range > index > ALL
+~~~
+
+* NULL `mysql能够在优化阶段分解查询语句，在执行阶段用不着再访问表或索引`
+~~~
+explain select min(id) from table;
+在索引列中选取最小值，可以单独查找索引来完成，不需要在执行时访问表
 ~~~
 
 * system    `系统表，少量数据，往往不需要进行磁盘IO；`
@@ -19,11 +88,13 @@
 explain select * from mysql.time_zone;
 
 #pkId 为 const, tmp 类型为 system
+#mysql能对查询的某部分进行优化并将其转化成一个常量
 explain select * from ( select * from user where pkId=1 ) tmp;
 ~~~
 
 * const     `常量连接`
 ~~~
+mysql能对查询的某部分进行优化并将其转化成一个常量
 1.命中主键(primary key)或者唯一(unique)索引
 2.被连接的部分是一个常量(const)值,pkId = 1
 tip.不要类型转换
@@ -42,6 +113,14 @@ tip.不要类型转换
 1.普通索引
 2.对于前表的每一行(row)，后表可能有多于一行的数据被扫描
 3.常量的连接查询，也由const降级为了ref，因为也可能有多于一行的数据被扫描
+~~~
+
+* ref_or_null `类似ref，但是可以搜索值为NULL的行。`
+
+* index_merge `表示使用了索引合并的优化方法`
+~~~
+例如：id是主键，tenant_id是普通索引。or 的时候没有用 primary key，而是使用了 primary key(id) 和 tenant_id 索引
+explain select * from role where id = 11011 or tenant_id = 8888;
 ~~~
 
 * range     `范围扫描`
@@ -69,6 +148,21 @@ explain select COUNT(*) from user;
 ##### key_len
 ~~~
 使用的索引的长度。在不损失精确性的情况下，长度越短越好
+字符串
+    char(n)：n字节长度
+    varchar(n)：2字节存储字符串长度，如果是utf-8，则长度 3n + 2
+数值类型
+    tinyint：1字节
+    smallint：2字节
+    int：4字节
+    bigint：8字节　　
+时间类型　
+    date：3字节
+    timestamp：4字节
+    datetime：8字节
+如果字段允许为 NULL，需要1字节记录是否为 NULL
+索引最大长度是768字节，当字符串过长时，mysql会做一个类似左前缀索引的处理，
+将前半部分的字符提取出来做索引。
 ~~~
 
 ##### ref
@@ -82,6 +176,10 @@ MYSQL认为必须检查的用来返回请求数据的行数
 ~~~
 
 ##### extra ： 解析查询的额外信息
+* distinct
+~~~
+一旦mysql找到了与行相联合匹配的行，就不再搜索了
+~~~
 * Using where
 ~~~
 SQL使用了where条件过滤数据,可以配合 type 优化,若 type 为 all,仍然需要优化
@@ -418,6 +516,7 @@ select * from t where id=1 for update;
     
     test_1 数据
     1 21 手机 {"1":"苹果","3":"6500"} 
+    
     
     
 ### 连接池
