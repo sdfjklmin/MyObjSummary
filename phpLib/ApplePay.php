@@ -370,6 +370,95 @@ class ApplePayVerify
         }
     }
 
+	/**
+	 * 数据示例
+	 */
+	public function appleReceiptBackData()
+	{
+		/**
+		 * @version 1.0 -1.1.0
+		 * @tag two
+		 */
+		$versionTwo = '{
+    "msg": "操作成功",
+    "code": 200,
+    "data": {
+        "status": 0,
+        "environment": "Sandbox",
+        "receipt": {
+            "receipt_type": "ProductionSandbox",
+            "adam_id": 0,
+            "app_item_id": 0,
+            "bundle_id": "com.duluduludala.btvideo",
+            "application_version": "1",
+            "download_id": 0,
+            "version_external_identifier": 0,
+            "receipt_creation_date": "2020-05-10 12:27:48 Etc/GMT",
+            "receipt_creation_date_ms": "1589113668000",
+            "receipt_creation_date_pst": "2020-05-10 05:27:48 America/Los_Angeles",
+            "request_date": "2020-05-10 12:30:47 Etc/GMT",
+            "request_date_ms": "1589113847593",
+            "request_date_pst": "2020-05-10 05:30:47 America/Los_Angeles",
+            "original_purchase_date": "2013-08-01 07:00:00 Etc/GMT",
+            "original_purchase_date_ms": "1375340400000",
+            "original_purchase_date_pst": "2013-08-01 00:00:00 America/Los_Angeles",
+            "original_application_version": "1.0",
+            "in_app": [
+                {
+                    "quantity": "1",
+                    "product_id": "2003",
+                    "transaction_id": "1000000662646469",
+                    "original_transaction_id": "1000000662646469",
+                    "purchase_date": "2020-05-10 12:27:47 Etc/GMT",
+                    "purchase_date_ms": "1589113667000",
+                    "purchase_date_pst": "2020-05-10 05:27:47 America/Los_Angeles",
+                    "original_purchase_date": "2020-05-10 12:27:48 Etc/GMT",
+                    "original_purchase_date_ms": "1589113668000",
+                    "original_purchase_date_pst": "2020-05-10 05:27:48 America/Los_Angeles",
+                    "expires_date": "2020-05-10 13:27:47 Etc/GMT",
+                    "expires_date_ms": "1589117267000",
+                    "expires_date_pst": "2020-05-10 06:27:47 America/Los_Angeles",
+                    "web_order_line_item_id": "1000000052368183",
+                    "is_trial_period": "false",
+                    "is_in_intro_offer_period": "false"
+                }
+            ]
+        },
+        "latest_receipt_info": [
+            {
+                "quantity": "1",
+                "product_id": "2003",
+                "transaction_id": "1000000662646469",
+                "original_transaction_id": "1000000662646469",
+                "purchase_date": "2020-05-10 12:27:47 Etc/GMT",
+                "purchase_date_ms": "1589113667000",
+                "purchase_date_pst": "2020-05-10 05:27:47 America/Los_Angeles",
+                "original_purchase_date": "2020-05-10 12:27:48 Etc/GMT",
+                "original_purchase_date_ms": "1589113668000",
+                "original_purchase_date_pst": "2020-05-10 05:27:48 America/Los_Angeles",
+                "expires_date": "2020-05-10 13:27:47 Etc/GMT",
+                "expires_date_ms": "1589117267000",
+                "expires_date_pst": "2020-05-10 06:27:47 America/Los_Angeles",
+                "web_order_line_item_id": "1000000052368183",
+                "is_trial_period": "false",
+                "is_in_intro_offer_period": "false",
+                "subscription_group_identifier": "20633812"
+            }
+        ],
+        "latest_receipt": "MIIT4QYJKoZIhvcNAQcCoIIT0jCCE84CAQExCzAJBgUrDgMCGgUAMIIDggYJKoZIhvcNAQcBoIIDcwSCA28xggNrMAoCAQgCAQEEAhYAMAoCARQCAQEEAgwAMAsCAQECAQEEAwIBADALAgEDAgEBBAMMATEwCwIBCwIBAQQDAgEAMAsCAQ8CAQEEAwIBADALAgEQAgEBBAMCAQAwCwIBGQIBAQQDAgEDMAwCAQoCAQEEBBYCNCswDAIBDgIBAQQEAgIAyzANAgENAgEBBAUCAwH9YTANAgETAgEBBAUMAzEuMDAOAgEJAgEBBAYCBFAyNTMwGAIBBAIBAgQQzWz87/5Ls67to6XYxoWyojAbAgEAAgEBBBMMEVByb2R1Y3Rpb25TYW5kYm94MBwCAQUCAQEEFP7QjBTsocVND8IisOXbgskAIOmEMB4CAQwCAQEEFhYUMjAyMC0wNS0xMFQxMjozMDo0N1owHgIBEgIBAQQWFhQyMDEzLTA4LTAxVDA3OjAwOjAwWjAiAgECAgEBBBoMGGNvbS5kdWx1ZHVsdWRhbGEuYnR2aWRlbzBCAgEGAgEBBDr97I7rh0Jfd1fDc6N+8Vqfyid3IC8P3AfQj7KJVPtZyA45QNhMSjzBM4lSHgtEsHEwq3Oa+O6sUbo4MEcCAQcCAQEEP92v6CblD7UaQRuaIg8Kh69+UUPhZYxhj2xhmUJPwpIYOQ1FHA/T4kd4Okq5u/IsWysQo1lzjNIo/m5PuRZJrjCCAXECARECAQEEggFnMYIBYzALAgIGrQIBAQQCDAAwCwICBrACAQEEAhYAMAsCAgayAgEBBAIMADALAgIGswIBAQQCDAAwCwICBrQCAQEEAgwAMAsCAga1AgEBBAIMADALAgIGtgIBAQQCDAAwDAICBqUCAQEEAwIBATAMAgIGqwIBAQQDAgEDMAwCAgauAgEBBAMCAQAwDAICBrECAQEEAwIBADAMAgIGtwIBAQQDAgEAMA8CAgamAgEBBAYMBDIwMDMwEgICBq8CAQEECQIHA41+p+WTNzAbAgIGpwIBAQQSDBAxMDAwMDAwNjYyNjQ2NDY5MBsCAgapAgEBBBIMEDEwMDAwMDA2NjI2NDY0NjkwHwICBqgCAQEEFhYUMjAyMC0wNS0xMFQxMjoyNzo0N1owHwICBqoCAQEEFhYUMjAyMC0wNS0xMFQxMjoyNzo0OFowHwICBqwCAQEEFhYUMjAyMC0wNS0xMFQxMzoyNzo0N1qggg5lMIIFfDCCBGSgAwIBAgIIDutXh+eeCY0wDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSwwKgYDVQQLDCNBcHBsZSBXb3JsZHdpZGUgRGV2ZWxvcGVyIFJlbGF0aW9uczFEMEIGA1UEAww7QXBwbGUgV29ybGR3aWRlIERldmVsb3BlciBSZWxhdGlvbnMgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTUxMTEzMDIxNTA5WhcNMjMwMjA3MjE0ODQ3WjCBiTE3MDUGA1UEAwwuTWFjIEFwcCBTdG9yZSBhbmQgaVR1bmVzIFN0b3JlIFJlY2VpcHQgU2lnbmluZzEsMCoGA1UECwwjQXBwbGUgV29ybGR3aWRlIERldmVsb3BlciBSZWxhdGlvbnMxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApc+B/SWigVvWh+0j2jMcjuIjwKXEJss9xp/sSg1Vhv+kAteXyjlUbX1/slQYncQsUnGOZHuCzom6SdYI5bSIcc8/W0YuxsQduAOpWKIEPiF41du30I4SjYNMWypoN5PC8r0exNKhDEpYUqsS4+3dH5gVkDUtwswSyo1IgfdYeFRr6IwxNh9KBgxHVPM3kLiykol9X6SFSuHAnOC6pLuCl2P0K5PB/T5vysH1PKmPUhrAJQp2Dt7+mf7/wmv1W16sc1FJCFaJzEOQzI6BAtCgl7ZcsaFpaYeQEGgmJjm4HRBzsApdxXPQ33Y72C3ZiB7j7AfP4o7Q0/omVYHv4gNJIwIDAQABo4IB1zCCAdMwPwYIKwYBBQUHAQEEMzAxMC8GCCsGAQUFBzABhiNodHRwOi8vb2NzcC5hcHBsZS5jb20vb2NzcDAzLXd3ZHIwNDAdBgNVHQ4EFgQUkaSc/MR2t5+givRN9Y82Xe0rBIUwDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBSIJxcJqbYYYIvs67r2R1nFUlSjtzCCAR4GA1UdIASCARUwggERMIIBDQYKKoZIhvdjZAUGATCB/jCBwwYIKwYBBQUHAgIwgbYMgbNSZWxpYW5jZSBvbiB0aGlzIGNlcnRpZmljYXRlIGJ5IGFueSBwYXJ0eSBhc3N1bWVzIGFjY2VwdGFuY2Ugb2YgdGhlIHRoZW4gYXBwbGljYWJsZSBzdGFuZGFyZCB0ZXJtcyBhbmQgY29uZGl0aW9ucyBvZiB1c2UsIGNlcnRpZmljYXRlIHBvbGljeSBhbmQgY2VydGlmaWNhdGlvbiBwcmFjdGljZSBzdGF0ZW1lbnRzLjA2BggrBgEFBQcCARYqaHR0cDovL3d3dy5hcHBsZS5jb20vY2VydGlmaWNhdGVhdXRob3JpdHkvMA4GA1UdDwEB/wQEAwIHgDAQBgoqhkiG92NkBgsBBAIFADANBgkqhkiG9w0BAQUFAAOCAQEADaYb0y4941srB25ClmzT6IxDMIJf4FzRjb69D70a/CWS24yFw4BZ3+Pi1y4FFKwN27a4/vw1LnzLrRdrjn8f5He5sWeVtBNephmGdvhaIJXnY4wPc/zo7cYfrpn4ZUhcoOAoOsAQNy25oAQ5H3O5yAX98t5/GioqbisB/KAgXNnrfSemM/j1mOC+RNuxTGf8bgpPyeIGqNKX86eOa1GiWoR1ZdEWBGLjwV/1CKnPaNmSAMnBjLP4jQBkulhgwHyvj3XKablbKtYdaG6YQvVMpzcZm8w7HHoZQ/Ojbb9IYAYMNpIr7N4YtRHaLSPQjvygaZwXG56AezlHRTBhL8cTqDCCBCIwggMKoAMCAQICCAHevMQ5baAQMA0GCSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKEwpBcHBsZSBJbmMuMSYwJAYDVQQLEx1BcHBsZSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTEWMBQGA1UEAxMNQXBwbGUgUm9vdCBDQTAeFw0xMzAyMDcyMTQ4NDdaFw0yMzAyMDcyMTQ4NDdaMIGWMQswCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjEsMCoGA1UECwwjQXBwbGUgV29ybGR3aWRlIERldmVsb3BlciBSZWxhdGlvbnMxRDBCBgNVBAMMO0FwcGxlIFdvcmxkd2lkZSBEZXZlbG9wZXIgUmVsYXRpb25zIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjhUpstWqsgkOUjpjO7sX7h/JpG8NFN6znxjgGF3ZF6lByO2Of5QLRVWWHAtfsRuwUqFPi/w3oQaoVfJr3sY/2r6FRJJFQgZrKrbKjLtlmNoUhU9jIrsv2sYleADrAF9lwVnzg6FlTdq7Qm2rmfNUWSfxlzRvFduZzWAdjakh4FuOI/YKxVOeyXYWr9Og8GN0pPVGnG1YJydM05V+RJYDIa4Fg3B5XdFjVBIuist5JSF4ejEncZopbCj/Gd+cLoCWUt3QpE5ufXN4UzvwDtIjKblIV39amq7pxY1YNLmrfNGKcnow4vpecBqYWcVsvD95Wi8Yl9uz5nd7xtj/pJlqwIDAQABo4GmMIGjMB0GA1UdDgQWBBSIJxcJqbYYYIvs67r2R1nFUlSjtzAPBgNVHRMBAf8EBTADAQH/MB8GA1UdIwQYMBaAFCvQaUeUdgn+9GuNLkCm90dNfwheMC4GA1UdHwQnMCUwI6AhoB+GHWh0dHA6Ly9jcmwuYXBwbGUuY29tL3Jvb3QuY3JsMA4GA1UdDwEB/wQEAwIBhjAQBgoqhkiG92NkBgIBBAIFADANBgkqhkiG9w0BAQUFAAOCAQEAT8/vWb4s9bJsL4/uE4cy6AU1qG6LfclpDLnZF7x3LNRn4v2abTpZXN+DAb2yriphcrGvzcNFMI+jgw3OHUe08ZOKo3SbpMOYcoc7Pq9FC5JUuTK7kBhTawpOELbZHVBsIYAKiU5XjGtbPD2m/d73DSMdC0omhz+6kZJMpBkSGW1X9XpYh3toiuSGjErr4kkUqqXdVQCprrtLMK7hoLG8KYDmCXflvjSiAcp/3OIK5ju4u+y6YpXzBWNBgs0POx1MlaTbq/nJlelP5E3nJpmB6bz5tCnSAXpm4S6M9iGKxfh44YGuv9OQnamt86/9OBqWZzAcUaVc7HGKgrRsDwwVHzCCBLswggOjoAMCAQICAQIwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCVVMxEzARBgNVBAoTCkFwcGxlIEluYy4xJjAkBgNVBAsTHUFwcGxlIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MRYwFAYDVQQDEw1BcHBsZSBSb290IENBMB4XDTA2MDQyNTIxNDAzNloXDTM1MDIwOTIxNDAzNlowYjELMAkGA1UEBhMCVVMxEzARBgNVBAoTCkFwcGxlIEluYy4xJjAkBgNVBAsTHUFwcGxlIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MRYwFAYDVQQDEw1BcHBsZSBSb290IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5JGpCR+R2x5HUOsF7V55hC3rNqJXTFXsixmJ3vlLbPUHqyIwAugYPvhQCdN/QaiY+dHKZpwkaxHQo7vkGyrDH5WeegykR4tb1BY3M8vED03OFGnRyRly9V0O1X9fm/IlA7pVj01dDfFkNSMVSxVZHbOU9/acns9QusFYUGePCLQg98usLCBvcLY/ATCMt0PPD5098ytJKBrI/s61uQ7ZXhzWyz21Oq30Dw4AkguxIRYudNU8DdtiFqujcZJHU1XBry9Bs/j743DN5qNMRX4fTGtQlkGJxHRiCxCDQYczioGxMFjsWgQyjGizjx3eZXP/Z15lvEnYdp8zFGWhd5TJLQIDAQABo4IBejCCAXYwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFCvQaUeUdgn+9GuNLkCm90dNfwheMB8GA1UdIwQYMBaAFCvQaUeUdgn+9GuNLkCm90dNfwheMIIBEQYDVR0gBIIBCDCCAQQwggEABgkqhkiG92NkBQEwgfIwKgYIKwYBBQUHAgEWHmh0dHBzOi8vd3d3LmFwcGxlLmNvbS9hcHBsZWNhLzCBwwYIKwYBBQUHAgIwgbYagbNSZWxpYW5jZSBvbiB0aGlzIGNlcnRpZmljYXRlIGJ5IGFueSBwYXJ0eSBhc3N1bWVzIGFjY2VwdGFuY2Ugb2YgdGhlIHRoZW4gYXBwbGljYWJsZSBzdGFuZGFyZCB0ZXJtcyBhbmQgY29uZGl0aW9ucyBvZiB1c2UsIGNlcnRpZmljYXRlIHBvbGljeSBhbmQgY2VydGlmaWNhdGlvbiBwcmFjdGljZSBzdGF0ZW1lbnRzLjANBgkqhkiG9w0BAQUFAAOCAQEAXDaZTC14t+2Mm9zzd5vydtJ3ME/BH4WDhRuZPUc38qmbQI4s1LGQEti+9HOb7tJkD8t5TzTYoj75eP9ryAfsfTmDi1Mg0zjEsb+aTwpr/yv8WacFCXwXQFYRHnTTt4sjO0ej1W8k4uvRt3DfD0XhJ8rxbXjt57UXF6jcfiI1yiXV2Q/Wa9SiJCMR96Gsj3OBYMYbWwkvkrL4REjwYDieFfU9JmcgijNq9w2Cz97roy/5U2pbZMBjM3f3OgcsVuvaDyEO2rpzGU+12TZ/wYdV2aeZuTJC+9jVcZ5+oVK3G72TQiQSKscPHbZNnF5jyEuAF1CqitXa5PzQCQc3sHV1ITGCAcswggHHAgEBMIGjMIGWMQswCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjEsMCoGA1UECwwjQXBwbGUgV29ybGR3aWRlIERldmVsb3BlciBSZWxhdGlvbnMxRDBCBgNVBAMMO0FwcGxlIFdvcmxkd2lkZSBEZXZlbG9wZXIgUmVsYXRpb25zIENlcnRpZmljYXRpb24gQXV0aG9yaXR5AggO61eH554JjTAJBgUrDgMCGgUAMA0GCSqGSIb3DQEBAQUABIIBAEX7vBYrYIX2CwFGq+qZgpgJUgECdmoDsvmC8ILntyqoPw9z9Ymu9ucoT4E08RnNWb64PARIe45AQLsMfNvZGk6ZpoEz1Bm6SzVVOhw55/eJdFWtHFrYCVaas40D+W9WdAmrPAw5Ok84YxxeSkwELrcXlA3UR+TkgpCpEWMrIoOt1cLucBZKMGAcV4RCswUutLxnhDDXCocclFGPF/rR4RM665f0gCKwjLqPVKwcPQdQU2/hv8BD1657wIpCUAZc12OIhCiEpWFcMPogz41aqUk7m4R4+NkRsB4XvvdUS27+xl5c+0IDy+4N/QOGT6rxPFsiLz50WvZDpXJnTK3+qd8=",
+        "pending_renewal_info": [
+            {
+                "auto_renew_product_id": "2003",
+                "original_transaction_id": "1000000662646469",
+                "product_id": "2003",
+                "auto_renew_status": "1"
+            }
+        ]
+    },
+    "time": 1589113847
+}';
+    }
+
     /** 自身业务处理
      * @param $appData
      * @return string
