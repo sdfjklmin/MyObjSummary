@@ -38,6 +38,10 @@
 - 使用 `df -h` 查看磁盘使用情况,如果某个磁盘满了,进入挂载点使用 `du -h --max-depth=1` 逐层分析,删除不必要的文件
       
 - free 当前内存和交换空间的使用情况
+
+- 查看cpu : `cat /proc/cpuinfo`
+
+- 查看内存(memory) : `cat /proc/meminfo`
       
 - hostname 当前主机名称      
 
