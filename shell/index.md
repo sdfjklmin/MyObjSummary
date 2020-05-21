@@ -163,7 +163,7 @@ echo '参数三:	$3'
 #### 流程控制
 ```shell script
 num=$1
-#统一安装这个格式,空格也是
+#统一按照这个格式,空格也是
 if [ $1 -gt 80 ]; then
     echo 'good'
 fi
@@ -204,6 +204,20 @@ done
 for i in {1..5} ; do
     
 done
+```
+```shell script
+#eg
+num=1
+numStr=abc123
+#数字判断
+if [ $num -eq 1 ]; then
+    
+fi
+
+#字符串要用 = 判断
+if [ "$numStr" = "abc123" ]; then
+    
+fi
 ```
 ~~~
 #这里空格用 span 表示,方便解释
