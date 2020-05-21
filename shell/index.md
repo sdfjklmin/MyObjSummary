@@ -288,6 +288,18 @@ fi
 	done
 ~~~
 	
+#### 函数
+```shell script
+#函数需要提前声明
+abc() {
+  #函数内部的运行体,这里的 $1 属于 abc
+  echo "params is ${1}"    
+}
+
+#调用
+abc 1
+abc "im params"
+```
 #### 其他:
 	把命令运行结果赋给变量
 	a=`/usr/local/php/sbin/php-fpm`	#使用反引号
