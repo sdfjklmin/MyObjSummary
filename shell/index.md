@@ -300,6 +300,18 @@ abc() {
 abc 1
 abc "im params"
 ```
+#### 文件引入
+```shell script
+#### 引入方式 #source或者.加上空格再加上文件的绝对路径
+#### 这里建议使用 . 不同的系统可能会有 source命令,而不会解析成shell引入文件
+
+####文件引入1
+#source 对应shell的绝对路径
+
+
+####文件引入2
+. 对应shell的绝对路径
+```
 #### 其他:
 	把命令运行结果赋给变量
 	a=`/usr/local/php/sbin/php-fpm`	#使用反引号
