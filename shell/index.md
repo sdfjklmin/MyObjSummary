@@ -14,7 +14,6 @@ echo 'this is test shell'
 #! 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell。
 echo 命令用于向窗口输出文本。
 ~~~
-
 #### 一般格式 `标准4行`
 ~~~
 #申明bash
@@ -36,6 +35,9 @@ chmod +x ./test.sh
 
 #其它方式执行
 sh test.sh
+
+#检测脚本是否有语法错误
+sh -n test.sh 
 ```
 #### 变量
     #变量类型[局部变量,环境变量,shell变量]
@@ -79,7 +81,6 @@ sh test.sh
     #查找字符串
     string='my name is shell'
     echo `expr index "${string}" is` 	#``这个是反引号,Tab上面那个
-
 #### 数组(只支持一维数组,下标为整数或者算术表达式)
     Shell 数组用括号来表示，元素用"空格"符号分割开，语法格式如下
     arr_value2=( a	b  c  d  e )
@@ -159,8 +160,6 @@ echo '参数三:	$3'
 	-x file	检测文件是否可执行，如果是，则返回 true。				[ -x $file ] 返回 true。
 	-s file	检测文件是否为空（文件大小是否大于0），不为空返回 true。	[ -s $file ] 返回 true。
 	-e file	检测文件（包括目录）是否存在，如果是，则返回 true。		[ -e $file ] 返回 true。
-
-
 #### 流程控制
 ```shell script
 num=$1
@@ -275,10 +274,10 @@ done
 	done
 ~~~
 	
-
 #### 其他:
 	把命令运行结果赋给变量
 	a=`/usr/local/php/sbin/php-fpm`	#使用反引号
+	echo `date +%Y%m%d`
 	
 	让命令停止几秒
 	sleep 1
