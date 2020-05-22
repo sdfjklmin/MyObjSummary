@@ -144,6 +144,9 @@
     rm -rf              #删除文件和文件夹不用提示
     cp  				#复制
     cp -r dir dir       #复制文件夹 
+    scp                 #从本地复制到远程,secure cp
+    scp local_file remote_username@remote_ip:remote_folder 
+    scp test.txt proUser@123.456.789:/home/www/tmp 
     
 ##### 创建文件夹
     mkdir dir #创建文件夹dir
@@ -201,7 +204,8 @@
     $ tar -cvzf filename.tar.gz     ### 使用 gzip  压缩
     $ tar -xvzf filename.tar.gz     ### 解压 filename.tar.gz 到当前文件夹
     $ tar -tf   filename            ### 只查看 filename 归档中的文件，不解压
-    
+    ### 解压 filename.tar.gz 到 /ttt下
+    $ tar -xvzf filename.tar.gz -C /ttt    
 ##### 分组,权限
     chown 用于改变一个文件的所有者及所在的组。
     chown user filename        ### 改变 filename 的所有者为 user
@@ -721,4 +725,16 @@ gdb:>start
 
 #显示堆栈
 gdb:>bt
+```
+
+#### awk 取第几列
+```
+#table.txt
+1 bom 13 成都
+2 toy 18 日本
+
+#取第二行
+cat table.txt | awk '{print $2}'
+#bom
+#toy
 ```

@@ -38,6 +38,9 @@ sh test.sh
 
 #检测脚本是否有语法错误
 sh -n test.sh 
+
+#查看脚本执行过程
+sh -x test.sh 
 ```
 #### 变量
     #变量类型[局部变量,环境变量,shell变量]
