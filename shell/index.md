@@ -291,6 +291,34 @@ fi
 	done
 ~~~
 	
+#### for
+```shell script
+#批量更新代码
+#生成 1 - 15
+NUM=`seq 1 15`
+#从文件中获取
+FILE=`cat ip.txt`
+TMP_IP='127.0.0.1 127.0.0.2'
+for i in TMP_IP ;
+do
+  echo "\033[32mRunning ip is $i\033[0m" 
+  #这里需要配置ssh免密登录
+  ssh userName@$i
+  cd /home/www/site
+  git pull
+  exit
+done
+```
+#### while
+```shell script
+while [  ]; do
+    
+done
+
+while read line; do
+    #逐行读取tt.txt中的数据
+done</tt.txt
+```
 #### 函数
 ```shell script
 #函数需要提前声明
@@ -336,3 +364,7 @@ abc "im params"
 	read aNum 
 	#打印用户输入的值
     echo $aNum
+    
+    #带提示的输入
+    read -p "please input you message !" msgValue
+    echo $msgValue
