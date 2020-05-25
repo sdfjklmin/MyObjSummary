@@ -118,3 +118,12 @@
 #### Shift + DEl (删除当前行)
 
 #### Shift + Enter (跳转到新生成的一行)
+## 编辑器卡顿
+~~~
+phpstorm是由java编写而成，可以通过配置参数来进行优化
+1.编辑配置 PhpStorm-192.7142.41/bin/phpstorm.vmoptions 新增如下内容
+-Dawt.usesystemAAFontSettings=lcd
+-Dawt.java2d.opengl=true
+
+2.提高配置文件中所配置的内存大小【不推荐】
+~~~
