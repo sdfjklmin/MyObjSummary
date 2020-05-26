@@ -319,6 +319,50 @@ while read line; do
     #逐行读取tt.txt中的数据
 done</tt.txt
 ```
+#### case
+```
+#case
+case $x in
+pattern1)
+  echo 'pat 1'
+  ;;
+pattern2)
+  echo 'pat 2'
+  ;;
+*)
+ echo 'default' 
+  ;;
+esac
+```
+#### select
+```shell script
+PS3="PS3是标准的菜单输出格式"
+select i in "a" "b" "c";
+do
+  echo $i    
+done
+```
+#### select + case
+```shell script
+PS3="select you menu:"
+select i in "apple" "orange" "age"
+do
+    case $i in
+    apple)
+      echo "apple is good"
+      ;;
+    orange)
+      echo "orange is good"
+      ;;
+    age)
+      echo "age is bad"
+      ;;
+    *)
+      echo "please select menu in the select"
+      exit
+    esac
+done
+```
 #### 函数
 ```shell script
 #函数需要提前声明

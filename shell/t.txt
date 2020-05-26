@@ -5,3 +5,4 @@
 5.构建LAMP安装Shell
 6.For循环批量执行脚本
 7.While循环
+8.Case,Select
