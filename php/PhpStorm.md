@@ -126,4 +126,9 @@ phpstorm是由java编写而成，可以通过配置参数来进行优化
 -Dawt.java2d.opengl=true
 
 2.提高配置文件中所配置的内存大小【不推荐】
+
+3.优化内存配置 `Xms -> 初始堆大小M`, `Xmx -> 最大堆大小M`, `XX:MaxPermSize -> 设置持久代最大值M`
+-Xms256m
+-Xmx2048m
+-XX:MaxPermSize=350m
 ~~~
