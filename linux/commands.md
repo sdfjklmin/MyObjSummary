@@ -763,3 +763,29 @@ echo `seq 1 15`
 
     #显卡
     nvidia-smi
+    
+    #快捷查看
+    lscpu
+    ---------------------------------------------------------
+    Architecture:          x86_64
+    CPU op-mode(s):        32-bit, 64-bit
+    Byte Order:            Little Endian
+    CPU(s):                2                (两个逻辑CPU)
+    On-line CPU(s) list:   0,1
+    Thread(s) per core:    1                (支持超线程)
+    Core(s) per socket:    2                (2核)
+    Socket(s):             1                (一个CPU)
+    NUMA node(s):          1
+    Vendor ID:             GenuineIntel
+    CPU family:            6
+    Model:                 79
+    Model name:            Intel(R) Xeon(R) CPU E5-26xx v4
+    Stepping:              1
+    CPU MHz:               2394.452
+    BogoMIPS:              4788.90
+    Hypervisor vendor:     KVM
+    Virtualization type:   full
+    L1d cache:             32K
+    L1i cache:             32K
+    L2 cache:              4096K
+    NUMA node0 CPU(s):     0,1
