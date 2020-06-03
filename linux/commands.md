@@ -730,7 +730,7 @@ gdb:>start
 gdb:>bt
 ```
 
-#### awk 取第几列
+##### 47. awk 取第几列
 ```
 #table.txt
 1 bom 13 成都
@@ -742,8 +742,24 @@ cat table.txt | awk '{print $2}'
 #toy
 ```
 
-#### seq 1 15 
+##### 48. seq 1 15 
 ```
 #生成 1 - 15
 echo `seq 1 15`
 ```
+
+##### 49. 查看CPU,内存,等信息
+    #查看cup
+    sudo grep "model name" /proc/cpuinfo |awk -F ':' '{print $NF}'
+
+    #内存支持类型
+    sudo dmidecode -t memory |grep -A16 "Memory Device$" |grep "Type:"
+
+    #每个内存频率
+    sudo dmidecode -t memory |grep -A16 "Memory Device$" |grep "Speed:"
+
+    #每个内存大小
+    sudo dmidecode -t memory |grep -A16 "Memory Device$" |grep "Size:"
+
+    #显卡
+    nvidia-smi
