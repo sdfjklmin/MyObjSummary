@@ -760,6 +760,12 @@ echo `seq 1 15`
 
     #每个内存大小
     sudo dmidecode -t memory |grep -A16 "Memory Device$" |grep "Size:"
+    
+    #内存购买信息
+    #SO-DIMM    :   small outline dual in-line memory module,多用于笔记本
+    #DIMM       :   电脑
+    #内存大小    笔记本类型            频率(一般高频会向低频同步,A:1600,B:2666,处理为B:1600)
+    4G          SO-DIMM             2666
 
     #显卡
     nvidia-smi
