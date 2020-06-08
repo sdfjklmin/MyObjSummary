@@ -576,3 +576,8 @@ var_dump($model);
 
 #61 cli_set_process_title()
 # 设置当前 PHP 脚本名称
+
+#61 bc,mb_
+#精度计算: bc库,统一int型
+#更精细的Str: substr(); mb_substr();
+#更精细的时间: time(); microtime();
