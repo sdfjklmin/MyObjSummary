@@ -144,7 +144,11 @@
     sudo apt-get install exfat-utils
     重启生效
 
-    winetricks 安装windows程序
+    wine        兼容层,可兼容CentOs/Ubuntu/Linux/Mac
+    衍生软件:
+        winetricks  安装windows程序
+        crossover   安装windows程序
+        playonlinux 安装windows程序
 
 
     //视频时长
