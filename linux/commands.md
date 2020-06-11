@@ -800,6 +800,7 @@ echo `seq 1 15`
     NUMA node0 CPU(s):     0,1
     
     
+    
 ##### 50.expect
 * expect    ` 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)`
 * send       用于向进程发送字符串
@@ -851,7 +852,6 @@ send "df -h\r"
 #允许用户交互,如果没有这一句登录完成后会退出,而不是留在远程终端上
 interact
 ```
-
 `whereis expect` => `/usr/bin/expect`
 
 `/usr/bin/expect sshLogin.sh`
