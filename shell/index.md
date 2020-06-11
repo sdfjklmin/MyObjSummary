@@ -41,6 +41,9 @@ sh -n test.sh
 
 #查看脚本执行过程
 sh -x test.sh 
+
+#当使用`sh a.sh`报语法错误,但实际上并没有语法错误
+#不妨试试`/bin/bash a.sh`
 ```
 #### 变量
     #变量类型[局部变量,环境变量,shell变量]
@@ -402,7 +405,11 @@ abc "im params"
 	32m是颜色,具体的数字对应不同的颜色
 	\033是颜色标识,
 	0m表示只针对当前生效,1m则对下面文字也生效,并且是使用1m所对应的颜色
+	#sh color.sh
 	echo "\033[32m 这里是你的文字 \033[0m"
+	
+	#/bin/bash color.sh
+	echo -e "\033[32m 这里是你的文字 \033[0m"
 	
 	#等待用户输入
 	read aNum 
@@ -412,3 +419,46 @@ abc "im params"
     #带提示的输入
     read -p "please input you message !" msgValue
     echo $msgValue
+    
+#### expect: 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)
+* send       用于向进程发送字符串
+* expect     从进程接收字符串
+* spawn      启动新的进程
+* interact   允许用户交互
+* 普通用法
+```
+#!/usr/bin/expect
+#shll name : sshLogin.sh
+#声明shell运行环境
+
+#设置变量
+set timeout 30
+set host "101.200.241.109"
+set username "root"
+set password "123456"
+
+#启动新进程
+spawn ssh $username@$host
+
+#从进程接收字符串,并发送字符串
+#模式-动作
+#expect "*password*" {send "$password\r"}
+
+#动作分解形
+#从进程接收字符串
+expect "*password*"
+
+#向进程发送字符串
+send "password\r"
+
+#允许用户交互,如果没有这一句登录完成后会退出,而不是留在远程终端上
+interact
+```
+
+`whereis expect` => `/usr/bin/expect`
+
+`/usr/bin/expect sshLogin.sh`
+* 其它使用
+```
+#会了 Python,再看 expect 就是个 didi
+```
