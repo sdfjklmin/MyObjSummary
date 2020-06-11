@@ -798,3 +798,112 @@ echo `seq 1 15`
     L1i cache:             32K
     L2 cache:              4096K
     NUMA node0 CPU(s):     0,1
+    
+    
+##### 50.expect
+* expect    ` 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)`
+* send       用于向进程发送字符串
+* expect     从进程接收字符串
+* spawn      启动新的进程
+* set 设定变量为某个值
+* exp_continue 重新执行expect命令分支
+* [lindex $argv 0] 获取expect脚本的第1个参数 `set user [lindex $argv 0]`
+* [lindex $argv 1] 获取expect脚本的第2个参数
+* set timeout -1 设置超时方式为永远等待
+* set timeout 30 设置超时时间为30秒
+* interact 将脚本的控制权交给用户，用户可继续输入命令
+* expect eof 等待spawn进程结束后退出信号eof
+* 普通用法
+```
+#!/usr/bin/expect
+#shll name : sshLogin.sh
+#声明shell运行环境
+
+#设置变量
+set timeout 30
+set host "101.200.241.109"
+set username "root"
+set password "123456"
+
+#启动新进程
+spawn ssh $username@$host
+
+#从进程接收字符串,并发送字符串
+#模式-动作
+#expect "*password*" {send "$password\r"}
+
+#动作分解形
+#从进程接收字符串
+expect "*password*"
+
+#向进程发送字符串
+send "password\r"
+
+#定义命令的开始1(有延迟)
+expect "*]#"                                        
+#发送要执行的命令
+send "df -h\r" 
+
+#定义命令的开始2(无延迟)
+expect "]*"
+send "df -h\r"
+
+#允许用户交互,如果没有这一句登录完成后会退出,而不是留在远程终端上
+interact
+```
+
+`whereis expect` => `/usr/bin/expect`
+
+`/usr/bin/expect sshLogin.sh`
+* 其它使用
+```
+#单一分支
+set password 123456
+expect "*assword:" { send "$password\r" }
+
+#多分支
+set password 123456
+expect {
+      "(yes/no)?" { send "yes\r"; exp_continue }
+      "*assword:" { send "$password\r" }
+}
+
+#会了 Python,再看 expect 就是个 didi
+```
+* 完整例子
+```
+#!/usr/bin/expect
+#shll name : sshPull.sh
+#自动登录服务器并且更新代码
+#by author sjm
+
+#设置基础参数
+set timeout 30
+set host "101.200.241.109"
+set username "root"
+set password "123456"
+set dirPath "/www/object/test"
+set dirPathPwd "123456"
+
+#执行ssh
+spawn ssh $username@$host
+expect {
+      "(yes/no)?" { send "yes\r"; exp_continue }
+      "*password*:" { send "$password\r" }
+}
+
+#发送命令,进入项目
+expect "]*"
+send "cd $dirPath\r"
+
+#执行更新
+expect "]*"
+send "git pull\r"
+
+#执行密码
+expect "git@test.cn password:*"
+send "$dirPathPwd\r"
+
+#停留在远程终端
+interact
+```
