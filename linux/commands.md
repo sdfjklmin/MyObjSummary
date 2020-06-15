@@ -807,11 +807,7 @@ echo `seq 1 15`
     L1i cache:             32K
     L2 cache:              4096K
     NUMA node0 CPU(s):     0,1
-    
-    
-    
-    
-    
+ 
 ##### 50.expect
 * expect    ` 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)`
 * send       用于向进程发送字符串
@@ -923,3 +919,5 @@ send "$dirPathPwd\r"
 #停留在远程终端
 interact
 ```
+
+#### 60.
