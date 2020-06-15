@@ -792,7 +792,7 @@ echo `seq 1 15`
     On-line CPU(s) list:   0,1
     Thread(s) per core:    1                (支持超线程)
     Core(s) per socket:    2                (2核)
-    Socket(s):             1                (一个CPU)
+    Socket(s):             1                (一个CPU)(Socket:插座,有多少个就可以插多少芯片)
     NUMA node(s):          1
     Vendor ID:             GenuineIntel
     CPU family:            6
