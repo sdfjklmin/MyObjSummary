@@ -1,5 +1,3 @@
-## Linux 常用命令
-
 ### 系统命令
 
 - top  **显示当前系统中耗费资源最多的进程**
@@ -44,7 +42,6 @@
 - 查看内存(memory) : `cat /proc/meminfo`
       
 - hostname 当前主机名称      
-
 ### 操作命令
 
 ##### Folder(目录介绍)
@@ -105,7 +102,16 @@
          -<数字>     每屏的行数
          +<数字>     从指定行开始显示文件
          +/<字符串>  从匹配搜索字符串的位置开始显示文件
+
     more +100 abc.php 从100行开始显示  逐行显示
+
+    more -2 abc.php 显示前5行,后面的以跟多的方式查看
+    eg: 
+    我是第一行
+    我是第二行
+    -- 更多 --(4%)
+    
+    more +100 -2 abc.php 从100行开始显示,显示两行,其它以更多的方式查看
     
     less +100 abc.php 从100行开始显示  支持上下滚动查看
     
@@ -174,6 +180,9 @@
 ###### dpkg(ubuntu)
 
 ###### apt|apt-get(deb包管理式)
+    #安装
+    sudo apt install <deb name>
+
     # 删除软件及其配置文件
     apt-get --purge remove <package>
     
@@ -186,15 +195,15 @@
 ###### rpm(软件包管理器)
 
 ##### 解压
-    tar 主要用于创建归档文件,和解压归档文件,其本身是没有压缩功能的,但可以调用 gzip bzip2 进行压缩处理.
-		参数解释：
-			-c 创建归档
-			-x 解压归档
-			-v 显示处理过程
-			-f 目标文件，其后必须紧跟 目标文件
-			-j 调用 bzip2 进行解压缩
-			-z 调用 gzip 进行解压缩
-			-t 列出归档中的文件
+###### tar 主要用于创建归档文件,和解压归档文件,其本身是没有压缩功能的,但可以调用 gzip bzip2 进行压缩处理.
+    参数解释：
+        -c 创建归档
+        -x 解压归档
+        -v 显示处理过程
+        -f 目标文件，其后必须紧跟 目标文件
+        -j 调用 bzip2 进行解压缩
+        -z 调用 gzip 进行解压缩
+        -t 列出归档中的文件
 
     eg:
     $ tar -cvf filename.tar .       ### 将当前目录所有文件归档,不压缩,后面有个.代表当前目录的意思 
@@ -206,6 +215,23 @@
     $ tar -tf   filename            ### 只查看 filename 归档中的文件，不解压
     ### 解压 filename.tar.gz 到 /ttt下
     $ tar -xvzf filename.tar.gz -C /ttt    
+    
+###### rar解压:
+    sudo apt-get install rar
+    sudo apt-get install unrar
+    rar x test.rar
+
+###### zip解压:
+    #安装unar解压工具
+    sudo apt-get install unar
+
+    #瞬间就能解决zip解压中文乱码的问题。
+    #解压相应的zip文件
+    unar document.zip 
+
+    #归档,将 ttFile 压缩至 tt.zip
+    zip -r tt.zip ttFile/
+
 ##### 分组,权限
     chown 用于改变一个文件的所有者及所在的组。
     chown user filename        ### 改变 filename 的所有者为 user
@@ -298,7 +324,7 @@
     p #在光标下一行粘贴
     P #在光标上一行粘贴
     dd #删除一行
-    ndd #复制n行,n为行数,如: 5dd,当前向下删除5行,包括当前行
+    ndd #刪除n行,n为行数,如: 5dd,当前向下删除5行,包括当前行
     dG #删除当前光标所在行到末尾的内容
     :5,7d #删除指定行的内容
     shift + zz #保存退出等同于 :wq
@@ -309,6 +335,9 @@
     sudo apt-get install
     sudo apt-get install vim
     
+    
+### 常用命令
+
 ##### 1.添加用户和密码
 	adduser  test  
 	useradd -m -g users -G audio -s /usr/bin/bash newuser     
@@ -462,6 +491,7 @@
 	  pkill -9 php-fpm
 	3.kill -s 9 [pid]  
 	  -s 9 制定了传递给进程的信号是９，即强制、尽快终止进程。各个终止信号及其作用见附录
+	4.killall php-fpm #杀死全部php-fpm  
 
 ##### 17.查看用户的历史命令记录
 	cat ~user.bash_history > cat ~root.bash_history
