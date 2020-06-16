@@ -251,6 +251,12 @@
     chmod ugo=--- filename   ### 取消所有权限
     chmod -R 777 /minPro	 ### 把minPro下的所有文件赋予权限
     drwxr-xr-x =>d rwx r-x r-x  ### d:文件类型 rwx:文件拥有者的权限 r-x:与文件拥有者同用户组的其它用户 r-x:其它用户组用户权限
+    
+    #创建abc目录,让该组成员能够在目录下创建和访问文件,并且除了创作者之外的人不能删除
+    mkdir abc
+    chmod g+wx abc
+    #限位最后的‘+t’是‘粘滞位,防删位’，它用来替换‘x’，表明在这个目录中，文件只能被它们的拥有者、目录的拥有者或者是超级用户root删除
+    chmod +t abc
 
 ##### 查找
     find:
