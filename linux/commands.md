@@ -64,6 +64,7 @@
 ##### 系统小命令
     whereis  abc   		#abc在哪里
     who i am 			#显示当前登录的人    
+    whoami 			    #显示当前登录的人    
 
 ##### 关机重启
     halt  				#立刻关机 
