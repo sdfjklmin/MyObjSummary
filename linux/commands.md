@@ -307,7 +307,7 @@
     ls  | find a1	
     grep -option parm path ;    操作参数 路径
     find path -option parm ;    路径 	 操作参数 
-    grep -w error -l *.log #显示　*.log　中　有　error　的
+    grep -w error -l *.log #显示　*.log　中　有　error　的的文件
     cat 20.log | grep -n -w error #显示20.log中带 error 的,带行号 
     
 ##### Vi
