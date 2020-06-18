@@ -988,7 +988,7 @@ sed -i '1 d' file.txt
 
 sed -i '/world/d' file.txt #删除有world的行
 sed -n '/world/p' file.txt #匹配有world的行
-sed -i '/world/c ttt' file.txt #匹配有world的行替换成ttt
+sed -i '/world/c ttt' file.txt #匹配有world的行,将整行的内容替换成ttt
 
 #获取文件第5行的长度
 #‘sed -n ‘n p’ file.txt’，这里‘n’表示行号，‘p’打印出匹配内容（标准输出），该命令通常与-n命令行选项连用
