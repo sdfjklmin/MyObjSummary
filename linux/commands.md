@@ -959,14 +959,36 @@ interact
 
 ##### 60. 移除文件头 `sed`
 ```
+#语法
+命令     语法         脚本        文件   
+sed     [-i|n|e|..] [script]    [文件]
+sed                 '1 d'       file.txt
+sed     -i          '1 d'       file.txt
+
+
 #输出不带首行的文件内容
 sed '1 d' file.txt
+
+#删除 2 - 5 行
+sed '2,5d' file.txt
+
+#将2-5行的内容替换为2-5replace, 2 - 5行变为 1行
+sed '2,5c 2-5replace' file.txt
 
 #保存文件
 sed '1 d' file.txt > file2.txt
 
 #直接操作
 sed -i '1 d' file.txt
+
+#部分操作可以参考vi
+#/world(需要匹配的文字)/d(delete删除)
+#/world(需要匹配的文字)/p(print标准输出)
+#/world(需要匹配的文字)/c(替换)
+
+sed -i '/world/d' file.txt #删除有world的行
+sed -n '/world/p' file.txt #匹配有world的行
+sed -i '/world/c ttt' file.txt #匹配有world的行替换成ttt
 
 #获取文件第5行的长度
 #‘sed -n ‘n p’ file.txt’，这里‘n’表示行号，‘p’打印出匹配内容（标准输出），该命令通常与-n命令行选项连用
