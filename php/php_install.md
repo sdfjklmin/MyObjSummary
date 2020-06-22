@@ -159,6 +159,41 @@
 	make && make install
 
 	echo "extension=pthreads.so" >> /etc/php.ini #添加配置
+	
+#### 开启扩展 (--enable-expand)
+     #这里以 bcmath 为例,在最开始的时候没有开启扩展(--enable-bcmath),但后期想使用某个扩展
+     #这里需要有源码的安装包,如果没有可以重新下载一个,这里建议保留源码包
+     
+     #进入源码包地址
+     cd /home/demo/source/php-7.3.10/
+     
+     #进入扩展包,列出已有的包
+     cd ext/  && ll
+     
+     #进入 bcmath 包
+     cd bcmath/
+     
+     #生成./configue文件, phpize 的绝对地址
+     /usr/local/php7/bin/phpize
+     
+     #配置 php-config (shell文件,可执行,这里不是配置文件的地址哦) 地址,一般来说这里的 php-config 都在 bin 中
+     ./configure --with-php-config=/usr/local/php7/bin/php-config
+     
+     #编译并且编译安装
+     make && make install
+     
+     #安装完成后添加对应的配置,也可以查看扩展被安装到哪里了
+     #一般来说在 php目录下的 main/lib/php/extensions,具体可以产考安装输出信息
+     Installing shared extensions:     /usr/local/php7/main/lib/php/extensions/no-debug-non-zts-20180731/
+
+     #添加配置
+     echo "extension=bcmath.so" >> /etc/php.ini #添加配置
+     
+     #当持续报错,非PHP库
+     PHP Startup: Invalid library (maybe not a PHP library)
+     #手动设置扩展地址 php.ini  => extension_dir(扩展地址)
+     #还是不行的话,重新下载安装,重复步骤,具体看安装的提示信息,shell脚本等
+     
 
 #### 扩展依赖:
 	 undefined reference to `libiconv_open 无法编译PHP libiconv
