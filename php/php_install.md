@@ -151,10 +151,10 @@
 	tar -zxvf
 	cd youExtension
 	
-	#生成./configue文件, phpize的绝对地址
+	#使用 phpize (绝对地址), 生成./configue文件
 	/usr/local/php7/bin/phpize
 	
-	#配置 php-config (shell文件) 地址,一般来说这里的 php-config 都在 bin 中
+	#配置 php-config (shell文件,可执行,这里不是配置文件的地址哦) 地址,一般来说这里的 php-config 都在 bin 中
 	./configure --with-php-config=/usr/local/php7/bin/php-config
 	make && make install
 
@@ -173,7 +173,7 @@
      #进入 bcmath 包
      cd bcmath/
      
-     #生成./configue文件, phpize 的绝对地址
+     #使用 phpize (绝对地址), 生成./configue文件
      /usr/local/php7/bin/phpize
      
      #配置 php-config (shell文件,可执行,这里不是配置文件的地址哦) 地址,一般来说这里的 php-config 都在 bin 中
@@ -191,7 +191,9 @@
      
      #当持续报错,非PHP库
      PHP Startup: Invalid library (maybe not a PHP library)
-     #手动设置扩展地址 php.ini  => extension_dir(扩展地址)
+     #检测当前是否有多个PHP版本
+     #安装的时候是否使用得到 libtool 和对应的 libdir
+     #手动设置扩展地址 php.ini  => extension_dir(扩展地址) ,仅用于调试,不推荐
      #还是不行的话,重新下载安装,重复步骤,具体看安装的提示信息,shell脚本等
      
 
