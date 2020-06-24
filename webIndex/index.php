@@ -15,6 +15,11 @@ class SimpleRoute
 		return $_SERVER['PATH_INFO'] ?? '';
 	}
 
+	public function getCurrentURI()
+	{
+		return $_SERVER['REQUEST_URI'] ?? '';
+	}
+
 	public function getCurrentContent()
     {
 	    $action = $this->getCurrentUrl();
@@ -22,23 +27,30 @@ class SimpleRoute
             $action = 'README';
 	    }
 	    $action = ltrim($action,'/');
-	    $file =  APP_PATH.$action.'.md';
+		if (isset($_GET['ext']) && !empty($_GET['ext'])) {
+			$ext       = $_GET['ext'];
+			$lineBreak = '<br />';
+		} else {
+			$ext       = 'md';
+			$lineBreak = '\n';
+		}
+	    $file =  APP_PATH.$action.'.'.$ext;
 	    if(!file_exists($file)) {
 	        return "#### errors : file not find";
         }
 	    $content = file_get_contents($file);
-        //添加转移符
+		//添加转义符
 		$content = addslashes($content);
 		//替换
-		$search = array('
+		$search  = array('
 ','../webIndex');
-		$replace = array('\n','');
+		$replace = array($lineBreak,'');
 		return str_replace($search,$replace,$content);
 	}
 }
 $model     = new SimpleRoute();
-$activeUrl = $model->getCurrentUrl();
-$content    = $model->getCurrentContent();
+$activeUrl = $model->getCurrentURI();
+$content   = $model->getCurrentContent();
 ?>
 
 <!DOCTYPE html>

@@ -11,6 +11,10 @@ return [
 					'url'   => '#',
 					'menu'  => [
 						[
+							'title' => 'install',
+							'url'   => '/php/php_install',
+						],
+						[
 							'title' => 'composer',
 							'url'   => '/php/composer/composer',
 						],
@@ -18,10 +22,26 @@ return [
 							'title' => 'hyperf',
 							'url'   => '/php/frame/hf',
 						],
+
+					]
+				],
+				[
+					'title' => 'Swoole',
+					'url'   => '#',
+					'menu'  => [
 						[
-							'title' => '安装',
-							'url'   => '/php/php_install',
+							'title' => '介绍',
+							'url'   => '/swoole/README',
 						],
+						[
+							'title' => 'wiki',
+							'url'   => '/swoole/wiki/README',
+						],
+						[
+							'title' => 'Client',
+							'url'   => '/swoole/wiki/Client?ext=php',
+						],
+
 					]
 				],
 				[
