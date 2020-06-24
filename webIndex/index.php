@@ -1,5 +1,5 @@
 <?php
-$menus = require '../conf_menu.php';
+$menus = require '../conf.php';
 define('APP_PATH','../');
 class SimpleRoute
 {
@@ -29,9 +29,11 @@ class SimpleRoute
 	    $content = file_get_contents($file);
         //添加转移符
 		$content = addslashes($content);
-        //替换空格
-		return str_replace('
-','\n',$content);
+		//替换
+		$search = array('
+','../webIndex');
+		$replace = array('\n','');
+		return str_replace($search,$replace,$content);
 	}
 }
 $model     = new SimpleRoute();
