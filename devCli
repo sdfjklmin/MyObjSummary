@@ -50,7 +50,7 @@ class devCli
         array_shift($params);
         $this->init_data = $params;
         $this->port = '20002';
-        $this->dirs = './_public';
+        $this->dirs = './webIndex';
     }
 
     /**
