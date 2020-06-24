@@ -60,12 +60,12 @@
 	--with-mhash 
 	--with-openssl 
 	--enable-bcmath 
-	--enable-soap -
-	-with-libxml-dir 
+	--enable-soap
+	--with-libxml-dir 
 	--enable-pcntl 
 	--enable-shmop 
-	--enable-sysvmsg -
-	-enable-sysvsem 
+	--enable-sysvmsg 
+	--enable-sysvsem 
 	--enable-sysvshm 
 	--enable-sockets 
 	--with-curl 

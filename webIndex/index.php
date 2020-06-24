@@ -56,7 +56,7 @@ $content    = $model->getCurrentContent();
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="/dist/front/family.css" rel="stylesheet">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -180,10 +180,14 @@ $content    = $model->getCurrentContent();
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-top: 8px">
     <!-- Main content -->
-    <section class="content " id="marked_content">
+    <section class="content" >
+        <div class="card card-solid" >
+            <div style="margin: 57px" id="marked_content">
 
+            </div>
+        </div>
     </section>
     <!-- /.content -->
   </div>
