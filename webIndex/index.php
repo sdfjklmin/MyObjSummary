@@ -135,7 +135,7 @@ $content   = $model->getCurrentContent();
             <?php
                 foreach ($menus as $intro) {
                     if(!empty($intro['intro'])) {
-						$header = '<li class="nav-header"> <h6>'.$intro['intro'].'</h6></li>';
+						$header = '<li class="nav-header"> <h6><b>'.$intro['intro'].'</b></h6></li>';
 						echo $header;
                     }
 					foreach ($intro['menu'] as $menu) {
@@ -150,7 +150,7 @@ $content   = $model->getCurrentContent();
 							$prefix = '<li class="nav-item has-treeview '.$haveOpen.'">
                 <a href="#" class="nav-link /*'.$pActive.'*/">
                     <p>
-                        <b>'.$menu['title'].'</b>
+                        '.$menu['title'].'
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -180,7 +180,7 @@ $content   = $model->getCurrentContent();
                            <li class="nav-item">
                             <a href="'.$menu['url'].'" class="nav-link '.$isActive.'">
                               <p>
-                               <b> '.$menu['title'].' </b>
+                               '.$menu['title'].'
                               </p>
                               <!-- <span class="right badge badge-danger">New</span>-->
                             </a>
