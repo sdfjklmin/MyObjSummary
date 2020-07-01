@@ -23,6 +23,10 @@
     #搜索背景图片
     Background Image Plus
     View -> Set Background Image
+    #便捷方式
+    按两次 shift （或者 Ctrl +shift+A） 输入 Set Background Image 命令
+    
+    选择图片(弹窗可能不够图片显示,可以自己拉伸) -> 设置透明度 -> 保存
     
 ## 内置请求
     Tools ->  Http Client -> Test RESTFul Web Service
