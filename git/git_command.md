@@ -124,6 +124,10 @@ git show tag-name
 
 #查看具体的某次改动
 git show commit-id
+
+#显示tag
+git tag
+#
 ```
 
 ##### 日志
