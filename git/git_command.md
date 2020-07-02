@@ -127,7 +127,12 @@ git show commit-id
 
 #显示tag
 git tag
-#
+
+#显示某类tag
+git tag -l 'v2.*'
+
+#将tag推送至远程
+git push origin <tagname>
 ```
 
 ##### 日志
