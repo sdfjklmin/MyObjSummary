@@ -133,6 +133,9 @@ git tag -l 'v2.*'
 
 #将tag推送至远程
 git push origin <tagname>
+
+#切换到对应的tag中
+git checkout <tagname>
 ```
 
 ##### 日志
