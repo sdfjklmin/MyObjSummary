@@ -176,10 +176,22 @@
         return $arr ;
     }
 
-#24: final class ;最终类(不能用于继承)
-#    abstract class ; 抽象类(只能用于继承,和实现里面的方法)
-#    interface class ;接口类(只用用于继承实现)
-#    static function ;静态方法(无需new class)
+#24: final class className;最终类(不能用于继承)
+#    abstract class className; 抽象类(只能用于继承,和实现里面的方法)
+#    interface className ;接口类(只用用于继承实现)
+#    static function functionName;静态方法(无需new class)
+final class EndClass
+{
+
+}
+abstract class AbClass
+{
+
+}
+interface InterfaceClass
+{
+
+}
 
 #25: call_user_func_array(callable $callback , array $param_arr ) 调用回调函数，并把一个数组参数作为回调函数的参数
      #调用 $foo->bar($arg1,$arg2)
