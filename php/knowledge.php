@@ -593,3 +593,6 @@ var_dump($model);
 #精度计算: bc库,统一int型
 #更精细的Str: substr(); mb_substr();
 #更精细的时间: time(); microtime();
+
+#62 pow(2,3)
+# 2 的 3 次方
