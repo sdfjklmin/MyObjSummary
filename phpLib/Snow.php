@@ -10,7 +10,7 @@ class Snow
 	protected $start_time = '1594178723567';
 
 	/** @var string 41位时间戳字节 */
-	protected $bit_41 = "";
+	protected $bit_41 = "";#能够使用69年
 
 	/** @var string 工作机器 10字节 */
 	protected $bit_10 = "";
@@ -25,9 +25,9 @@ class Snow
 	protected $bit_12 = "";
 
 	/** @var string 总字节数 */
-	protected $bit_64 = "";
+	protected $bit_64 = "";#对应 10 进制最大为 19 位
 
-	/** 获取ID
+	/** 获取ID,每秒 26 万
 	 * @return float|int
 	 */
 	public function getId()
