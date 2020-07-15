@@ -30,6 +30,8 @@
     | Threads_running   | 1478  |   #激活的连接数
     +-------------------+-------+
     
+    #刷新当前hosts
+    flush hosts;
     
 #### Error
 ##### Uncaught PDOException: SQLSTATE[HY000] [1130] Host '192.168.1.108' is not allowed to connect to this MariaDB server
