@@ -596,3 +596,9 @@ var_dump($model);
 
 #62 pow(2,3)
 # 2 的 3 次方
+
+#63 array_slice 取数组前几个, slice(片)
+$arr = [
+	'a','b'
+];
+var_dump(array_slice($arr,0,3));

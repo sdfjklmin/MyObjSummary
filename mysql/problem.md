@@ -21,7 +21,14 @@
     SHOW FULL PROCESSLIST;
     
     show status like 'Threads%';
-    
+    +-------------------+-------+
+    | Variable_name     | Value |
+    +-------------------+-------+
+    | Threads_cached    | 1     |
+    | Threads_connected | 1595  |   #打开的连接数
+    | Threads_created   | 2     |
+    | Threads_running   | 1478  |   #激活的连接数
+    +-------------------+-------+
     
     
 #### Error
