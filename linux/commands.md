@@ -863,6 +863,11 @@ echo `seq 1 15`
     L1i cache:             32K
     L2 cache:              4096K
     NUMA node0 CPU(s):     0,1
+    
+    #U盘单个复制的最大文件,如果超出限制则无法复制
+    NTFS ：最大文件2TB
+    FAT16：最大文件2GB
+    FAT32：最大文件4GB(默认)
  
 ##### 50.expect
 * expect    ` 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)`
