@@ -269,7 +269,7 @@
 	/usr/local/php/sbin/php-fpm (start|stop|reload) #比较老的版本
 	ps aux | grep php-fpm 
 	kill 15891 # 对应的master进程ID 
-	killall -9 php-fpm #裙摆杀死
+	killall -9 php-fpm #全部杀死
 	
 	php重启2:
 	ps aux | grep php-fpm  #查看对应的php-fpm.conf文件地址

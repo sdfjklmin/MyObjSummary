@@ -39,7 +39,7 @@ class SimpleRoute
 	        return "#### errors : file not find";
         }
 	    $content = file_get_contents($file);
-		//添加转义符
+		//添加反斜杠
 		$content = addslashes($content);
 		//替换
 		$search  = array('

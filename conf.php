@@ -15,6 +15,14 @@ return [
 							'url'   => '/php/php_install',
 						],
 						[
+							'title' => 'knowledge',
+							'url'   => '/php/knowledge?ext=php',
+						],
+						[
+							'title' => 'magicFunc',
+							'url'   => '/php/magicFunc?ext=php',
+						],
+						[
 							'title' => 'composer',
 							'url'   => '/php/composer/composer',
 						],
@@ -45,7 +53,7 @@ return [
 					]
 				],
 				[
-					'title' => 'shell',
+					'title' => 'Shell',
 					'url'   => '#',
 					'menu'  => [
 						[
@@ -61,7 +69,7 @@ return [
 	'menu'  =>
 		[
 			[
-				'title' => 'composer',
+				'title' => 'Composer',
 				'url'   => '#',
 				'menu'  => [
 					[
@@ -75,7 +83,7 @@ return [
 				]
 			],
 			[
-				'title' => 'docker',
+				'title' => 'Docker',
 				'url'   => '/git/git_command',
 				'menu'  => [
 				]
