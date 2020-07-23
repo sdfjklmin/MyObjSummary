@@ -27,10 +27,17 @@ return [
 							'url'   => '/php/composer/composer',
 						],
 						[
-							'title' => 'hyperf',
-							'url'   => '/php/frame/hf',
+							'title' => 'fpm',
+							'url'   => '/php/php-fpm?ext=conf',
 						],
-
+						[
+							'title' => 'phpStorm',
+							'url'   => '/php/PhpStorm',
+						],
+						[
+							'title' => 'consul',
+							'url'   => '/php/consul',
+						],
 					]
 				],
 				[
