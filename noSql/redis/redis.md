@@ -151,6 +151,71 @@ row value
 | GET key | 获取|
 | SET key value [EX seconds] [PX milliseconds] [NX或XX] | 设置|
 
+#### 其它
+##### info（可以一次性获取所有的信息，也可以按块获取信息）
+    server:服务器运行的环境参数
+    clients:客户端相关信息
+    memory：服务器运行内存统计数据
+    persistence：持久化信息
+    stats：通用统计数据
+    Replication：主从复制相关信息
+    CPU：CPU使用情况
+    cluster：集群信息
+    Keypass：键值对统计数量信息
+    
+    eg:
+    ./redis-cli info 按块获取信息 | grep 需要过滤的参数
+    ./redis-cli info stats | grep ops
+    
+    或
+    
+    ./redis-cli 
+    > info server
+    
+    #每秒操作数
+    ./redis-cli info | grep ops
+    
+    #内存监控
+    ./redis-cli info | grep used | grep human       
+    used_memory_human:2.99M         # 内存分配器从操作系统分配的内存总量
+    used_memory_rss_human:8.04M     #操作系统看到的内存占用，top命令看到的内存
+    used_memory_peak_human:7.77M    # redis内存消耗的峰值
+    used_memory_lua_human:37.00K    # lua脚本引擎占用的内存大小
+    
+    #由于最大内存限制被移除的key的数量
+    ./redis-cli info | grep evicted_keys
+    
+    #内存碎片率
+    ./redis-cli info | grep mem_fragmentation_ratio
+    
+    #已使用内存
+    ./redis-cli info | grep used_memory
+    
+    #连接数,如果 connected_clients 很大，则意味着服务器的最大连接数设置得过低，需要调整maxclients
+    ./redis-cli info | grep connected
+    
+    #最后一次持久化保存磁盘的时间戳
+    ./redis-cli info | grep rdb_last_save_time
+    
+    #自最后一次持久化以来数据库的更改数
+    ./redis-cli info | grep rdb_changes_since_last_save
+    
+    #key值查找失败(没有命中)次数，出现多次可能是被hei ke gong ji
+    ./redis-cli info | grep keyspace
+    
+    #主从断开的持续时间（以秒为单位)
+    ./redis-cli info | grep rdb_changes_since_last_save
+    
+    #复制积压缓冲区如果设置得太小，会导致里面的指令被覆盖掉找不到偏移量，从而触发全量同步
+    ./redis-cli info | grep backlog_size
+    
+    #通过查看sync_partial_err变量的次数来决定是否需要扩大积压缓冲区，它表示主从半同步复制失败的次数
+    ./redis-cli info | grep sync_partial_err
+    
+    #性能测试, 100个连接，5000次请求对应的性能。
+    ./redis-benchmark -c 100 -n 5000
+
+        
 #### 参考文献
 * [Redis单线程为何速度如此之快](https://blog.csdn.net/wangwenru6688/article/details/82467890)		
 

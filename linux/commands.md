@@ -868,6 +868,9 @@ echo `seq 1 15`
     NTFS ：最大文件2TB
     FAT16：最大文件2GB
     FAT32：最大文件4GB(默认)
+    
+    #U盘挂载 ntfs 类型
+    sudo ntfsfix /dev/sdb1
  
 ##### 50.expect
 * expect    ` 实现自动登录,交互通信,指定字符串命令(实现自动交互功能的软件)`
