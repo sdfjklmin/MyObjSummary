@@ -40,6 +40,8 @@
 - 查看cpu : `cat /proc/cpuinfo`
 
 - 查看内存(memory) : `cat /proc/meminfo`
+
+- 查看硬盘及分区信息 : `fdisk -l` 
       
 - hostname 当前主机名称      
 ### 操作命令
