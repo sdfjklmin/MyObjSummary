@@ -60,7 +60,7 @@ $content   = $model->getCurrentContent();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>SokminYo | Dashboard 2</title>
+  <title>SokminYo</title>
 
   <!--<link id="el_favicon" rel="shortcut icon" href="/dist/img/icons.png">-->
   <!-- Font Awesome Icons -->
