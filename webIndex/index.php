@@ -73,8 +73,8 @@ $content   = $model->getCurrentContent();
   <link href="/dist/front/family.css" rel="stylesheet">
 
   <!--marked高亮css和js-->
-  <link href="/marked.min/monokai_sublime.min.css" rel="stylesheet">
-  <script src="/marked.min/highlight.min.js"></script>
+  <!--<link href="/marked.min/monokai_sublime.min.css" rel="stylesheet">
+  <script src="/marked.min/highlight.min.js"></script>-->
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -238,11 +238,10 @@ $content   = $model->getCurrentContent();
 <!--./ REQUIRED SCRIPTS -->
 
 <script src="/marked.min/marked.min.js"></script>
-<!--marked.min高亮加载-->
-<script>hljs.initHighlightingOnLoad();</script>
 <script>
     const content = "<?php echo $content; ?>";
     /*高亮设置可省*/
+   /* hljs.initHighlightingOnLoad();
     const rendererMD = new marked.Renderer();
     marked.setOptions({
         renderer: rendererMD,
@@ -258,7 +257,7 @@ $content   = $model->getCurrentContent();
         highlight: function (code) {
             return hljs.highlightAuto(code).value;
         }
-    });
+    });*/
     /*.高亮部分*/
     document.getElementById('marked_content').innerHTML = marked(content);
 </script
