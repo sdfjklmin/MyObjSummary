@@ -152,6 +152,23 @@ row value
 | SET key value [EX seconds] [PX milliseconds] [NX或XX] | 设置|
 
 #### 其它
+##### `./redis-server --help` 启动帮助
+    #启动,加载默认配置
+    ./redis-server (run the server with default conf)
+    
+    #启动,指定加载配置,如果有时候修改配置文件不生效,可以指定配置文件试试
+    #这里是绝对地址哦
+    ./redis-server /etc/redis/6379.conf
+    
+    #指定端口
+    ./redis-server --port 7777
+    
+    #指定端口,和slave地址
+    ./redis-server --port 7777 --slaveof 127.0.0.1 8888
+    
+    #指定配置和loglevel
+    ./redis-server /etc/myredis.conf --loglevel verbose
+
 ##### info（可以一次性获取所有的信息，也可以按块获取信息）
     server:服务器运行的环境参数
     clients:客户端相关信息
