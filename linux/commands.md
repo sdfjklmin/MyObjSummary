@@ -237,18 +237,28 @@
 
 ##### 分组,权限
     chown 用于改变一个文件的所有者及所在的组。
+    #改变 用户[:组] 文件
     chown user filename        ### 改变 filename 的所有者为 user
     chown user:group filename  ### 改变 filename 的所有者为 user，组为 group
     chown -R root folder       ### 改变 folder 文件夹及其子文件的所有者为 root
     
-    chmod 永远更改一个文件的权限,主要有读取,写入,执行其中 所有者,用户组,其他 各占三个,因此 ls -l以看到如下的信息
-    -所有者,用户组,其他
+    chmod 永远更改一个文件的权限,主要有读取,写入,执行其中 所有者,用户组,其他 各占三个,
+    ls -l :
     -rwxr--r-- 1 locez users   154 Aug 30 18:09 filename
-    其中 r=read ， w=write ， x=execute
+    drwxr--r-- 1 locez users   154 Aug 30 18:09 filename
+    解释:
+        -|d        rwx    r--    r---   1    locez  users  1540 月份 日期 时间 文件    
+        非目录|目录  user  group  others  num  用户   用户组  大写
+        1540 : (-h | 1.5K,默认单位为K,当小于K时无法显示单位,以字节数显示)
+    
+    说明:r=read ， w=write ， x=execute
         4		  2			1		
+        
     chmod +x filename        ### 为 user ，group ，others 添加执行权限
     chmod -x filename        ### 取消 user ， group ，others 的执行权限
     chmod +w filename        ### 为 user 添加写入权限
+    chmod o+x filename       ### 为 others 添加 x 权限
+    chmod o-x filename       ### 为 others 取消 x 权限  
     chmod ugo=rwx filename   ### 设置 user ，group ，others 具有 读取、写入、执行权限
     chmod ug=rw filename     ### 设置 user ，group 添加 读取、写入权限
     chmod ugo=--- filename   ### 取消所有权限
