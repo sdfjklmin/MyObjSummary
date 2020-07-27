@@ -254,16 +254,16 @@
     说明:r=read ， w=write ， x=execute
         4		  2			1		
         
-    chmod +x filename        ### 为 user ，group ，others 添加执行权限
-    chmod -x filename        ### 取消 user ， group ，others 的执行权限
-    chmod +w filename        ### 为 user 添加写入权限
-    chmod o+x filename       ### 为 others 添加 x 权限
-    chmod o-x filename       ### 为 others 取消 x 权限  
-    chmod ugo=rwx filename   ### 设置 user ，group ，others 具有 读取、写入、执行权限
-    chmod ug=rw filename     ### 设置 user ，group 添加 读取、写入权限
-    chmod ugo=--- filename   ### 取消所有权限
-    chmod -R 777 /minPro	 ### 把minPro下的所有文件赋予权限
-    drwxr-xr-x =>d rwx r-x r-x  ### d:文件类型 rwx:文件拥有者的权限 r-x:与文件拥有者同用户组的其它用户 r-x:其它用户组用户权限
+    chmod +x filename                               ### 为 user ，group ，others 添加执行权限
+    chmod -x filename                               ### 取消 user ， group ，others 的执行权限
+    chmod +w filename                               ### 为 user 添加写入权限
+    chmod o+x filename                              ### 为 others 添加 x 权限
+    chmod o-x filename                              ### 为 others 取消 x 权限  
+    chmod ugo=rwx filename                          ### 设置 user ，group ，others 具有 读取、写入、执行权限
+    chmod ug=rw filename                            ### 设置 user ，group 添加 读取、写入权限
+    chmod ugo=--- filename                          ### 取消所有权限
+    chmod -R [777|+x|-x|ugo=---|...] /minPro	    ### 把minPro下的所有文件赋予权限
+    drwxr-xr-x =>d rwx r-x r-x                      ### d:文件类型 rwx:文件拥有者的权限 r-x:与文件拥有者同用户组的其它用户 r-x:其它用户组用户权限
     
     #创建abc目录,让该组成员能够在目录下创建和访问文件,并且除了创作者之外的人不能删除
     mkdir abc
