@@ -41,7 +41,7 @@
                 ↓
            (web server) -> (前端资源静态化) -> (cdn)          web应用:实现核心应用逻辑，返回html或者json
                 ↓
-            (service)  → (cache)                            服务:实了服务
+            (service)  → (cache)                            服务:服务层
               /  ↘ write  
         read /     (db-master)       
              ↓      ↙ binlog                               数据库:缓存+数据库
