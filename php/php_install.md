@@ -30,7 +30,23 @@
 #### 下载 [官网地址](https://www.php.net/downloads.php)
     官方下载 php.tar.gz
     
-    tar -zxvf php-7.1.gz 解压进入
+    #解压进入
+    tar -zxvf php-7.1.gz 
+
+    cd php-7.1
+
+#### 目录和文件说明
+    ./buildconf         #运行 autoconf 生成 ./configure 脚本和 autoheader 生成 main/php_config.h.in 模板, autoconf 需要安装 (yum install autoconf)
+    ./configure         #配置信息
+    build/              #顾名思义，这里主要放置一些和源码编译相关的一些文件，比如开始构建之前的buildconf脚本等文件，还有一些检查环境的脚本等。
+    ext/                #官方扩展目录，包括了绝大多数PHP的函数的定义和实现，如array系列，pdo系列，spl系列等函数的实现，都在这个目录中。个人写的扩展在测试时也可以放到这个目录，方便测试和调试。
+    main/               #这里存放的就是PHP最为核心的文件了，主要实现PHP的基本设施，这里和Zend引擎不一样，Zend引擎主要实现语言最核心的语言运行环境。
+    Zend/               #Zend引擎的实现目录，比如脚本的词法语法解析，opcode的执行以及扩展机制的实现等等。
+    pear/               #“PHP 扩展与应用仓库”，包含PEAR的核心文件。
+    sapi/               #包含了各种服务器抽象层的代码，例如apache的mod_php，cgi，fastcgi以及fpm等等接口。
+    TSRM/               #PHP的线程安全是构建在TSRM库之上的，PHP实现中常见的*G宏通常是对TSRM的封装，TSRM(Thread Safe Resource Manager)线程安全资源管理器。
+    tests/              #PHP的测试脚本集合，包含PHP各项功能的测试文件
+    win32/              #这个目录主要包括Windows平台相关的一些实现，比如sokcet的实现在Windows下和*Nix平台就不太一样，同时也包括了Windows下编译PHP相关的脚本。
 
 #### 配置说明
     ./buildconf                       #没有configure则生成configure文件
@@ -84,7 +100,25 @@
 	./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --enable-dtrace --enable-maintainer-zts --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear
 	#--with-png-dir --with-freetype-dir --with-jpeg-dir --with-gd 暂时有问题
 	#./configure –enable-pcntl 编译pcntl,多线程
-
+	
+#### 配置解释
+    #查看当前配置说明
+    ./configure --help | less
+    
+    #通用的 autoconf 选项,还有很多这里只列举一些
+    --prefix=/usr/local/php    
+   
+    # PHP 特定的设置
+    #1.开关来选择编译的扩展和 SAPI
+    --enable-NAME
+    --disable-NAME
+    
+    #2.如果扩展或 SAPI 有外部依赖，你必须使用
+    --with-NAME
+    --without-NAME
+    
+    #3.如果 NAME 所需要的库不在默认位置（例如，因为你自己编译），你可以指定使用位置。 
+    -with-NAME=DIR 
 
 #### 编译
     make && make install
@@ -206,7 +240,7 @@
      # ./configure --prefix=/usr/local/libiconv
      # make
      # make install
-     再检查php，指定 iconv的位置  --with-iconv=/usr/local/libiconv
+     再检查php，指定 iconv的位置 --with-iconv=/usr/local/libiconv
      #./configure --with-iconv=/usr/local/libiconv
      #make
      #make installx

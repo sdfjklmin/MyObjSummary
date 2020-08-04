@@ -320,7 +320,13 @@
     grep -option parm path ;    操作参数 路径
     find path -option parm ;    路径 	 操作参数 
     grep -w error -l *.log #显示　*.log　中　有　error　的的文件
-    cat 20.log | grep -n -w error #显示20.log中带 error 的,带行号 
+    cat 20.log | grep -n -w error #显示20.log中带 error 的,带行号
+     
+    #显示目录
+    ls -l | grep '^d'
+           
+    #显示文件
+    ls -l | grep '^-'       
     
 ##### Vi
     i   #在光标前插入
