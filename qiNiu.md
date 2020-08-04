@@ -17,6 +17,10 @@ response :
 }
 ```
 
+#### 图片处理(格式转换、缩略、剪裁) `imageView2`
+    requst   : http://domain.com/key?imageView2/1/w/200/h/200
+    response : 返回指定的参数内容
+
 ##### 视频信息 `avinfo`
 ```
 requst   : http://domain.com/key?avinfo
