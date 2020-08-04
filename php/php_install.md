@@ -120,6 +120,16 @@
     #3.如果 NAME 所需要的库不在默认位置（例如，因为你自己编译），你可以指定使用位置。 
     -with-NAME=DIR 
 
+    #最简版本
+    ./configure --disable-all (编译最简单版本的php)
+    
+    #错误处理
+    make clean              #清楚编译缓存
+    ./buildconf --force     #强制生成 config
+    ./config.nice           #最后一次 ./configure 调用
+    make -jN                # N 是内核的数量
+    make distclean          # 达到更强效的清理目标。它除了运行正常的清理，还会回滚所有 ./configure 命令调用带来的的文件。它会删除配置缓存、make 文件、配置头文件和其他各种文件。顾名思义，该目标是 “分布清理”，所以通常由发行管理者使用。
+    
 #### 编译
     make && make install
 
@@ -163,9 +173,21 @@
     #cannot get gid for group ‘nobody’(新增用户组)
     sudo groupadd nobody
     
+#### bin目录说明
+    cd /usr/local/php/bin && ls
+    
+    ./pear          #pear安装扩展,是PHP的扩展代码包,Pear是PHP的上层扩展
+    ./peardev
+    ./pecl          #pecl安装扩展,是PHP的标准扩展,Pecl是PHP的底层扩展。
+    ./phar
+    ./php
+    ./php-cgi
+    ./php-config    #提供有关于 PHP 构建的配置的信息
+    ./phpdbg
+    ./phpize        #为扩展生成 configure 文件, 相当于 ./buildconf 的扩展。它会从 lib/php/build 复制各种文件，并调用 autoconf/autoheader.
 
 
-#### PHP扩展安装
+#### 扩展安装:(pecl、pear)
     建议在php对应的安装目录运行安装
     /usr/local/php/bin
     
@@ -180,7 +202,7 @@
     /usr/local/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so  //系统pecl安装的默认扩展目录
     /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/msgpack.so //php.ini系统扩展目录
 
-#### 手动编译扩展
+#### 扩展安装:(phpize手动编译扩展)
 	wget http://youExtension.tgz
 	tar -zxvf
 	cd youExtension
@@ -194,6 +216,15 @@
 
 	echo "extension=pthreads.so" >> /etc/php.ini #添加配置
 	
+#### 扩展安装:(源码树)
+     将 `扩展源码` 下载并解压至, php 源码包的 ext/ 目录中
+     再次运行编译 --enable-Name
+     rm configure && ./buildconf --force 	    #删除之前的配置并且强制生成配置
+    
+     ./config.nice --enable-name                #使用最后一次的调用
+     # or
+     ./configure --enable-name --other-options  #重新编译
+      
 #### 开启扩展 (--enable-expand)
      #这里以 bcmath 为例,在最开始的时候没有开启扩展(--enable-bcmath),但后期想使用某个扩展
      #这里需要有源码的安装包,如果没有可以重新下载一个,这里建议保留源码包
@@ -243,14 +274,20 @@
      再检查php，指定 iconv的位置 --with-iconv=/usr/local/libiconv
      #./configure --with-iconv=/usr/local/libiconv
      #make
-     #make installx
+     #make install
      或者
      --without-iconv #不安装:-D
 
 #### CLI命令
-    #查看yar的版本信息
-    php --ri yar 
-
+    #查看 expandName 的版本信息, reflection ini
+    php --ri expandName 
+    
+    #查看 expandName 的扩展信息(源码), reflection extension
+    php --re expandName 
+    
+    #查看 php 模块信息
+    php -m
+    
 #### 安装配置nginx
 #### hosts设置
     #windows hosts配置
