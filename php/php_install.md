@@ -282,7 +282,7 @@
     #查看 expandName 的版本信息, reflection ini
     php --ri expandName 
     
-    #查看 expandName 的扩展信息(源码), reflection extension
+    #查看 expandName 的扩展信息(源码,参数等), reflection extension
     php --re expandName 
     
     #查看 php 模块信息
