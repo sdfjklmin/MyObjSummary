@@ -602,3 +602,15 @@ $arr = [
 	'a','b'
 ];
 var_dump(array_slice($arr,0,3));
+
+#64 fputcsv — 将行格式化为 CSV 并写入文件指针
+$list = array (
+	array('aaa', 'bbb', 'ccc', 'dddd'),
+	array('123', '456', '789'),
+	array('"aaa"', '"bbb"')
+);
+$fp = fopen('file.csv', 'w');
+foreach ($list as $fields) {
+	fputcsv($fp, $fields);
+}
+fclose($fp);

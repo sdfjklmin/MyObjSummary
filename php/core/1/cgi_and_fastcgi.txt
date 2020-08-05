@@ -2,7 +2,7 @@ CGI :
  common gateway interface (公共网关接口)
 
 请求模式:
-	Web Brower(浏览器) ----(通过http协议传输)----> Http Server(服务器nginx/apache) -----> CGI Program -----> Db
+	Web Browse(浏览器) ----(通过http协议传输)----> Http Server(服务器nginx/apache) -----> CGI Program -----> Db
 
 	Server 与 CGI 通过 STDIN/STDOUT(标准的输入/输出)进行数据传递
 	nginx(动态加载模块) apache(指定加载模块)
