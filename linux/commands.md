@@ -1066,3 +1066,7 @@ cut -c '1,3' file.txt # 截取 第一和第三列=>  13
 # -f 列
 cut  -f '3,4' -d ' ' file.txt #截取 3 和 4 字段,以 空格 分割 => 9 10 
 ```
+
+##### 63. Ubuntu 18 Wi-Fi 热点分享
+    设置 -> Wi-Fi -> 点击右上角[列表ICON|横着的三杠] -> 打开 Wi-Fi 热点
+    配置具体信息: 命令行输入 nm-connection-editor -> 界面交互 -> Hotspot (热点区域) 
