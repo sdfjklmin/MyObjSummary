@@ -5,7 +5,7 @@
 * `[]` 表示可省, `[{index_name}]` index_name 非必需内容, 可以省略
 * `[{[|]}]` 表示可省, `|` 分割多个选项, 内层 `[]`表示多个选项,`[{index_type[fulltext|unique]}]`
 
-#### 添加索引
+#### 添加索引 `索引添加和删除受权限限制,create > alter,具体使用什么语法可以根据权限来使用`
 语法
 ```
 alter table {table_name} 
@@ -14,6 +14,9 @@ add
 [`{index_name}`] 
 (`{column}`,`{column}`)
 [USING [BTREE|HASH]] [COMMENT 'remark'];
+
+create index admin_email_index
+	on admin (email);
 ```
 
 示例, test_normal_key 和 user_id 要用 ` 引起来
@@ -54,6 +57,8 @@ show index from {table_name}
 ###### 删除索引
 ```
 drop index `{index_name}` on {table_name}
+
+alter table {table_name} drop index `{index_name}` ;
 ```
 
 #### 强制使用索引
