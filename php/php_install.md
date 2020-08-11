@@ -402,3 +402,17 @@
     
 #### 应用程序开发 [PHP-GTK](http://gtk.php.net/)    
     通过 PHP-GTK 可以开发应用程序，客户端等
+
+#### PHP-FPM 相关
+
+##### WARNING: [pool www] seems busy (you may need to increase pm.start_servers, or pm.min/max_spare_servers), spawning 8 children, there are 42 idle, and 93 total children
+    pool 繁忙,建议提示对应的配置.产考 php-fpm.conf 
+    如果配置过后, 任然有此报错, 可能是某些请求触发时间较长, 导致线程无法回收, 可以从 服务器,数据库,连接占用等多方面排查!
+    
+#### 其它
+
+##### 查看对应 `php-fpm` 内存使用
+    ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
+    
+##### 查看 `php-fpm` 个数
+    ps -ylC php-fpm --sort:rss | wc -l
