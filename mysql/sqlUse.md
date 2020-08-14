@@ -105,6 +105,10 @@
 	FROM
 		play_order;
 		
+	update table
+    set   key_name = REPLACE(key_name,'要替换的内容','新内容') 
+    where key_name like '%要替换的内容%';
+		
 14:having 指定一组行或聚合的过滤条件,通常和group by连用
 
     (通过column分组,查询出名称和对应的总数,获取总数大于10的)
