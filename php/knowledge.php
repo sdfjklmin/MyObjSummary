@@ -614,3 +614,14 @@ foreach ($list as $fields) {
 	fputcsv($fp, $fields);
 }
 fclose($fp);
+
+#65 array_chunk ( array $array , int $size [, bool $preserve_keys = false ] ) : array 分割数组
+#   array_slice ( array $array , int $offset [, int $length = NULL [, bool $preserve_keys = false ]] ) : array 分割数组(取数组一部分)
+$arr = [1,2,3,4];
+$arr2 = array_chunk($arr,1);
+# [
+#    [1],
+#    [2],
+#    [3],
+#    [4],
+#]
