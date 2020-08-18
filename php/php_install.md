@@ -408,6 +408,7 @@
 ##### WARNING: [pool www] seems busy (you may need to increase pm.start_servers, or pm.min/max_spare_servers), spawning 8 children, there are 42 idle, and 93 total children
     pool 繁忙,建议提示对应的配置.产考 php-fpm.conf 
     如果配置过后, 任然有此报错, 可能是某些请求触发时间较长, 导致线程无法回收, 可以从 服务器,数据库,连接占用等多方面排查!
+    可以配置对应的慢日志! php-fpm: slowlog, nginx: slowlog, mysql: log
     
 #### 其它
 
