@@ -32,6 +32,10 @@
     
     #刷新当前hosts
     flush hosts;
+    # unix_timestamp() 当前时间戳
+    # now()  当前日期
+    # unix_timestamp(now()) 当前日期的时间戳
+    # select unix_timestamp(), now(), unix_timestamp(now());
     
 #### Error
 ##### Uncaught PDOException: SQLSTATE[HY000] [1130] Host '192.168.1.108' is not allowed to connect to this MariaDB server
