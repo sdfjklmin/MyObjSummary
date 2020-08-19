@@ -32,6 +32,7 @@
     
     #刷新当前hosts
     flush hosts;
+    
     # unix_timestamp() 当前时间戳
     # now()  当前日期
     # unix_timestamp(now()) 当前日期的时间戳
