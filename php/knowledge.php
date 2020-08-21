@@ -194,10 +194,44 @@ interface InterfaceClass
 }
 
 #25: call_user_func_array(callable $callback , array $param_arr ) 调用回调函数，并把一个数组参数作为回调函数的参数
-     #调用 $foo->bar($arg1,$arg2)
-     call_user_func_array(array($foo, "bar"), array("three", "four"));
-     // bar($arg1,$arg2)
-     call_user_func_array('bar', array("three", "four"));
+	#call_user_func ( callable $callback [, mixed $parameter [, mixed $... ]] ) : mixed
+	#第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。
+
+	#单一函数调用
+	function ttCallUser($one, $two)
+	{
+		echo 'call_user_func_array';
+	}
+    call_user_func_array('ttCallUser',['one','two']);
+
+    #类调用
+	class CallUser
+	{
+		public function tt($one, $two)
+		{
+			echo 'call_user_func_array';
+		}
+	}
+	$ttCallUser = new CallUser();
+	call_user_func_array([$ttCallUser,'tt'],['one','two']);
+
+	#匿名函数调用
+	class CallUser2
+	{
+		public function tt($one, $two)
+		{
+			$this->intoCallback(function ()use ($one, $two){
+				echo "do something";
+			});
+		}
+
+		public function intoCallback(callable $callable)
+		{
+			if(is_callable($callable)) {
+				call_user_func_array($callable,[$this]);
+			}
+		}
+	}
 
 #26:可变函数
     function foo() {
