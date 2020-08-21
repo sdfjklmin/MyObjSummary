@@ -203,6 +203,7 @@ interface InterfaceClass
 		echo 'call_user_func_array';
 	}
     call_user_func_array('ttCallUser',['one','two']);
+	call_user_func('ttCallUser','1','2');
 
     #类调用
 	class CallUser
@@ -214,6 +215,7 @@ interface InterfaceClass
 	}
 	$ttCallUser = new CallUser();
 	call_user_func_array([$ttCallUser,'tt'],['one','two']);
+	call_user_func([$ttCallUser,'tt'],'one','two');
 
 	#匿名函数调用
 	class CallUser2
