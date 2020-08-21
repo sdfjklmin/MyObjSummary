@@ -280,6 +280,19 @@ interface InterfaceClass
         3 => "3data"
     ]*/
 
+	#给 receive  的key 批量加前缀
+	$receive = [
+		'id' => 1,
+		'name' => 'receive name'
+	];
+	$myNewArray = array_combine(
+		array_map( function($key) {
+			return 'receive_member_'.$key;
+		}, array_keys($receive)),
+		$receive
+	);
+	var_dump($myNewArray);
+
 #31 官方建议PHP文件以 ? > 结尾 ，但是语法标准和文件中并未这样做，为什么 ？
 # 避免文件引入的时候有多余的空格或者其它字符引起报错
 
