@@ -23,6 +23,13 @@ composer init
 #安装composer.json中的依赖文件 如果有composer.lock文件则获取它的安装信息
 composer install
 
+#secure-http for details 错误
+#局部禁用https
+composer config secure-http false
+
+#全局禁用https
+composer config -g secure-http false
+
 #依赖升级
 composer update
 
