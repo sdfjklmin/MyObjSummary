@@ -207,7 +207,7 @@
 	tar -zxvf
 	cd youExtension
 	
-	#使用 phpize (绝对地址), 生成./configue文件
+	#使用 phpize (绝对地址), 生成 ./configure 文件
 	/usr/local/php7/bin/phpize
 	
 	#配置 php-config (shell文件,可执行,这里不是配置文件的地址哦) 地址,一般来说这里的 php-config 都在 bin 中
@@ -238,7 +238,7 @@
      #进入 bcmath 包
      cd bcmath/
      
-     #使用 phpize (绝对地址), 生成./configue文件
+     #使用 phpize (绝对地址), 生成 ./configue 文件
      /usr/local/php7/bin/phpize
      
      #配置 php-config (shell文件,可执行,这里不是配置文件的地址哦) 地址,一般来说这里的 php-config 都在 bin 中
