@@ -156,6 +156,7 @@
     scp                 #从本地复制到远程,secure cp
     scp local_file remote_username@remote_ip:remote_folder 
     scp test.txt proUser@123.456.789:/home/www/tmp 
+    scp -r dir/ tt@10.10.10.10:/home/tt/down
     
 ##### 创建文件夹
     mkdir dir #创建文件夹dir
