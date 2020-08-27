@@ -16,6 +16,7 @@
         }
     },
     "require": {
-        "swoole/ide-helper": "@dev"
+        "swoole/ide-helper": "@dev",
+      "ext-pcntl": "*"
     }
 }
