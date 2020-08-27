@@ -1,4 +1,4 @@
-1.必备软件和一些问题
+#### 1.必备软件和一些问题
     a.安装 pcre 为了支持 rewrite 功能，我们需要安装 pcre
 
         #yum install pcre* //如过你已经装了，请跳过这一步
@@ -30,7 +30,7 @@
         echo 91761 >> nginx.pid
         重启
 
- 2.安装
+ #### 2.安装
     a.下载 wget http://nginx.org/download/nginx-1.16.0.tar.gz (自行选择版本,建议最新的稳定版本),自行解压.
 
     b.进入对应文件夹运行
@@ -89,7 +89,7 @@
 
          curl -s http://localhost | grep nginx.com
 
- 3.参数详解(部分参数由于版本原因可能已弃用,请参照官网进行配置)
+ #### 3.参数详解(部分参数由于版本原因可能已弃用,请参照官网进行配置)
          –prefix= 指向安装目录
          –sbin-path 指向（执行）程序文件（nginx）
          –conf-path= 指向配置文件（nginx.conf）
@@ -172,7 +172,7 @@
          –with-openssl= 指向 openssl 安装目录
          –with-openssl-opt 在编译时为 openssl 设置附加参数
          –with-debug 启用 debug 日志
-4.内核优化
+#### 4.内核优化
      vi /etc/sysctl.conf
     参数如下 : 
         net.ipv4.netfilter.ip_conntrack_tcp_timeout_established = 1800
@@ -199,11 +199,11 @@
         # vi /etc/init.d/iptables
         /sbin/sysctl -p
 
-5.配置PHP(详情PHP部分)
+#### 5.配置PHP(详情PHP部分)
 
-6.nginx配置多个虚拟主机(多server,详见配置)
+#### 6.nginx配置多个虚拟主机(多server,详见配置)
 
-7.location 配置
+#### 7.location 配置
     语法规则： location [=|~|~*|^~] /uri/ { … }
     = 表示精确匹配,这个优先级也是最高的
     ^~ 表示 uri 以某个常规字符串开头，理解为匹配 url 路径即可。nginx 不对 url 做编码，因此请求为 /static/20%/aa，可以被规则^~ /static/ /aa 匹配到（注意是空格）。
@@ -228,7 +228,7 @@
         deny all; //禁止这些文件下载，大家可以根据自己的环境来配置
     }
 
-8.文件路径配置 root 和 alias (两者分别以不同的方式将请求映射到 服务器文件上)
+#### 8.文件路径配置 root 和 alias (两者分别以不同的方式将请求映射到 服务器文件上)
     [root]
         语法：root path
         默认值: root html
@@ -262,7 +262,7 @@
             alias服务器地址:
             /data/error/logs/error.log
 
-9.日志切割
+#### 9.日志切割
     1. 定义日志轮滚策略
         # vim nginx-log-rotate 添加如下内容
         /usr/local/nginx/logs/*.log {
@@ -296,13 +296,13 @@
         endscript
         脚本让nginx重新生成日志文件
 
-10.重写规则rewrite
+#### 10.重写规则rewrite
 
-11.nginx 逻辑运算
+#### 11.nginx 逻辑运算
 
-12.CDN调度
+#### 12.CDN调度
 
-13.PHP 安全配置
+#### 13.PHP 安全配置
 
     a. 使用 open_basedir限制虚拟主机跨目录访问
         [HOST=www.ttlsa.com]
@@ -338,4 +338,4 @@
 
       file_get_contents("http://www.baidu.com/") 无法访问
 
-14.nginx tcp配置
+#### 14.nginx tcp配置
