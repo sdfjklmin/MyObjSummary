@@ -62,7 +62,7 @@ $content   = $model->getCurrentContent();
 
   <title>Sokmin</title>
 
-  <!--<link id="el_favicon" rel="shortcut icon" href="/dist/img/icons.png">-->
+  <link id="el_favicon" rel="shortcut icon" href="/dist/logo/round.png">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->
