@@ -27,6 +27,19 @@
     
     Ubuntu版本需要apt-get update,apt-get install,若还是不能安装依赖[应用程序 -> 软件和更新 -> 更新 -> 勾选 重要安全更新 和 推荐更新]
     
+    如果安装的时候无法定位到资源包(有些系统可能遗弃了),直接去对应的官网下载安装包,按照说明下载即可
+    
+    安装libzip
+    #libzip 依赖于 cmake
+    yum install -y cmake3
+    
+    wget https://libzip.org/download/libzip-1.5.2.tar.gz -O libzip.tar.gz
+    tar xvf libzip.tar.gz
+    cd libzip*
+    mkdir build && cd build
+    cmake ..
+    make && make install
+    
 #### 下载 [官网地址](https://www.php.net/downloads.php)
     官方下载 php.tar.gz
     
