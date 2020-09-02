@@ -101,16 +101,16 @@ return [
 							'url'   => '/linux/ftp',
 						],
 						[
-							'title' => '服务器',
-							'url'   => '/linux/server',
-						],
-						[
 							'title' => 'Supervisor',
 							'url'   => '/linux/supervisor',
 						],
 						[
 							'title' => 'Samba',
-							'url'   => '/samba/index',
+							'url'   => '/linux/samba',
+						],
+						[
+							'title' => 'Server',
+							'url'   => '/linux/server',
 						],
 					]
 				],
