@@ -61,17 +61,17 @@ git status
 #对应变化
 git diff 	
     
-    #查看文件在工作区和暂存区区别
-    git diff file-name
+#查看文件在工作区和暂存区区别
+git diff file-name
 
-    #查看暂存区和本地仓库区别
-    git diff --cached  file-name
-    
-    #查看文件和另一个分支的区别
-    git diff branch-name file-name
-    
-    #查看两次提交的区别
-    git diff commit-id commit-id			
+#查看暂存区和本地仓库区别
+git diff --cached  file-name
+
+#查看文件和另一个分支的区别
+git diff branch-name file-name
+
+#查看两次提交的区别
+git diff commit-id commit-id			
 
 #新添加文件
 git add file1.py 		
@@ -90,9 +90,9 @@ git commit -m "备注说明"
 
 git push -u origin master:master 
 对应问题 :
-    1.冲突
-        git reset --hard  #放弃本地冲突代码
-        git pull
+1.冲突
+    git reset --hard  #放弃本地冲突代码
+    git pull
 ```
 
 ##### git rest

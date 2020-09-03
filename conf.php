@@ -112,6 +112,10 @@ return [
 							'title' => 'Server',
 							'url'   => '/linux/server',
 						],
+						[
+							'title' => 'Vi',
+							'url'   => '/linux/vi',
+						],
 					]
 				],
 				[
