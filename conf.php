@@ -116,6 +116,10 @@ return [
 							'title' => 'Vi',
 							'url'   => '/linux/vi',
 						],
+						[
+							'title' => '压测',
+							'url'   => '/linux/pressure_test',
+						],
 					]
 				],
 				[
