@@ -562,8 +562,8 @@
     ONBOOT=yes
     
     eg:固定ip
-    DEVICE="eth2"	#网卡名称
-    NETMASK="255.255.255.0"   #网关
+    DEVICE="eth2"	            #网卡名称
+    NETMASK="255.255.255.0"     #网关
     IPADDR="192.168.1.48"		#IP地址
     GATEWAY="192.168.1.1"		#默认网关
     DNS='192.168.1.1'			#dns地址 ipconfig /all windows上的对应
@@ -1075,3 +1075,6 @@ cut  -f '3,4' -d ' ' file.txt #截取 3 和 4 字段,以 空格 分割 => 9 10
     nm-connection-editor : 
         创建一个网桥，使用网络管理器创建网桥最简单的方式。
         这款GUI(图形用户界面)的工具允许你傻瓜式地配置一个网桥
+        
+##### 64. lsb_release -a `查看系统版本`
+    LSB是Linux Standard Base的缩写，lsb_release命令用来显示LSB和特定版本的相关信息
