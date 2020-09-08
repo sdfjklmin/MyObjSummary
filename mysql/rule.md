@@ -61,7 +61,7 @@ W:
 ~~~
 * 根据业务区分使用datetime/timestamp
 ~~~
-前者占用5个字节，后者占用4个字节，存储年使用YEAR，存储日期使用DATE，存储时间使用datetime
+前者占用8个字节，后者占用4个字节，存储年使用YEAR，存储日期使用DATE，存储时间使用datetime
 ~~~
 * 必须把字段定义为NOT NULL并设默认值
 ~~~
