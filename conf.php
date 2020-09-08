@@ -131,6 +131,10 @@ return [
 							'url'   => '/mysql/problem',
 						],
 						[
+							'title' => '数据类型',
+							'url'   => '/mysql/data_type',
+						],
+						[
 							'title' => 'SQL分析',
 							'url'   => '/mysql/sqlAnalysis',
 						],
