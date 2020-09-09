@@ -127,6 +127,10 @@ return [
 					'url'   => '#',
 					'menu'  => [
 						[
+							'title' => '基础',
+							'url'   => '/mysql/mysql',
+						],
+						[
 							'title' => '常见问题',
 							'url'   => '/mysql/problem',
 						],
