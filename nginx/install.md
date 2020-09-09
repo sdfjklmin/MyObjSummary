@@ -1,3 +1,7 @@
+#### 直接安装
+    sudo apt install -y nginx
+    yum install -y nginx 
+    
 #### 1.必备软件和一些问题
     a.安装 pcre 为了支持 rewrite 功能，我们需要安装 pcre
 
