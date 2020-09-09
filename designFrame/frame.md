@@ -21,7 +21,16 @@
     * QPS：Query Per-Second 每秒响应请求数。在互联网领域，这个指标和吞吐量区分的没有这么明显。
     * 并发用户数：同时承载正常使用系统功能的用户数量。
         例如一个即时通讯系统，同时在线量一定程度上代表了系统的并发用户数。
-        
+* 分布式系统
+    * 分布式(不同业务模块分布到对应的服务器通过API相互访问,公共部分用RPC)[模块] , 集群(同一个系统分布到不同的服务器中)[系统]
+    * CAP
+~~~
+C:Consistency(一致性)      A:Availability(可用性)     P:Partition(分区容错性). 
+在分布式系统中，同时满足CAP定律中的一致性 Consistency、可用性 Availability和分区容错性 Partition Tolerance三者是不可能的。
+在绝大多数的场景，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证最终一致性。
+~~~
+![CAP](../webIndex/img/frame_cap.jpg)   
+         
 #### 分散的知识点可以组合成适合自己业务的架构
     根据自己的业务需求,分析出不同阶段的瓶颈,进行逐步优化.
     没有一层不变的架构,需要不断的设计符合当前业务的架构.        
@@ -127,7 +136,7 @@
       (小部件)  ← (前端资源包)
       
 ##### 生命周期
-![Yii生命周期](yii-request-lifecycle.png)
+![Yii生命周期](../webIndex/img/frame_yii-request-lifecycle.png)
 1.用户向入口脚本 web/index.php 发起请求。
 
 2.入口脚本加载应用配置并创建一个应用 实例去处理请求。
@@ -175,7 +184,7 @@ DAO: [Data Access Object]也可以是 Modle 层.
 * Manager 层：通用业务处理层，它有如下特征:1. 对第三方平台封装的层，预处理返回结果及转化异常信息;2. 对Service层通用能力的下沉，如缓存方案、中间件通用处理;3. 与DAO层交互，对多个DAO的组合复用。
 * DAO 层：数据访问层，与底层 MySQL、Oracle、Hbase 进行数据交互。
 ##### 细化分层
-![细化分层](layered.png)
+![细化分层](../webIndex/img/frame_layered.png)
 * Controller|TService:轻业务逻辑，参数校验，异常兜底。通常这种接口可以轻易更换接口类型，所以业务逻辑必须要轻，甚至不做具体逻辑
 * Service:业务层，复用性较低，这里推荐每一个controller方法都得对应一个service,不要把业务编排放在controller中去做，为什么呢？如果我们把业务编排放在controller层去做的话，如果以后我们要接入thrift,我们这里又需要把业务编排在做一次，这样会导致我们每接入一个入口层这个代码都得重新复制一份
 * Manager：可复用逻辑层。这里的Mannager可以是单个服务的，比如我们的cache,mq等等，当然也可以是复合的，当你需要调用多个Mannager的时候，这个可以合为一个Mannager，比如逻辑上的连表查询等。如果是httpMannager或rpcMannager需要在这一层做一些数据转换

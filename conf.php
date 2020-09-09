@@ -177,6 +177,24 @@ return [
 					]
 				],
 				[
+					'title' => 'NoSQL',
+					'url'   => '#',
+					'menu'  => [
+						[
+							'title' => '介绍',
+							'url'   => '/noSql/README',
+						],
+						[
+							'title' => 'Redis',
+							'url'   => '/noSql/redis/redis',
+						],
+						[
+							'title' => 'Mongodb',
+							'url'   => '/noSql/mongodb/index',
+						],
+					]
+				],
+				[
 					'title' => 'Nginx',
 					'url'   => '#',
 					'menu'  => [
@@ -191,7 +209,27 @@ return [
 					]
 				],
 				[
-					'title' => '杂项',
+					'title' => 'Node',
+					'url'   => '#',
+					'menu'  => [
+						[
+							'title' => '介绍',
+							'url'   => '/node/README',
+						]
+					]
+				],
+				/*[
+					'title' => 'Code',
+					'url'   => '#',
+					'menu'  => [
+						[
+							'title' => '介绍',
+							'url'   => '/node/README',
+						]
+					]
+				],*/
+				[
+					'title' => 'Other',
 					'url'   => '#',
 					'menu'  => [
 						[
@@ -207,9 +245,25 @@ return [
 							'url'   => '/md/index',
 						],
 						[
-							'title' => '谷歌扩展',
-							'url'   => '#',
+							'title' => 'Zh-cn',
+							'url'   => '/other/index',
 						],
+						[
+							'title' => '思维模式',
+							'url'   => '/other/thinkModel',
+						],
+						[
+							'title' => '系统架构',
+							'url'   => '/designFrame/frame',
+						],
+						/*[
+							'title' => '知识英语',
+							'url'   => '/frame/README',
+						],
+						[
+							'title' => '鸡汤灌溉',
+							'url'   => '/frame/README',
+						],*/
 					]
 				],
 			]
