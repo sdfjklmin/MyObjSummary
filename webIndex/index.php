@@ -1,8 +1,96 @@
 <?php
 $menus = require '../conf.php';
 define('APP_PATH','../');
+/**
+ * Class PDOConnect
+ * @author sjm
+ */
+class PDOConnect
+{
+	private $link;
+
+	protected $config = [
+		// 数据库类型
+		'type'            => '',
+		// 服务器地址
+		'hostname'        => '',
+		// 数据库名
+		'database'        => '',
+		// 用户名
+		'username'        => '',
+		// 密码
+		'password'        => '',
+		// 端口
+		'port'        => '',
+		// 连接dsn
+		'dsn'             => '',
+		// 数据库连接参数
+		'params'          => [],
+		// 数据库编码默认采用utf8
+		'charset'         => 'utf8',
+		// 数据库表前缀
+		'prefix'          => '',
+		// 数据库调试模式
+		'debug'           => false,
+	];
+
+	/**
+	 * PDOConnect constructor.
+	 * @param array $config
+	 */
+	public function __construct($config = [])
+	{
+		/* Connect to a MySQL database using driver invocation */
+		$dsn      = 'mysql:dbname=tt;host=127.0.0.1';
+		$user     = 'root';
+		$password = 'root123';
+		try {
+			/** @var \PDO $dbh */
+			$dbh = new \PDO($dsn, $user, $password);
+			$this->link = $dbh;
+		} catch (\PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();die();
+		}
+	}
+
+	/** 查询
+	 * @param $sql
+	 * @return array
+	 */
+	public function query($sql)
+	{
+		$data = [];
+		foreach ($this->link->query($sql,\PDO::FETCH_ASSOC) as $row) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+}
+
+/**
+ * Class SimpleRoute
+ * @author sjm
+ */
 class SimpleRoute
 {
+	/** 允许的后缀
+	 * @var string[]
+	 */
+    private $allowExt = ['md','php','html','conf'];
+
+	/** 允许访问PDO的路由
+	 * @var string[]
+	 */
+	private $allowPDO = ["/try/tt?ext=html"];
+
+	/** 格式化代码
+	 * @var string[]
+	 */
+	private $allowCodePre = ['php','conf'];
+
+	/**
+	 * SimpleRoute constructor.
+	 */
     public function __construct()
 	{
         if(PHP_SAPI == 'cli') {
@@ -10,16 +98,105 @@ class SimpleRoute
         }
 	}
 
+	/**
+	 * @return mixed|string
+	 */
 	public function getCurrentUrl()
 	{
 		return $_SERVER['PATH_INFO'] ?? '';
 	}
 
+	/**
+	 * @return mixed|string
+	 */
 	public function getCurrentURI()
 	{
 		return $_SERVER['REQUEST_URI'] ?? '';
 	}
 
+	/**
+	 * @return array|false
+	 */
+	private function getExt()
+    {
+		if (isset($_GET['ext']) && !empty($_GET['ext'])) {
+			$ext       = strtolower($_GET['ext']);
+		} else {
+			$ext       = 'md';
+		}
+		if(!in_array($ext,$this->allowExt)) {
+		    return false;
+        }
+		switch ($ext) {
+			case "md":
+				$lineBreak = '\n';
+				break;
+			case "html":
+				$lineBreak = '';
+				break;
+			default :
+				$lineBreak = '<br />';
+				break;
+		}
+		return [$ext,$lineBreak];
+    }
+
+	/** 设置代码格式
+	 * @param $content
+	 * @param $ext
+	 * @return string
+	 */
+    private function codePre($content, $ext)
+    {
+        if(in_array($ext,$this->allowCodePre)) {
+            return "<pre style='font-size: 18px'>{$content}</pre>";
+        }
+        return $content;
+    }
+
+	/** 页面渲染
+	 * @param mixed $data
+	 * @param $file
+	 * @return false|string
+	 */
+    protected function displayWithObCache($data, $file)
+    {
+        // 解析变量
+        extract($data);
+		// 页面缓存
+		ob_start();
+		ob_implicit_flush(0);
+		// 渲染输出
+		try {
+			require $file;
+		} catch (\Exception $e) {
+			ob_end_clean();
+			throw $e;
+		}
+		// 获取并清空缓存
+		return ob_get_clean();
+    }
+
+	/** 获取内容
+	 * @param $file
+	 * @return false|string
+	 * @throws Exception
+	 */
+    private function getContent($file)
+    {
+        if(in_array($this->getCurrentURI(),$this->allowPDO)) {
+			$link = new PDOConnect();
+			$list = $link->query("select * from english_word limit 10");
+			$content = $this->displayWithObCache(['title' => 'English Word','list' => $list],$file);
+        }else{
+			$content = file_get_contents($file);
+		}
+        return $content;
+    }
+
+	/**
+	 * @return false|string|string[]
+	 */
 	public function getCurrentContent()
     {
 	    $action = $this->getCurrentUrl();
@@ -27,18 +204,17 @@ class SimpleRoute
             $action = 'README';
 	    }
 	    $action = ltrim($action,'/');
-		if (isset($_GET['ext']) && !empty($_GET['ext'])) {
-			$ext       = $_GET['ext'];
-			$lineBreak = '<br />';
-		} else {
-			$ext       = 'md';
-			$lineBreak = '\n';
-		}
+	    $extLine = $this->getExt();
+	    if($extLine === false) {
+			return "#### Errors : ext not permission";
+        }
+		list($ext,$lineBreak) = $extLine;
 	    $file =  APP_PATH.$action.'.'.$ext;
 	    if(!file_exists($file)) {
-	        return "#### errors : file not find";
+	        return "#### Errors : file not find";
         }
-	    $content = file_get_contents($file);
+	    $content = $this->getContent($file);
+	    $content = $this->codePre($content,$ext);
 		//添加反斜杠
 		$content = addslashes($content);
 		//替换
@@ -84,7 +260,7 @@ $content   = $model->getCurrentContent();
   <aside class="main-sidebar elevation-4 sidebar-light-teal">
   <!--<aside class="main-sidebar elevation-4 sidebar-dark-primary">-->
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="/dist/img/avatar6.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Sokmin</span>
@@ -192,6 +368,7 @@ $content   = $model->getCurrentContent();
 					}
 				}
             ?>
+            <li style="height: 100px"></li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -204,7 +381,7 @@ $content   = $model->getCurrentContent();
     <!-- Main content -->
     <section class="content" >
         <div class="card card-solid" >
-            <div style="margin: 57px" id="marked_content">
+            <div style="margin: 27px" id="marked_content">
 
             </div>
         </div>

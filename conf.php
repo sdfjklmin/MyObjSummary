@@ -256,6 +256,10 @@ return [
 							'title' => '系统架构',
 							'url'   => '/designFrame/frame',
 						],
+						[
+							'title' => 'English Word',
+							'url'   => '/try/tt?ext=html',
+						],
 						/*[
 							'title' => '知识英语',
 							'url'   => '/frame/README',
