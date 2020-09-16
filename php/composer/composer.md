@@ -7,6 +7,7 @@
     
     #局部下载
     1.  curl -sS https://getcomposer.org/installer | php    
+        或者
     2.  php -r "readfile('https://getcomposer.org/installer');" | php
     
     #下载成功后会获得 composer.phar ，这是 composer 的二进制文件。
@@ -15,6 +16,26 @@
     #设置全局
     3.  sudo  mv composer.phar /usr/local/bin/composer 
     
+    #设置权限
+    4.chmod +x composer
+    
+    #error
+    ##无法写入-Unable to write keys.dev.pub to: /home/panjm/.composer
+    sudo su
+    curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php
+    
+    ##命令无法下载时,使用 wget 下载
+    wget https://getcomposer.org/composer.phar
+    
+    ##环境无法满足安装包要求-Your requirements could not be resolved to an installable set of packages.
+    #自我更新,然后重试
+    composer selfupdate
+    
+    #如果还是不行,先设置 阿里源 , 在 selfupdate , 然后重试
+    composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+    
+    #还是不行 ? 重装 composer, 不行 ? 重装系统, 不行 ? 删服务器, 跑路 O(∩_∩)O !
+      
 #### 命令
 ```
 #初始化默认信息(composer.json的信息)

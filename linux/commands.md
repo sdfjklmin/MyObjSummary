@@ -520,7 +520,7 @@
 	4.killall php-fpm #杀死全部php-fpm  
 
 ##### 17.查看用户的历史命令记录
-	cat ~user.bash_history > cat ~root.bash_history
+	cat ~/.bash_history 
 
 ##### 18.telnet
 	yum install telnet
