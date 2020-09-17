@@ -255,6 +255,33 @@ $content   = $model->getCurrentContent();
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </nav>
+
   <!-- Main Sidebar Container :　sidebar-dark-primary 通过样式换肤 -->
   <!--<aside class="main-sidebar sidebar-light-olive elevation-4">-->
   <aside class="main-sidebar elevation-4 sidebar-light-teal">
@@ -327,8 +354,9 @@ $content   = $model->getCurrentContent();
 							}
 							$prefix = '<li class="nav-item has-treeview '.$haveOpen.'">
                 <a href="#" class="nav-link /*'.$pActive.'*/">
+                <i>'.$menu['title'].'</i>
                     <p>
-                        '.$menu['title'].'
+                        <!--这里可以拼接标题-->
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -377,10 +405,10 @@ $content   = $model->getCurrentContent();
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-top: 8px">
+  <div class="content-wrapper">
     <!-- Main content -->
-    <section class="content" >
-        <div class="card card-solid" >
+    <section class="content">
+        <div class="card card-solid" style="margin-top: 62px">
             <div style="margin: 27px" id="marked_content">
 
             </div>
