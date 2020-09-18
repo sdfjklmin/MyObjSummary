@@ -287,7 +287,7 @@ $content   = $model->getCurrentContent();
   <aside class="main-sidebar elevation-4 sidebar-light-teal">
   <!--<aside class="main-sidebar elevation-4 sidebar-dark-primary">-->
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="/dist/img/avatar6.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Sokmin</span>
@@ -370,7 +370,8 @@ $content   = $model->getCurrentContent();
 								$prefix .= '
                 <li class="nav-item">
                         <a href="'.$son['url'].'" class="nav-link '.$isActive.'">
-                            <p class="text-sm">'.$son['title'].'</p>
+                            <!--这里 i 变成 p 即可成普通样式-->
+                            <i class="text-sm">'.$son['title'].'</i>
                         </a>
                     </li>';
 							}
