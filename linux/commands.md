@@ -255,7 +255,10 @@
         1540 : (-h | 1.5K,默认单位为K,当小于K时无法显示单位,以字节数显示)
     
     说明:r=read ， w=write ， x=execute
-        4		  2			1		
+        4		  2			1
+        		
+    常用权限:
+        文件夹:755   普通文本:644
         
     chmod +x filename                               ### 为 user ，group ，others 添加执行权限
     chmod -x filename                               ### 取消 user ， group ，others 的执行权限
@@ -1084,3 +1087,10 @@ cut  -f '3,4' -d ' ' file.txt #截取 3 和 4 字段,以 空格 分割 => 9 10
         
 ##### 64. lsb_release -a `查看系统版本`
     LSB是Linux Standard Base的缩写，lsb_release命令用来显示LSB和特定版本的相关信息
+    
+##### 65. linux cd 进入目录提示 -bash: cannot create temp file for here-document
+    #想进入 www 目录, 输入 cd /ww ,按 tab 想自动补全, 结果报错
+    #简单分析
+    1.权限是否正确
+    2.磁盘已满
+    3.对应文件夹的占用过大,出于保护拒绝
