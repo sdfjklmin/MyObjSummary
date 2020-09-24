@@ -156,6 +156,9 @@ row value
 | cli> auth 123456 | 如果有密码,操作前需要认证权限 |
 | cli> config get requirepass | 获取当前密码 |
 | cli> config set requirepass 123456| 设置当前密码为 123456,一般不使用,可修改配置 |
+| cli> config get * | 获取所有的配置,可使用通配符 |
+| cli> config get *slow* | 获取带有 slow 的配置 |
+| cli> config set parameter value| 设置 parameter 的 value |
 | vi redis.conf -> `requirepass abcd`| 取消注释,设置密码 abcd,保存退出并重启 |
 | select index | 选择对应的db,index为(0-15)|
 | flushdb | 清空当前db内容		|

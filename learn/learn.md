@@ -1,4 +1,4 @@
-巨鲸互娱:
+#### A Company
 	API网关设计:
 		1.对客户端的身份认证
 		2.通信会话的秘钥协议
@@ -31,7 +31,7 @@
 	docker
 	GuzzleHttp (请求插件)
 
-米兰网:
+#### B Company
 	windos通过映射网络驱动去修改linux的文件信息
 	MetInfo  / wordpress 网站模板
 	啊D   注入工具
@@ -45,7 +45,7 @@
 	后台API启动 beauty_api  ./start-guz.sh
 	C端前端启动 frontend-customer npm run dev
 
-泰瑞亚:
+#### C Company
 	(单点登录)passport.qaq.com : php-cgi -b 127.0.0.1:9001 php.ini  (QQ登录)
 	(前台登录)trade.qaq.com		(QQ登录)
 	(后台登录)steam.admin.com
@@ -86,7 +86,7 @@
               已登陆(请求A登录->单点登录并记录公用缓存信息然后回调传参SESSION_KEY到A系统通过缓存共用一个SESSION_KEY,获取用户信息,实行本地登录
               未登录(无操作)
 
-顶层：(ubuntu)
+#### D Company (ubuntu)
     php时间类:
     DateInterval
     DateTime
