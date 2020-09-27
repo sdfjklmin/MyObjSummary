@@ -1,26 +1,26 @@
-## [官网地址](https://www.jetbrains.com/help/phpstorm/quick-start-guide-phpstorm.html)
+#### [官网地址](https://www.jetbrains.com/help/phpstorm/quick-start-guide-phpstorm.html)
 
-## [免费申请](https://www.jetbrains.com/shop/eform/opensource)
+#### [免费申请](https://www.jetbrains.com/shop/eform/opensource)
 
-## 具体设置选项的地方可能有版本差异，可能层级有所不同，但大体位置是相同的
+#### 具体设置选项的地方可能有版本差异，可能层级有所不同，但大体位置是相同的
 
-## 取消代码重复提醒
+#### 取消代码重复提醒
     Settings -> Editor -> Inspection -> General -> duplicated code framework (去除勾选)
     
-## 代码库提示
+#### 代码库提示
     External Libraires(项目文件夹下方) -> 点击右键 ->  Configure PHP Include Paths -> Include Path (点击+号，添加提示代码库)
     
-## 命令脚本 
+#### 命令脚本 
     Add Configuration(屏幕右上方) -> 点击+号 -> PHP Script -> 设置 Name(脚本名称), File(对应脚本地址,/tt/tt.php), Arguments(对应参数,start),
     运行成功后在左下角有 Run 的信息
     
-## 设置PHP版本号
+#### 设置PHP版本号
     Settings -> Languages && Framworks -> PHP(点击选中,可以修改版本号) --版本号无法选择--> 点击PHP下的Composer -> IDE Setting with composer.json (取消勾选)
 
-## 取消 composer 缺失提示
+#### 取消 composer 缺失提示
     Settings -> Editor -> Inspections -> PHP -> Composer -> Extension-is-missing-in-json (去除勾选)    
     
-## [插件](https://plugins.jetbrains.com/phpstorm)
+#### [插件](https://plugins.jetbrains.com/phpstorm)
     Settings -> Plugins(插件) -> PHP Annotation(注解)(search and install) -> resart IDE
     
     #搜索背景图片
@@ -31,7 +31,7 @@
     
     选择图片(弹窗可能不够图片显示,可以自己拉伸) -> 设置透明度 -> 保存
     
-## 内置请求
+#### 内置请求
     Tools ->  Http Client -> Test RESTFul Web Service
 
 #### 内置请求文件快捷操作
@@ -64,10 +64,10 @@
             }
           }
         }               
-## 连接远程服务器
+#### 连接远程服务器
     Tools -> Deployment -> 新增(configuration -> +) | 浏览(browse remote host -> 点击 Remote Host 中的 ... )
     
-## 快捷使用
+### 快捷使用
     
 #### Alt+Shift+Enter(快速生成)
     把光标指向要自动生成的代码上,使用快捷键快速生成,可生成(对应使用的命名空间,对应类的属性,方法等)  

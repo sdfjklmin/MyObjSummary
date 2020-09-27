@@ -38,20 +38,24 @@ return [
 							'url'   => '/php/knowledge?ext=php',
 						],
 						[
-							'title' => 'composer',
+							'title' => 'Composer',
 							'url'   => '/php/composer/composer',
 						],
 						[
-							'title' => 'fpm',
+							'title' => 'FPM',
 							'url'   => '/php/php-fpm?ext=conf',
 						],
 						[
-							'title' => 'phpStorm',
+							'title' => 'PhpStorm',
 							'url'   => '/php/PhpStorm',
 						],
 						[
-							'title' => 'consul',
+							'title' => 'Consul',
 							'url'   => '/php/consul',
+						],
+						[
+							'title' => 'DI/IOC',
+							'url'   => '/php/di_and_ioc/README',
 						],
 					]
 				],
