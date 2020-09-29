@@ -201,7 +201,9 @@ class SimpleRoute
     {
 	    $action = $this->getCurrentUrl();
 	    if(!$action) {
-            $action = 'README';
+			//$action    = 'README';
+			$action      = 'index';
+			$_GET['ext'] = 'html';
 	    }
 	    $action = ltrim($action,'/');
 	    $extLine = $this->getExt();
