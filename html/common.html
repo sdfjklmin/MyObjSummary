@@ -1,3 +1,15 @@
+<!--浏览器无法正常播放视频-->
+<!--html 想要正常播放视频,需要编码为
+ibx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 RGB (codec h264)
+统称 h264 ,非此编码会转换为音频或者无法显示-->
+<video controls width="250">
+    <source src="http://www.tt.com/test.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+
+
+<script>
 //浏览器地址无限拼接参数
 var all = "" ;
 for (var i=0;i<1000;i++)
@@ -89,3 +101,4 @@ document.getElementById("table_div_fixed").scrollIntoView();
 /*默认滚动到底部:有效果*/
 var t = document.body.clientHeight;
 window.scroll({ top: t, left: 0, behavior: 'smooth' });
+</script>

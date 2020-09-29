@@ -23,6 +23,8 @@ response :
 
 ##### 视频信息 `avinfo`
 ```
+浏览器默认播放编码为 ibx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 RGB (codec h264) 
+统称 h264,非此编码无法正常播放
 requst   : http://domain.com/key?avinfo
 response :
 {
