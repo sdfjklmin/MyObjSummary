@@ -300,6 +300,17 @@ git push --set-upstream origin mantis_80_withdraw
     把以上5个域名挨个查询一下，找一个TTL值比较小的IP替换掉。
     注意替换前要把IP先Ping一下，确保是通的才替换，否则是无效的。
 
-#### Git pages | Gitee pages
+#### [Git pages](https://docs.github.com/cn/free-pro-team@latest/github/working-with-github-pages/getting-started-with-github-pages) | Gitee pages
     为项目创建外网访问,只支持静态文件
     repositories(add|update) -> Settings -> GitHub Pages(set info)
+
+#### [Jekyll](https://jekyllrb.com/docs/installation/) 构建 Git pages
+    #在当前目录构建
+    jekyll new .
+    
+    #如果已存在可以强制生成
+    jekyll new --force .
+    
+    #本地启动服务
+    bundle exec jekyll serve
+    
