@@ -299,4 +299,7 @@ git push --set-upstream origin mantis_80_withdraw
     打开 http://tool.chinaz.com/dns ,查询域名IP映射，
     把以上5个域名挨个查询一下，找一个TTL值比较小的IP替换掉。
     注意替换前要把IP先Ping一下，确保是通的才替换，否则是无效的。
-    
+
+#### Git pages | Gitee pages
+    为项目创建外网访问,只支持静态文件
+    repositories(add|update) -> Settings -> GitHub Pages(set info)
