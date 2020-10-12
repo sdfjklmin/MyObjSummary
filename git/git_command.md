@@ -314,3 +314,22 @@ git push --set-upstream origin mantis_80_withdraw
     #本地启动服务
     bundle exec jekyll serve
     
+    #由于git对空间有权限限制,所以部分插件可能本地生效,线上没有生效
+    将生成的 _site/ 设置为对应 项目 的源文件
+    test.github.io
+        .git/
+        _layouts/
+        _posts/
+        ...
+        _site/(屏蔽状态)
+        _config.yml
+        这里相当于源码,需要构建,如果提交,则git通过jekyll(git 默认支持的构建功工具)帮助我们构建html
+    
+    test.github.io
+        .git/ 
+        2019/
+        2018/
+        ...
+        index.html
+        这里的内容在_site目录中,是本地构建生成的,提交后git直接显示不需要构建
+            
