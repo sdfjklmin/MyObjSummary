@@ -35,7 +35,7 @@
         sudo apt install mysql-server 
         
     #其它错误
-    1.如果一直无法启动并且报错
+    1.如果一直无法启动并且报错(Failed to start MySQL Community Server.)
         查看配置 /etc/my.cnf(具体看安装时的配置) 对应写入的文件夹是否有权限.
         查看对应 log 是否有文件或者权限设置,一般为 /var/log/mysql/error.log
         对应写入的地方是否空间不足,磁盘是否满了等
