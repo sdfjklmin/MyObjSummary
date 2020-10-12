@@ -33,7 +33,13 @@
     4.安装 
         yum -y install mysql-server
         sudo apt install mysql-server 
-    
+        
+    #其它错误
+    1.如果一直无法启动并且报错
+        查看配置 /etc/my.cnf(具体看安装时的配置) 对应写入的文件夹是否有权限.
+        查看对应 log 是否有文件或者权限设置,一般为 /var/log/mysql/error.log
+        对应写入的地方是否空间不足,磁盘是否满了等
+        
 #### 默认配置
     #debian(安装,配置,虚拟机文件)
     #默认安装的配置,初始化账号和密码都在此文件中
