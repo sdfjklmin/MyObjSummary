@@ -14,7 +14,7 @@ echo 'this is test shell'
 #! 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell。
 echo 命令用于向窗口输出文本。
 ~~~
-#### 一般格式 `标准4行`
+#### 1.一般格式 `标准4行`
 ~~~
 #申明bash
 #这里是功能描述
@@ -22,7 +22,7 @@ echo 命令用于向窗口输出文本。
 #这里写作者和日期
 
 ~~~
-#### 脚本语言运行的权限
+#### 2.脚本语言运行的权限
 ```
 #使脚本具有执行权限
 chmod +x ./test.sh  
@@ -45,7 +45,7 @@ sh -x test.sh
 #当使用`sh a.sh`报语法错误,但实际上并没有语法错误
 #不妨试试`/bin/bash a.sh`
 ```
-#### 变量
+#### 3.变量
     #变量类型[局部变量,环境变量,shell变量]
     
     #变量使用
@@ -71,7 +71,7 @@ sh -x test.sh
     $?          上一次命令是否成功,成功则返回0
     $*          所有参数
     $#          所有参数个数
-#### 字符串
+#### 4.字符串
     #拼接字符串
     name='bom'
     linkname='hello,'$name'!'  #无需拼接符
@@ -87,9 +87,15 @@ sh -x test.sh
     #查找字符串
     string='my name is shell'
     echo `expr index "${string}" is` 	#``这个是反引号,Tab上面那个
-#### 数组(只支持一维数组,下标为整数或者算术表达式)
+#### 5.数组(只支持一维数组,下标为整数或者算术表达式)
     Shell 数组用括号来表示，元素用"空格"符号分割开，语法格式如下
     arr_value2=( a	b  c  d  e )
+    arr2=(
+       PWD=$PWD
+       sjm
+       `echo 111`
+    )
+    
     #定义数组
     arr_value=(a,b,c,d,e,f) 
     
@@ -104,7 +110,7 @@ sh -x test.sh
     #获取数组长度
     length=${#arr_value2[@]}
 
-##### 传递参数
+##### 6.传递参数
 ```
 #!/bin/bash
 echo '执行文件为: $0'
@@ -113,7 +119,7 @@ echo '参数二:	$2'
 echo '参数三:	$3'
 运行: ./test.sh 1 2 3   # $0为执行的文件名可以理解为是第一个参数 
 ```
-#### 运算符
+#### 7.运算符
 	#原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用。
 	val=`expr 2 + 2` # 反引号 运算符间要有空格  乘号(*)前边必须加反斜杠(\)才能实现乘法运算；
 	echo $val
@@ -166,7 +172,7 @@ echo '参数三:	$3'
 	-x file	检测文件是否可执行，如果是，则返回 true。				[ -x $file ] 返回 true。
 	-s file	检测文件是否为空（文件大小是否大于0），不为空返回 true。	[ -s $file ] 返回 true。
 	-e file	检测文件（包括目录）是否存在，如果是，则返回 true。		[ -e $file ] 返回 true。
-#### 流程控制
+#### 8.流程控制
 ```shell script
 num=$1
 #统一按照这个格式,空格也是
@@ -294,7 +300,7 @@ fi
 	done
 ~~~
 	
-#### for
+#### 8.1 for
 ```shell script
 #批量更新代码
 #生成 1 - 15
@@ -312,7 +318,7 @@ do
   exit
 done
 ```
-#### while
+#### 8.2 while
 ```shell script
 while [  ]; do
     
@@ -322,7 +328,7 @@ while read line; do
     #逐行读取tt.txt中的数据
 done</tt.txt
 ```
-#### case
+#### 8.3 case
 ```
 #case
 case $x in
@@ -337,7 +343,7 @@ pattern2)
   ;;
 esac
 ```
-#### select
+#### 8.4 select
 ```shell script
 PS3="PS3是标准的菜单输出格式"
 select i in "a" "b" "c";
@@ -345,7 +351,7 @@ do
   echo $i    
 done
 ```
-#### select + case
+#### 8.5 select + case
 ```shell script
 PS3="select you menu:"
 select i in "apple" "orange" "age"
@@ -366,7 +372,7 @@ do
     esac
 done
 ```
-#### 函数
+#### 9.函数
 ```shell script
 #函数需要提前声明
 abc() {
@@ -378,7 +384,7 @@ abc() {
 abc 1
 abc "im params"
 ```
-#### 文件引入
+#### 10.文件引入
 ```shell script
 #### 引入方式 #source或者.加上空格再加上文件的绝对路径
 #### 这里建议使用 . 不同的系统可能会有 source命令,而不会解析成shell引入文件
@@ -389,6 +395,18 @@ abc "im params"
 
 ####文件引入2
 . 对应shell的绝对路径
+
+#func.sh
+#!/bin/bash
+test ()
+{
+  echo "This is test function ${1}"
+}
+
+#include.sh
+#!/bin/bash
+. func.sh
+test "I am include use test"
 ```
 #### 其他:
 	把命令运行结果赋给变量
