@@ -435,3 +435,4 @@
     
 ##### 查看 `php-fpm` 个数
     ps -ylC php-fpm --sort:rss | wc -l
+    ps -C php-fpm | wc -l
