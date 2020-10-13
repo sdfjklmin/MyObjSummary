@@ -333,3 +333,24 @@ git push --set-upstream origin mantis_80_withdraw
         index.html
         这里的内容在_site目录中,是本地构建生成的,提交后git直接显示不需要构建
             
+            
+#### Github 项目搜索 <- All GitHub
+    主体:
+        in:name xxx         // 按照项目名搜索
+        in:readme xxx       // 按照README搜索
+        in:description xxx  // 按照description搜索
+    
+    筛选条件:
+        stars:>xxx          // stars数大于xxx
+        forks:>3000         // forks数大于xxx
+        language:xxx        // 编程语言是xxx
+        pushed:>YYYY-MM-DD  // 最后更新时间大于YYYY-MM-DD
+        
+    示例(搜索node):
+    默认是(in:name)
+        node
+        node stars:>3000 
+        node stars:>3000 forks:>3000
+    其它:
+        in:readme node stars:>3000 forks:>3000
+        
