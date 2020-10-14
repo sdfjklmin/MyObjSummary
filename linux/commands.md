@@ -813,10 +813,12 @@ gdb:>bt
 1 bom 13 成都
 2 toy 18 日本
 
-#取第二行
+#取第二列
 cat table.txt | awk '{print $2}'
 #bom
 #toy
+
+cat table.txt | awk  -F: '{print $2}'  # -F:, 以 : 为分隔符
 ```
 
 ##### 48. seq 1 15 
@@ -1044,10 +1046,30 @@ sed -i '1 d' file.txt
 sed -i '/world/d' file.txt #删除有world的行
 sed -n '/world/p' file.txt #匹配有world的行
 sed -i '/world/c ttt' file.txt #匹配有world的行,将整行的内容替换成ttt
+sed 's/search/replace/g' file.txt #搜索替换,遵循正则匹配
 
 #获取文件第5行的长度
 #‘sed -n ‘n p’ file.txt’，这里‘n’表示行号，‘p’打印出匹配内容（标准输出），该命令通常与-n命令行选项连用
 sed -n '5 p' file.txt | wc -c
+```
+##### 60.1 awk sed grep find 四剑客
+```
+# 获取IP地址
+# ip addr show 获取所有的IP信息,通过 dynamic 过滤掉其它的,awk 获取第二行,sed去除末尾
+# inet 192.168.1.125/24 brd 192.168.1.255 scope global dynamic noprefixroute enp0s25
+ip addr show | grep dynamic | awk '{print $2}' | sed 's/\/24//g'
+
+# 获取文本中最大的数字
+# number.txt
+123 4322
+4334 4334223 54
+223
+112 23 433456
+23
+543
+# sed 将 空格 替换成 换行符, sort 进行排序 -g 数字排序,默认小到大, r 反转, head -1 取头部一行 
+cat number.txt | sed 's/ /\n/g' | sort -gr | head -1
+
 ```
 
 ##### 61. Linux进程在它的一生中，通常经历了四个主要阶段
