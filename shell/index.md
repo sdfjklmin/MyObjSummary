@@ -87,6 +87,13 @@ sh -x test.sh
     #查找字符串
     string='my name is shell'
     echo `expr index "${string}" is` 	#``这个是反引号,Tab上面那个
+    
+    #手动拼接变量
+    jingniaoUser=ubuntu
+    t=User
+    val="jingniao${t}"
+    echo ${!val}
+    
 #### 5.数组(只支持一维数组,下标为整数或者算术表达式)
     Shell 数组用括号来表示，元素用"空格"符号分割开，语法格式如下
     arr_value2=( a	b  c  d  e )
@@ -135,8 +142,8 @@ echo '参数三:	$3'
 	fi
 
 	#关系运算符
-	-eq	检测两个数是否相等，相等返回 true。						[ $a -eq $b ] 返回 false。
-	-ne	检测两个数是否相等，不相等返回 true。					[ $a -ne $b ] 返回 true。
+	-eq	检测两个数是否相等，相等返回 true。					[ $a -eq $b ] 返回 false。
+	-ne	检测两个数是否相等，不相等返回 true。				[ $a -ne $b ] 返回 true。
 	-gt	检测左边的数是否大于右边的，如果是，则返回 true。		[ $a -gt $b ] 返回 false。
 	-lt	检测左边的数是否小于右边的，如果是，则返回 true。		[ $a -lt $b ] 返回 true。
 	-ge	检测左边的数是否大于等于右边的，如果是，则返回 true。	[ $a -ge $b ] 返回 false。
@@ -153,8 +160,8 @@ echo '参数三:	$3'
 
 	#字符串运算符
 	=	检测两个字符串是否相等，相等返回 true。		[ $a = $b ] 	返回 false。
-	!=	检测两个字符串是否相等，不相等返回 true。	[ $a != $b ] 	返回 true。
-	-z	检测字符串是否为空，为0返回 true。		[ -z $a ] 		返回 false。
+	!=	检测两个字符串是否相等，不相等返回 true。	    [ $a != $b ] 	返回 true。
+	-z	检测字符串是否为空，为0返回 true。		    [ -z $a ] 		返回 false。
 	-n	检测字符串长度是否为0，不为0返回 true。		[ -n $a ] 		返回 true。
 	str	检测字符串是否为空，不为空返回 true。		[ $a ] 			返回 true。
 
