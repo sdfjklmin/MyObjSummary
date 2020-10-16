@@ -108,6 +108,11 @@
 	update table
     set   key_name = REPLACE(key_name,'要替换的内容','新内容') 
     where key_name like '%要替换的内容%';
+    
+    #去除换行和回车
+    #char(10):  换行符
+    #char(13):  回车符
+    UPDATE table SET field = REPLACE(REPLACE(field, CHAR(10), ''), CHAR(13), '');
 		
 14:having 指定一组行或聚合的过滤条件,通常和group by连用
 
