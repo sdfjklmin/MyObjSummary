@@ -301,6 +301,7 @@
         find   / -nouser             #查找在系统中属于作废用户的文件
         find   / -user   fred       #查找在系统中属于FRED这个用户的文件
         
+        find  / -type f -name "*.txt" | xargs grep "Hello"
 ##### grep   
     在文本中查找
     grep a1 /home/test/t1.php  /home/test/t2.php  在t1.php,t2.php中查找a1
@@ -334,6 +335,8 @@
     #显示文件
     ls -l | grep '^-'       
     
+    #递归查找,显示哪些文件中包含 Hello
+    grep -rn "Hello" ./
 ##### Vi
     i   #在光标前插入
     A   #在光标当前行末尾插入
