@@ -295,7 +295,21 @@
      #make install
      或者
      --without-iconv #不安装:-D
+     
+#### Zend扩展
+    添加对应的 so 到 php 的扩展目录中 /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303
+    {/usr/local/php}{/lib}{/php}{/extensions}{/no-debug-non-zts-20160303}
+    {php安装路径}    {库}   {php} {扩展文件夹}  {线性安全和非线性安全文件夹}
+    zend_extension = /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/ioncube_loader_lin_7.1.so
 
+    php --ini
+    #Configuration File (php.ini) Path: /usr/local/php/etc(配置路径)
+    #Loaded Configuration File:         /usr/local/php/etc/php.ini(配置)
+    #Scan for additional .ini files in: /usr/local/php/conf.d(扩展配置)
+    #Additional .ini files parsed:      /usr/local/php/conf.d/00-ioncube.ini(扩展的ini)
+   
+    00-ioncube.ini => zend_extension = /usr/local/php/lib/php/extensions/no-debug-non-zts-20160303/ioncube_loader_lin_7.1.so
+    将 00-ioncube.ini 放入 php/conf.d 中即可
 #### CLI命令
     #查看 expandName 的版本信息, reflection ini
     php --ri expandName 
