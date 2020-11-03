@@ -710,15 +710,19 @@ $arr2 = array_chunk($arr,1);
 
 #66. flock 文件锁定
 #@link https://www.php.net/manual/zh/function.flock.php
-	$fp = fopen("/tmp/lock.txt", "r+");
+	$fp = fopen("./lock.txt", "r+");
 
-	if (flock($fp, LOCK_EX)) {  // 进行排它型锁定
-		ftruncate($fp, 0);      // truncate file
-		fwrite($fp, "Write something here\n");
-		fflush($fp);            // flush output before releasing the lock
-		flock($fp, LOCK_UN);    // 释放锁定
-	} else {
-		echo "Couldn't get the lock!";
+	//LOCK_SH 取得共享锁定（读取的程序）。
+	//LOCK_EX 取得独占锁定（写入的程序）。
+	//LOCK_UN 释放锁定（无论共享或独占）。
+	//LOCK_NB 锁定时无阻塞操作。
+	/* Activate the LOCK_NB option on an LOCK_EX operation */
+	if(!flock($fp, LOCK_EX | LOCK_NB)) {
+		echo 'Unable to obtain lock';
+		exit(-1);
 	}
+
+	flock($fp, LOCK_UN);    // 释放锁定
+	/* ... */
 
 	fclose($fp);
