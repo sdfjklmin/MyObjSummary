@@ -17,6 +17,7 @@
     },
     "require": {
         "swoole/ide-helper": "@dev",
-      "ext-pcntl": "*"
+        "ext-pcntl": "*",
+        "firebase/php-jwt": "^5.2"
     }
 }

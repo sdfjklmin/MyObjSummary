@@ -496,6 +496,8 @@ $a = function(){
 $a(); //11
 var_dump($a instanceof \Closure); //true
 
+# 预定义接口
+# https://www.php.net/manual/zh/reserved.interfaces.php
 #46 ArrayAccess（数组式访问）接口 可以以数组形式访问类
 
 #47 IteratorAggregate（聚合式迭代器）接口
@@ -726,3 +728,11 @@ $arr2 = array_chunk($arr,1);
 	/* ... */
 
 	fclose($fp);
+
+#67. strtr 转换指定字符
+#@link https://www.php.net/manual/zh/function.strtr.php
+	//strtr ( string $str , string $from , string $to ) : string
+	//strtr ( string $str , array $replace_pairs ) : string
+	$trans = array("hello" => "hi", "hi" => "hello");
+	echo strtr("hi all, I said hello", $trans);
+	//hello all, I said hi
