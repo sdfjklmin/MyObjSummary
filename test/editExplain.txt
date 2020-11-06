@@ -11,6 +11,7 @@ A.SFTP
 		  任意打开一个文件,点击右键
 		  选择 	SFTP/FTP -> Map to Remote
 		  配置远程登陆信息和服务器代码地址
+
 B.SublimeSimpleSync	  
   设置 Preferences-->Package Settings-->Sublime Simple Sync-->Setting-User
   复制 对应路径下的 Setting-Default 编辑 Setting-User保存
@@ -29,12 +30,14 @@ B.SublimeSimpleSync
   }
   ]
 }
+
 C.php代码错误提示
   ctrl+shift+p 输入 install 点击 install packge
      等待安装框出来后,输入sublimelinter选择选装,
      然后再pic唤醒输入：sublimelinter-php 
      
      安装自动代码提醒+当前文件内函数定义等跳转插件：SublimeCodeIntel
+
 D.关闭更新
    1.添加 license key 
    Help -> add License (以下选择一个)
@@ -125,3 +128,9 @@ ECB1BC4E D8010D5A 77BA86C8 BA7F76CC
 
 2.Preferences -> Settings -> settings-user 
   添加 "update_check":false,
+
+E.设置简体中文
+  1.ctrl+shift+p 输入 install 点击 install packge
+     等待安装框出来后,输入chinese 选择 ChineseLocalizations
+
+  2. help/language->选择语言
