@@ -1,5 +1,4 @@
 <?php
-namespace MyObjSummary;
 /**
  * 使用openssl实现非对称加密
  * 
@@ -69,7 +68,9 @@ uv2VL3fMBI4SGWWN/LPSeZkUdPbh0GmRCSo4nPOfxK8=
     public function createKey()
     {
         $config = [
-            "config" => 'D:\Min\Install\wamp\wamp64\bin\php\php5.6.25\extras\ssl\openssl.cnf',
+            //"config" => 'D:\Min\Install\wamp\wamp64\bin\php\php5.6.25\extras\ssl\openssl.cnf',
+			//这里是对应的 openssl.cnf 使用 ` php --ri openssl` 进行查看,或者通过 find 进行查找
+            "config" => '/usr/lib/ssl/openssl.cnf',
             "digest_alg" => "sha512",
             "private_key_bits" => 4096,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
@@ -227,21 +228,31 @@ uv2VL3fMBI4SGWWN/LPSeZkUdPbh0GmRCSo4nPOfxK8=
         @fclose($this->_pubKey);
     }
 }
-$rsa = new Rsa();
-
-echo "openssl_private_encrypt,openssl_public_decrypt","<br />";
+//--------------------------------------
+//具体使用公钥还是私钥,根据自己的业务进行组合	|
+//场景:老板,员工,临时工					|
+//--------------------------------------
+/*$rsa = new Rsa();*/
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //私钥加密，公钥解密
+//老板发布了一条私钥信息,员工可以通过公钥获得信息,临时工懵逼不懂
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*echo "openssl_private_encrypt,openssl_public_decrypt","<br />";
 echo "私钥加密,公钥验签","<br />";
 echo "待加密数据：testInfo","<br />";
 $pre = $rsa->privEncrypt("testInfo");
 echo "加密后的密文:<br />" . $pre . "<br />";
 $pud = $rsa->pubDecrypt($pre);
 echo "解密后数据:" . $pud . "<br />";
-echo "<hr>";
+echo "<hr>";*/
 
-
-//公钥加密，私钥解密
-echo "openssl_public_encrypt,openssl_private_decrypt","<br />";
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//公钥加密，私钥解密，私钥负责签名，公钥负责验证
+//员工A发了一条公钥信息给老板
+//员工B也发了一条公钥信息给老板
+//老板可以通过私钥查看,员工A,B发的信息,但是A,B无法相互查看,临时工持续懵逼
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*echo "openssl_public_encrypt,openssl_private_decrypt","<br />";
 echo "公钥加密，私钥验签","<br />";
 echo "待加密数据：ssh-test","<br />";
 $pue = $rsa->pubEncrypt("ssh-test");
@@ -258,4 +269,4 @@ $pre = $rsa->priKeySign('test=32');
 echo "加密后的密文:","<br />" . $pre . "<br />";
 $pud = $rsa->pubKeyCheck($pre,'test=32');
 echo "是否解密成功:" . $pud . "<br />";
-echo "<hr>";
+echo "<hr>";*/
