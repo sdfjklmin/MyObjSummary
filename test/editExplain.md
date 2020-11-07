@@ -1,154 +1,136 @@
 #### 基础命令 `Ctrl + Shift + P`
-* 安装: 输入 install 点击 install packge,输入名称
-* 移除: 输入 remove  点击 remove packge,选择你想移除的扩展
+* 安装: 输入 install 点击 install package,输入名称
+* 移除: 输入 remove  点击 remove package,选择你想移除的扩展
   markdown preview 
 
-A.SFTP
-	a.1   ctrl+shift+p 输入 install 点击 install packge
-	   等待安装框出来后,输入SFTP
+#### 1. SFTP
+* 配置:File->SFTP/FTP -> Setup Server(配置相关的登陆信息) 保存在User\sftp_servers中
+* 查看:File->SFTP/FTP ->	Browse Packages
+* 操作:File->SFTP/FTP -> Browse Packages -> 选择你的配置好的信息
 
-	a.2通过SFTP操作文件   
-		File->SFTP/FTP 配置相关的登陆信息 保存在User\sftp_servers中
-	  查看:
-	  	Preferences->	Browes Packages
-	a.3通过SFTP操作项目
-		  从服务器获取代码后,打开项目
-		  任意打开一个文件,点击右键
-		  选择 	SFTP/FTP -> Map to Remote
-		  配置远程登陆信息和服务器代码地址
+#### 2. SublimeSimpleSync - 简单同步	  
+* 设置 Preferences-->Package Settings-->Sublime Simple Sync-->Setting-User
+* 复制 对应路径下的 Setting-Default 编辑 Setting-User保存
 
-B.SublimeSimpleSync	  
-  设置 Preferences-->Package Settings-->Sublime Simple Sync-->Setting-User
-  复制 对应路径下的 Setting-Default 编辑 Setting-User保存
-  eg:
-  {
-  "config": {
-    "autoSync": true,// 保存的时候自动将local路径的内容同步到remote路径中去。
-    "debug": false,
-    "timeout": 10 //support mac/Linux
-  },
-  "rules": [
-  {
-    "type" : "local",
-    "local" : "D:\\xxx路径\\WebContent",           //你的本地文件夹
-    "remote" : "D:\\xxxx路径\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\xxx文件夹"   //你的本地服务器的位置
-  }
-  ]
-}
+      eg:
+      {
+      "config": {
+        "autoSync": true,// 保存的时候自动将local路径的内容同步到remote路径中去。
+        "debug": false,
+        "timeout": 10 //support mac/Linux
+      },
+      "rules": [
+      {
+        "type" : "local",
+        "local" : "D:\\xxx路径\\WebContent",           //你的本地文件夹
+        "remote" : "D:\\xxxx路径\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\xxx文件夹"   //你的本地服务器的位置
+      }
+      ]
+    }
 
-C.php代码错误提示
-  ctrl+shift+p 输入 install 点击 install packge
-     等待安装框出来后,输入sublimelinter选择选装,
-     然后再pic唤醒输入：sublimelinter-php 
-     
-     安装自动代码提醒+当前文件内函数定义等跳转插件：SublimeCodeIntel
+#### 3. sublimelinter - php代码错误提示
 
-D.关闭更新
-   1.添加 license key 
-   Help -> add License (以下选择一个)
-—– BEGIN LICENSE —– 
-TwitterInc 
-200 User License 
-EA7E-890007 
-1D77F72E 390CDD93 4DCBA022 FAF60790 
-61AA12C0 A37081C5 D0316412 4584D136 
-94D7F7D4 95BC8C1C 527DA828 560BB037 
-D1EDDD8C AE7B379F 50C9D69D B35179EF 
-2FE898C4 8E4277A8 555CE714 E1FB0E43 
-D5D52613 C3D12E98 BC49967F 7652EED2 
-9D2D2E61 67610860 6D338B72 5CF95C69 
-E36B85CC 84991F19 7575D828 470A92AB 
-—— END LICENSE ——
+#### 4. SublimeCodeIntel - 安装自动代码提醒+当前文件内函数定义等跳转插件
 
-—– BEGIN LICENSE —– 
-Bug7sec Team (www.bug7sec.org) 
-50 User License 
-EA7E-1068832 
-86C49532 8F829C68 2ED18D56 162664F2 
-8B934F0C EB60A7FE 81D7D5EF BB8F1673 
-F67D69C7 C5E21B19 42E7EFBD D9C2BBC1 
-CEBA4697 535E29CA 0D2D0D4D ACE548CE 
-07815DC7 BDE3901E D5D198E4 BC1677C0 
-46097A55 29BCE0C9 72A358E8 CEFEEFB5 
-24CEB623 D7232749 F2515349 FB675F93 
-C55635A7 B1E32AB0 3D055979 041E0359 
-—— END LICENSE ——
+#### 5. 关闭更新
+       1.添加 license key 
+       Help -> add License (以下选择一个)
+    —– BEGIN LICENSE —– 
+    TwitterInc 
+    200 User License 
+    EA7E-890007 
+    1D77F72E 390CDD93 4DCBA022 FAF60790 
+    61AA12C0 A37081C5 D0316412 4584D136 
+    94D7F7D4 95BC8C1C 527DA828 560BB037 
+    D1EDDD8C AE7B379F 50C9D69D B35179EF 
+    2FE898C4 8E4277A8 555CE714 E1FB0E43 
+    D5D52613 C3D12E98 BC49967F 7652EED2 
+    9D2D2E61 67610860 6D338B72 5CF95C69 
+    E36B85CC 84991F19 7575D828 470A92AB 
+    —— END LICENSE ——
+    
+    —– BEGIN LICENSE —– 
+    Bug7sec Team (www.bug7sec.org) 
+    50 User License 
+    EA7E-1068832 
+    86C49532 8F829C68 2ED18D56 162664F2 
+    8B934F0C EB60A7FE 81D7D5EF BB8F1673 
+    F67D69C7 C5E21B19 42E7EFBD D9C2BBC1 
+    CEBA4697 535E29CA 0D2D0D4D ACE548CE 
+    07815DC7 BDE3901E D5D198E4 BC1677C0 
+    46097A55 29BCE0C9 72A358E8 CEFEEFB5 
+    24CEB623 D7232749 F2515349 FB675F93 
+    C55635A7 B1E32AB0 3D055979 041E0359 
+    —— END LICENSE ——
+    
+    —– BEGIN LICENSE —– 
+    Esri, Inc 
+    19 User License 
+    EA7E-853424 
+    BBB0D927 00F6E4AB 0AFFEFEA 82C4A3E5 
+    4F9A99D1 7C0475AB 5A708861 6C81D74E 
+    4BBA1F56 877CE0E2 88126328 486D8600 
+    8A0A85D7 49671882 49969D92 312F27A7 
+    5CCAE55B D711D4E2 9069DE55 B510370C 
+    9499567E 61D548BA FB260403 711DFE24 
+    1BAFDA6D 1F52E6B1 B728EF5B A40CCD4D 
+    FD716AF5 1760D208 0E05F26E 22660950 
+    —— END LICENSE ——
+    
+    —– BEGIN LICENSE —– 
+    Die Socialisten GmbH 
+    10 User License 
+    EA7E-800613 
+    51311422 E45F49ED 3F0ADE0C E5B8A508 
+    2F4D9B65 64E1E244 EDA11F0E F9D06110 
+    B7B2E826 E6FDAA72 2C653693 5D80582F 
+    09DCFFB5 113A940C 5045C0CD 5F8332F8 
+    34356CC6 D96F6FDB 4DEC20EA 0A24D83A 
+    2C82C329 E3290B29 A16109A7 EC198EB9 
+    F28EBB17 9C07403F D44BA75A C23C6874 
+    EBF11238 5546C3DD 737DC616 445C2941 
+    —— END LICENSE ——
+    
+    —– BEGIN LICENSE —– 
+    Dylan Tittel 
+    Single User License 
+    EA7E-898127 
+    CD1A23C0 E8687245 18A89BFA 7CF52C10 
+    A20AA536 9E1A57C7 D33839DC 6613C428 
+    91E9C7FF F4702893 251C6403 27A10818 
+    6F48AC9C BB66843D C1D60DEA B952C2D0 
+    40019115 E5278B04 95EBB709 D6B1C5B9 
+    67CA940A 88701851 32910570 57AD5B96 
+    263A8906 AFBFAB46 52F6706F CACFC74E 
+    DFAD4752 D10E58B6 744B90F2 13AF2B9C 
+    —— END LICENSE ——
+    
+    —– BEGIN LICENSE —– 
+    Country Rebel 
+    Single User License 
+    EA7E-993095 
+    19176BCE 3FF86EA0 3CE86508 6BE4DCA7 
+    9F74D761 4D0CAD8B E4033008 43FC73F3 
+    1C01F6DD C4829BE9 E7830578 A4823ADC 
+    61B224F1 DC93C458 ABAAAE0F 925C32D4 
+    04A83C36 813FF6C8 9877942C 4418F99C 
+    2F15E5B8 544EDB80 D9A86985 4CBBA6A8 
+    998DE3E4 7FB33E15 6CD30357 6DC96CEA 
+    ECB1BC4E D8010D5A 77BA86C8 BA7F76CC 
+    —— END LICENSE ——
+    --------------------- 
+    
+    2.Preferences -> Settings -> settings-user 
+      添加 "update_check":false,
 
-—– BEGIN LICENSE —– 
-Esri, Inc 
-19 User License 
-EA7E-853424 
-BBB0D927 00F6E4AB 0AFFEFEA 82C4A3E5 
-4F9A99D1 7C0475AB 5A708861 6C81D74E 
-4BBA1F56 877CE0E2 88126328 486D8600 
-8A0A85D7 49671882 49969D92 312F27A7 
-5CCAE55B D711D4E2 9069DE55 B510370C 
-9499567E 61D548BA FB260403 711DFE24 
-1BAFDA6D 1F52E6B1 B728EF5B A40CCD4D 
-FD716AF5 1760D208 0E05F26E 22660950 
-—— END LICENSE ——
+#### 6. ChineseLocalizations - 设置简体中文
+* 配置: help/language->选择语言
 
-—– BEGIN LICENSE —– 
-Die Socialisten GmbH 
-10 User License 
-EA7E-800613 
-51311422 E45F49ED 3F0ADE0C E5B8A508 
-2F4D9B65 64E1E244 EDA11F0E F9D06110 
-B7B2E826 E6FDAA72 2C653693 5D80582F 
-09DCFFB5 113A940C 5045C0CD 5F8332F8 
-34356CC6 D96F6FDB 4DEC20EA 0A24D83A 
-2C82C329 E3290B29 A16109A7 EC198EB9 
-F28EBB17 9C07403F D44BA75A C23C6874 
-EBF11238 5546C3DD 737DC616 445C2941 
-—— END LICENSE ——
+#### 7. terminal - 终端   
+* 配置: 首选项 -> package settings -> terminal -> (进行设置)
+* 快捷键: Ctrl + Shift + t
 
-—– BEGIN LICENSE —– 
-Dylan Tittel 
-Single User License 
-EA7E-898127 
-CD1A23C0 E8687245 18A89BFA 7CF52C10 
-A20AA536 9E1A57C7 D33839DC 6613C428 
-91E9C7FF F4702893 251C6403 27A10818 
-6F48AC9C BB66843D C1D60DEA B952C2D0 
-40019115 E5278B04 95EBB709 D6B1C5B9 
-67CA940A 88701851 32910570 57AD5B96 
-263A8906 AFBFAB46 52F6706F CACFC74E 
-DFAD4752 D10E58B6 744B90F2 13AF2B9C 
-—— END LICENSE ——
-
-—– BEGIN LICENSE —– 
-Country Rebel 
-Single User License 
-EA7E-993095 
-19176BCE 3FF86EA0 3CE86508 6BE4DCA7 
-9F74D761 4D0CAD8B E4033008 43FC73F3 
-1C01F6DD C4829BE9 E7830578 A4823ADC 
-61B224F1 DC93C458 ABAAAE0F 925C32D4 
-04A83C36 813FF6C8 9877942C 4418F99C 
-2F15E5B8 544EDB80 D9A86985 4CBBA6A8 
-998DE3E4 7FB33E15 6CD30357 6DC96CEA 
-ECB1BC4E D8010D5A 77BA86C8 BA7F76CC 
-—— END LICENSE ——
---------------------- 
-
-2.Preferences -> Settings -> settings-user 
-  添加 "update_check":false,
-
-E.设置简体中文
-  1.ctrl+shift+p 输入 install 点击 install packge
-     等待安装框出来后,输入chinese 选择 ChineseLocalizations
-
-  2. help/language->选择语言
-
-F.安装终端 terminal  
-  1.ctrl+shift+p 输入 install 点击 install packge
-     等待安装框出来后,terminal 选择 ChineseLocalizations
-
-  2.首选项 -> package settings -> terminal -> (进行设置)
-
-  3.快捷键 Ctrl + Shift + t
-
-G. 设置 sublime merge
+#### 8. 设置 sublime merge
   1. 下载 sublime_merge 扩展包,并解压
   2. 进入目录将 sublime_merge 可执行文件设为全局访问
   3. 进入编辑器 "首选项 -> 设置",添加如下配置
