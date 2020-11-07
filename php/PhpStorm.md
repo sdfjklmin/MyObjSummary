@@ -65,8 +65,11 @@
           }
         }               
 #### 连接远程服务器
-    Tools -> Deployment -> 新增(configuration -> +) | 浏览(browse remote host -> 点击 Remote Host 中的 ... )
-    
+    Tools -> Deployment -> Configuration...(+选择对应的服务类型)
+    Tools -> Deployment -> Browse remote host -> 点击 Remote Host 中的 ... )
+    二级配置:
+            SSH Configuration ... (点击...新增具体的ssh配置信息)
+    通过SSH连接到远程目录时,修改文件,编辑器不会自动保存,需要点击文件窗口上的上传按钮
 ### 快捷使用
     
 #### Alt+Shift+Enter(快速生成)
