@@ -33,8 +33,8 @@
 #### 4. SublimeCodeIntel - 安装自动代码提醒+当前文件内函数定义等跳转插件
 
 #### 5. 关闭更新
-       1.添加 license key 
-       Help -> add License (以下选择一个)
+    1.添加 license key 
+    Help -> add License (以下选择一个)
     —– BEGIN LICENSE —– 
     TwitterInc 
     200 User License 
