@@ -1,3 +1,8 @@
+#### 基础命令 `Ctrl + Shift + P`
+* 安装: 输入 install 点击 install packge,输入名称
+* 移除: 输入 remove  点击 remove packge,选择你想移除的扩展
+  markdown preview 
+
 A.SFTP
 	a.1   ctrl+shift+p 输入 install 点击 install packge
 	   等待安装框出来后,输入SFTP
@@ -147,4 +152,4 @@ G. 设置 sublime merge
   1. 下载 sublime_merge 扩展包,并解压
   2. 进入目录将 sublime_merge 可执行文件设为全局访问
   3. 进入编辑器 "首选项 -> 设置",添加如下配置
-    "sublime_merge_path":"/usr/local/bin/sublime_merge"
+  "sublime_merge_path":"/usr/local/bin/sublime_merge"
