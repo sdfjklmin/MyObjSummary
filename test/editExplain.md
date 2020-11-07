@@ -128,7 +128,7 @@
 
 #### 7. terminal - 终端   
 * 配置: 首选项 -> package settings -> terminal -> (进行设置)
-* 快捷键: Ctrl + Shift + t
+* 快捷键: Ctrl + Shift + T
 
 #### 8. 设置 sublime merge
   1. 下载 sublime_merge 扩展包,并解压
