@@ -101,7 +101,7 @@
     全部折叠(展开)代码
     可以先 Ctrl + Shift + 减号,全部折叠,然后使用 Ctrl + 加号,查看各个方法
     
-#### Ctrl + Alt + L (快速格式代码)
+#### Ctrl + Alt + L (快速格式代码)  Ctrl + Shift + J (所选区域合并一行)
     Settings -> Editor -> Code Style -> PHP->( Wrapping(包装) and Braces(大括号) 
         #设置 等号 对齐
         -> Assignment(分配) statemnet(申明) -> `勾选`  Align(对齐) consecutive(连续) assignments
