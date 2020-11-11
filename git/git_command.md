@@ -37,7 +37,7 @@ ssh -T git@github.com
 ssh-keygen -t rsa -C 'git账号' 
 
 ssh-keygen 
-    -t rsa  [加密类型:  dsa | ecdsa | ed25519 | rsa ] 
+    -t rsa  [加密类型(encryption type):  dsa | ecdsa | ed25519 | rsa ] 
     -C 'git账号'  [comment: 填写和自己相关的账号]
 
 #生成对应的key,根据生成的对应提示cat,复制key
