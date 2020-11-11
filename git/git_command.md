@@ -311,6 +311,12 @@ git push --set-upstream origin mantis_80_withdraw
     #如果已存在可以强制生成
     jekyll new --force .
     
+    #使用gem安装插件
+    gem install jekyll-pages
+    
+    #第一次构建，基础插件
+    bundle install
+    
     #本地启动服务
     bundle exec jekyll serve
     
