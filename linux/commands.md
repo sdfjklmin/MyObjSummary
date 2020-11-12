@@ -328,6 +328,8 @@
     find path -option parm ;    路径 	 操作参数 
     grep -w error -l *.log #显示　*.log　中　有　error　的的文件
     cat 20.log | grep -n -w error #显示20.log中带 error 的,带行号
+    
+    cat 20.log | grep -10 -n -w error #显示文件中带error的带行号,并且显示error附近的(上下)10行
      
     #显示目录
     ls -l | grep '^d'
@@ -337,6 +339,72 @@
     
     #递归查找,显示哪些文件中包含 Hello
     grep -rn "Hello" ./
+    
+    //-------------------------------
+    // grep --help                  |
+    //-------------------------------
+    用法: grep [选项]... PATTERN [FILE]...
+    Search for PATTERN in each FILE.
+    Example: grep -i 'hello world' menu.h main.c
+    
+    Pattern selection and interpretation:
+      -E, --extended-regexp     PATTERN is an extended regular expression
+      -F, --fixed-strings       PATTERN is a set of newline-separated strings
+      -G, --basic-regexp        PATTERN is a basic regular expression (default)
+      -P, --perl-regexp         PATTERN is a Perl regular expression
+      -e, --regexp=PATTERN      用 PATTERN 来进行匹配操作
+      -f, --file=FILE           从 FILE 中取得 PATTERN
+      -i, --ignore-case         忽略大小写
+      -w, --word-regexp         强制 PATTERN 仅完全匹配字词
+      -x, --line-regexp         强制 PATTERN 仅完全匹配一行
+      -z, --null-data           一个 0 字节的数据行，但不是空行
+    
+    杂项:
+      -s, --no-messages         不显示错误信息
+      -v, --invert-match        选中不匹配的行
+      -V, --version             显示版本信息并退出
+          --help                显示此帮助并退出
+    
+    Output control:
+      -m, --max-count=NUM       stop after NUM selected lines
+      -b, --byte-offset         print the byte offset with output lines
+      -n, --line-number         print line number with output lines
+          --line-buffered       flush output on every line
+      -H, --with-filename       print file name with output lines
+      -h, --no-filename         suppress the file name prefix on output
+          --label=LABEL         use LABEL as the standard input file name prefix
+      -o, --only-matching       只显示匹配PATTERN 部分的行
+      -q, --quiet, --silent     不显示所有常规输出
+          --binary-files=TYPE   设定二进制文件的TYPE 类型；
+                                TYPE 可以是`binary', `text', 或`without-match'
+      -a, --text                等同于 --binary-files=text
+      -I                        等同于 --binary-files=without-match
+      -d, --directories=ACTION  读取目录的方式；
+                                ACTION 可以是`read', `recurse',或`skip'
+      -D, --devices=ACTION      读取设备、先入先出队列、套接字的方式；
+                                ACTION 可以是`read'或`skip'
+      -r, --recursive           等同于--directories=recurse
+      -R, --dereference-recursive       同上，但遍历所有符号链接
+          --include=FILE_PATTERN  只查找匹配FILE_PATTERN 的文件
+          --exclude=FILE_PATTERN  跳过匹配FILE_PATTERN 的文件和目录
+          --exclude-from=FILE   跳过所有除FILE 以外的文件
+          --exclude-dir=PATTERN  跳过所有匹配PATTERN 的目录。
+      -L, --files-without-match  print only names of FILEs with no selected lines
+      -l, --files-with-matches  print only names of FILEs with selected lines
+      -c, --count               print only a count of selected lines per FILE
+      -T, --initial-tab         make tabs line up (if needed)
+      -Z, --null                print 0 byte after FILE name
+    
+    文件控制:
+      -B, --before-context=NUM  打印文本及其前面NUM 行
+      -A, --after-context=NUM   打印文本及其后面NUM 行
+      -C, --context=NUM         打印NUM 行输出文本
+      -NUM                      same as --context=NUM
+          --color[=WHEN],
+          --colour[=WHEN]       use markers to highlight the matching strings;
+                                WHEN is 'always', 'never', or 'auto'
+      -U, --binary              do not strip CR characters at EOL (MSDOS/Windows)
+
 ##### Vi
     i   #在光标前插入
     A   #在光标当前行末尾插入
