@@ -29,7 +29,14 @@
 *****
 
 ### 5.图片
+![名称](地址)
 ![Image text](https://github.com/sdfjklmin/MyObjSummary/blob/master/serviceMesh/img/shape.png)
+
+![备注][快速链接]
+[快速链接]:地址
+
+![http_code.jpg][1]
+[1]: /assets/image/http_code.jpg
 
 ### 6.超链接
  [test](https://github.com/)
