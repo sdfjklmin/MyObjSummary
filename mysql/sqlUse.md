@@ -191,3 +191,34 @@
     where id in (1,2,3,5,4,6)
     order by field (id,1,2,3,5,4,6)
     ;        
+
+20. like escape(逃逸),在like中某也字符串被mysql赋予了一些规则
+    %   全部匹配
+    _   只匹配一个
+    如果查询内容包含 %，_ 或者其它特殊意义字符，则需要使用 escape 进行转义
+    Table: tt
+    Data:
+        ID  VAR_NAME
+        1	小A%
+        2	张%三
+        3	李四
+        4	小M
+        5	大M
+        6	_M
+    Commend:  like "" escape "任意符号，需要与like中匹配，建议使用/"
+    #1,2
+    select * from tt where var_name like "%>%%" escape '>';
+    
+    #all
+    select * from tt where var_name like "%%%" escape '/';
+    
+    #all
+    select * from tt where var_name like "%%%";
+    
+    #6
+    select * from tt where var_name like "/_M" escape '/';
+    
+    #4,5,6
+    select * from tt where var_name like "_M";
+    
+    
