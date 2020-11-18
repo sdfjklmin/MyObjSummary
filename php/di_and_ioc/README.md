@@ -37,9 +37,41 @@
     延迟注入（Lazy injection）
     
 #### 代码参考
+* 场景
+~~~
+应用程序需要用到 Foo 去 doSomething,
+但是 Foo 中需要 Bar 去 doSomething,
+Bar 则需要 Bim 去 doSomething.
+
+#传统模式
+Foo -> doSomething [ Bar -> doSomething [ Bim -> doSomething ] ]
+
+#DI/IOC
+[ [ Bim ] Bar ] Foo -> doSomething -> [ Foo_Bar -> doSomething [ Bar_Bim -> doSomething ] ]
+~~~
 * [传统模式](NormalFoo.php)    
 * [依赖注入](DiFoo.php)    
 * [更多依赖注入实例](DiFooDemo.php)    
-* [控制反转](IocFoo.php)    
-* [容器](Container.php)    
-* [依赖注入容器](DiContainer.php)    
+* [控制反转](IocFoo.php)
+~~~
+定义是抽象的（interface），注入则是抽象的实现 （A interface），通过调整不同的注入对象，来控制程序的行为。
+Foo(CaceInterFace $cache) -> action（get/set/del）
+$cacheRedis     = new CacheRedis();
+$cacheFile      = new CacheFile();
+$cacheMemcache  = new CacheMemcache();
+~~~
+* [容器](Container.php)
+~~~
+#动态绑定
+$containerModel->foo = new Foo();
+$containerModel->bar = new Bar();
+
+#静态绑定
+Container::bind('Foo', new Foo());
+Container::get('Foo');
+~~~    
+* [依赖注入容器](DiContainer.php)
+~~~
+利用魔法方法 __get()，__set()等
+使用反射类 ReflectionClass 进行实例化
+~~~    
