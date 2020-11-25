@@ -8,18 +8,28 @@
 #### SQL 
     组合索引 : alter table {table_name} add index {index_name} ({column},{column});
     
+    显示配置：show variables;
+    显示某些配置： show variables like '%some_conf%';
+    
+    #显示配置-连接信息
     show variables like '%connection%';
     
+    #显示配置-最大连接数
     show variables like '%max_user_connections%';
     
-    SHOW  STATUS LIKE '%max_used_connections%';
+    显示状态：show status;
+    显示某些状态：show status like '%some_conf%';
+    
+    #显示最大的使用连接
+    show  status like '%max_used_connections%';
     
     #查看进程
-    SHOW PROCESSLIST;
+    show processlist;
     
     #查看所有进程
-    SHOW FULL PROCESSLIST;
+    show full processlist;
     
+    #显示线程状态
     show status like 'Threads%';
     +-------------------+-------+
     | Variable_name     | Value |
@@ -27,7 +37,7 @@
     | Threads_cached    | 1     |
     | Threads_connected | 1595  |   #打开的连接数
     | Threads_created   | 2     |
-    | Threads_running   | 1478  |   #激活的连接数
+    | Threads_running   | 1478  |   #激活的连接数,这个数值一般远低于connected数值  
     +-------------------+-------+
     
     #刷新当前hosts
