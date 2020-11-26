@@ -44,4 +44,4 @@ m为TaskWorker进程数，
 - [Timer](./official/Timer.php) [Official](https://wiki.swoole.com/wiki/page/p-timer.html)
 
 ### 自绘图
-![SwooleAll](../webIndex/img/swoole.png =100x20){:height="100px" width="400px"}
+![SwooleAll](../webIndex/img/swoole.png){:height="100px" width="400px"}
