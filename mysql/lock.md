@@ -158,6 +158,24 @@
 * 并发插入相同记录，可能死锁(某一个回滚)
 * 并发插入，可能出现间隙锁死锁(难排查)
 * show engine innodb status; 可以查看InnoDB的锁情况，也可以调试死锁
+* show status like 'innodb_row_lock%';查看InnoDB_row_lock的状态
+* show variables like '%lock_wait_timeout%';
+
+#### Innodb Row Lock
+    Innodb_row_lock_current_waits:当前正在等待锁的数量；
+    
+    Innodb_row_lock_time:从系统启动到现在锁定总时间长度；
+    
+    Innodb_row_lock_time_avg：每次等待所花平均时间；
+    
+    Innodb_row_lock_time_max:从系统启动到现在等待最长的一次所花的时间长度；
+    
+    Innodb_row_lock_waits:系统启动到现在总共等待的次数；
+    
+    对于这5个状态变量，比较重要的是：
+    
+    Innodb_row_lock_time_avg，Innodb_row_lock_waits，Innodb_row_lock_time。
+
 #### 死锁
 * 复现
 * 查看事务与锁信息
@@ -312,10 +330,20 @@ A：insert into t values(5);
 记录锁，它封锁索引记录，例如：
 select * from t where id=1 for update;
 它会在id=1的索引记录上加锁，以阻止其他事务插入，更新，删除id=1的这一行。
+
+当有主键或者索引的时候，会形成行锁。
+当无法命中索引或者无索引、范围、模糊时，会形成表锁。
+明确指定索引，若无查询数据，无锁。
+
+for update 仅适用于InnoDB，并且必须开启事务，在begin与commit之间才生效。
+for update锁住表或者锁住行，只允许当前事务进行操作（读写），其他事务被阻塞，直到当前事务提交或者回滚，被阻塞的事务自动执行。
+for update nowait 锁住表或者锁住行，只允许当前事务进行操作（读写），其他事务被拒绝，事务占据的statement连接也会被断开。
+
 需要说明的是：
     select * from t where id=1;
     则是快照读(SnapShot Read)，它并不加锁.
 ~~~
+
 #### 间隙锁(Gap Locks) : 锁定间隔，防止间隔中被其他事务插入
 ~~~
 它封锁索引记录中的间隔，或者第一条索引记录之前的范围，又或者最后一条索引记录之后的范围。
@@ -336,3 +364,37 @@ select * from t where id=1 for update;
 如果一个会话占有了索引记录R的共享/排他锁，其他会话不能立刻在R之前的区间插入新的索引记录。
 临键锁的主要目的，也是为了避免幻读(Phantom Read)。如果把事务的隔离级别降级为RC，临键锁则也会失效。
  ~~~
+
+#### 源数据锁(metadata lock) Waiting for table metadata lock
+    KILL 掉某些事物占用的锁，使DDL成功，然后进而不阻塞其他DML操作。
+    
+    设置锁超时短些 lock_wait_timeout
+    
+    DML（data manipulation language）数据操纵语言：
+        就是我们最经常用到的 SELECT、UPDATE、INSERT、DELETE。 主要用来对数据库的数据进行一些操作
+        
+    DDL（data definition language）数据库定义语言：
+        其实就是我们在创建表的时候用到的一些sql，比如说： CREATE、ALTER、DROP、TRUNCATE等。
+        DDL主要是用在定义或改变表的结构，数据类型，表之间的链接和约束等初始化工作上。
+   
+    DQL(Data Query Language) 数据查询语言DQL：
+        select 相关
+             
+    DCL（Data Control Language）数据库控制语言：
+        是用来设置或更改数据库用户或角色权限的语句，包括（grant,deny,revoke等）语句。这个比较少用到
+
+#### 锁等待超时，尝试重启事物 Lock wait timeout exceeded; try restarting transaction
+    出现死锁应该从锁的源头进行排查，这里需要和业务逻辑相互结合进行排查。
+    DB: information_schema(数据库相关信息)
+    
+    Table:
+    innodb_trx 当前运行的所有事务
+    innodb_locks 当前出现的锁
+    innodb_lock_waits 锁等待的对应关系
+    可以使用 Desc 查看表结构。
+    
+    通过 状态 进行排除，  kill 对应的 死锁。 
+    select * from information_schema.innodb_trx;
+    
+    设置锁的超时时间
+    show variables like '%lock_wait_timeout%';
