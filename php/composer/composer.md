@@ -178,3 +178,7 @@ require 'vendor/autoload.php';
             }
         }
     }
+    
+#### 兼容性
+    1. TP > 5.0 使用 composer:2.0.0 以上，无法下载 thinkphp 主体框架，
+       建议回退到 composer:1.*.* 最新版本。

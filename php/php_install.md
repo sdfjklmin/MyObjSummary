@@ -40,6 +40,44 @@
     cmake ..
     make && make install
     
+#### 常见依赖错误
+    No package 'sqlite3' found
+    ==> sudo apt-get install libsqlite3-dev
+    
+    No package 'oniguruma' found
+    ==> sudo apt install libonig-dev
+    
+    Error:no acceptable C compiler found in $PATH (没有gcc)
+    ==> yum install gcc
+    
+    Configure: error: Cannot find OpenSSL's <evp.h>
+    ==> yum install libssl-dev 
+    
+    Undefined reference to `libiconv_open` 无法编译PHP libiconv
+    ==> #wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
+        #tar -zxvf libiconv-1.13.1.tar.gz
+        #cd libiconv-1.13.1
+        # ./configure --prefix=/usr/local/libiconv
+        # make
+        # make install
+        再检查php，指定 iconv的位置 --with-iconv=/usr/local/libiconv
+        #./configure --with-iconv=/usr/local/libiconv
+        #make
+        #make install
+        或者
+        --without-iconv #不安装:-D
+        
+    Please check your autoconf installation and the	$PHP_AUTOCONF environment variable. Then, rerun this script.
+    ==> 错误提示:没有autoconf.autoconf依赖于m4
+        yum install m4
+        yum install autoconf
+    
+    Jpeglib.h not found
+    ==> yum -y install libjpeg-devel
+    
+    Png.h not found
+    ==> yum -y install libpng-devel      
+      
 #### 下载 [官网地址](https://www.php.net/downloads.php)
     官方下载 php.tar.gz
     
