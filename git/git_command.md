@@ -276,6 +276,7 @@ git push --set-upstream origin mantis_80_withdraw
     # 将.js、.css、.html当作python语言来统计
 
 ##### 查看git全局配置
+    git config --list
     git config --global --list
     //新增全局配置
     git config --global --add key value
