@@ -302,6 +302,9 @@
         find   / -user   fred       #查找在系统中属于FRED这个用户的文件
         
         find  / -type f -name "*.txt" | xargs grep "Hello"
+        
+        #找到当前目录下，以 .tar 结尾的，执行移动命令
+        find . -name “*.tar” -exec mv {}./backup/
 ##### grep   
     在文本中查找
     grep a1 /home/test/t1.php  /home/test/t2.php  在t1.php,t2.php中查找a1
