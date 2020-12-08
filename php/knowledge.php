@@ -736,3 +736,29 @@ $arr2 = array_chunk($arr,1);
 	$trans = array("hello" => "hi", "hi" => "hello");
 	echo strtr("hi all, I said hello", $trans);
 	//hello all, I said hi
+
+#68. trait 实现代码复用 (PHP为但继承，不能同时继承多个类，使用 trait 进行复用)，单基础复用机制。
+#优先级: 优先顺序是来自当前类的成员覆盖了 trait 的方法，而 trait 则覆盖了被继承的方法。
+trait TestTrait
+{
+	public function t1()
+	{
+
+	}
+
+	public function t2()
+	{
+
+	}
+}
+
+class TestTraitClass
+{
+	use TestTrait;
+
+	public function test()
+	{
+		$this->t1();
+		$this->t2();
+	}
+}
