@@ -38,3 +38,27 @@
 	
 	#查看
 	whereis vsftpd
+
+#### 上传 put
+    格式：put local-file [remote-file]
+    将本地文件上传到服务器home目录下面/home,并改名为2.htm
+    ftp> put 1.htm /home/2.htm
+
+#### 下载 get
+    格式：get [remote-file] [local-file]
+    将服务器文件/home/1.htm下载到本地
+    ftp> get /usr/your/1.htm 1.htm，回车
+
+
+#### FTP 测试
+```
+ftp 12.34.56.78
+Name (000:test): 
+    (input you ftp username)
+Password:
+    (input you ftp username passwd)
+
+put
+
+get
+```
