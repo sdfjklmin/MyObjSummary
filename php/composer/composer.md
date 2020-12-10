@@ -179,6 +179,14 @@ require 'vendor/autoload.php';
         }
     }
     
-#### 兼容性
+#### 常见问题
     1. TP > 5.0 使用 composer:2.0.0 以上，无法下载 thinkphp 主体框架，
        建议回退到 composer:1.*.* 最新版本。
+
+    2. Failed, trying the next URL (0: The "https://dl.laravel-china.org/guzzlehttp/guzzle/407b0cb880ace85c9b63c5f9551db498cb2d50ba.zip" 
+       file could not be downloaded: SSL operation failed with code 1. OpenSSL Error messages:
+       error:1416F086:SSL routines:tls_process_server_certificate:certificate verify failed
+       Failed to enable crypto
+    ==> 根据提示报错，定位为 SSL 证书问题。本地错误概率很小
+        点击下载的地址，你会发现此地址为非安全地址(本地项目读取了lock没有更新)
+        删除 composer.lock ，再次安装
