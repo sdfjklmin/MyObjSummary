@@ -259,6 +259,8 @@
         		
     常用权限:
         文件夹:755   普通文本:644
+        find -type d | xargs chmod 755
+        find -type f | xargs chmod 644
         
     chmod +x filename                               ### 为 user ，group ，others 添加执行权限
     chmod -x filename                               ### 取消 user ， group ，others 的执行权限
