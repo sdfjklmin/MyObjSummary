@@ -763,3 +763,16 @@ class TestTraitClass
 		$this->t2();
 	}
 }
+
+#69.JsonSerializable Json序列号接口
+class JsonSTest implements JsonSerializable
+{
+
+	/**
+	 * @return mixed
+	 */
+	public function jsonSerialize()
+	{
+		// TODO: Implement jsonSerialize() method.
+	}
+}
