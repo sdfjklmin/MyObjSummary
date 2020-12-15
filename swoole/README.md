@@ -43,5 +43,10 @@ m为TaskWorker进程数，
 - [WebSocketServerPush](./official/WebSocketServerPush.php)
 - [Timer](./official/Timer.php) [Official](https://wiki.swoole.com/wiki/page/p-timer.html)
 
-### 自绘图
+#### 自绘图
 ![SwooleAll](../webIndex/img/swoole.png){:height="100px" width="400px"}
+
+
+#### 遇到的问题
+1. [NOTICE] swFactoryProcess_finish (ERRNO 1005): connection[fd=7] does not exist
+   服务器与客户端建立连接，客户端连接关闭，服务端响应(发送消息或者操作响应)客户端。
