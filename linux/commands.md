@@ -474,7 +474,10 @@
 	PermitRootLogin no
 
 ##### 4.登录提示信息
-	编辑 vi /etc/motd 即可
+	CentOs: 编辑 vi /etc/motd 即可
+    Ubuntu: cd /etc/update-motd.d, 这里面都是 shell,
+            可以发现目录中的文件名都是数字开头的, 数字越小的文件越先加载
+            可以修改也可以新增
 
 ##### 5.自定义命令
     a.直接修改系统命令
