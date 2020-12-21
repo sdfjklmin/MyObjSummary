@@ -93,6 +93,10 @@ return [
 					'url'   => '#',
 					'menu'  => [
 						[
+							'title' => '目录说明',
+							'url'   => '/linux/dir',
+						],
+						[
 							'title' => '常用命令',
 							'url'   => '/linux/commands',
 						],
