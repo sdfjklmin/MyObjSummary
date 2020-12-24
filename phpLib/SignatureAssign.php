@@ -485,6 +485,39 @@ class SignatureFactory
 	}
 
 }
+
+class SignKeySecurity
+{
+	// app_key + app_security  = unique | only match
+
+	protected $app_key      = 'app_key_test';
+
+	protected $app_security = 'app_key_security';
+
+	public function encrypt(): array
+	{
+		$data         = [
+			'data_a' => 'a',
+			'data_b' => 'b',
+			'data_c' => 'c',
+			'rand_s' => time(),
+			'appKey' => $this->app_key
+		];
+		sort($data);
+		$str          = http_build_query($data);
+		$data['sign'] = md5($str . $this->app_security);
+		return $data;
+	}
+
+	public function decrypt($data)
+	{
+		parse_str($data,$strArr);
+		$app_key = $strArr['appKey'];
+		//get app_security by app_key
+		sort($strArr);
+		return true;
+	}
+}
 //----------------------------
 // 使用示例					 |
 //----------------------------
@@ -511,3 +544,8 @@ $secretKey   = 'f76f58e3ba30ec46f5b3265c2f3989851c5c582a';
 $sha1Encrypt = $sha1Model->encrypt($secretId, $secretKey);
 var_dump($sha1Encrypt, $sha1Model->decrypt($sha1Encrypt, '', $secretId, $secretKey));
 exit();*/
+
+//app_key,app_security
+/*$appModel = new SignKeySecurity();
+$test1 = $appModel->encrypt();
+$test2 = $appModel->decrypt("a=1&b=3");*/

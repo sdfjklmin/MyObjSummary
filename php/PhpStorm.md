@@ -128,6 +128,11 @@
 #### Shift + DEl (删除当前行)
 
 #### Shift + Enter (跳转到新生成的一行)
+
+#### Ctrl + F12  (查看结构体:structure)
+
+#### Alt + 7  将结构体(structure)显示在侧边栏(sidebar)
+
 ## 编辑器卡顿
 ~~~
 phpstorm是由java编写而成，可以通过配置参数来进行优化
