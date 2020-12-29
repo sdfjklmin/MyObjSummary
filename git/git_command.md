@@ -119,6 +119,9 @@ git reset --hard HEAD~3
 #回退到指定commit
 git reset --hard commit-id
 
+#当前版本的commit-id
+git rev-parse HEAD
+
 ```
 
 ##### 标签
