@@ -488,6 +488,12 @@
         在最后一行添加
         alias test="cd /minCmd"	
         source /etc/bashrc  # 使更改配置生效
+    a1. alias 
+        #显示所有别名
+        alias
+      
+        #设置别名
+        alias sshpro="/usr/bin/expect sshLogin.sh"
     b.建立shell脚本
     c.linux自定义service
         tt.service
