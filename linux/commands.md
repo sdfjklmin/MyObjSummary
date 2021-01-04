@@ -258,7 +258,7 @@
         4		  2			1
         		
     常用权限:
-        文件夹:755   普通文本:644
+        文件夹:755   普通文本:644 | 664
         find -type d | xargs chmod 755
         find -type f | xargs chmod 644
 
