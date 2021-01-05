@@ -192,12 +192,15 @@
     order by field (id,1,2,3,5,4,6)
     ;        
 
-20. like escape(逃逸),在like中某也字符串被mysql赋予了一些规则
+20. like escape(逃逸)
+    
+
+    在like中某些字符串被mysql赋予了一些规则
     %   全部匹配
     _   只匹配一个
     如果查询内容包含 %，_ 或者其它特殊意义字符，则需要使用 escape 进行转义
     Table: tt
-    Data:
+    Data :
         ID  VAR_NAME
         1	小A%
         2	张%三
@@ -220,5 +223,35 @@
     
     #4,5,6
     select * from tt where var_name like "_M";
+
+21. 查看表数据大小
+
+
+    #单表大写
+    select concat(round((DATA_LENGTH/1024/1024),2),'M') as table_size,
+    table_name
+    from information_schema.tables
+    where table_schema='数据库名称'
+    AND table_name='表名称';
+
+    #库大小
+    select concat(sum(round((DATA_LENGTH/1024/1024)),2),'M') as table_size,
+    table_name
+    from information_schema.tables
+    where table_schema='数据库名称';
+
+22. 优化表存储
+
+
+    #优化表(更新删除表示，缓存，冗余等)
+    optimize table tableName;
+
+
+23. information_schema 系统库
+
+
+    #所有库中的表的字段
+    information_schema.columns
     
-    
+    #所有库中的表
+    information_schema.tables
