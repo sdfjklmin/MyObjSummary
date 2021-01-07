@@ -118,6 +118,19 @@ Postman将启用语法突出显示并将相关标头附加到您的请求。
 
 ###### GraphQL : github API 格式
 
+#### Pre-request Script 预请求脚本
+~~~
+这里可以提前请求某些接口，然后设置环境变量。
+自动设置签名：
+pm.sendRequest("http://api.com/sign", function (err, response) {
+    //打印返回信息
+    console.log(response.json());
+    console.log(response.json().msg);
+    //根据返回信息设置环境变量
+    pm.environment.set('local_sign', response.json().msg);
+});
+~~~
+
 #### Authorization : 验证
 
 ###### 单一授权
