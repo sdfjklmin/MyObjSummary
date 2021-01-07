@@ -201,3 +201,10 @@ server {
     |
            |         
     nginx 将结果通过 http 返回给浏览器
+
+# 恶意访问
+    
+    服务启动，但是过了几秒直接瘫痪，可以考虑访问量过多，或者恶意访问！
+
+    #查看近期IP访问
+    tail -3000 access.log | awk '{print $1}' | sort | uniq -c
