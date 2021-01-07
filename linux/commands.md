@@ -906,7 +906,10 @@ cat table.txt | awk '{print $2}'
 #bom
 #toy
 
-cat table.txt | awk  -F: '{print $2}'  # -F:, 以 : 为分隔符
+cat table.txt | awk  -F: '{print $2}'  # -F:, 以 : 
+
+#统计第一列出现的次数和内容
+tail -3000 access.log | awk '{print $1}' | sort | uniq -c
 ```
 
 ##### 48. seq 1 15 
