@@ -335,6 +335,12 @@ git push --set-upstream origin mantis_80_withdraw
     
     #本地启动服务
     bundle exec jekyll serve
+
+    #本地启动服务,跟踪日志
+    bundle exec jekyll serve  --trace
+
+    #指定端口
+    bundle exec jekyll serve -P 4001 
     
     #由于git对空间有权限限制,所以部分插件可能本地生效,线上没有生效
     将生成的 _site/ 设置为对应 项目 的源文件
