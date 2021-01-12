@@ -318,6 +318,9 @@ git push --set-upstream origin mantis_80_withdraw
     #使用gem安装插件
     gem install jekyll-pages
     
+    #安装对应版本的 bundle
+    gem install bundler -v 2.0.1
+
     #第一次构建，基础插件
     bundle install
     
