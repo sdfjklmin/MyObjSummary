@@ -318,6 +318,12 @@ git push --set-upstream origin mantis_80_withdraw
     #使用gem安装插件
     gem install jekyll-pages
     
+    #安装插件
+    gem install 'jekyll-paginate'
+
+    #向配置中添加插件内容
+    _config.yml => plugins: [jekyll-paginate]
+    
     #安装对应版本的 bundle
     gem install bundler -v 2.0.1
 
