@@ -321,6 +321,9 @@ git push --set-upstream origin mantis_80_withdraw
     #安装对应版本的 bundle
     gem install bundler -v 2.0.1
 
+    #can't find gem bundler (>= 0.a) with executable bundle
+    代码克隆下来后，有可能存在 Gemfile.lock，删除 Gemfile.lock 重新构建
+
     #第一次构建，基础插件
     bundle install
     
