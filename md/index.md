@@ -29,7 +29,8 @@
 *****
 
 ### 5.图片
-![名称](地址)
+![名称](地址){:height="100px" width="400px"}
+
 ![Image text](https://github.com/sdfjklmin/MyObjSummary/blob/master/serviceMesh/img/shape.png)
 
 ![备注][快速链接]
