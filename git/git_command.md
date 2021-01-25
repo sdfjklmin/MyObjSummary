@@ -97,6 +97,8 @@ git push -u origin master:master
 1.冲突
     git reset --hard  #放弃本地冲突代码
     git pull
+
+#如果ssh正确配置，权限也正常。但是无法获取远程代码，可以尝试新建文件夹进行拉取。
 ```
 
 ##### git rest
