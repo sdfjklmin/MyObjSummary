@@ -26,7 +26,8 @@
     #查看进程
     show processlist;
     
-    #查看所有进程
+    #查看所有进程,可以根据具体的响应时间进行排查
+    #手动 kill 时间较长的死进程
     show full processlist;
     
     #显示线程状态
