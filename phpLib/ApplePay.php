@@ -66,6 +66,25 @@ class ApplePayVerify
         return new self($bundle_id);
     }
 
+	/**
+	 * @param int $code
+	 * @return string
+	 */
+    protected function errorCode($code = 0)
+	{
+		return [
+			0     => '成功',
+			21000 => 'App Store无法读取你提供的JSON数据',
+			21002 => '收据数据不符合格式',
+			21003 => '收据无法被验证',
+			21004 => '你提供的共享密钥和账户的共享密钥不一致',
+			21005 => '收据服务器当前不可用',
+			21006 => '收据是有效的，但订阅服务已经过期。当收到这个信息时，解码后的收据信息也包含在返回内容中',
+			21007 => '收据信息是测试用（sandbox），但却被发送到产品环境中验证',
+			21008 => '收据信息是产品环境中使用，但却被发送到测试环境中验证',
+		][$code];
+	}
+
     /** 设置环境，默认为沙箱环境
      * @param bool $isSandbox
      * @return $this
@@ -211,6 +230,10 @@ class ApplePayVerify
             //多物品购买时
             // in_app为多个(坑)
             // ios一次支付可能返回多个,可能是上次成功后没有及时返回,这次成功后会把上次或上上次成功的返回
+			// 通过不同的订阅类型进行处理：
+			// 普通:单产品会在in_app中，订单号独立
+			// 连续订阅:订单号可能会和第一次订单号相同，去重的时候需要特殊处理
+			//一次性购买:通过官方文档和返回数据进行处理
             if (!empty($inAppData = $data['receipt']['in_app'])) {
                 //处理自身逻辑
                 $this->appleAppData($inAppData);
