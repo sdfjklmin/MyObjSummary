@@ -251,7 +251,10 @@
 
 
     #所有库中的表的字段
-    information_schema.columns
+    select * from information_schema.columns
     
     #所有库中的表
-    information_schema.tables
+    select * from information_schema.tables
+
+    #程序列表，类比 show full processlist ;
+    select * from information_schema.processlist;
