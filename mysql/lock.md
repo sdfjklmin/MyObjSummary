@@ -453,10 +453,18 @@ for update nowait 锁住表或者锁住行，只允许当前事务进行操作�
 |18094117	|pro_link	|172.27.0.4:34122	|vdsns	|Execute	|30	    |updating |UPDATE `pyjy_member_account` SET `account` = 'oqYpgtzv7Q8nFRJzTIJrMWJIbXss' , `token` = 'ff912be664f352cfe162e830894908a1' , `token_expire` = 1614823655 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 61 , `invite_code` = '65c95a40e39461e2f16e89e5f797265c' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354756 |
 
 分析：等待行锁
-
 >354754 出现了 8 次，均为 `update`，每次更新的 `account` 都不相同。
 > 
 >注册逻辑为账号分配+事物。当并发量比较高的时候，单毫秒随机分配可能对应多个用户，`find one`、`get one`、`one` 等都会失效。
 > 
 >比如： 用户ID `354754` 对应了 `8` 个用户。由于注册逻辑中包含了事物，导致多事物同时操作一条数据，
 > `sql 语句` 可能会触发 `锁` 相关的问题，导致 `cup` 处理变慢，从而导致卡顿，甚至宕机。
+
+分析： Gap Lock 
+> `pyjy_member_third_login`
+> 
+> column：`member_id(pk)`，`open_id`
+> 
+> 由于 `member_id` 来源于 `pyjy_member_account -> id`，相对随机。
+> 
+> 当出于事物时，会触发 `Gap Lock` 。
