@@ -12,6 +12,9 @@
 #克隆地址，分为 https(推送代码需要输入用户信息) 和 ssh(配置rsa，不需要输入用户信息) 。
 git clone git@github.com:sdfjklmin/laraval.git
 
+#当使用 sudo 进行克隆时，有可能会出现权限问题，去掉 sudo 重新试下
+sudo git clone git@gitree.com:aaa/bb.git
+
 #添加版本控制
 git add .
 
