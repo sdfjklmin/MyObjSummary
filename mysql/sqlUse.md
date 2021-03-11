@@ -273,4 +273,14 @@
     通过 PK id = 477，找到对应索引，找到对应的叶子节点，这个阶段属于 execution 。
     在 execution 时，S1 和 S2 大体时间相同。在叶子节点获取数据的时候，即 fetching 时间差异较大。
     在 fetching  时，如果单表字段比较多的时候，这个时候差异比较大，数据源大小不一样。
+    示例：
+        id int 4 byte
+        age tinyint 1 byte
+        nickname varchar(30)  30 byte
+        其它字段 总占用 1M
+        总计： 1M + 4 byte + 1 byte + 30 byte = 1M 35byte
+
+    fetching： 
+        S1 => 35byte
+        S2 => 1M 35byte
     
