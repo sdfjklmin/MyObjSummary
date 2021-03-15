@@ -1212,4 +1212,11 @@ cut  -f '3,4' -d ' ' file.txt #截取 3 和 4 字段,以 空格 分割 => 9 10
     原因:磁盘满了
     解决:
         启动 -> 快捷键(Shift,F2,F12,U盘启动盘,...具体看电脑) -> 选择 'Ubuntu高级选项'
-        -> 最新的一个(recovery mode) -> 点击 'root' -> 根据 'df | du' 进行逐步删除 
+        -> 最新的一个(recovery mode) -> 点击 'root' -> 根据 'df | du' 进行逐步删除
+
+##### 67. Ubuntu:  cannot install "xx": snap "xx"  has "install-snap" change in progress
+    # 查看未安装完成的软件
+    snap changes
+
+    #终止对应的ID
+    sudo snap abort 5
