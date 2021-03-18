@@ -2,7 +2,7 @@
    
    sudo /etc/init.d/vmware strt 或 ystemctl start vmware
 
-2. he Vm can't run. please check you vm.log
+2.  当虚拟机无法启动时，可以根据具体的 Vmware.log 进行排查。
 
 3. This host supports Intel VT-x,but Intel VT-x is disabled
 
