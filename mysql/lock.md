@@ -428,3 +428,43 @@ for update nowait 锁住表或者锁住行，只允许当前事务进行操作�
 
 设置锁等待超时参数：innodb_lock_wait_timeout，这个参数并不是只用来解决死锁问题，在并发访问比较高的情况下，如果大量事务因无法立即获得所需的锁而挂起，会占用大量计算机资源，造成严重性能问题，甚至拖跨数据库。我们通过设置合适的锁等待超时阈值，可以避免这种情况发生。
 
+##### 3.5 业务分析
+风险提示：等待行锁
+
+注册会话快照：
+
+|id	| user	|host	|db	|command	|time	|state| info |
+| :------:   | :-----:  | :----: | :----:| :---:| :---:| :---:| :---:|
+|18077187	|pro_link	|172.27.0.4:38548	|vdsns	|Execute	|449	|updating |DELETE FROM `pyjy_member_third_login` WHERE `member_id` = 353424 |
+|18093488	|pro_link	|172.27.0.4:52505	|vdsns	|Execute	|46	    |updating |UPDATE `pyjy_member_account` SET `account` = '930222D967F87C6B32BC01576FE78604' , `token` = 'b3fd932e262dd61acef925edb93c84b2' , `token_expire` = 1614823639 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 37 , `invite_code` = 'f031e00749ab64d4333e606130c6a22e' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093496	|pro_link	|172.27.0.4:52613	|vdsns	|Execute	|46	    |updating |UPDATE `pyjy_member_account` SET `account` = '0783E89A040DF376CA34DF035125BACF' , `token` = 'b3fd932e262dd61acef925edb93c84b2' , `token_expire` = 1614823639 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 53 , `invite_code` = 'f031e00749ab64d4333e606130c6a22e' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093491	|pro_link	|172.27.0.4:52534	|vdsns	|Execute	|46	    |updating |UPDATE `pyjy_member_account` SET `account` = '15138493313' , `token` = 'b3fd932e262dd61acef925edb93c84b2' , `token_expire` = 1614823639 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 43 , `invite_code` = 'f031e00749ab64d4333e606130c6a22e' , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093549	|pro_link	|172.27.0.4:53586	|vdsns	|Execute	|44	    |updating |UPDATE `pyjy_member_account` SET `account` = '19560718036' , `token` = '84164aa936b149b43d8a17314c744f69' , `token_expire` = 1614823641 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 30 , `invite_code` = '9b10dec5a4da46552e20b58e2b1dd429' , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093562	|pro_link	|172.27.0.4:53780	|vdsns	|Execute	|44	    |updating |UPDATE `pyjy_member_account` SET `account` = '17391981239' , `token` = '84164aa936b149b43d8a17314c744f69' , `token_expire` = 1614823641 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 34 , `invite_code` = '9b10dec5a4da46552e20b58e2b1dd429' , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093546	|pro_link	|172.27.0.4:53494	|vdsns	|Execute	|44	    |updating |UPDATE `pyjy_member_account` SET `account` = 'oqYpgtxCfv7kz0VzxQ24pgkx7RJw' , `token` = '84164aa936b149b43d8a17314c744f69' , `token_expire` = 1614823641 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 23 , `invite_code` = '9b10dec5a4da46552e20b58e2b1dd429' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093680	|pro_link	|172.27.0.4:55578	|vdsns	|Execute	|41	    |updating |UPDATE `pyjy_member_account` SET `account` = '17861511276' , `token` = 'f474940c7e6fe6d897ed551d192fe745' , `token_expire` = 1614823644 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 27 , `invite_code` = 'c1b1b794c46c4219a405fe162cc79747' , `register_is_finished` = 0 WHERE `id` = 354754 |
+|18093821	|pro_link	|172.27.0.4:57776	|vdsns	|Execute	|39	    |updating |UPDATE `pyjy_member_account` SET `login_date_cnt` = 1 , `free_time` = 1612404446 , `last_login_ip` = 989067844 , `hb_time` = 1612404446 , `machine` = 'HUAWEI FRL-AN00a android 10' WHERE `id` = 354754 |
+|18093843	|pro_link	|172.27.0.4:58234	|vdsns	|Execute	|37	    |updating |UPDATE `pyjy_member_account` SET `account` = '15751656669' , `token` = 'bbe2d320f7081efa124176927950d7ca' , `token_expire` = 1614823648 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 32 , `invite_code` = '78d8d45da6a7f20e49b2d6810b3616dd' , `register_is_finished` = 0 WHERE `id` = 354755 |
+|18093820	|pro_link	|172.27.0.4:57718	|vdsns	|Execute	|37	    |updating |UPDATE `pyjy_member_account` SET `account` = '412141BA7BB60272460CCCF0D11D3A07' , `token` = 'bbe2d320f7081efa124176927950d7ca' , `token_expire` = 1614823648 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 14 , `invite_code` = '78d8d45da6a7f20e49b2d6810b3616dd' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354755 |
+|18094060	|pro_link	|172.27.0.4:33288	|vdsns	|Execute	|33	    |updating |UPDATE `pyjy_member_account` SET `login_date_cnt` = 1 , `free_time` = 1612404452 , `last_login_ip` = 2871237327 , `hb_time` = 1612404452 , `machine` = 'Xiaomi M2011K2C android 11' WHERE `id` = 354755 |
+|18094087	|pro_link	|172.27.0.4:33636	|vdsns	|Execute	|31	    |updating |UPDATE `pyjy_member_account` SET `account` = 'oqYpgt31XDLbcdFRXiVP9dztOt-U' , `token` = '4d51a529eecb29d03d0fa494d77e6bd3' , `token_expire` = 1614823654 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 21 , `invite_code` = 'b9bcee0db031514b39cacb8d83452ab0' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354756 |
+|18094094	|pro_link	|172.27.0.4:33786	|vdsns	|Execute	|31	    |updating |UPDATE `pyjy_member_account` SET `account` = '15918293696' , `token` = '4d51a529eecb29d03d0fa494d77e6bd3' , `token_expire` = 1614823654 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 51 , `invite_code` = 'b9bcee0db031514b39cacb8d83452ab0' , `register_is_finished` = 0 WHERE `id` = 354756 |
+|18094147	|pro_link	|172.27.0.4:35052	|vdsns	|Execute	|31	    |updating |UPDATE `pyjy_member_account` SET `login_date_cnt` = 1 , `free_time` = 1612404454 , `last_login_ip` = 1699913819 , `hb_time` = 1612404454 , `machine` = 'Redmi M2006J10C android 10' WHERE `id` = 354755 |
+|18094117	|pro_link	|172.27.0.4:34122	|vdsns	|Execute	|30	    |updating |UPDATE `pyjy_member_account` SET `account` = 'oqYpgtzv7Q8nFRJzTIJrMWJIbXss' , `token` = 'ff912be664f352cfe162e830894908a1' , `token_expire` = 1614823655 , `prepare_state` = 3 , `nickname` = '' , `avatar` = '' , `sign` = '' , `address_distance` = 61 , `invite_code` = '65c95a40e39461e2f16e89e5f797265c' , `have_phone` = 0 , `register_is_finished` = 0 WHERE `id` = 354756 |
+
+分析：等待行锁
+>354754 出现了 8 次，均为 `update`，每次更新的 `account` 都不相同。
+> 
+>注册逻辑为账号分配+事物。当并发量比较高的时候，单毫秒随机分配可能对应多个用户，`find one`、`get one`、`one` 等都会失效。
+> 
+>比如： 用户ID `354754` 对应了 `8` 个用户。由于注册逻辑中包含了事物，导致多事物同时操作一条数据，
+> `sql 语句` 可能会触发 `锁` 相关的问题，导致 `cup` 处理变慢，从而导致卡顿，甚至宕机。
+
+分析： Gap Lock 
+> `pyjy_member_third_login`
+> 
+> column：`member_id(pk)`，`open_id`
+> 
+> 由于 `member_id` 来源于 `pyjy_member_account -> id`，相对随机。
+> 
+> 当出于事物时，会触发 `Gap Lock` 。

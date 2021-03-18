@@ -251,7 +251,36 @@
 
 
     #所有库中的表的字段
-    information_schema.columns
+    select * from information_schema.columns
     
     #所有库中的表
-    information_schema.tables
+    select * from information_schema.tables
+
+    #程序列表，类比 show full processlist ;
+    select * from information_schema.processlist;
+
+24. select 使用
+
+
+    #查询 固定的字段 S1
+    select id,age,nickname from member_account where id = 477;
+    1 row retrieved starting from 1 in 54 ms (execution: 26 ms, fetching: 28 ms)
+
+    #查询 所有字段 S2
+    select * from member_account where id = 477;
+    1 row retrieved starting from 1 in 190 ms (execution: 36 ms, fetching: 154 ms)
+
+    通过 PK id = 477，找到对应索引，找到对应的叶子节点，这个阶段属于 execution 。
+    在 execution 时，S1 和 S2 大体时间相同。在叶子节点获取数据的时候，即 fetching 时间差异较大。
+    在 fetching  时，如果单表字段比较多的时候，这个时候差异比较大，数据源大小不一样。
+    示例：
+        id int 4 byte
+        age tinyint 1 byte
+        nickname varchar(30)  30 byte
+        其它字段 总占用 1M
+        总计： 1M + 4 byte + 1 byte + 30 byte = 1M 35byte
+
+    fetching： 
+        S1 => 35byte
+        S2 => 1M 35byte
+    

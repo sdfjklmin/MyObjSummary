@@ -776,3 +776,6 @@ class JsonSTest implements JsonSerializable
 		// TODO: Implement jsonSerialize() method.
 	}
 }
+
+#70.时间戳,4位小数
+$floatTime = microtime(true);

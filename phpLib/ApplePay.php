@@ -66,6 +66,25 @@ class ApplePayVerify
         return new self($bundle_id);
     }
 
+	/**
+	 * @param int $code
+	 * @return string
+	 */
+    protected function errorCode($code = 0)
+	{
+		return [
+			0     => '成功',
+			21000 => 'App Store无法读取你提供的JSON数据',
+			21002 => '收据数据不符合格式',
+			21003 => '收据无法被验证',
+			21004 => '你提供的共享密钥和账户的共享密钥不一致',
+			21005 => '收据服务器当前不可用',
+			21006 => '收据是有效的，但订阅服务已经过期。当收到这个信息时，解码后的收据信息也包含在返回内容中',
+			21007 => '收据信息是测试用（sandbox），但却被发送到产品环境中验证',
+			21008 => '收据信息是产品环境中使用，但却被发送到测试环境中验证',
+		][$code];
+	}
+
     /** 设置环境，默认为沙箱环境
      * @param bool $isSandbox
      * @return $this
@@ -211,6 +230,12 @@ class ApplePayVerify
             //多物品购买时
             // in_app为多个(坑)
             // ios一次支付可能返回多个,可能是上次成功后没有及时返回,这次成功后会把上次或上上次成功的返回
+			// 通过不同的订阅类型进行处理：
+			// 普通:单产品会在in_app中，订单号独立
+			// 连续订阅:订单号可能会和第一次订单号相同，去重的时候需要特殊处理
+			// 一次性购买:通过官方文档和返回数据进行处理
+			// 不同的处理可能数据源不用 $data['receipt], $data['latest_receipt_info'], $data['pending_renewal_info']
+			// 具体参考官方文档和返回示例
             if (!empty($inAppData = $data['receipt']['in_app'])) {
                 //处理自身逻辑
                 $this->appleAppData($inAppData);
@@ -308,6 +333,179 @@ class ApplePayVerify
     "time": 1589113847
 }';
     }
+
+
+    public function appleBackData()
+	{
+		/*array(6) {
+		["environment"] => string(10) "Production"
+		["receipt"] => array(18) {
+			["receipt_type"] => string(10) "Production"
+			["adam_id"] => int(1484898944)
+			["app_item_id"] => int(1484898944)
+			["bundle_id"] => string(24) "com.duluduludala.btvideo"
+			["application_version"] => string(1) "6"
+			["download_id"] => int(72080018155698)
+			["version_external_identifier"] => int(840064035)
+			["receipt_creation_date"] => string(27) "2021-01-25 16:30:32 Etc/GMT"
+			["receipt_creation_date_ms"] => string(13) "1611592232000"
+			["receipt_creation_date_pst"] => string(39) "2021-01-25 08:30:32 America/Los_Angeles"
+			["request_date"] => string(27) "2021-01-26 03:00:53 Etc/GMT"
+			["request_date_ms"] => string(13) "1611630053252"
+			["request_date_pst"] => string(39) "2021-01-25 19:00:53 America/Los_Angeles"
+			["original_purchase_date"] => string(27) "2020-11-04 04:21:31 Etc/GMT"
+			["original_purchase_date_ms"] => string(13) "1604463691000"
+			["original_purchase_date_pst"] => string(39) "2020-11-03 20:21:31 America/Los_Angeles"
+			["original_application_version"] => string(1) "2"
+			["in_app"] => array(4) {
+				[0] => array(12) {
+					["quantity"] => string(1) "1"
+					["product_id"] => string(4) "3002"
+					["transaction_id"] => string(15) "320000823953545"
+					["original_transaction_id"] => string(15) "320000823953545"
+					["purchase_date"] => string(27) "2021-01-25 16:30:32 Etc/GMT"
+					["purchase_date_ms"] => string(13) "1611592232000"
+					["purchase_date_pst"] => string(39) "2021-01-25 08:30:32 America/Los_Angeles"
+					["original_purchase_date"] => string(27) "2021-01-25 16:30:32 Etc/GMT"
+					["original_purchase_date_ms"] => string(13) "1611592232000"
+					["original_purchase_date_pst"] => string(39) "2021-01-25 08:30:32 America/Los_Angeles"
+					["is_trial_period"] => string(5) "false"
+					["in_app_ownership_type"] => string(9) "PURCHASED"
+      }
+      [1] => array(17) {
+					["quantity"] => string(1) "1"
+					["product_id"] => string(4) "2001"
+					["transaction_id"] => string(15) "320000776214684"
+					["original_transaction_id"] => string(15) "320000776214684"
+					["purchase_date"] => string(27) "2020-11-04 04:31:28 Etc/GMT"
+					["purchase_date_ms"] => string(13) "1604464288000"
+					["purchase_date_pst"] => string(39) "2020-11-03 20:31:28 America/Los_Angeles"
+					["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+					["original_purchase_date_ms"] => string(13) "1604464291000"
+					["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+					["expires_date"] => string(27) "2020-12-04 04:31:28 Etc/GMT"
+					["expires_date_ms"] => string(13) "1607056288000"
+					["expires_date_pst"] => string(39) "2020-12-03 20:31:28 America/Los_Angeles"
+					["web_order_line_item_id"] => string(15) "320000305342466"
+					["is_trial_period"] => string(5) "false"
+					["is_in_intro_offer_period"] => string(5) "false"
+					["in_app_ownership_type"] => string(9) "PURCHASED"
+      }
+      [2] => array(17) {
+					["quantity"] => string(1) "1"
+					["product_id"] => string(4) "2001"
+					["transaction_id"] => string(15) "320000791458617"
+					["original_transaction_id"] => string(15) "320000776214684"
+					["purchase_date"] => string(27) "2020-12-04 04:31:28 Etc/GMT"
+					["purchase_date_ms"] => string(13) "1607056288000"
+					["purchase_date_pst"] => string(39) "2020-12-03 20:31:28 America/Los_Angeles"
+					["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+					["original_purchase_date_ms"] => string(13) "1604464291000"
+					["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+					["expires_date"] => string(27) "2021-01-04 04:31:28 Etc/GMT"
+					["expires_date_ms"] => string(13) "1609734688000"
+					["expires_date_pst"] => string(39) "2021-01-03 20:31:28 America/Los_Angeles"
+					["web_order_line_item_id"] => string(15) "320000305342467"
+					["is_trial_period"] => string(5) "false"
+					["is_in_intro_offer_period"] => string(5) "false"
+					["in_app_ownership_type"] => string(9) "PURCHASED"
+      }
+      [3] => array(17) {
+					["quantity"] => string(1) "1"
+					["product_id"] => string(4) "2001"
+					["transaction_id"] => string(15) "320000809985451"
+					["original_transaction_id"] => string(15) "320000776214684"
+					["purchase_date"] => string(27) "2021-01-04 04:31:28 Etc/GMT"
+					["purchase_date_ms"] => string(13) "1609734688000"
+					["purchase_date_pst"] => string(39) "2021-01-03 20:31:28 America/Los_Angeles"
+					["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+					["original_purchase_date_ms"] => string(13) "1604464291000"
+					["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+					["expires_date"] => string(27) "2021-02-04 04:31:28 Etc/GMT"
+					["expires_date_ms"] => string(13) "1612413088000"
+					["expires_date_pst"] => string(39) "2021-02-03 20:31:28 America/Los_Angeles"
+					["web_order_line_item_id"] => string(15) "320000314493781"
+					["is_trial_period"] => string(5) "false"
+					["is_in_intro_offer_period"] => string(5) "false"
+					["in_app_ownership_type"] => string(9) "PURCHASED"
+      }
+    }
+  }
+  ["latest_receipt_info"] => array(3) {
+			[0] => array(18) {
+				["quantity"] => string(1) "1"
+				["product_id"] => string(4) "2001"
+				["transaction_id"] => string(15) "320000809985451"
+				["original_transaction_id"] => string(15) "320000776214684"
+				["purchase_date"] => string(27) "2021-01-04 04:31:28 Etc/GMT"
+				["purchase_date_ms"] => string(13) "1609734688000"
+				["purchase_date_pst"] => string(39) "2021-01-03 20:31:28 America/Los_Angeles"
+				["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+				["original_purchase_date_ms"] => string(13) "1604464291000"
+				["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+				["expires_date"] => string(27) "2021-02-04 04:31:28 Etc/GMT"
+				["expires_date_ms"] => string(13) "1612413088000"
+				["expires_date_pst"] => string(39) "2021-02-03 20:31:28 America/Los_Angeles"
+				["web_order_line_item_id"] => string(15) "320000314493781"
+				["is_trial_period"] => string(5) "false"
+				["is_in_intro_offer_period"] => string(5) "false"
+				["in_app_ownership_type"] => string(9) "PURCHASED"
+				["subscription_group_identifier"] => string(8) "20633812"
+    }
+    [1] => array(18) {
+				["quantity"] => string(1) "1"
+				["product_id"] => string(4) "2001"
+				["transaction_id"] => string(15) "320000791458617"
+				["original_transaction_id"] => string(15) "320000776214684"
+				["purchase_date"] => string(27) "2020-12-04 04:31:28 Etc/GMT"
+				["purchase_date_ms"] => string(13) "1607056288000"
+				["purchase_date_pst"] => string(39) "2020-12-03 20:31:28 America/Los_Angeles"
+				["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+				["original_purchase_date_ms"] => string(13) "1604464291000"
+				["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+				["expires_date"] => string(27) "2021-01-04 04:31:28 Etc/GMT"
+				["expires_date_ms"] => string(13) "1609734688000"
+				["expires_date_pst"] => string(39) "2021-01-03 20:31:28 America/Los_Angeles"
+				["web_order_line_item_id"] => string(15) "320000305342467"
+				["is_trial_period"] => string(5) "false"
+				["is_in_intro_offer_period"] => string(5) "false"
+				["in_app_ownership_type"] => string(9) "PURCHASED"
+				["subscription_group_identifier"] => string(8) "20633812"
+    }
+    [2] => array(18) {
+				["quantity"] => string(1) "1"
+				["product_id"] => string(4) "2001"
+				["transaction_id"] => string(15) "320000776214684"
+				["original_transaction_id"] => string(15) "320000776214684"
+				["purchase_date"] => string(27) "2020-11-04 04:31:28 Etc/GMT"
+				["purchase_date_ms"] => string(13) "1604464288000"
+				["purchase_date_pst"] => string(39) "2020-11-03 20:31:28 America/Los_Angeles"
+				["original_purchase_date"] => string(27) "2020-11-04 04:31:31 Etc/GMT"
+				["original_purchase_date_ms"] => string(13) "1604464291000"
+				["original_purchase_date_pst"] => string(39) "2020-11-03 20:31:31 America/Los_Angeles"
+				["expires_date"] => string(27) "2020-12-04 04:31:28 Etc/GMT"
+				["expires_date_ms"] => string(13) "1607056288000"
+				["expires_date_pst"] => string(39) "2020-12-03 20:31:28 America/Los_Angeles"
+				["web_order_line_item_id"] => string(15) "320000305342466"
+				["is_trial_period"] => string(5) "false"
+				["is_in_intro_offer_period"] => string(5) "false"
+				["in_app_ownership_type"] => string(9) "PURCHASED"
+				["subscription_group_identifier"] => string(8) "20633812"
+    }
+  }
+  ["latest_receipt"] => string(7916) "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"
+		["pending_renewal_info"] => array(1) {
+			[0] => array(4) {
+				["auto_renew_product_id"] => string(4) "2004"
+				["original_transaction_id"] => string(15) "320000776214684"
+				["product_id"] => string(4) "2001"
+				["auto_renew_status"] => string(1) "1"
+    }
+  }
+  ["status"] => int(0)
+}*/
+
+	}
 
     /** 自身业务处理
      * @param $appData
