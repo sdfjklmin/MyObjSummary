@@ -186,6 +186,9 @@
 ###### dpkg(ubuntu)
 
 ###### apt|apt-get(deb包管理式)
+    #列出所以的软件包
+    dpkg --list
+
     #安装
     sudo apt install <deb name>
 
