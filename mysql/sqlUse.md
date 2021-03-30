@@ -259,6 +259,11 @@
     #程序列表，类比 show full processlist ;
     select * from information_schema.processlist;
 
+    #查看对应库中的信息
+    select TABLE_NAME,TABLE_ROWS,TABLE_COMMENT from information_schema.tables where TABLE_SCHEMA = '库名'
+    and TABLE_NAME not like "一些条件"
+    order by TABLE_ROWS desc ;
+
 24. select 使用
 
 
