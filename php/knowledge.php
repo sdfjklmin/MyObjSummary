@@ -177,8 +177,8 @@
     }
 
 #24: final class className;最终类(不能用于继承)
-#    abstract class className; 抽象类(只能用于继承,和实现里面的方法)
-#    interface className ;接口类(只用用于继承实现)
+#    abstract class className; 抽象类(只能用于继承,和实现里面的方法，只能单继承，可以复用 trait 实现多类继承)
+#    interface className ;接口类(只用用于实现，可以多个实现)
 #    static function functionName;静态方法(无需new class)
 final class EndClass
 {
@@ -188,11 +188,51 @@ abstract class AbClass
 {
 
 }
-interface InterfaceClass
+abstract class CdClass
 {
 
 }
+interface InterfaceClass
+{
+    public function t1();
 
+    public function w1();
+}
+interface InterfaceTwoClass
+{
+    public function t2();
+
+    public function w2();
+}
+
+/** 可以实现多个接口，但是只能继承一个类，不过可以复用多类。
+ * Class TryExtentAndImp
+ */
+class TryExtentAndImp extends AbClass implements InterfaceClass,InterfaceTwoClass
+{
+    //复用多继承
+    use TestTrait;
+
+    public function t1()
+    {
+        // TODO: Implement t1() method.
+    }
+
+    public function w1()
+    {
+        // TODO: Implement w1() method.
+    }
+
+    public function t2()
+    {
+        // TODO: Implement t2() method.
+    }
+
+    public function w2()
+    {
+        // TODO: Implement w2() method.
+    }
+}
 #25: call_user_func_array(callable $callback , array $param_arr ) 调用回调函数，并把一个数组参数作为回调函数的参数
 	#call_user_func ( callable $callback [, mixed $parameter [, mixed $... ]] ) : mixed
 	#第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。
@@ -738,7 +778,7 @@ $arr2 = array_chunk($arr,1);
 	echo strtr("hi all, I said hello", $trans);
 	//hello all, I said hi
 
-#68. trait 实现代码复用 (PHP为但继承，不能同时继承多个类，使用 trait 进行复用)，单基础复用机制。
+#68. trait 实现代码复用 (PHP为单继承，不能同时继承多个类，使用 trait 进行复用)，单基础复用机制。
 #优先级: 优先顺序是来自当前类的成员覆盖了 trait 的方法，而 trait 则覆盖了被继承的方法。
 trait TestTrait
 {
