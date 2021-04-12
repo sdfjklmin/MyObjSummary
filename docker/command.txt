@@ -48,7 +48,7 @@
     容器日志 : docker logs <容器名orID>
     容器端口 : docker port <容器名orID>
     删除容器 : docker rm <容器名orID>
-    进入容器 : docker exec -it <容器名orID> /bin/bash
+    进入容器 : docker exec -it <容器名orID> /bin/bash |  /bin/sh (具体看对应的操作系统)
     导出容器 : docker export <容器名orID> >文件名.格式   => docker export mysql >mysql.tar
     导入容器 : docker import 文件名.格式
 
