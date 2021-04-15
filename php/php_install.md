@@ -157,6 +157,10 @@
 	sudo apt-get install gcc g++ libacl1-dev libxml2-dev libssl-dev openssl libssl-dev pkg-config libbz2-dev libcurl4-openssl-dev libpng12-dev libgd-dev libgmp-dev libedit-dev -y
     ./configure --prefix=/usr/local/php7.3 --htmldir=/usr/local/php7.3/doc --with-config-file-path=/usr/local/php7.3 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-fpm-acl --with-litespeed --enable-phpdbg --enable-phpdbg-webhelper --enable-phpdbg-debug --enable-debug --enable-sigchild --disable-short-tags --with-openssl --with-libxml-dir --with-system-ciphers --with-pcre-regex --with-pcre-jit --with-zlib --enable-bcmath --with-bz2 --enable-calendar --with-curl --enable-exif --with-gd --enable-ftp --with-freetype-dir --enable-gd-jis-conv --with-gettext --with-gmp --with-mhash --enable-intl --enable-mbstring --enable-pcntl --with-pdo-mysql --with-libedit --with-readline --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-zip --enable-mysqlnd --with-pear
 	
+    #Ubuntu简装
+    sudo apt-get install gcc g++ libacl1-dev libxml2-dev libssl-dev openssl libssl-dev pkg-config libbz2-dev libcurl4-openssl-dev libgd-dev libgmp-dev libedit-dev -y
+    ./configure --prefix=/usr/local/php7.3 --htmldir=/usr/local/php7.3/doc --with-config-file-path=/usr/local/php7.3 --enable-fpm --with-fpm-user=ubuntu --with-fpm-group=ubuntu --with-fpm-acl --with-litespeed --enable-phpdbg --enable-phpdbg-webhelper --enable-phpdbg-debug --enable-debug --enable-sigchild --disable-short-tags --with-openssl --with-libxml-dir --with-system-ciphers --with-pcre-regex --with-pcre-jit --with-zlib --enable-bcmath --with-bz2 --enable-calendar --with-curl --enable-exif --with-gd --enable-ftp  --enable-gd-jis-conv --with-gettext --with-gmp --with-mhash --enable-intl --enable-mbstring --enable-pcntl --with-pdo-mysql --with-libedit --with-readline --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-zip --enable-mysqlnd --with-pear
+
 #### 配置解释
     #查看当前配置说明
     ./configure --help | less
