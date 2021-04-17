@@ -181,7 +181,7 @@ require 'vendor/autoload.php';
     
 #### 常见问题
     1. TP > 5.0 使用 composer:2.0.0 以上，无法下载 thinkphp 主体框架，
-       建议回退到 composer:1.*.* 最新版本。
+    ==>   建议回退到 composer:1.*.* 最新版本。
 
     2. Failed, trying the next URL (0: The "https://dl.laravel-china.org/guzzlehttp/guzzle/407b0cb880ace85c9b63c5f9551db498cb2d50ba.zip" 
        file could not be downloaded: SSL operation failed with code 1. OpenSSL Error messages:
@@ -190,3 +190,11 @@ require 'vendor/autoload.php';
     ==> 根据提示报错，定位为 SSL 证书问题。本地错误概率很小
         点击下载的地址，你会发现此地址为非安全地址(本地项目读取了lock没有更新)
         删除 composer.lock ，再次安装
+
+    3. Could not find a version of package PackageName matching your minimum-stability (stable). Require it   
+       with an explicit version constraint allowing its desired stability.                                                                    
+    ==> composer require PackageName (composer 没有找到对应 Package 匹配的信息)
+    一般来说，在对应的 PackageName 后面加入对应的分支或者版本号，可以按照以下顺序尝试
+    ==> composer require PackageName master 
+    ==> composer require PackageName dev-master 
+    ==> composer require PackageName:1.*
