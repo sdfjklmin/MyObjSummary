@@ -15,7 +15,7 @@ git 钩子，主要用于触发一些操作，
       将 phpcs.phar 复制为 phpcs
       可以将 phpcs 和 ruleset.xml 配置成全局，也可以跟随项目。  
 
-#### phpcs 使用
+#### [phpcs](https://github.com/squizlabs/PHP_CodeSniffer) 使用
 
     单文件检测
     ~/phpcs --report=full --standard=~/ruleset.xml file.php
