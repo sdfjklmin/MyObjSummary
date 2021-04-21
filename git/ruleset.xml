@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset name="WptStandard">
+    <!--
+    https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties
+    所有规则,可以根据实际项目进行相关调整
+    -->
+    <description>微拍堂代码嗅探规则</description>
+    <arg name="tab-width" value="4"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg name="extensions" value="php"/>
+
+    <rule ref="Generic.WhiteSpace.ScopeIndent" />
+    <rule ref="PSR1">
+        <!-- 忽略php类文件中直接require文件 -->
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
+    <rule ref="PSR2">
+        <!--忽略下划线规则-->
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+        <exclude name="PSR2.Namespaces.UseDeclaration.MultipleDeclarations" />
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <!--单行字段宽度限制140字符-->
+            <property name="lineLimit" value="140"/>
+            <!--单行字段宽度超过160字符 报错-->
+            <property name="absoluteLineLimit" value="160"/>
+        </properties>
+    </rule>
+</ruleset>
+

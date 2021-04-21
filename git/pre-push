@@ -1,0 +1,49 @@
+#!/bin/sh
+ 
+# phpcs在你电脑的安装位置
+phpcs_bin=phpcs
+# ruleset.xml 在你电脑的位置 项目目下
+phpcs_coding_standard=ruleset.xml
+ 
+current_branch=$(git name-rev --name-only HEAD)
+ 
+# 忽略
+ignore=('gray', 'gray2', 't1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9')
+if [[ "${ignore[@]}" =~ "${current_branch}" ]]; then
+    exit 0
+fi
+ 
+base_commit=$(git merge-base origin/master $current_branch)
+ 
+# 检查本地文件修改 忽略vendor目录
+files=$(git diff-tree -r --name-only --diff-filter=M --diff-filter=A $base_commit $current_branch | grep -v "vendor" | grep ".php")
+ 
+if [ "$files" == "" ]; then
+  exit 0
+fi
+ 
+flag=0
+for file in $files; do
+  if [ -f "$file" ]; then 
+    # php 语法检查
+    check_out=$(php -l $file)
+    check_status=$?
+    if [ $check_status -ne 0 ]; then
+      echo "$check_out"
+      exit 1
+    fi
+    phpcs_out=$($phpcs_bin --report=full --standard=$phpcs_coding_standard "$file")
+    phpcs_retval=$?
+ 
+    if [ $phpcs_retval -ne 0 ]; then
+      echo "$phpcs_out"
+      flag=1
+    fi
+  fi
+done
+ 
+if [ "$flag" -eq 1 ]; then
+  exit 1
+fi
+ 
+exit 0
