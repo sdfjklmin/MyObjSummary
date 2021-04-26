@@ -492,3 +492,6 @@
 ##### 查看 `php-fpm` 个数
     ps -ylC php-fpm --sort:rss | wc -l
     ps -C php-fpm | wc -l
+
+##### [PHP文档](https://www.php.net/download-docs.php) 、 [PHP文档下载](https://www.php.net/download-docs.php)
+
