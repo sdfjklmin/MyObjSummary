@@ -1,7 +1,10 @@
 #### 
+在对应链接中搜索: MySQL Community Server
 [官网](https://www.mysql.com/) 
 [中文官网](https://www.mysql.com/cn/) 
 [社区下载](https://dev.mysql.com/downloads/)
+[直接下载](https://dev.mysql.com/downloads/mysql/)
+[官网下载](https://www.mysql.com/downloads/)
 
 #### 安装与启动
     #如果对应的源没有安装包,可以尝试更新 yum update, apt update, apt-get update
@@ -295,3 +298,25 @@
             Slave_IO_Running: Yes
             Slave_SQL_Running: Yes
 
+#### Mac 安装
+
+> 安装
+> 
+>>    在官网下载，安装，安装过程中会有默认密码，记得保存。
+> 
+>> 默认安装地址: /usr/local/mysql/bin
+
+> 重置密码:
+> 
+>>苹果 -> 系统偏好设置 -> mysql -> stop
+>>
+>> 进入 /usr/local/mysql-5.7.25-macos10.14-x86_64(具体看自己的安装地址)/bin
+>> 
+>> `sudo su`， `./mysqld_safe --skip-grant-tables`
+>> 
+>>  新开个终端
+    进入  /usr/local/mysql/bin 
+    运行 ./mysql -u root -p ,此时没有密码，直接回车即可。
+    修改密码: 具体的命令要根据版本信息，可自行搜索
+    刷新权限:
+    重新进入即可
