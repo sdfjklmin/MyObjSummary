@@ -11,7 +11,8 @@ A.安装composer
 	sudo mv composer.phar /usr/local/bin/composer  // 移动到默认安装目录
 B.进入的自己的项目路径 eg: /home/wwwroot/myobj/laravel
 	运行:
-		composer create-project laravel/laravel learnlaravel5  
+		composer create-project laravel/laravel learnlaravel5
+        composer create-project --prefer-dist laravel/laravel=5.6.*  laravel-blog
 C.运行
 	cd learnlaravel5/public  
 	php -S 0.0.0.0:1024  		
