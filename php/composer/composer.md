@@ -176,6 +176,13 @@ require 'vendor/autoload.php';
                 "type": "composer",
                 "url": "https://packagist.phpcomposer.com"
             }
+        },
+        //使用阿里镜像包
+        "repositories": {
+            "packagist": {
+                "type": "composer",
+                "url": "https://mirrors.aliyun.com/composer/"
+            }
         }
     }
     
