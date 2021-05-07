@@ -156,3 +156,7 @@
     $t = new \getID3();
     $ThisFileInfo = @$t->analyze($path); //分析文件，$path为音频文件的地址（文件绝对路径）
     $ThisFileInfo['playtime_seconds']; //时长
+
+#### E Company(Mac)
+
+    服务划分、SQL优化
