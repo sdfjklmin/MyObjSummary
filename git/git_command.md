@@ -365,7 +365,29 @@ git push --set-upstream origin mantis_80_withdraw
         ...
         index.html
         这里的内容在_site目录中,是本地构建生成的,提交后git直接显示不需要构建
-            
+##### Mac 安装 Jekyll 
+
+    Mac 系统自带了 Ruby ，不建议移除，因为有太多依赖。
+    通过 brew 进行安装，
+        brew install ruby 
+
+    安装过后，具体看提示信息，因为存在ruby，系统默认不会替换默认配置。
+    具体路径在：
+        /opt/homebrew/opt/ruby/bin
+
+    进入项目路径，删除对应的 .lock，执行
+    /opt/homebrew/opt/ruby/bin/bundle install
+
+    安装 jekyll
+    /opt/homebrew/opt/ruby/bin/gem install jekyll
+ 
+    运行，可能会报错:
+        cannot load such file -- webrick (LoadError)
+            Ruby 3.0.0 以上移除了 webrick ，在对应项目路径中执行
+            /opt/homebrew/opt/ruby/bin/bundle add webrick
+
+    测试
+    
             
 #### Github 项目搜索 <- All GitHub
     主体:
