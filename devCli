@@ -3,26 +3,6 @@
 class devCli
 {
     /**
-     * @var mixed
-     */
-    private $init_first;
-
-    /**
-     * @var array
-     */
-    private $init_data;
-
-    /**
-     * @var string
-     */
-    private $port;
-
-    /**
-     * @var string
-     */
-    private $dirs;
-
-    /**
      * @var string
      */
     private $index = '/index.php';
@@ -35,7 +15,17 @@ class devCli
     /**
      * @var string
      */
-    private $cli_version = '1.0.1-dev (cli)';
+    private $cli_version = '1.0.1-dev';
+
+    /**
+     * @var array
+     */
+    private $inside_commend = ['-h', '-v', 'serve'];
+
+    /**
+     * @var string
+     */
+    private $command;
 
     /**
      * devCli constructor.
@@ -46,11 +36,34 @@ class devCli
         if(PHP_SAPI !== 'cli') {
             $this->format('this file must be cli model',true);
         }
-        $this->init_first = $params[0];
         array_shift($params);
-        $this->init_data = $params;
-        $this->port = '20002';
-        $this->dirs = './webIndex';
+        $this->command = $params[0] ?? '';
+        if(!$this->command || !in_array($this->command, $this->inside_commend)) {
+            $this->usages();
+        }
+        $func = $this->command;
+        $this->$func();
+    }
+
+    /**
+     * run serve
+     */
+    private function serve()
+    {
+        //default params
+        $port = '20002';
+        $dirs = './webIndex';
+        //show serv message
+        echo "{$this->cli_name} {$this->cli_version}"."\n";
+        echo 'This cli can only be used for development'."\n";
+        echo 'Listening on http://localhost:'.$port."\n";
+        echo 'Press Ctrl-Click url to website '."\n";
+        echo 'Document index is '.__DIR__.ltrim($dirs,'.').$this->index."\n";
+        echo "Simple find PID : `lsof -i:{$port}`"."\n";
+        echo 'Press Ctrl-C to quit'."\n";
+        //set shell command
+        $command = "php -S localhost:{$port} -t {$dirs}";
+        $this->runShell($command);
     }
 
     /**
@@ -69,20 +82,6 @@ class devCli
     }
 
     /**
-     *
-     */
-    protected function cliMessage()
-    {
-        echo "{$this->cli_name} {$this->cli_version}"."\n";
-        echo 'This cli can only be used for development'."\n";
-        echo 'Listening on http://localhost:'.$this->port."\n";
-        echo 'Press Ctrl-Click url to website '."\n";
-        echo 'Document index is '.__DIR__.ltrim($this->dirs,'.').$this->index."\n";
-        echo "Simple find PID : `lsof -i:{$this->port}`"."\n";
-        echo 'Press Ctrl-C to quit'."\n";
-    }
-
-    /**
      * @param $command
      */
     protected function runShell($command)
@@ -91,34 +90,24 @@ class devCli
     }
 
     /**
-     *
+     * show the shell usages
      */
-    protected function setParams()
+    public function usages()
     {
-        if(isset($this->init_data[0])) {
-            $this->port = $this->init_data[0];
-        }
-        if(isset($this->init_data[1])) {
-            $this->dirs = $this->init_data[1];
-        }
-        if(!is_numeric($this->port)) {
-            $this->format('port must be a number',true);
-        }
-        if(!file_exists($this->dirs.$this->index)) {
-            $this->format('index.php not find',true);
-        }
-    }
+        echo "{$this->cli_name} \033[32m{$this->cli_version}\033[0m
 
-    /**
-     *
-     */
-    public function run()
-    {
-        $this->setParams();
-        $command = "php -S localhost:{$this->port} -t {$this->dirs}";
-        $this->cliMessage();
-        $this->runShell($command);
+\033[33mUsage\033[0m:
+  php devCli [options] [arguments]
+
+\033[33mOptions\033[0m:
+  \033[32m -h, --help \033[0m            Display this help message
+  \033[32m -v, --version \033[0m         Display this application version
+  \033[32m serve \033[0m                 Serve the application on the PHP development server
+ 
+Available commands:
+  \033[32m serve \033[0m                 Serve the application on the PHP development server
+";exit();
     }
 }
-$model = new devCli($argv);
-$model->run();
+
+new devCli($argv);

@@ -101,16 +101,16 @@ class SimpleRoute
 	/**
 	 * @return mixed|string
 	 */
-	public function getCurrentUrl()
-	{
+	public function getCurrentUrl(): string
+    {
 		return $_SERVER['PATH_INFO'] ?? '';
 	}
 
 	/**
 	 * @return mixed|string
 	 */
-	public function getCurrentURI()
-	{
+	public function getCurrentURI(): string
+    {
 		return $_SERVER['REQUEST_URI'] ?? '';
 	}
 
@@ -146,7 +146,7 @@ class SimpleRoute
 	 * @param $ext
 	 * @return string
 	 */
-    private function codePre($content, $ext)
+    private function codePre($content, $ext): string
     {
         if(in_array($ext,$this->allowCodePre)) {
             return "<pre style='font-size: 18px'>{$content}</pre>";
@@ -184,19 +184,20 @@ class SimpleRoute
 	 */
     private function getContent($file)
     {
-        if(in_array($this->getCurrentURI(),$this->allowPDO)) {
+        /*if(in_array($this->getCurrentURI(),$this->allowPDO)) {
 			$link = new PDOConnect();
 			$list = $link->query("select * from english_word limit 10");
 			$content = $this->displayWithObCache(['title' => 'English Word','list' => $list],$file);
         }else{
 			$content = file_get_contents($file);
-		}
-        return $content;
+		}*/
+        return file_get_contents($file);
     }
 
-	/**
-	 * @return false|string|string[]
-	 */
+    /**
+     * @return false|string|string[]
+     * @throws Exception
+     */
 	public function getCurrentContent()
     {
 	    $action = $this->getCurrentUrl();
@@ -208,12 +209,12 @@ class SimpleRoute
 	    $action = ltrim($action,'/');
 	    $extLine = $this->getExt();
 	    if($extLine === false) {
-			return "#### Errors : ext not permission";
+			return "#### Errors : Ext Not Permission";
         }
 		list($ext,$lineBreak) = $extLine;
 	    $file =  APP_PATH.$action.'.'.$ext;
 	    if(!file_exists($file)) {
-	        return "#### Errors : file not find";
+	        return "#### Errors : File Not Find";
         }
 	    $content = $this->getContent($file);
 	    $content = $this->codePre($content,$ext);
@@ -226,9 +227,14 @@ class SimpleRoute
 		return str_replace($search,$replace,$content);
 	}
 }
+
 $model     = new SimpleRoute();
 $activeUrl = $model->getCurrentURI();
-$content   = $model->getCurrentContent();
+try {
+    $content = $model->getCurrentContent();
+} catch (Exception $e) {
+    $content = "";
+}
 ?>
 
 <!DOCTYPE html>
