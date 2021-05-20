@@ -19,7 +19,11 @@
 
 #### 取消 composer 缺失提示
     Settings -> Editor -> Inspections -> PHP -> Composer -> Extension-is-missing-in-json (去除勾选)    
-    
+
+#### 设置 PHP 类的注释模板
+    Settings -> Editor  -> File and Code Templates -> Files | Includes | Code
+    一般只修改 Includes 即可，修改时注意看 Description，里面有对应的变量示例和说明
+ 
 #### [插件](https://plugins.jetbrains.com/phpstorm)
     Settings -> Plugins(插件) -> PHP Annotation(注解)(search and install) -> resart IDE
     
