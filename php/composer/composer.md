@@ -108,6 +108,12 @@ composer.phar create-project doctrine/orm path 2.2.*
 #诊断问题,dia.g.nose
 composer.phar diagnose
 
+#忽略 composer.json 的一些版本要求
+composer install --ignore-platform-reqs
+
+#忽略 composer.json 的一些版本要求
+composer update --ignore-platform-reqs
+
 #获取帮助
 composer.phar help install
 
