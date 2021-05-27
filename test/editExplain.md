@@ -138,3 +138,6 @@
   2. 进入目录将 sublime_merge 可执行文件设为全局访问
   3. 进入编辑器 "首选项 -> 设置",添加如下配置
   "sublime_merge_path":"/usr/local/bin/sublime_merge"
+
+#### 9. 设置代码提示 - codeFormatter
+  安装 codeFormatter 完成配置即可。
