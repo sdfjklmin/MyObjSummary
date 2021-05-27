@@ -101,6 +101,11 @@ git push -u origin master:master
     git reset --hard  #放弃本地冲突代码
     git pull
 
+2.放弃push
+    git reset commitID(最近一次的提交ID)
+    git status
+    git reset --hard
+
 #如果ssh正确配置，权限也正常。但是无法获取远程代码，可以尝试新建文件夹进行拉取。
 ```
 
