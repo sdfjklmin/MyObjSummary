@@ -28,7 +28,10 @@
       ]
     }
 
-#### 3. sublimelinter - php代码错误提示
+#### 3. sublimelinter 代码错误提示
+
+  1. 安装 sublimelinter
+  2. 安装 sublimelinter-php
 
 #### 4. SublimeCodeIntel - 安装自动代码提醒+当前文件内函数定义等跳转插件
 
