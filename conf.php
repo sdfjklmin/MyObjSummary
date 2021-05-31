@@ -268,16 +268,26 @@ return [
 							'title' => 'English Word',
 							'url'   => '/try/tt?ext=html',
 						],
-						/*[
-							'title' => '知识英语',
-							'url'   => '/frame/README',
-						],
-						[
-							'title' => '鸡汤灌溉',
-							'url'   => '/frame/README',
-						],*/
 					]
 				],
 			]
+	],
+	[
+		'menu'  => [
+			[
+				'title' => 'English',
+				'url'   => '#',
+				'menu'  => [
+					[
+						'title' => 'Words',
+						'url'   => '地址?ext=扩展后缀名称|{ text/index?ext=php}|默认后缀 md',
+					],
+					[
+						'title' => 'Study Method',
+						'url'   => '/other/english_method',
+					],
+				]
+			]
+		]
 	]
 ];

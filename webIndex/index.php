@@ -1,71 +1,8 @@
 <?php
-$menus = require '../conf.php';
+
 define('APP_PATH','../');
-/**
- * Class PDOConnect
- * @author sjm
- */
-class PDOConnect
-{
-	private $link;
 
-	protected $config = [
-		// 数据库类型
-		'type'            => '',
-		// 服务器地址
-		'hostname'        => '',
-		// 数据库名
-		'database'        => '',
-		// 用户名
-		'username'        => '',
-		// 密码
-		'password'        => '',
-		// 端口
-		'port'        => '',
-		// 连接dsn
-		'dsn'             => '',
-		// 数据库连接参数
-		'params'          => [],
-		// 数据库编码默认采用utf8
-		'charset'         => 'utf8',
-		// 数据库表前缀
-		'prefix'          => '',
-		// 数据库调试模式
-		'debug'           => false,
-	];
-
-	/**
-	 * PDOConnect constructor.
-	 * @param array $config
-	 */
-	public function __construct($config = [])
-	{
-		/* Connect to a MySQL database using driver invocation */
-		$dsn      = 'mysql:dbname=tt;host=127.0.0.1';
-		$user     = 'root';
-		$password = 'root123';
-		try {
-			/** @var \PDO $dbh */
-			$dbh = new \PDO($dsn, $user, $password);
-			$this->link = $dbh;
-		} catch (\PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();die();
-		}
-	}
-
-	/** 查询
-	 * @param $sql
-	 * @return array
-	 */
-	public function query($sql)
-	{
-		$data = [];
-		foreach ($this->link->query($sql,\PDO::FETCH_ASSOC) as $row) {
-			$data[] = $row;
-		}
-		return $data;
-	}
-}
+$menus = require '../conf.php';
 
 /**
  * Class SimpleRoute
@@ -184,13 +121,6 @@ class SimpleRoute
 	 */
     private function getContent($file)
     {
-        /*if(in_array($this->getCurrentURI(),$this->allowPDO)) {
-			$link = new PDOConnect();
-			$list = $link->query("select * from english_word limit 10");
-			$content = $this->displayWithObCache(['title' => 'English Word','list' => $list],$file);
-        }else{
-			$content = file_get_contents($file);
-		}*/
         return file_get_contents($file);
     }
 
@@ -257,8 +187,8 @@ try {
   <link href="/dist/front/family.css" rel="stylesheet">
 
   <!--marked高亮css和js-->
-  <!--<link href="/marked.min/monokai_sublime.min.css" rel="stylesheet">
-  <script src="/marked.min/highlight.min.js"></script>-->
+  <link href="/marked.min/monokai_sublime.min.css" rel="stylesheet">
+  <script src="/marked.min/highlight.min.js"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -457,7 +387,7 @@ try {
 <script>
     const content = "<?php echo $content; ?>";
     /*高亮设置可省*/
-   /* hljs.initHighlightingOnLoad();
+    hljs.initHighlightingOnLoad();
     const rendererMD = new marked.Renderer();
     marked.setOptions({
         renderer: rendererMD,
@@ -473,7 +403,7 @@ try {
         highlight: function (code) {
             return hljs.highlightAuto(code).value;
         }
-    });*/
+    });
     /*.高亮部分*/
     document.getElementById('marked_content').innerHTML = marked(content);
 </script
