@@ -15,12 +15,21 @@ class devCli
     /**
      * @var string
      */
-    private $cli_version = '1.0.1-dev';
+    private $cli_version = 'dev-1.0.1';
 
     /**
      * @var array
      */
-    private $inside_commend = ['-h', '-v', 'serve'];
+    private $inside_commend = ['-h', '-v', 'serv'];
+
+    /**
+     * @var array
+     */
+    private $inside_func = [
+        '-v' => 'version',
+        '-h' => 'usages',
+        'serv' => 'serve'
+    ];
 
     /**
      * @var string
@@ -41,9 +50,28 @@ class devCli
         if(!$this->command || !in_array($this->command, $this->inside_commend)) {
             $this->usages();
         }
-        $func = $this->command;
+        $this->paresParams();
+    }
+
+    /**
+     * pares params
+     */
+    private function paresParams()
+    {
+        $func = $this->inside_func[$this->command];
         $this->$func();
     }
+
+
+    /**
+     * the func of -v
+     */
+    private function version()
+    {
+        echo "{$this->cli_name} \033[32m{$this->cli_version}\033[0m
+";exit();
+    }
+
 
     /**
      * run serve
@@ -102,10 +130,10 @@ class devCli
 \033[33mOptions\033[0m:
   \033[32m -h, --help \033[0m            Display this help message
   \033[32m -v, --version \033[0m         Display this application version
-  \033[32m serve \033[0m                 Serve the application on the PHP development server
+  \033[32m serv \033[0m                 Serve the application on the PHP development server
  
 Available commands:
-  \033[32m serve \033[0m                 Serve the application on the PHP development server
+  \033[32m serv \033[0m                 Serve the application on the PHP development server
 ";exit();
     }
 }
