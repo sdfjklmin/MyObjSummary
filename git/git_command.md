@@ -392,6 +392,7 @@ git push --set-upstream origin mantis_80_withdraw
             /opt/homebrew/opt/ruby/bin/bundle add webrick
 
     测试
+    sudo /opt/homebrew/opt/ruby/bin/bundle exec /opt/homebrew/lib/ruby/gems/3.0.0/bin/jekyll serve  --trace
     
             
 #### Github 项目搜索 <- All GitHub
