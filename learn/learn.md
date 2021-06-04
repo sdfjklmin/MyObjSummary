@@ -49,6 +49,13 @@
 	(单点登录)passport.qaq.com : php-cgi -b 127.0.0.1:9001 php.ini  (QQ登录)
 	(前台登录)trade.qaq.com		(QQ登录)
 	(后台登录)steam.admin.com
+	以keepalive方式请求，本地多系统调试是: A-> 调用B -> B调用C ，由于本地PHP的CGI默认为9000，当A发起请求占用一个CGI进程，通过 curl 调用 B，此时 curl 请求 b 。
+	在本地文件以CURL请求本地环境中PHP文件时，之前的PHP还在等待CURL后的结果，这时9000端口已经被占用。导致CURL一直在处于等待状态。不设置timeout超时，程序就会卡死。结果都是false。
+	默认的也是 9000，所有程序内部无法执行。
+	----------
+	web -> cgi:9000 -> A -> curl:cgi:9000 (已被之前的请求占用)-> B 
+	----------
+
 
 	#批量删除文件夹中名字为.gitignore
 	find  .  -name  '.gitignore'  -type  f  -print  -exec  rm  -rf  {} \;
@@ -159,4 +166,4 @@
 
 #### E Company(Mac)
 
-    服务划分、SQL优化、领域驱动、微服务
+    服务划分、SQL优化、领域驱动、微服务、SwitchHosts、uTools、codis
