@@ -245,6 +245,16 @@ git push --set-upstream origin mantis_80_withdraw
     git diff #本次代码的不同之处
     git diff -w test.php #单一文件的不同之处
 
+    <<<<<<< HEAD
+
+    本地代码
+
+    =======
+
+    拉下来的代码
+    
+    master
+    >>>>>>>
 
 ##### 扩展只有文件文件内容无法提交(删除缓存,再添加)
     git rm -rf --cached vendor/crazyfd/yii2-qiniu
