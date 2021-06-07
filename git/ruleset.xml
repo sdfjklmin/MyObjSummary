@@ -4,7 +4,7 @@
     https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties
     所有规则,可以根据实际项目进行相关调整
     -->
-    <description>微拍堂代码嗅探规则</description>
+    <description>代码嗅探规则</description>
     <arg name="tab-width" value="4"/>
     <arg name="encoding" value="utf-8"/>
     <arg name="extensions" value="php"/>
