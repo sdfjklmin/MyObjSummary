@@ -77,6 +77,10 @@ git diff --cached  file-name
 #查看文件和另一个分支的区别
 git diff branch-name file-name
 
+#当前分支test，文件 Logic.php
+#在当前分支test，对比 master 上的文件差异
+git diff master Logic.php
+
 #查看两次提交的区别
 git diff commit-id commit-id			
 
