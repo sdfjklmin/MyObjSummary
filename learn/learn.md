@@ -166,4 +166,4 @@
 
 #### E Company(Mac)
 
-    服务划分、SQL优化、领域驱动、微服务、SwitchHosts、uTools、codis
+    服务划分、SQL优化、领域驱动、微服务、SwitchHosts、uTools、codis、结队开发
