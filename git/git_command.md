@@ -204,6 +204,9 @@ git checkout test
 #本地删除test分支
 git branch -d test
 
+#delete force，强制删除本地分支
+git branch -D test
+
 #查看执行结果
 git remote -v
 
