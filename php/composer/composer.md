@@ -120,6 +120,15 @@ composer.phar help install
 #引入composer安装生成的文件,自动加载
 require 'vendor/autoload.php';
 
+#如果想把composer从2版本降到1版本
+composer self-update 1.4.1
+
+#如果想降到1版本
+composer self-update --1
+
+composer require weipaitang/cus-sdk:dev-feature_workorder_service_20210520
+
+
 #命令说明,默认以配置的php和composer的环境变量进行操作
 [php] [composer] [commands]
 
