@@ -152,11 +152,20 @@ git tag
 #显示某类tag
 git tag -l 'v2.*'
 
+#创建标签
+git tag 1.0.0
+
+#创建带备注的标签(推荐)
+git tag -a 1.0.0 -m "这是备注信息"
+
 #将tag推送至远程
 git push origin <tagname>
 
 #切换到对应的tag中
 git checkout <tagname>
+
+#删除本地标签
+git tag -d 1.0.0
 ```
 
 ##### 日志
