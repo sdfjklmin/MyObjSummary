@@ -288,4 +288,6 @@
     fetching： 
         S1 => 35byte
         S2 => 1M 35byte
+
+25. 随机排序 order by rand();
     

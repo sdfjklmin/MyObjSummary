@@ -166,6 +166,15 @@ git checkout <tagname>
 
 #删除本地标签
 git tag -d 1.0.0
+
+#删除远程标签
+git push origin :refs/tags/1.0.0
+
+#git的推送和删除远程标签命令是相同的，删除操作实际上就是推送空的源标签refs。
+git push origin 标签名  
+
+#等同于如下操作：  
+git push origin refs/tags/源标签名:refs/tags/目的标签名
 ```
 
 ##### 日志
