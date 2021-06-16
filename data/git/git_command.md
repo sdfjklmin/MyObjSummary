@@ -333,7 +333,14 @@ git push --set-upstream origin mantis_80_withdraw
     git config --global --add alias.ps push
     git config --global --add alias.pl pull
     
+    //全局配置`用户名` 和 `邮箱`
+    git config --global user.name "aaaaa"
+    git config --global user.email "aaaaa@qq.com"
     
+    //进入项目文件夹，设置当前项目的`用户名` 和 `邮箱`    
+    git config user.name "bbbbb"
+    git config user.email "bbbbb@qq.com"
+
 #### git缓慢
 1.在hosts文件里追加以下内容（IP需要替换掉），以下5个域名一个都不要少
 
