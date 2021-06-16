@@ -10,6 +10,11 @@ class devCli
     /**
      * @var string
      */
+    private $dir = './public';
+
+    /**
+     * @var string
+     */
     private $cli_name = 'Quickly WebSite';
 
     /**
@@ -80,17 +85,16 @@ class devCli
     {
         //default params
         $port = '20002';
-        $dirs = './webIndex';
         //show serv message
         echo "{$this->cli_name} {$this->cli_version}"."\n";
         echo 'This cli can only be used for development'."\n";
         echo 'Listening on http://localhost:'.$port."\n";
         echo 'Press Ctrl-Click url to website '."\n";
-        echo 'Document index is '.__DIR__.ltrim($dirs,'.').$this->index."\n";
+        echo 'Document index is '.__DIR__.ltrim($this->dir,'.').$this->index."\n";
         echo "Simple find PID : `lsof -i:{$port}`"."\n";
         echo 'Press Ctrl-C to quit'."\n";
         //set shell command
-        $command = "php -S localhost:{$port} -t {$dirs}";
+        $command = "php -S localhost:{$port} -t {$this->dir}";
         $this->runShell($command);
     }
 

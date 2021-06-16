@@ -2,7 +2,7 @@
 
 #### Server
 ##### 流程图 
-![Image text](../webIndex/img/swoole_AServer.png)
+![Image text](../public/img/swoole_AServer.png)
 ##### 进程/线程
 ~~~
 Swoole是一个多进程模式的框架（可以类比Nginx的进程模型），
@@ -12,9 +12,9 @@ m为TaskWorker进程数，
 2为一个Master进程和一个Manager进程，
 它们之间的关系如下图所示
 ~~~
-![ThreadAndProcess](../webIndex/img/swoole_ThreadProcess.png)
+![ThreadAndProcess](../public/img/swoole_ThreadProcess.png)
 ##### 进程
-![ProcessStructure](../webIndex/img/swoole_process_structure.png)
+![ProcessStructure](../public/img/swoole_process_structure.png)
 ##### worker `主要的业务逻辑处理`
 * 对收到的数据进行处理，包括协议解析和响应请求。未设置 worker_num，底层会启动与 CPU 数量一致的 Worker 进程。
 * 启动失败扩展内会抛出致命错误，请检查 php error_log 的相关信息。errno={number} 是标准的 Linux Errno，可参考相关文档。
@@ -44,7 +44,7 @@ m为TaskWorker进程数，
 - [Timer](./official/Timer.php) [Official](https://wiki.swoole.com/wiki/page/p-timer.html)
 
 #### 自绘图
-![SwooleAll](../webIndex/img/swoole.png){:height="100px" width="400px"}
+![SwooleAll](../public/img/swoole.png){:height="100px" width="400px"}
 
 
 #### 遇到的问题
