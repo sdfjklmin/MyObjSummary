@@ -406,6 +406,6 @@ try {
     });
     /*.高亮部分*/
     document.getElementById('marked_content').innerHTML = marked(content);
-</script
+</script>
 </body>
 </html>
