@@ -341,6 +341,10 @@ git push --set-upstream origin mantis_80_withdraw
     git config user.name "bbbbb"
     git config user.email "bbbbb@qq.com"
 
+    //对应修改点在: 当前文件夹/.git/config ，内容如下。
+    [user]
+        name = sokmin
+
 #### git缓慢
 1.在hosts文件里追加以下内容（IP需要替换掉），以下5个域名一个都不要少
 
