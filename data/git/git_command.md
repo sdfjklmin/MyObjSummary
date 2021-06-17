@@ -228,9 +228,8 @@ git branch -D test
 #查看执行结果
 git remote -v
 
-#删除远程的test分支
-git branch -r -d origin /test
-git push origin :test
+#删除远程的test分支,当不知道如何写分支时，可以使用 git status
+git branch -r -d origin/test
 
 #提交test分支的代码
 git push --set-upstream origin test
