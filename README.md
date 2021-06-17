@@ -29,6 +29,8 @@
 * [public](public)
 * [test](test)
 * [theme](theme) 
+* [devCli](devCli)
+* [ide_helper](_ide_helper.php)
       
     
 ## 声明
