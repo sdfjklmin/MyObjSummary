@@ -254,6 +254,14 @@ git push
 #设置推送分支
 git push --set-upstream origin mantis_80_withdraw
 
+#分支延迟，当分支滞后时。可以重新更新或者强制推送
+error: failed to push some refs to '***.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+git push -f --set-upstream origin mantis_80_withdraw
 ```
 
 ##### 忽略管理:
