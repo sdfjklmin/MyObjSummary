@@ -126,7 +126,11 @@ composer self-update 1.4.1
 #如果想降到1版本
 composer self-update --1
 
+#单独安装某个包的分支
 composer require weipaitang/cus-sdk:dev-feature_workorder_service_20210520
+
+#单独安装某个包的版本号
+composer require weipaitang/cus-sdk:v0.4.1
 
 
 #命令说明,默认以配置的php和composer的环境变量进行操作
