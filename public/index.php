@@ -2,7 +2,7 @@
 
 define('APP_PATH','../');
 
-$menus = require '../conf.php';
+$menus = require '../config/conf.php';
 
 /**
  * Class SimpleRoute

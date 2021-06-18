@@ -31,31 +31,31 @@ return [
 					'menu'  => [
 						[
 							'title' => '安装',
-							'url'   => '/php/php_install',
+							'url'   => '/data/php/php_install',
 						],
 						[
 							'title' => '常规总结',
-							'url'   => '/php/knowledge?ext=php',
+							'url'   => '/data/php/knowledge?ext=php',
 						],
 						[
 							'title' => 'Composer',
-							'url'   => '/php/composer/composer',
+							'url'   => '/data/php/composer/composer',
 						],
 						[
 							'title' => 'FPM',
-							'url'   => '/php/php-fpm?ext=conf',
+							'url'   => '/data/php/php-fpm?ext=conf',
 						],
 						[
 							'title' => 'PhpStorm',
-							'url'   => '/php/PhpStorm',
+							'url'   => '/data/php/PhpStorm',
 						],
 						[
 							'title' => 'Consul',
-							'url'   => '/php/consul',
+							'url'   => '/data/php/consul',
 						],
 						[
 							'title' => 'DI/IOC',
-							'url'   => '/php/di_and_ioc/README',
+							'url'   => '/data/php/di_and_ioc/README',
 						],
 					]
 				],
