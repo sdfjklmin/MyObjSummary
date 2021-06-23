@@ -1,13 +1,10 @@
 {
-    "name": "Map_Website_Book ",
+    "name": "YanHan ",
     "autoload": {
         "psr-4": {
-            "bookLog\\": "_bookLog",
-            "app\\": "_application"
+            "App\\": "app/"
         },
-        "files": [
-            "_function/function.php"
-        ]
+        "files": ["app/Helper/function.php"]
     },
     "repositories": {
         "packagist": {
