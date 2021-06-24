@@ -32,7 +32,7 @@ $moreLevel = [
                 ['name' => 'A2', 'url' => '/A2'],
             ],
             [
-                ['name' => 'B1', 'url' => '/B1'],
+                ['name' => '领域驱动设计 - 货运', 'url' => '/_bookLog/DDD/SimpleOne/php'],
                 ['name' => 'B2', 'url' => '/B2'],
             ],
             [
@@ -40,44 +40,8 @@ $moreLevel = [
                 ['name' => 'C2', 'url' => '/C2'],
             ],
             [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
-            ],
-            [
-                ['name' => 'C1', 'url' => '/C1'],
-                ['name' => 'C2', 'url' => '/C2'],
+                ['name' => 'D1', 'url' => '/C1'],
+                ['name' => 'D2', 'url' => '/C2'],
             ],
         ]
     ]

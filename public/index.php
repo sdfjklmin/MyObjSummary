@@ -89,7 +89,7 @@ $content    = $app->getFile()->getContent();
                         YanHan
                     </a>
                     <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
-                    <a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
+                    <!--<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a>--><!-- search icon -->
 
                     <div class="d-flex order-lg-2 ml-auto header-rightmenu">
                         <div class="dropdown">
@@ -196,9 +196,6 @@ $content    = $app->getFile()->getContent();
                         <!--列表子菜单-->
                         <?php foreach ($moreConfig as $moreMenu) { ?>
                         <li aria-haspopup="true">
-                            <span class="horizontalMenu-click">
-                                <i class="horizontalMenu-arrow fa fa-angle-down"></i>
-                            </span>
                             <a href="#" class="sub-icon  <?php
                             if(in_array($uri, array_column_two($moreMenu['menus'], 'url'))) {
                                 echo 'active' ;
