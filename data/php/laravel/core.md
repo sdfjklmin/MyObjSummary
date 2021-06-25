@@ -31,10 +31,16 @@
 
 t.t 调试
     dd($this->instances, $this->bindings, $this->abstractAliases);
-    $app->singleton -> $app ->bind => bindings
-    $app->bind      => bindings
-    $app->register  => serviceProviders、loadedProviders
-    $app->make      => 获取 $this->bindings 中，绑定的 concrete
+    
+    设置:
+        $app->instance  => $app->instances[]
+        $app->singleton -> $app->bind => $app->bindings[]
+        $app->bind      => $app->bindings[]
+        $app->register  => $app->serviceProviders[]、$app->loadedProviders[]
+        $app->alias     => $app->aliases[]、$app->abstractAliases[]
+        
+    获取:    
+        $app->make      => 获取 $this->bindings 中，绑定的 concrete
 
 2.1 绑定 核心 处理类 Http/Kernel、Console/Kernel、Exceptions/Handler
     $app->singleton(
@@ -51,10 +57,15 @@ t.t 调试
         Illuminate\Contracts\Debug\ExceptionHandler::class,
         App\Exceptions\Handler::class
     );
-    
+~~~
+
+#### App\Http\Kernel extend Illuminate\Contracts\Http\Kernel
+~~~
 3.1 获取之前绑定的核心、处理、运行。
     /** @var App\Http\Kernel $kernel */
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    
+    Illuminate\Contracts\Http\Kernel 会获取之前初始化的 $app 和已绑定的 router : Illuminate\Routing\Router
     
     $response = $kernel->handle(
         $request = Illuminate\Http\Request::capture()

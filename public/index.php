@@ -165,12 +165,6 @@ $content    = $app->getFile()->getContent();
             <div class="horizontal-mainwrapper container clearfix">
                 <nav class="horizontalMenu clearfix">
                     <ul class="horizontalMenu-list">
-                        <li aria-haspopup="true">
-                            <a href="/" class="sub-icon <?php if ($uri == '/') { echo 'active'; } ?>">
-                                <i class="typcn typcn-th-large-outline hor-icon"></i> Dashboard
-                            </a>
-                        </li>
-
                         <!--单独的子菜单-->
                         <?php foreach($config as $menu) { ?>
                         <li aria-haspopup="true"><a href="#" class="sub-icon <?php
@@ -211,7 +205,7 @@ $content    = $app->getFile()->getContent();
                                         <div class="row">
                                             <?php foreach ($moreMenu['menus'] as $oneLevel) { ?>
 
-                                                        <div class="col-lg-3 col-md-12 col-xs-12 link-list">
+                                             <div class="col-lg-3 col-md-12 col-xs-12 link-list">
                                                 <ul>
                                                 <?php foreach ($oneLevel as $value) { ?>
                                                     <?php if($value['url'] == $uri) {
@@ -223,6 +217,7 @@ $content    = $app->getFile()->getContent();
 
                                                 </ul>
                                             </div>
+
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -414,7 +409,7 @@ $content    = $app->getFile()->getContent();
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-lg-12 col-sm-12   text-center">
-                            禅宗悟道、知易行难、给与得失
+                            禅宗悟道、知易行难、给与得失、至死方休
                         </div>
                     </div>
                 </div>

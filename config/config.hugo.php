@@ -14,7 +14,46 @@ $twoLevel = [
         ]
     ],
     [
+        'name'  => 'PHP Frame',
+        'icon'  => 'fa fa-paw',
+        'menus' => [
+            ['name' => 'Laravel - Application', 'url' => '/php/laravel/core/md'],
+        ]
+    ],
+    [
         'name'  => 'MySql',
+        'icon'  => 'mdi mdi-airplay',
+        'menus' => [
+            ['name' => 'Install', 'url' => ''],
+            ['name' => 'phpStorm', 'url' => ''],
+        ]
+    ],
+    [
+        'name'  => 'Nginx',
+        'icon'  => 'mdi mdi-airplay',
+        'menus' => [
+            ['name' => 'Install', 'url' => ''],
+            ['name' => 'phpStorm', 'url' => ''],
+        ]
+    ],
+    [
+        'name'  => 'Docker',
+        'icon'  => 'mdi mdi-airplay',
+        'menus' => [
+            ['name' => 'Install', 'url' => ''],
+            ['name' => 'phpStorm', 'url' => ''],
+        ]
+    ],
+    [
+        'name'  => 'NoSQL',
+        'icon'  => 'mdi mdi-airplay',
+        'menus' => [
+            ['name' => 'Install', 'url' => ''],
+            ['name' => 'phpStorm', 'url' => ''],
+        ]
+    ],
+    [
+        'name'  => 'RabbitMQ',
         'icon'  => 'mdi mdi-airplay',
         'menus' => [
             ['name' => 'Install', 'url' => ''],
