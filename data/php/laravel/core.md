@@ -65,7 +65,7 @@ t.t 调试
     /** @var App\Http\Kernel $kernel */
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     
-    Illuminate\Contracts\Http\Kernel 会获取之前初始化的 $app 和已绑定的 router : Illuminate\Routing\Router
+    //Illuminate\Contracts\Http\Kernel 会获取之前初始化的 $app 和已绑定的 router : Illuminate\Routing\Router
     
     $response = $kernel->handle(
         $request = Illuminate\Http\Request::capture()
@@ -75,3 +75,23 @@ t.t 调试
     
     $kernel->terminate($request, $response);
 ~~~
+
+#### Illuminate\Http\Request::capture()
+~~~
+3.1.2 初始化请求
+    Illuminate\Http\Request::capture()
+    
+    /**
+     * Create a new Illuminate HTTP request from server variables.
+     *
+     * @return static
+     */
+    public static function capture()
+    {
+        static::enableHttpMethodParameterOverride();
+
+        return static::createFromBase(SymfonyRequest::createFromGlobals());
+    }
+    
+    SymfonyRequest::createFromGlobals() 将 $_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER
+    赋值给 request (Illuminate\Http\Request extends Symfony\Component\HttpFoundation\Request)
