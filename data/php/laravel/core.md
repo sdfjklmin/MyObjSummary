@@ -67,6 +67,8 @@ t.t 调试
     
     //Illuminate\Contracts\Http\Kernel 会获取之前初始化的 $app 和已绑定的 router : Illuminate\Routing\Router
     
+    //加载项目、自身的中间件、路由、命令、服务等一些列东西
+    //路由匹配规则参考: https://learnku.com/articles/38503
     $response = $kernel->handle(
         $request = Illuminate\Http\Request::capture()
     );
