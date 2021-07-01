@@ -140,14 +140,19 @@
 ## 编辑器卡顿
 ~~~
 phpstorm是由java编写而成，可以通过配置参数来进行优化
-1.编辑配置 PhpStorm-192.7142.41/bin/phpstorm.vmoptions 新增如下内容
+1.1 windows 编辑配置 PhpStorm-192.7142.41/bin/phpstorm.vmoptions 新增如下内容
+1.2 mac 编辑配置 /Applications/PhpStorm.app/Contents/bin/phpstorm.vmoptions
 -Dawt.usesystemAAFontSettings=lcd
 -Dawt.java2d.opengl=true
 
-2.提高配置文件中所配置的内存大小【不推荐】
+2. 提高配置文件中所配置的内存大小【不推荐】
 
-3.优化内存配置 `Xms -> 初始堆大小M`, `Xmx -> 最大堆大小M`, `XX:MaxPermSize -> 设置持久代最大值M`
+3. 优化内存配置 `Xms -> 初始堆大小M`, `Xmx -> 最大堆大小M`, `XX:MaxPermSize -> 设置持久代最大值M`
 -Xms256m
 -Xmx2048m
 -XX:MaxPermSize=350m
+
+4. 如果修改配置后内存占用然后过高，可以在导航栏点击 
+Help -> Change Memory Settings
+核对对应的 值 和 配置地址
 ~~~
