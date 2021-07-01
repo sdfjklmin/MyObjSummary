@@ -67,6 +67,11 @@ $moreLevel = [
         'name' => 'Other',
         'icon' => 'typcn typcn-spanner-outline',
         'menus' => [
+            //本地忽略文件地址
+            [
+                ['name' => '工单错误信息', 'url' => '/try/error_order/log'],
+                ['name' => 'CST错误信息', 'url' => '/try/error_cst/log'],
+            ],
             [
                 ['name' => '框架设计', 'url' => '/designFrame/frame/md'],
                 ['name' => 'A2', 'url' => '/A2'],

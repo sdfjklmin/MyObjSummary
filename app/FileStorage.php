@@ -9,13 +9,18 @@ class FileStorage
      */
     protected $suffix = [
         'md'  => '\n', 'html' => '', 'conf' => '<br />',
-        'php' => '<br />'
+        'php' => '<br />', 'log' => '<br />',
     ];
 
     /**
      * @var string[]
      */
-    protected $pre_suffix = ['php', 'conf'];
+    protected $pre_suffix = ['php', 'conf', 'log'];
+
+    /**
+     * @var string
+     */
+    protected $special_dir_string = '/try';
 
     /**
      * @var string
@@ -39,6 +44,21 @@ class FileStorage
     }
 
     /**
+     * @param $path
+     * @return string
+     */
+    protected function specialLink($path): string
+    {
+        $specialArr = explode($this->special_dir_string, $path);
+        if (count($specialArr) > 1) {
+            $link = '/../';
+        } else {
+            $link = '';
+        }
+        return $link;
+    }
+
+    /**
      * @return string
      */
     public function getContent(): string
@@ -48,7 +68,7 @@ class FileStorage
             return '';
         }
         $pathInfo = pathinfo($uri);
-        $file     = $this->base_path . $pathInfo['dirname'] . '.' . $pathInfo['filename'];
+        $file     = $this->base_path . $this->specialLink($pathInfo['dirname']) . $pathInfo['dirname'] . '.' . $pathInfo['filename'];
         if (!isset($this->suffix[$pathInfo['filename']])) {
             return "# 400 => Oops! The File suffix not allowed...";
         }
