@@ -97,3 +97,4 @@ t.t 调试
     
     SymfonyRequest::createFromGlobals() 将 $_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER
     赋值给 request (Illuminate\Http\Request extends Symfony\Component\HttpFoundation\Request)
+~~~

@@ -18,6 +18,7 @@ $twoLevel = [
         'icon'  => 'fa fa-paw',
         'menus' => [
             ['name' => 'Laravel - Application', 'url' => '/php/laravel/core/md'],
+            ['name' => 'Laravel - Core', 'url' => '/php/laravel/core2/md'],
         ]
     ],
     [
