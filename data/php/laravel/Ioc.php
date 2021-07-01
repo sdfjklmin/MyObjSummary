@@ -1,17 +1,11 @@
-深入理解 laravel 内核
-----------------------
-----------------------
-
-
-##### 1. 依赖注入、控制反转、容器注入、服务提供
-```
 <?php
+
 namespace Ioc;
 
 use ReflectionException;
 
 //------------------------------------
-//  依赖注入、控制反转、容器注入、服务提供
+// 1. 依赖注入、控制反转、容器注入、服务提供
 //------------------------------------
 interface Log
 {
@@ -187,18 +181,19 @@ $container->bind(Log::class, DatabaseLog::class);
 $container->bind(User::class, TestUserIoc::class);
 $user = $container->make(User::class);
 $user->login();
-```
+
+//----------------------------------------------
+//  2. Contracts 契约编程: 契约就是所谓的面向接口编程
+//----------------------------------------------
+// 这里的接口指的是 interface Log 、interface User
+// 基于接口编程，从而更好的解耦程序依赖，方便扩展。
+// 对比 示例一、示例二 中 日志的绑定。
 
 
-##### 2. Contracts之契约编程: 契约就是所谓的面向接口编程
-```
-这里的接口指的是 interface Log 、interface User
-基于接口编程，从而更好的解耦程序依赖，方便扩展。
-对比 示例一、示例二 中 日志的绑定。
-```
-
-##### 3. Facades的实现原理: __callStatic
-```
+//--------------------------------------------
+// 3. Facades 的实现原理
+//--------------------------------------------
+// 通过魔术方法
 
 /**
  * Class UserFacade
@@ -248,10 +243,7 @@ class UserFacade
 UserFacade::setFacadeIoc($container);
 
 UserFacade::login();
-```
 
-##### 4. Laravel 之中间件
-```
 
 //--------------------------------------------
 // 4. Laravel 之中间件
@@ -346,10 +338,7 @@ $callback = array_reduce($pipe_arr, 'Ioc\testUse',$handle);
 call_user_func($callback);
 //单独调用
 //var_dump(call_user_func_array(array(VerifyLogin::class, 'handle'),array($deal)));
-```
 
-##### 5. laravel 生命周期
-```
 
 //-----------------------------------
 // 5. laravel 生命周期
@@ -357,39 +346,7 @@ call_user_func($callback);
 // 详情请查看入口解析
 
 
-// 定义了laravel一个请求的开始时间
-define('LARAVEL_START', microtime(true));
-
-// composer自动加载机制
-require __DIR__.'/../vendor/autoload.php';
-
-// 这句话你就可以理解laravel,在最开始引入了一个ioc容器。
-$app = require_once __DIR__.'/../bootstrap/app.php';
-
-// 打开__DIR__.'/../bootstrap/app.php';你会发现这段代码，绑定了Illuminate\Contracts\Http\Kernel::class，
-// 这个你可以理解成之前我们所说的$ioc->bind();方法。
-// $app->singleton(
-//     Illuminate\Contracts\Http\Kernel::class,
-//    App\Http\Kernel::class
-// );
-
-// 这个相当于我们创建了Kernel::class的服务提供者
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-
-// 获取一个 Request ，返回一个 Response。以把该内核想象作一个代表整个应用的大黑盒子，输入 HTTP 请求，返回 HTTP 响应。
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
-
-// 就是把我们服务器的结果返回给浏览器。
-$response->send();
-
-// 这个就是执行我们比较耗时的请求，
-$kernel->terminate($request, $response);
-```
-
-##### 6. Laravel事件之观察者模式
-```
+echo "6. Laravel事件之观察者模式","\n";
 //----------------------------------
 // 6. Laravel事件之观察者模式
 //----------------------------------
@@ -438,14 +395,14 @@ class Observer2 implements Observer
  * @package Ioc
  * @remark 我是为观测者提供的事件处理
  *  我不关心具体的业务，基于我自身职责我会提供:
- *  新增事件、事件通知、事件执行
+ *  新增事件、事件通知、事件执行、移除事件、清空事件
  */
 class ObserverEvent
 {
     /**
      * @var array
      */
-    protected $observer;
+    protected $observer = [];
 
     public function add(Observer $observer)
     {
@@ -464,6 +421,7 @@ class ObserverEvent
     {
         $this->notify();
     }
+
 }
 
 /**
@@ -504,10 +462,9 @@ $service->demo();
 // 观察者事件 - 为观察者提供事件的基础操作(新增、触发、通知)
 // 观察者服务事件 - 事件调用入口(事件逻辑、新增事件、触发事件)
 // 服务 - 提供业务处理、调用服务事件
-```
 
-##### 7. Eloquent ORM 中的 find
-```
+
+echo "7. Eloquent ORM 中的 find","\n";
 //---------------------------------------------
 // 7. Eloquent ORM 中的 find
 //---------------------------------------------
@@ -518,6 +475,3 @@ $service->demo();
 // 最后组装 sql
 // 交给 mysql 执行 返回结果。
 // laravel 中封装的比这个要复杂的多，这个只是让大家明白 ORM 简单的一个 find () 是怎么编写的
-```
-
-##### [完整代码地址](/php/laravel/Ioc/php)
