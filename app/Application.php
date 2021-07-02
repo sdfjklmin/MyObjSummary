@@ -6,7 +6,7 @@ namespace App;
  * Class Application
  * @package App
  */
-class Application
+class Application extends Container
 {
 
     /**

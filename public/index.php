@@ -2,12 +2,22 @@
 
 require "../vendor/autoload.php";
 
-$app        = new \App\Application(realpath(__DIR__ . '/../'));
+use App\Application;
+
+//init app
+$app        = new Application(realpath(__DIR__ . '/../'));
+
+//get uri
 $uri        = $app->getRequest()->getUri();
 $current    = 'Dashboard';
-$baseConfig = $app->getConfig()->getConfig('config_hugo');
+
+//get config
+$baseConfig = $app->getConfig()->getConfig('hugo');
+$appInfo    = $app->getConfig()->getConfig('app');
 $config     = $baseConfig['two_level'];
 $moreConfig = $baseConfig['more_level'];
+
+//get content
 $content    = $app->getFile()->getContent();
 
 ?>
@@ -28,7 +38,7 @@ $content    = $app->getFile()->getContent();
     <link rel="shortcut icon" type="image/x-icon" href="/hugo/assets/images/brand/favicon.ico" />
 
     <!-- Title -->
-    <title>YH</title>
+    <title><?php echo $appInfo['name'] ?? 'Title'; ?></title>
 
     <!--Bootstrap.min css-->
     <link rel="stylesheet" href="/hugo/assets/plugins/bootstrap/css/bootstrap.min.css">

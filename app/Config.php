@@ -19,6 +19,11 @@ class Config
     protected $app;
 
     /**
+     * @var array
+     */
+    protected $configs = [];
+
+    /**
      * Config constructor.
      * @param Application $app
      */
@@ -27,13 +32,14 @@ class Config
         $this->app         = $app;
 
         $this->config_path = $this->app->getBasePath() . DIRECTORY_SEPARATOR . 'config';
+
+        $this->setConfig();
     }
 
     /**
-     * @param string $key
-     * @return array
+     * set config
      */
-    public function getConfig($key = ''): array
+    protected function setConfig()
     {
         $dirs  = scandir($this->config_path) ;
         $config = [];
@@ -41,13 +47,23 @@ class Config
             if (in_array($file, ['.', '..'])) {
                 continue;
             }
-            $base = rtrim($file,'.php');
-            $index = str_replace('.','_', $base);
-            $config[$index] = require $this->config_path.DIRECTORY_SEPARATOR.$file;
+            $pathInfo = pathinfo($file);
+            $filename = $pathInfo['filename'];
+            $config[$filename] = require $this->config_path.DIRECTORY_SEPARATOR.$file;
         }
-        if($key && isset($config[$key])) {
-            return $config[$key];
+        $this->configs = $config;
+    }
+
+    /**
+     * @param string $key
+     * @return array|mixed
+     */
+    public function getConfig($key = ''): array
+    {
+        if ($key) {
+            return $this->configs[$key] ?? [];
         }
-        return $config;
+
+        return $this->configs;
     }
 }
