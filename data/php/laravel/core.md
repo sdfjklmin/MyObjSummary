@@ -98,3 +98,50 @@ t.t 调试
     SymfonyRequest::createFromGlobals() 将 $_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER
     赋值给 request (Illuminate\Http\Request extends Symfony\Component\HttpFoundation\Request)
 ~~~
+
+#### Illuminate\Foundation\Http\Kernel -> handle
+~~~
+4. 核心类处理
+    $response = $kernel->handle(
+        $request = Illuminate\Http\Request::capture()
+    );
+    
+     /**
+     * Send the given request through the middleware / router.
+     *
+     * @param  \Illuminate\Http\Request extends SymfonyRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendRequestThroughRouter($request)
+    {
+        $this->app->instance('request', $request);
+    
+        Facade::clearResolvedInstance('request');
+    
+        $this->bootstrap();
+    
+        return (new Pipeline($this->app))
+                    ->send($request)
+                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
+                    ->then($this->dispatchToRouter());
+    }
+    
+    这里的路由分发主要是 $this->dispatchToRouter();
+    
+    /**
+     * Get the route dispatcher callback.
+     *
+     * @return \Closure
+     */
+    protected function dispatchToRouter()
+    {
+        return function ($request) {
+            $this->app->instance('request', $request);
+            // \Illuminate\Routing\Router
+            return $this->router->dispatch($request);
+        };
+    }
+    
+    经过一系列规则最终走向 toResponse($request, $response)
+    Response prepars Request
+~~~
