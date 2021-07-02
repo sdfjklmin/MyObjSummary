@@ -611,3 +611,58 @@ if(!function_exists('recursive')) {
         return $source;
     }
 }
+
+
+if (!function_exists('retryError')) {
+    /**
+     * @param $times
+     * @param callable $callback
+     * @param int $sleep
+     * @return mixed
+     * @throws Exception
+     */
+    function retryError($times, callable $callback, $sleep = 0)
+    {
+        $times--;
+        beginning:
+        try {
+            return $callback();
+        } catch (Exception $e) {
+
+            if (!$times) {
+                throw $e;
+            }
+            $times--;
+            if ($sleep) {
+                usleep($sleep * 1000);
+            }
+            goto beginning;
+        }
+    }
+}
+
+if (!function_exists('retryNormal')) {
+    /**
+     * @param $times
+     * @param callable $call
+     * @param $sleep
+     * @return bool
+     */
+    function retryNormal($times,callable $call, $sleep = 0): bool
+    {
+        beginning:
+        $times--;
+        try {
+            $call();
+        }catch (Exception $e) {
+            return false;
+        }
+        if ($sleep) {
+            usleep($sleep * 1000);
+        }
+        if (!$times) {
+            return true;
+        }
+        goto beginning;
+    }
+}
