@@ -167,6 +167,7 @@ class Container
 $container = new Container();
 
 /*这里的 bind 需要根据依赖关系来进行绑定*/
+/*bind 用来注册各种接口与实现绑定的地方*/
 
 /**
  * 示例一
@@ -187,8 +188,10 @@ $container->bind(Log::class, DatabaseLog::class);
 $container->bind(User::class, TestUserIoc::class);
 $user = $container->make(User::class);
 $user->login();
-```
 
+/*切换接口实现就是更换一行bind代码*/
+/*利用这种架构设计，我们的应用可以在各种服务的不同实现方式之间快速切换。*/
+```
 
 ##### 2. Contracts之契约编程: 契约就是所谓的面向接口编程
 ```

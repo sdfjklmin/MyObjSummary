@@ -34,7 +34,7 @@ t.t 调试
     
     设置:
         $app->instance  => $app->instances[]
-        $app->singleton -> $app->bind => $app->bindings[]
+        $app->singleton -> $app->bind => $app->bindings[] => 整个应用生命周期中只实例化某类一次
         $app->bind      => $app->bindings[]
         $app->register  => $app->serviceProviders[]、$app->loadedProviders[]
         $app->alias     => $app->aliases[]、$app->abstractAliases[]
