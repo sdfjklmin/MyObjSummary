@@ -76,3 +76,47 @@ class OrderBill implements BillInterface
     }
 }
 ```
+
+#### 服务容器
+> 可以参考之前的`核心代码解析`
+
+
+#### 接口即契约: 接口并不包含任何代码实现，只是定义了一个实现该接口的对象必须实现的一系列方法
+> 强类型与弱类型
+>> 在 PHP 中，如果一个对象可以像鸭子一样走路、游泳并且嘎嘎叫，就认为这个对象是鸭子对象，哪怕它不是从鸭子类继承而来。
+>> 换句话说，PHP 是弱类型语言，对象类型在运行时动态判断。
+>>
+>> 也可以在方法前强制指定类，它们各自的优劣之处。
+>>
+>> 在 PHP 里面，不管使用强类型还是弱类型，都没问题，没犯什么错误。
+>> 错误的是不假思索，不区分具体适用场景和问题，为了使用某种类型而使用。
+
+> `关于多态`：多态含义很广，从本质上说，是一个实体拥有多种形式。 在本书中，我们讲多态说的是一个接口有多钟实现方式。
+>  例如，UserRepositoryInterface 可以有 MySQL 和 Redis 两种实现，并且每一种实现都是 UserRepositoryInterface 的一个实例。
+
+> `忘掉细节`：记住，接口实际上并不做任何事情。它只是简单的定义了实现类必须拥有的一系列方法。
+
+```
+//这里实现的是通用的代码
+//只需要定义 OrderRepositoryInterface 不需要了解具体的实现
+//可以通过 bind(OrderRepositoryInterface::class, new Test())
+//进行测试和联调，之后更换绑定到具体的实现类即可。
+class OrderController {
+    public function __construct(OrderRepositoryInterface $orders)
+    {
+        $this->orders = $orders;
+    }
+    public function getRecent()
+    {
+        $recent = $this->orders->getMostRecent(Auth::user());
+        return View::make('orders.recent', compact('recent'));
+    }
+}
+```
+
+#### 服务提供者
+> 如果你想深入理解框架是如何运行的，请阅读 Laravel 框架的核心服务提供者的源码。
+> 
+> 通读之后，你将会对框架如何把各部分功能模块组合在一起，以及每一个服务提供者为应用提供了哪些功能有更加扎实的理解。
+> 
+> 此外，有了这些更深入的理解，你也可以为更好的 Laravel 生态系统添砖加瓦！
