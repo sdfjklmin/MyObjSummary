@@ -18,8 +18,8 @@
   "background":
   {
     // 2种指定方式，如果指定JS，那么会自动生成一个背景页
-    "page": "background.html"
-    //"scripts": ["js/background.js"]
+    //"page": "background.html"
+    "scripts": ["background.js"]
   },
   // 浏览器右上角图标设置，browser_action、page_action、app必须三选一
   "browser_action":
@@ -89,7 +89,7 @@
     // 添加一些默认的样式，推荐使用
     "chrome_style": true
   },
-  // 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字
+  // 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字，这里的事件会在 background.js 中触发。
   "omnibox": { "keyword" : "go" },
   // 默认语言
   "default_locale": "zh_CN",
