@@ -120,3 +120,11 @@ class OrderController {
 > 通读之后，你将会对框架如何把各部分功能模块组合在一起，以及每一个服务提供者为应用提供了哪些功能有更加扎实的理解。
 > 
 > 此外，有了这些更深入的理解，你也可以为更好的 Laravel 生态系统添砖加瓦！
+
+
+#### SOLID
+* 单一职责原则（Single Responsibility Principle）
+* 开放封闭原则（Open Closed Principle）
+* 里氏替换原则（Liskov Substitution Principle）
+* 接口隔离原则（Interface Segregation Principle）
+* 依赖反转原则（Dependency Inversion Principle）
