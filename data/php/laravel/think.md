@@ -124,7 +124,15 @@ class OrderController {
 
 #### SOLID
 * 单一职责原则（Single Responsibility Principle）
+> 单一职责原则规定一个类有且仅有一个理由使其改变。
+> 
+> 换句话说，一个类的边界和职责应当是十分狭窄且集中的。在类的职责问题上，无知是福。
+> 
+> 一个类应当做它该做的事，并且不应当被它的任何依赖的变化所影响。
+
 * 开放封闭原则（Open Closed Principle）
+> 规定代码对扩展是开放的，对修改是封闭的。
+
 * 里氏替换原则（Liskov Substitution Principle）
 * 接口隔离原则（Interface Segregation Principle）
 * 依赖反转原则（Dependency Inversion Principle）
